@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="线段树,算法或技巧," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://oldplace.github.io/about/index-1.html">
+<meta name="description" content="Line Painting1019. Line Painting @ Timus Online Judge 题目大意，给你一个线段，每次会在线段上一个区间染色（初始白色，染色黑白），然后最后问你最长的白色线段的两端在哪。 显然，线段长度初始 $10^9$ ，离散化一手，接下来该怎么做？ $5000$ ，直接暴力估计都可以直接搞了，不过这道题目放在数据结构当中应该是想让我们用线段树做，那就老老实实用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Line Painting（建立在线段上的线段树例题）">
+<meta property="og:url" content="http://oldplace.github.io/2021/05/22/Line-Painting%EF%BC%88%E5%BB%BA%E7%AB%8B%E5%9C%A8%E7%BA%BF%E6%AE%B5%E4%B8%8A%E7%9A%84%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BE%8B%E9%A2%98%EF%BC%89/index.html">
 <meta property="og:site_name" content="Player">
+<meta property="og:description" content="Line Painting1019. Line Painting @ Timus Online Judge 题目大意，给你一个线段，每次会在线段上一个区间染色（初始白色，染色黑白），然后最后问你最长的白色线段的两端在哪。 显然，线段长度初始 $10^9$ ，离散化一手，接下来该怎么做？ $5000$ ，直接暴力估计都可以直接搞了，不过这道题目放在数据结构当中应该是想让我们用线段树做，那就老老实实用">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-05-02T10:47:31.000Z">
-<meta property="article:modified_time" content="2021-05-02T10:47:31.699Z">
+<meta property="article:published_time" content="2021-05-22T10:45:23.000Z">
+<meta property="article:modified_time" content="2021-05-22T11:05:14.539Z">
 <meta property="article:author" content="player">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="算法或技巧">
 <meta name="twitter:card" content="summary">
 
 
@@ -117,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://oldplace.github.io/about/index-1.html"/>
+  <link rel="canonical" href="http://oldplace.github.io/2021/05/22/Line-Painting（建立在线段上的线段树例题）/"/>
 
 
 
 
 
-  <title>about | Player</title>
+  <title>Line Painting（建立在线段上的线段树例题） | Player</title>
   
 
 
@@ -274,33 +278,165 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oldplace.github.io/2021/05/22/Line-Painting%EF%BC%88%E5%BB%BA%E7%AB%8B%E5%9C%A8%E7%BA%BF%E6%AE%B5%E4%B8%8A%E7%9A%84%E7%BA%BF%E6%AE%B5%E6%A0%91%E4%BE%8B%E9%A2%98%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Player">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">Line Painting（建立在线段上的线段树例题）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-22T18:45:23+08:00">
+                2021-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="Line-Painting"><a href="#Line-Painting" class="headerlink" title="Line Painting"></a>Line Painting</h1><p><a target="_blank" rel="noopener" href="https://acm.timus.ru/problem.aspx?space=1&amp;num=1019">1019. Line Painting @ Timus Online Judge</a></p>
+<p>题目大意，给你一个线段，每次会在线段上一个区间染色（初始白色，染色黑白），然后最后问你最长的白色线段的两端在哪。</p>
+<p>显然，线段长度初始 $10^9$ ，离散化一手，接下来该怎么做？</p>
+<p>$5000$ ，直接暴力估计都可以直接搞了，不过这道题目放在数据结构当中应该是想让我们用线段树做，那就老老实实用线段树吧。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 31000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NN 61000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> lc,rc,co,d;</span><br><span class="line">}tr[NN];<span class="keyword">int</span> len;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushlazy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>{tr[x].co=k;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">updata</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[tr[x].lc].co==tr[tr[x].rc].co)tr[x].co=tr[tr[x].lc].co;</span><br><span class="line">    <span class="keyword">else</span> tr[x].co=<span class="number">-1</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[x].co!=<span class="number">-1</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">pushlazy</span>(tr[x].lc,tr[x].co);</span><br><span class="line">        <span class="built_in">pushlazy</span>(tr[x].rc,tr[x].co);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> be[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bt</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> x=++len;tr[x].co=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l+<span class="number">1</span>&lt;r)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        tr[x].lc=len+<span class="number">1</span>;<span class="built_in">bt</span>(l,mid);</span><br><span class="line">        tr[x].rc=len+<span class="number">1</span>;<span class="built_in">bt</span>(mid,r);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ll,<span class="keyword">int</span> rr,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[x].co==k)<span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(l==ll &amp;&amp; r==rr){<span class="built_in">pushlazy</span>(x,k);<span class="keyword">return</span> ;}</span><br><span class="line">    <span class="built_in">pushdown</span>(x);</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(rr&lt;=mid)<span class="built_in">change</span>(tr[x].lc,l,mid,ll,rr,k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(mid&lt;=ll)<span class="built_in">change</span>(tr[x].rc,mid,r,ll,rr,k);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">change</span>(tr[x].lc,l,mid,ll,mid,k),<span class="built_in">change</span>(tr[x].rc,mid,r,mid,rr,k);</span><br><span class="line">    <span class="built_in">updata</span>(x);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> ansl,ansr,suml,sumr;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">gen</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(be[sumr]-be[suml]&gt;be[ansr]-be[ansl])ansl=suml,ansr=sumr;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[x].co==<span class="number">1</span>)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">gen</span>();suml=sumr=r;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(tr[x].co==<span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        sumr=r;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">Query</span>(tr[x].lc,l,mid);<span class="built_in">Query</span>(tr[x].rc,mid,r);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> ll[N],rr[N],type[N],m;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Lisan</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> *x,val;</span><br><span class="line">}li[N];<span class="keyword">int</span> top,n;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Lisan x,Lisan y)</span></span>{<span class="keyword">return</span> x.val&lt;y.val;}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);m++;</span><br><span class="line">    ll[<span class="number">1</span>]=<span class="number">0</span>;rr[<span class="number">1</span>]=<span class="number">1e9</span>;type[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">    li[++top].x=&amp;ll[<span class="number">1</span>];li[top].val=ll[<span class="number">1</span>];</span><br><span class="line">    li[++top].x=&amp;rr[<span class="number">1</span>];li[top].val=rr[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">char</span> st[<span class="number">10</span>];<span class="built_in">scanf</span>(<span class="string">"%d%d%s"</span>,&amp;ll[i],&amp;rr[i],st+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(st[<span class="number">1</span>]==<span class="string">'b'</span>)type[i]=<span class="number">1</span>;</span><br><span class="line">        li[++top].x=&amp;ll[i];li[top].val=ll[i];</span><br><span class="line">        li[++top].x=&amp;rr[i];li[top].val=rr[i];</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">sort</span>(li+<span class="number">1</span>,li+top+<span class="number">1</span>,cmp);</span><br><span class="line">    n=*li[<span class="number">1</span>].x=<span class="number">1</span>;be[<span class="number">1</span>]=li[<span class="number">1</span>].val;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=top;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(li[i].val!=li[i<span class="number">-1</span>].val)n++,be[n]=li[i].val;</span><br><span class="line">        *li[i].x=n;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">bt</span>(<span class="number">1</span>,n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++)<span class="built_in">change</span>(<span class="number">1</span>,<span class="number">1</span>,n,ll[i],rr[i],type[i]);</span><br><span class="line">    <span class="built_in">Query</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">    <span class="built_in">gen</span>();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,be[ansl],be[ansr]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>总结一下建立在线段区间上的线段树应该怎么写：</p>
+<ol>
+<li>线段树的端点直接维护的便是一段区间，区间长度为 $1$ 的点是叶子节点。</li>
+<li>强行将线段上一个个长度为 $1$ 的区间看成点，然后像普通数组一样维护，至于点的编号可以采取左（右）端点的编号，或者用其余方法赋予编号，反正方法很多，看个人喜好，我个人喜欢直接采取左端点编号，简单好想好思考。</li>
+</ol>
+<p>当然，我个人推荐第一种。为什么，因为第一种离散化考虑起来比较方便，第二种就比较麻烦了。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95%E6%88%96%E6%8A%80%E5%B7%A7/" rel="tag"># 算法或技巧</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/22/C++%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/" rel="next" title="C++中遇到的坑(持续更新)">
+                <i class="fa fa-chevron-left"></i> C++中遇到的坑(持续更新)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/22/Parity-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E8%80%83%E8%99%91%E8%A7%92%E5%BA%A6/" rel="prev" title="Parity 的一个比较好的考虑角度">
+                Parity 的一个比较好的考虑角度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -333,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -383,6 +528,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Line-Painting"><span class="nav-number">1.</span> <span class="nav-text">Line Painting</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

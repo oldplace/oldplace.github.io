@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/author32.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/author16.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法或技巧,支配树," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言一个非常毒瘤的事情，2021联合省选竟然考了支配树，甚至名字还叫支配？？？ 当然，其实那道题目不用支配也能做，但是我太菜了，不会，然后就弃掉了。 现在学了一下支配树，来写个模板。 注：支配树证明部分基本沿用了王梦迪大佬PPT的证明，因此如果是寻求另类解释的OIer可以撤了。（曾经我也想看完做法后好好理解看看自己能不能领悟证明，事实证明我错了，自己思考除了浪费时间貌似一点作用都没有，菜就是菜QA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支配树">
+<meta property="og:url" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/index.html">
+<meta property="og:site_name" content="Player">
+<meta property="og:description" content="前言一个非常毒瘤的事情，2021联合省选竟然考了支配树，甚至名字还叫支配？？？ 当然，其实那道题目不用支配也能做，但是我太菜了，不会，然后就弃掉了。 现在学了一下支配树，来写个模板。 注：支配树证明部分基本沿用了王梦迪大佬PPT的证明，因此如果是寻求另类解释的OIer可以撤了。（曾经我也想看完做法后好好理解看看自己能不能领悟证明，事实证明我错了，自己思考除了浪费时间貌似一点作用都没有，菜就是菜QA">
+<meta property="og:locale">
+<meta property="og:image" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/zhipeitree-1.png">
+<meta property="og:image" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/zhipeitree-2.png">
+<meta property="og:image" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/zhipeitree-3.png">
+<meta property="og:image" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/zhipeitree-4.png">
+<meta property="article:published_time" content="2021-05-22T10:47:27.000Z">
+<meta property="article:modified_time" content="2021-05-22T11:10:14.254Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="算法或技巧">
+<meta property="article:tag" content="支配树">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/zhipeitree-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oldplace.github.io/2021/05/22/支配树/"/>
+
+
+
+
+
+  <title>支配树 | Player</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Player</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oldplace.github.io/2021/05/22/%E6%94%AF%E9%85%8D%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Player">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支配树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-22T18:47:27+08:00">
+                2021-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一个非常毒瘤的事情，2021联合省选竟然考了支配树，甚至名字还叫支配？？？</p>
+<p>当然，其实那道题目不用支配也能做，但是我太菜了，不会，然后就弃掉了。</p>
+<p>现在学了一下支配树，来写个模板。</p>
+<p>注：支配树证明部分基本沿用了王梦迪大佬PPT的证明，因此如果是寻求另类解释的OIer可以撤了。（曾经我也想看完做法后好好理解看看自己能不能领悟证明，事实证明我错了，自己思考除了浪费时间貌似一点作用都没有，菜就是菜QAQ）</p>
+<h1 id="支配树简介"><a href="#支配树简介" class="headerlink" title="支配树简介"></a>支配树简介</h1><p>在一个有向图上，保证 $1$ 号点能到达所有的点，如果 $1$ 到达 $x$ 的所有路径都要经过点 $y$ ，则称 $y$ 支配 $x$ ，当然，特殊的，$1$ 和点 $x$ 本身都支配点 $x$ 。</p>
+<p>当然，有时候不一定 $1$ 号点能到达所有的点，你就把到不了的点剔除在外就行了。</p>
+<p>仔细想想支配有什么性质？</p>
+<p>其实画个图不难发现支配是呈现树状结构的，此话怎讲？</p>
+<p>例如 $x,y$ 都支配 $k$ ，你认为 $x,y$ 能是什么关系？</p>
+<p>如果 $x,y$ 互相并不支配，那么想想看，假设存在一条路径是从 $1-&gt;x-&gt;y-&gt;k$ 的，那么因为 $x$ 并不支配 $y$ ，那么只要在另找一条不包括 $x$ 到 $y$ 的路径代替就可以变成：$1-&gt;y-&gt;k$ 了，这与 $x$ 支配 $k$ 矛盾，因此 $x,y$ 之间一定有支配关系。</p>
+<p>另外，$x,y$ 之间也不能互相支配，假设 $x,y$ 互相支配，则到 $y$ 的一条简单路径为：$1-&gt;x-&gt;y$ ，但是 $y$ 支配 $x$ ，所以为：$1-&gt;y-&gt;x-&gt;y$，与简单路径矛盾，所以 $x,y$ 最多只能是单向支配关系（所以支配关系是一个 $DAG$ 图，当然，自己支配自己不考虑在这个图内）。</p>
+<p>还有一条性质：如果 $x$ 支配 $y$ ，那么支配 $x$ 的点也支配 $y$ 。</p>
+<p>继续仔细观察，不难发现，对于一个点 $x$ ，如果假设支配他的点的集合为 $V$ ，将 $V$ 中的 $x$ 踢出去，那么 $V$ 中一定有个点 $y$ 能被 $V$ 中所有点支配，我们称 $y$ 是 $x$ 的支配点（因此 $k$ 支配 $x$ 不一定代表 $k$ 是 $x$ 的支配点）。</p>
+<p>当然，除 $1$ 以外的点都有支配点，至于为什么，可以发现，支配关系一定是一个 $DAG$ 图，然后如果我们讨论踢到 $x$ 的 $V$ 的导出子图，就会发现，这个点数为 $t$ 的导出子图每个点的度数都是 $t-1$ ，且样子是固定的，每个点的入度和出度都从 $0$ 到 $t-1$ 完完整整的来了一遍（这个用数学归纳法很好证），那个入度为 $t-1$ 出度为 $0$ 的点就是支配点。（当然，深入一点，这个子图上每个点的入度加一其实就表示了在支配树上的深度，这一点目前无关紧要。）</p>
+<p>举个栗子：</p>
+<p>$1-&gt;3-&gt;2-&gt;5$</p>
+<p>这一条链中 $1,3,2$ 都能支配 $2$ ，看 $1,3$ ，发现只有 $3$ 是被 $1,3$ 支配，所以 $3$ 是 $2$ 的支配点。</p>
+<p>然后我们让每个点 $x$ （除 $1$ 以外）的支配点连向 $x$ ，便可以得到一个新的树，这个树就叫支配树。（至于为什么是树嘛，$n-1$ 条边，且没有环，不就是树吗？而且还是个以 $1$ 为根的外向树，除 $1$ 外每个点的入度都是 $1$ ）</p>
+<p>在这节最后总结一下：</p>
+<p>$x,y$ 不能互相支配，如果他们支配同一个点，他们之间存在支配关系，同时，支配关系具有传递性。</p>
+<p>支配树的概念基本就讲完了，其实支配树就是支配关系DAG图中的一个生成树罢了。</p>
+<p>接下来会介绍一种做法： Lengauer Tarjan算法。名字上的两个人就是发明者。</p>
+<p>时间复杂度：$O((n+m)α(n))$，空间复杂度：$O(n+m)$。</p>
+<p>当然，你乐意的话其实可以把 $α(n)$ 换成 $log$ 的，反正我是这样干的。</p>
+<h1 id="支配树的构造方法"><a href="#支配树的构造方法" class="headerlink" title="支配树的构造方法"></a>支配树的构造方法</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5180">P5180 [模板]支配树 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p>先来分析一下这道题目和支配树有什么关系，来一条性质：</p>
+<p>$x$ 如果支配 $y$ ，那么 $x$ 在支配树上一定是 $y$ 的祖先。</p>
+<p>证明：</p>
+<p>设支配 $y$ 的点集为 $V$ ，$k$ 是 $y$ 的支配点，因为支配具有传递性，所以支配 $k$ 的点集是 $V$ 的一个子集，且大小只相差 $1$ ，这样不断下去，就会发现，其实点集呈现一条链状，所以 $x$ 是 $y$ 的祖先，其实这条链中每个点的深度上面也提到了，就是 $V$ 导出子图中每个点的入度加一。</p>
+<p>因此，实际上一个点所支配的点就是其子树（同理，支配一个点的点就是其到根节点的这一条链），因此这道题目实际就是问每个点在支配树上的子树大小。</p>
+<p>接下来会提到暴力和特殊情况，如果要看做法直接跳到正确做法即可。</p>
+<h2 id="暴力构造法"><a href="#暴力构造法" class="headerlink" title="暴力构造法"></a>暴力构造法</h2><p>这个方法的时间复杂度是 $O(n^2)$ ，但这次省选D2T3应该这个复杂度就够了。</p>
+<p>没什么实际作用，但是应该能提升一点点理解吧。</p>
+<p>设置 $idom$ 表示一个点的支配点编号。</p>
+<p>简单来说，去掉一个点 $t$ ，然后跑 $BFS$ ，然后便会有一些点会到不了，记作点集 $V$ ，对于点 $x∈V$，首先 $t$ 支配 $x$  ，如果 $idom[x]$ 为 $0$ ，那么 $t$ 可能是 $x$ 的支配点，或者 $idom[x]∉V$ ，说明 $idom[x]$ 支配 $t$ ，所以 $t$ 可能是 $x$ 的支配点。</p>
+<p>但是，如果 $idom[x]∈V$ ，那 $t$ 便不可能是 $x$ 的点集。</p>
+<p>然后依次去掉每个点，便可以完成此暴力，时间复杂度 $O(n^2)$ ，空间复杂度：$O(n)$ 。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 210000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 310000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="class"><span class="keyword">struct</span>  <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> y,next;</span><br><span class="line">}a[M];<span class="keyword">int</span> len,last[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{len++;a[len].y=y;a[len].next=last[x];last[x]=len;}</span><br><span class="line"><span class="keyword">int</span> ban;</span><br><span class="line"><span class="keyword">bool</span> v[N];</span><br><span class="line"><span class="keyword">int</span> pre[N];<span class="comment">//其实就是前面的idom数组，这个代码敲的比较早，所以用的是pre</span></span><br><span class="line"><span class="keyword">int</span> list[N],head,tail;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    list[head=tail=<span class="number">1</span>]=<span class="number">1</span>;<span class="built_in">memset</span>(v,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(v));v[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(head&lt;=tail)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=list[head++];</span><br><span class="line">        <span class="keyword">if</span>(x==ban)<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[x];k;k=a[k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[k].y;</span><br><span class="line">            <span class="keyword">if</span>(!v[y])</span><br><span class="line">            {</span><br><span class="line">                v[y]=<span class="number">1</span>;</span><br><span class="line">                list[++tail]=y;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    v[ban]=<span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        ban=i;</span><br><span class="line">        <span class="built_in">bfs</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(!v[j] &amp;&amp; i!=j<span class="comment">/*将自环情况剔除在外*/</span> &amp;&amp; (!pre[j] || v[pre[j]]))pre[j]=i;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> siz[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    siz[x]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=last[x];k;k=a[k].next)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> y=a[k].y;</span><br><span class="line">        <span class="built_in">dfs</span>(y);siz[x]+=siz[y];</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x,y;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">        <span class="built_in">ins</span>(x,y);</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    len=<span class="number">0</span>;<span class="built_in">memset</span>(last,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(last));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)<span class="built_in">ins</span>(pre[i],i);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">printf</span>(<span class="string">"%d "</span>,siz[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="DAG特殊情况"><a href="#DAG特殊情况" class="headerlink" title="DAG特殊情况"></a>DAG特殊情况</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2597">[P2597 ZJOI2012]灾难 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p>来看种特殊情况，即原图没有环的情况，也是算加深理解顺便做道题目吧。</p>
+<p>首先将其和支配扯上关系：将被捕者向捕食者连边，如果从所有生产者出发到这个点 $x$ 都要经过一个点 $y$ ，那么 $y$ 支配 $x$ ，为了方便，我们加入一个超级源点，向所以入度为 $0$ 的点连边，这样就重新变成了我们原本所定义的支配关系了。</p>
+<p>该怎么做呢？实际上非常的简单<del>但我不会</del>，做法就是拓扑排序+倍增，在边跑拓扑排序的时候（这里我们将入度为 $0$ 作为入队要求），当一个点入度变为 $0$ 加入队列时，便更新其倍增数组，倍增数组维护的是其在分配树上的祖先，而一个点在分配树上的祖先就是连向他的在支配树上的 $LCA$ 。</p>
+<p>举个例子：如果 $1,2,3$ 都连向 $4$ ，那么 $4$ 的支配点就是 $1,2,3$ 在支配树上的 $LCA$ 。</p>
+<p>比较简单，不证明了。</p>
+<p>然后就做完了。</p>
+<p>时间复杂度：$O(n\log{n})$，空间复杂度：$O(n\log{n})$ 。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建反图，求支配树，然后求出每个点在支配树上的子树大小 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 71000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SN 22</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 1100000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span>&amp;y)</span></span>{x^=y^=x^=y;}</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> y,next;</span><br><span class="line">}a[M];<span class="keyword">int</span> len,last[N],in[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{len++;a[len].y=y;a[len].next=last[x];last[x]=len;in[y]++;} </span><br><span class="line"><span class="keyword">int</span> fa[N][SN],dep[N];</span><br><span class="line"><span class="keyword">int</span> list[N],head,tail;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">updata</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">18</span> &amp;&amp; fa[x][i<span class="number">-1</span>];i++)fa[x][i]=fa[fa[x][i<span class="number">-1</span>]][i<span class="number">-1</span>];</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(dep[x]&gt;dep[y])<span class="built_in">swap</span>(x,y);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">18</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(dep[fa[y][i]]&gt;=dep[x])y=fa[y][i];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span>(x==y)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">18</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(fa[x][i]!=fa[y][i])x=fa[x][i],y=fa[y][i];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> fa[x][<span class="number">0</span>];</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> siz[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> x;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">            <span class="keyword">if</span>(!x)<span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">ins</span>(x,i);</span><br><span class="line">        }</span><br><span class="line">        siz[i]=<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(!in[i])<span class="built_in">ins</span>(n+<span class="number">1</span>,i);</span><br><span class="line">    }</span><br><span class="line">    n++;</span><br><span class="line">    list[head=tail=<span class="number">1</span>]=n;dep[n]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(head&lt;=tail)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=list[head++];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[x];k;k=a[k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[k].y;</span><br><span class="line">            in[y]--;</span><br><span class="line">            <span class="keyword">if</span>(!fa[y][<span class="number">0</span>])fa[y][<span class="number">0</span>]=x;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            {</span><br><span class="line">                fa[y][<span class="number">0</span>]=<span class="built_in">lca</span>(fa[y][<span class="number">0</span>],x);</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(!in[y])</span><br><span class="line">            {</span><br><span class="line">                dep[y]=dep[fa[y][<span class="number">0</span>]]+<span class="number">1</span>;</span><br><span class="line">                list[++tail]=y;</span><br><span class="line">                <span class="built_in">updata</span>(y);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    len=<span class="number">0</span>;<span class="built_in">memset</span>(last,<span class="number">0</span>,<span class="built_in"><span class="keyword">sizeof</span></span>(last));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=tail;i&gt;=<span class="number">1</span>;i--)siz[fa[list[i]][<span class="number">0</span>]]+=siz[list[i]];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,siz[i]<span class="number">-1</span>);</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">work</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="正确做法"><a href="#正确做法" class="headerlink" title="正确做法"></a>正确做法</h2><h3 id="DFS树"><a href="#DFS树" class="headerlink" title="DFS树"></a>DFS树</h3><p>首先，我们跑个 $DFS$ ，可以得到 $DFS$ 序 $dfn$ 数组。（记录 $DFS$ 中的访问时间）</p>
+<p>同时我们可以得到一个 $DFS$ 树。（下文中的父亲，祖先关系都是在 $DFS$ 树上，与半支配树以及支配树无关）</p>
+<h4 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h4><p>下文中 $DFS$ 树用 $T$ 代替，$DFS$ 树中的边用 $E$ 表示，原图中的边用 $E’$ ，为了方便，下文点的编号全部用 $dfn$ 重新编号。</p>
+<p>$x-&gt;y$ 表示 $x-&gt;y$ 的路径，包括左右两个点。</p>
+<p>$(x-&gt;y)$ 表示 $x-&gt;y$ 在 $T$ 中的路径，不包括左右两个点，$[x-&gt;y]$ 表示 $x-&gt;y$ 在 $T$ 中的路径，包括左右两个点（类似开闭区间）。</p>
+<p>$x+-&gt;y$ 表示 $x$ 在 $T$ 中是 $y$ 的祖先，且 $x≠y$ 。</p>
+<p>$x.-&gt;y$ 表示 $x$ 在 $T$ 中是 $y$ 的祖先，但可能 $x=y$ 。</p>
+<h4 id="讨论性质"><a href="#讨论性质" class="headerlink" title="讨论性质"></a>讨论性质</h4><ol>
+<li><p>如果​ $x$ 支配 $y$ ，那么 $x$ 在 $T$ 上一定是 $y$ 的祖先，这个非常简单，因为树上 $1$ 到 $x$ 这条链上的点才有资格去支配 $x$ 。</p>
+</li>
+<li><p>定义：如果一条边是 $x-&gt;y$ ，且 $x,y$ 在树上的 $LCA$ 不是 $x,y$ ，则称这条边为横叉边，可以发现 $x&gt;y$ ，证明：如果$x<y$，那么 $x$="" 优先于$y$="" 访问，则="" $y$="" 应该在="" 子树内，与横叉边定义矛盾，所以="" $x="">y$ 。</y$，那么></p>
+</li>
+<li><p>路径引理：如果 $x&lt;y$ ，那么 $x$ 到 $y$ 的每条路径都包括一个他们的公共祖先（不一定是 $LCA$ ，不同路径也不一定是同一个）。</p>
+<p> 证明：先明白一个事情，一个点的两个儿子子树，根据 $T$ 的定义，肯定是一个儿子子树的点的编号普遍大于另外一个儿子子树的点，因此如果对于 $k$ ，$x,y$ 位于其两个不同的儿子子树，$x&lt;y$，你在 $x$ 所在的儿子子树是找不到一个点的编号大于 $y$ 的，因此，我们可以根据这个勉强的认为一个点的不同儿子子树间存在大小。</p>
+<p> <img src="zhipeitree-1.png" alt="zhipeitree-1"></p>
+<p> 回归我们要证的题目，红色三角形表示整体小于 $y$ 的子树（其实 $x$ 所在的那个三角形也应该是红色），蓝色则是整体大于 $y$ 的，可以发现，$x$ 不管走横叉边还是儿子边，最终都只能到达另外一个红色三角形，只有走返祖边，到达 $x,y$ 的其中一个公共祖先，才可以到达蓝色三角形。</p>
+</li>
+<li><p>如果 $x+-&gt;y$ ，则 $x.-&gt;idom[y]$ 或 $idom[y].-&gt;idom[x]$ 。</p>
+<p> <img src="zhipeitree-2.png" alt="zhipeitree-2"></p>
+<p> 换言之，$idom[y]$ 不可能卡在 $idom[x],x$ 中间。</p>
+<p> 为什么？如果 $idom[y]$ 卡在中间，那么存在一条路径不经过 $idon[y]$ 直接到 $x$ 然后再到 $y$ 即可，矛盾。</p>
+</li>
+</ol>
+<h3 id="半支配点"><a href="#半支配点" class="headerlink" title="半支配点"></a>半支配点</h3><p>半支配点是什么？</p>
+<p>如果 $x$ 是满足存在一条 $x$ 到 $y$ 的路径使得除 $x,y$ 以外的点编号都大于 $y$ 且编号最小的点，那么就称 $x$ 是 $y$ 的半支配点。（默认 $1$ 没有半支配点）</p>
+<p>不难发现，$x$ 的父亲有可能成为 $x$ 的半支配点，我们认为，$sdom[x]$ 为 $x$ 的半支配点。</p>
+<p>性质：</p>
+<ol>
+<li><p>$x$ 的半支配点一定是 $x$ 的祖先。</p>
+<p> 证明：假设 $y$ 不是 $x$ 的祖先，那么假想一下 $y$ 那条满足要求的路径吧，假设路径第一条边到 $t$ ，且是横叉边，则$y&gt;t&gt;x$，那还不如 $x$ 不如让 $x$ 的父亲当半支配点， $dfn$ 更小。</p>
+<p> 如果不是横叉边，而是指向 $y$ 子树的边，那么同理证否，如果指向的是 $y$ 的祖先，那么让 $y$ 的祖先当这个半支配点更好，证毕。</p>
+<p> EX： 因此，如果我们认为将 $sdom[x]$ 连向 $x$ 能构造成一棵树，这棵树叫半支配树。</p>
+</li>
+<li><p>$x$ 的半支配点 $y$ 在 $x$ 到支配点 $k$ 的路径上（包括两端）。</p>
+<p> 证明一下：首先，不难发现， $k$ 到根节点的点（不包括 $k$ ）由于到 $x$ 都要经过 $k$  ，所以不可能满足要求，则半支配点一定在 $x$ 到支配点 $k$ 的路径上，当然，也不一定 $y=k$ ，可以举个反例：</p>
+<p> 比如：$1-&gt;2-&gt;3-&gt;4-&gt;5$，如果还存在边：$1-&gt;3-&gt;5,2-&gt;4$，那么 $1$ 是 $5$ 支配点，但是 $4$ 是 $5$ 的半支配点。</p>
+</li>
+<li><p>如果不存在 $z∈(sdom[x]-&gt;x)$ 使得 $sdom[z]&lt;sdom[x]$，$sdom[x]=idom[x]$ 。</p>
+<p> 证明：只要证明 $sdom[x]$ 支配 $x$ 即可，我们假设 $k∈1-&gt;x$ ，且满足是最后一个编号小于 $x$ 的点（肯定有，如果没有，则 $sdom[x]=1$ ，同样结论成立），$y$ 是 $k$ 之后第一个属于 $[sdom[x]-&gt;x]$ 的点，设 $v_{i}$ 是路径上介于 $k,y$ 之间的点，现在证明 $v_{i}&gt;y$ 。</p>
+<p> <img src="zhipeitree-3.png" alt="zhipeitree-3"></p>
+<p> 如果 $sdom[x]<v_i<y$ ，那么则="" $lca(y,v_i)∈[sdom[x]-="">y)$  ，则肯定存在另外一个 $v_{j}∈[sdom[x]-&gt;y)$ ，那么就与 $y$ 定义矛盾了，则 $dfn[v_{i}]&gt;y$ 。</v_i<y$></p>
+<p> 那么，则 $k≥sdom[y]$ （ $k$ 满足 $sdom[y]$ 的要求），则 $sdom[y]≤k&lt;sdom[x]$ ，因此，$y$ 只能是 $sdom[x]$ 了， $sdom[x]$ 支配 $x$ ，证毕。</p>
+</li>
+<li><p>如果存在 $sdom$ 最小的 $z∈(sdom[x]-&gt;x)$ 使得 $dfn[sdom[z]]&lt;dfn[sdom[x]]$，$idom[z]=idom[x]$ 。</p>
+<p> 证明：运用 DFS 性质 $4$ ，我们可以发现 $sdom[x]&gt;z&gt;x$ ，那么就不可能是情况一了，只能是第二种情况，这样我们只需要证明 $idom[x]$ 支配 $y$ 即可。（即：$idom[x].-&gt;idom[z]-&gt;z-&gt;x$）</p>
+<p> <img src="zhipeitree-4.png" alt="zhipeitree-4"></p>
+<p> 类似的，我们设一个 $k$ ，表示 $1-&gt;y$ 路径上最后一个 $dfn$ 小于 $idom[z]$ 的点设为 $k$ ，同时第一个属于 $[idom[z]-&gt;y]$ 的点设 $y$ ，那么类似的可以证明 $sdom[y]<idom[z]$，先思考， $z$="" 能在="" $1$="" 号位置吗？因为="" 已经是="" $[sdom[x]-="">x]$ 上 $sdom$ 最小的，因此$idom[z]≤sdom[z]≤sdom[y]$ ，矛盾，因此，$z$ 只能在 $2$ 号位置上，即 $[idom[z]-&gt;y]$ 上，但是因为 $sdom[y]&lt;idom[z]$ ，如果 $y≠idom[z]$ 则与 $idom[z]$ 支配 $z$ 矛盾，所以 $y=idom[z]$ ，$idom[z]$ 支配 $x$ ，证毕。</idom[z]$，先思考，></p>
+</li>
+<li><p>将半支配树和支配树合在一起构成一个新图，新图和原图的支配关系不变。</p>
+<p> 证明：实际只要求每个点的支配点不变就行，根据性质 $4,5$ ，可以发现新图上每个点的支配点其实是不变的。</p>
+<p> EX：因此，根据这条性质，如果我们求出了半支配点，就可以直接将 $T$ 和半支配树合在一起用 DAG 求法达到比较完美的 $O(n\log{n}+求半匹配点时间)$ 。</p>
+</li>
+<li><p>$sdom[x]=min(\{y|(y,x)∈E’,y<x\}∪\{sdom[z]|z.->y,z&gt;x,(y,x)∈E’\})$</x\}∪\{sdom[z]|z.-></p>
+<p> 证明：我们设 $g$ 等于等号右边。</p>
+<ol>
+<li><p>$sdom[x]≤g$</p>
+<p> 对于第一种情况， $y$ 显然满足半支配点的要求，可以作为考虑对象。</p>
+<p> 对于第二种情况，显然，存在一条路径 $sdom[z]-&gt;z$ 且使得路径中间的点都大于 $z$ （ $sdom[z]$ 定义），将 $z.-&gt;y-&gt;x$ 加上，显然整条路径的的中间也都大于 $x$ ，因此，$sdom[z]$ 也可以是 $x$ 的半支配点。</p>
+</li>
+<li><p>$sdom[x]≥g$</p>
+<p> 我们假设存在一条路径 $sdom[x]-&gt;v_1-&gt;v_2-&gt;v_i-&gt;v_k-&gt;x$ 那么如果 $k=0$ ，则 $sdom[x]$ 将在第一种情况被判断到（注意 $sdom[x]<x$ ），如果="" $k="">0$ ，那么设 $v_{i}$ 是路径上除 $sdom[x],v_{1}$ 后第一个满足 $v_{i}.-&gt;v_{k}$ 的点（ $v_{1}$ 则会被右式包含到），显然一定存在，因为 $v_{k}$ 自己就是。</x$></p>
+<p> 显然，$v_{j}&gt;v_{i}(1≤j&lt;i)$ ，因为如果小于，则一定经过 $v_{i}$ 的祖先，那么违反定义，则 $g≤sdom[v_{i}]≤sdom[x]$ 。</p>
+<p>综上，$g=sdom[x]$。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>根据性质 $6$ 不难发现，该式子只要右边的 $sdom$ 都是正确的，则一定可以保证左边的正确，因此，我们只需要按编号从大往小扫，只要保证编号最大的 $sdom$ 正确（显然，此时只有第一类），就可以类似数学归纳的思路保证所有的 $sdom$ 都是正确的。</p>
+<p>但是具体做法是什么呢？</p>
+<p>右式第一类比较好讨论，但是第二类呢？不难发现，其实 $z.-&gt;y$ 对应在树上就是一条链，因此，我们可以利用带权并查集的思路，维护一个点到目前最晚遍历到的祖先这么一条链上最小的 $sdom$ 即可。</p>
+<p>最后只要依次从大到小遍历，然后在反图遍历 $x$ 的边即可。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dfn[N],id[N],top;</span><br><span class="line"><span class="keyword">int</span> fa[N],mn[N]<span class="comment">/*记录fa中最小的sdom*/</span>;</span><br><span class="line"><span class="keyword">int</span> idom[N],sdom[N],ff[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findfa</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(x==fa[x])<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="built_in">findfa</span>(fa[x]);</span><br><span class="line">    <span class="keyword">if</span>(dfn[sdom[mn[x]]]&gt;dfn[sdom[mn[fa[x]]]])mn[x]=mn[fa[x]];</span><br><span class="line">    fa[x]=y;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)idom[i]=sdom[i]=fa[i]=mn[i]=i,siz[i]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">2</span>;i--)<span class="comment">//根节点不用找，肯定没有支配点 </span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">int</span> x=id[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">1</span>][x];k;k=a[<span class="number">1</span>][k].next)<span class="comment">//反图的边目录</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> y=a[<span class="number">1</span>][k].y;</span><br><span class="line">        <span class="built_in">findfa</span>(y)<span class="comment">/*更新一下你的父亲*/</span>;</span><br><span class="line">        <span class="keyword">if</span>(dfn[sdom[x]]&gt;dfn[sdom[mn[y]]])sdom[x]=sdom[mn[y]];</span><br><span class="line">    }</span><br><span class="line">    fa[x]=ff[x];<span class="comment">//更新到父亲</span></span><br><span class="line">    <span class="built_in">ins</span>(<span class="number">2</span>,sdom[x],x);<span class="comment">//维护半支配树</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意的是，$mn$ 维护的并不是链上最小的 $sdom$ ，而是持有最小 $sdom$ 的点（相同则 $dfn$ 大的优先）。（为后面更高效的做法作准备）</p>
+<p>同时，虽然链的顶部 $x$ 是没有被访问的点，但是无伤大雅，因为 $sdom[x]=x$ ，而其儿子的 $sdom$ 肯定是 $x$ 或者 $x$ 祖先，所以 $x$ 后代的 $mn$ 不会等于自己，无伤大雅。</p>
+<p>接下来只要跑个 $DAG$ 就完事了。</p>
+<p>但是，神犇并不满足于此。</p>
+<h3 id="更加高效的做法"><a href="#更加高效的做法" class="headerlink" title="更加高效的做法"></a>更加高效的做法</h3><p>其实性质 $3,4$ 点便是根据 $sdom$ 求 $idom$ 的方法。</p>
+<p>但是这个具体应该怎么搞呢？</p>
+<p>难道我们真的要傻傻的枚举 $x-&gt;sdom[x]$ 路径上的点？（<del>其实貌似用倍增依旧是一个log</del>）</p>
+<p>当然不用，其实我们不需要从 $x$ 出发考虑，我们可以从 $sdom[x]$ 出发考虑，当我们遍历到 $sdom[x]$ 的一个儿子 $y$ 的时候（ $x$ 在 $y$ 子树内），由于 $DFS$ 树的定义，$y$ 的子树肯定也都被遍历过了，也就是说， $[x-&gt;y]$ 这一条链实际上都已经被遍历过了，则并查集中 $x$ 的 $mn[x]$ 实际可能就是 $[x-&gt;y]$ 中我们要找的 $z$ （为什么是可能，因为可能没有 $z$ ，如果有，那么就是我们要的 $z$ ），因此，只要我们遍历完 $x$ ，我们就遍历 $x$ 的父亲在半支配树上的儿子来判断，但是需要注意的是，因为接下来会遍历 $x$ 父亲的其余儿子子树，为了防止在其余儿子子树重复判断 $x$ 子树的点，因此在 $x$ 遍历完后，要把 $x$ 父亲在半支配树上的儿子全部删掉。（当然，不删掉不会导致错误，但时间会假）</p>
+<p>如果我们发现，不存在 $z$ ，那么 $idom[x]=sdom[x]$ ，但是如果存在 $z$ ，$idom[x]=idom[z]$ ，$idom[z]$ 此时一定还没找到，怎么办？其实可以先用 $idom[x]=z$ ，最后正序扫描一遍赋值即可。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)idom[i]=sdom[i]=fa[i]=mn[i]=i,siz[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">2</span>;i--)<span class="comment">//根节点不用找，肯定没有支配点 </span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=id[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">1</span>][x];k;k=a[<span class="number">1</span>][k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[<span class="number">1</span>][k].y;</span><br><span class="line">            <span class="built_in">findfa</span>(y)<span class="comment">/*更新一下你的父亲*/</span>;</span><br><span class="line">            <span class="keyword">if</span>(dfn[sdom[x]]&gt;dfn[sdom[mn[y]]])sdom[x]=sdom[mn[y]];</span><br><span class="line">        }</span><br><span class="line">        fa[x]=ff[x];<span class="comment">//更新到父亲</span></span><br><span class="line">        <span class="built_in">ins</span>(<span class="number">2</span>,sdom[x],x);<span class="comment">//维护半支配树</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">2</span>][x=ff[x]];k;k=a[<span class="number">2</span>][k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[<span class="number">2</span>][k].y;</span><br><span class="line">            <span class="built_in">findfa</span>(y);</span><br><span class="line">            idom[y]=(mn[y]==x?y:mn[y]);</span><br><span class="line">        }</span><br><span class="line">        last[<span class="number">2</span>][x]=<span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=id[i];</span><br><span class="line">        <span class="keyword">if</span>(idom[x]==x)idom[x]=sdom[x];</span><br><span class="line">        <span class="keyword">else</span> idom[x]=idom[idom[x]];</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="完整的代码"><a href="#完整的代码" class="headerlink" title="完整的代码"></a>完整的代码</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 210000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 310000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymin</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&lt;y?x:y;}</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> y,next;</span><br><span class="line">}a[<span class="number">3</span>][M];<span class="keyword">int</span> len[<span class="number">3</span>],last[<span class="number">3</span>][N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> type,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{len[type]++;a[type][len[type]].y=y;a[type][len[type]].next=last[type][x];last[type][x]=len[type];}</span><br><span class="line"><span class="keyword">int</span> dfn[N],id[N],top;</span><br><span class="line"><span class="keyword">int</span> fa[N],mn[N]<span class="comment">/*记录fa中有最小的sdom的点*/</span>;</span><br><span class="line"><span class="keyword">int</span> idom[N],sdom[N],ff[N];<span class="comment">//需要注意的是，这些存的都是点的编号，而不是dfn</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findfa</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(x==fa[x])<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="built_in">findfa</span>(fa[x]);</span><br><span class="line">    <span class="keyword">if</span>(dfn[sdom[mn[x]]]&gt;dfn[sdom[mn[fa[x]]]])mn[x]=mn[fa[x]];</span><br><span class="line">    fa[x]=y;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    dfn[x]=++top;id[top]=x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">0</span>][x];k;k=a[<span class="number">0</span>][k].next)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> y=a[<span class="number">0</span>][k].y;</span><br><span class="line">        <span class="keyword">if</span>(!dfn[y])ff[y]=x,<span class="built_in">dfs</span>(y);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> siz[N];</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)idom[i]=sdom[i]=fa[i]=mn[i]=i,siz[i]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">2</span>;i--)<span class="comment">//根节点不用找，肯定没有支配点 </span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=id[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">1</span>][x];k;k=a[<span class="number">1</span>][k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[<span class="number">1</span>][k].y;</span><br><span class="line">            <span class="built_in">findfa</span>(y)<span class="comment">/*更新一下你的父亲*/</span>;</span><br><span class="line">            <span class="keyword">if</span>(dfn[sdom[x]]&gt;dfn[sdom[mn[y]]])sdom[x]=sdom[mn[y]];</span><br><span class="line">        }</span><br><span class="line">        fa[x]=ff[x];<span class="comment">//更新到父亲</span></span><br><span class="line">        <span class="built_in">ins</span>(<span class="number">2</span>,sdom[x],x);<span class="comment">//维护半支配树</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=last[<span class="number">2</span>][x=ff[x]];k;k=a[<span class="number">2</span>][k].next)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> y=a[<span class="number">2</span>][k].y;</span><br><span class="line">            <span class="built_in">findfa</span>(y);</span><br><span class="line">            idom[y]=(mn[y]==x?y:mn[y]);</span><br><span class="line">        }</span><br><span class="line">        last[<span class="number">2</span>][x]=<span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)<span class="comment">//正着赋值一遍</span></span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x=id[i];</span><br><span class="line">        <span class="keyword">if</span>(idom[x]==x)idom[x]=sdom[x];</span><br><span class="line">        <span class="keyword">else</span> idom[x]=idom[idom[x]];</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n;i&gt;=<span class="number">2</span>;i--)siz[idom[id[i]]]+=siz[id[i]];</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> x,y;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</span><br><span class="line">        <span class="built_in">ins</span>(<span class="number">0</span>,x,y);<span class="built_in">ins</span>(<span class="number">1</span>,y,x);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">work</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">printf</span>(<span class="string">"%d "</span>,siz[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>不难发现，此做法时间复杂度 $O((n+m)\log{n})$ ，空间复杂度：$O(n+m)$ ，比起 $DAG$ 做法，空间少个 $\log$ ，常数还比较小（但复杂度一样），因此，在洛谷上高效做法比 $DAG$ 做法整整快了 $3s$ （高效采用我的代码，$DAG$ 采用 XZY 的代码），当然，可以把并查集改成 $α(n)$ 的，这样时间复杂度就变成 $O((n+m)α(n))$ 。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Lengauer 和 Tarjan 太强啦。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>王梦迪 支配树PPT</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/xzyxzy/solution-p5180">题解 P5180 【【模板】支配树】 - xzyxzy 的博客 - 洛谷博客 (luogu.com.cn)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95%E6%88%96%E6%8A%80%E5%B7%A7/" rel="tag"># 算法或技巧</a>
+          
+            <a href="/tags/%E6%94%AF%E9%85%8D%E6%A0%91/" rel="tag"># 支配树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/22/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/" rel="next" title="比较好用的网站">
+                <i class="fa fa-chevron-left"></i> 比较好用的网站
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E9%85%8D%E6%A0%91%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">支配树简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E9%85%8D%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">支配树的构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E6%9E%84%E9%80%A0%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">暴力构造法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAG%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="nav-number">3.2.</span> <span class="nav-text">DAG特殊情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E5%81%9A%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">正确做法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS%E6%A0%91"><span class="nav-number">3.3.1.</span> <span class="nav-text">DFS树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">符号定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%E6%80%A7%E8%B4%A8"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">讨论性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E6%94%AF%E9%85%8D%E7%82%B9"><span class="nav-number">3.3.2.</span> <span class="nav-text">半支配点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">3.3.3.</span> <span class="nav-text">更加高效的做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.4.</span> <span class="nav-text">完整的代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">player</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+</body>
+</html>

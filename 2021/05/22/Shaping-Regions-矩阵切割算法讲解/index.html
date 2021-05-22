@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/author32.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/author16.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法或技巧,矩阵切割," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="例题1147. Shaping Regions @ Timus Online Judge 大意：一坨有颜色的矩阵依次覆盖，最后每个颜色有多少种面积。 坑点：矩阵不一定在白布上。 做法讲讲做法，对于一个矩阵 $X$ 覆盖在另外一个矩阵 $Y$ 上，我们可以尝试把 $Y$ 没有被覆盖的部分分成好几份。 但是要怎么切割，怎样切割会比较优秀呢？（切的尽量的少） 我们记 $X$ 左下角 $x,y$ 坐标为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shaping Regions(矩阵切割算法讲解)">
+<meta property="og:url" content="http://oldplace.github.io/2021/05/22/Shaping-Regions-%E7%9F%A9%E9%98%B5%E5%88%87%E5%89%B2%E7%AE%97%E6%B3%95%E8%AE%B2%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Player">
+<meta property="og:description" content="例题1147. Shaping Regions @ Timus Online Judge 大意：一坨有颜色的矩阵依次覆盖，最后每个颜色有多少种面积。 坑点：矩阵不一定在白布上。 做法讲讲做法，对于一个矩阵 $X$ 覆盖在另外一个矩阵 $Y$ 上，我们可以尝试把 $Y$ 没有被覆盖的部分分成好几份。 但是要怎么切割，怎样切割会比较优秀呢？（切的尽量的少） 我们记 $X$ 左下角 $x,y$ 坐标为">
+<meta property="og:locale">
+<meta property="og:image" content="c:/Users/admin/Desktop/blog/matrixcut-1.png">
+<meta property="article:published_time" content="2021-05-22T10:46:27.000Z">
+<meta property="article:modified_time" content="2021-05-22T11:12:25.694Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="算法或技巧">
+<meta property="article:tag" content="矩阵切割">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/admin/Desktop/blog/matrixcut-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://oldplace.github.io/2021/05/22/Shaping-Regions-矩阵切割算法讲解/"/>
+
+
+
+
+
+  <title>Shaping Regions(矩阵切割算法讲解) | Player</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Player</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://oldplace.github.io/2021/05/22/Shaping-Regions-%E7%9F%A9%E9%98%B5%E5%88%87%E5%89%B2%E7%AE%97%E6%B3%95%E8%AE%B2%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Player">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shaping Regions(矩阵切割算法讲解)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-22T18:46:27+08:00">
+                2021-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a target="_blank" rel="noopener" href="https://acm.timus.ru/problem.aspx?space=1&amp;num=1147">1147. Shaping Regions @ Timus Online Judge</a></p>
+<p>大意：一坨有颜色的矩阵依次覆盖，最后每个颜色有多少种面积。</p>
+<p>坑点：矩阵不一定在白布上。</p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>讲讲做法，对于一个矩阵 $X$ 覆盖在另外一个矩阵 $Y$ 上，我们可以尝试把 $Y$ 没有被覆盖的部分分成好几份。</p>
+<p>但是要怎么切割，怎样切割会比较优秀呢？（切的尽量的少）</p>
+<p>我们记 $X$ 左下角 $x,y$ 坐标为 $X(x_1)$ 和 $X(y_1)$ ，右上角是 $X(x_2)$ 和 $X(y_2)$ ，$((a,b),(c,d))$为以 $(a,b)$ 为左下角，$(c,d)$ 为右上角的矩阵。</p>
+<p>我们不妨考虑 $X$ （红色）和 $Y$ （蓝色）在 $x$ 轴投影的位置关系：</p>
+<p><img src="C:\Users\admin\Desktop\blog\matrixcut-1.png" alt="matrixcut-1"><br>如果 $X$ 的左边的 $x$ 坐标在 $Y$ 的 $x$ 轴投影内，即：$Y(x_1)&lt;X(x_1)&lt;Y(x_2)$，那么 $Y$ 在 $[Y(x_1),X(x_1)]$ 上的矩阵都没有被覆盖，即：$((Y(x_1),Y(y_{1}),(X(x_1),Y(y_{1}))$ 没有被覆盖，右边同理。</p>
+<p>但是还有中间的情况，$X,Y$ 在 $x$ 轴投影重叠部分的上方（红色框住的位置）：这个区间既包括 $Y$ 矩阵，也包括 $X$ 矩阵未被覆盖的部分（可能没有），这个时候分 $y$ 轴讨论就行了。</p>
+<p>不难发现，这样在任何情况下都是最优的割法。</p>
+<p>给上一份代码，网上抄的，当时学的拿来用了，现在不知道是谁的了QAQ，如果知道是谁的通知一声，我马上标注，放上这份代码的原因是和上面讲的比较符合，比较好理解。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,m,n) for(i=m;i&lt;=n;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rsp(it,s) for(set<span class="meta-string">&lt;int&gt;</span>::iterator it=s.begin();it!=s.end();it++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> vi vector<span class="meta-string">&lt;int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pi acos(-1.0)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Lson L, mid, rt&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rson mid+1, R, rt&lt;&lt;1|1</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">3e3</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll p,ll q)</span></span>{<span class="keyword">return</span> q==<span class="number">0</span>?p:<span class="built_in">gcd</span>(q,p%q);}</span><br><span class="line"><span class="function">ll <span class="title">qpow</span><span class="params">(ll p,ll q)</span></span>{ll f=<span class="number">1</span>;<span class="keyword">while</span>(q){<span class="keyword">if</span>(q&amp;<span class="number">1</span>)f=f*p;p=p*p;q&gt;&gt;=<span class="number">1</span>;}<span class="keyword">return</span> f;}</span><br><span class="line"><span class="keyword">int</span> n,m,k,t,ans[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x1,x2,y1,y2,c;</span><br><span class="line">    <span class="built_in">node</span>(){}</span><br><span class="line">    <span class="built_in">node</span>(<span class="keyword">int</span> _x1,<span class="keyword">int</span> _x2,<span class="keyword">int</span> _y1,<span class="keyword">int</span> _y2,<span class="keyword">int</span> _c)</span><br><span class="line">    {</span><br><span class="line">        x1=_x1,x2=_x2,y1=_y1,y2=_y2,c=_c;</span><br><span class="line">    }</span><br><span class="line">}op[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(node p,<span class="keyword">int</span> nt)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(nt&lt;=k&amp;&amp;((p.x1&gt;=op[nt].x2)||(p.x2&lt;=op[nt].x1)||(p.y1&gt;=op[nt].y2)||(p.y2&lt;=op[nt].y1)))<span class="comment">//如果两个矩阵没有相交，直接进入下一层</span></span><br><span class="line">        nt++;</span><br><span class="line">    <span class="keyword">if</span>(nt&gt;k)<span class="keyword">return</span> (p.x2-p.x1)*(p.y2-p.y1);</span><br><span class="line">    <span class="keyword">if</span>(p.x1&lt;op[nt].x1)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(p.x1,op[nt].x1,p.y1,p.y2,op[nt].c),nt+<span class="number">1</span>),p.x1=op[nt].x1;<span class="comment">//如果左边存在一整个块都没有被覆盖，就切割下来。</span></span><br><span class="line">    <span class="keyword">if</span>(p.x2&gt;op[nt].x2)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(op[nt].x2,p.x2,p.y1,p.y2,op[nt].c),nt+<span class="number">1</span>),p.x2=op[nt].x2;<span class="comment">//如果右边存在一整个块都没有被覆盖，就切割下来。</span></span><br><span class="line">    <span class="keyword">if</span>(p.y1&lt;op[nt].y1)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(p.x1,p.x2,p.y1,op[nt].y1,op[nt].c),nt+<span class="number">1</span>),p.y1=op[nt].y1;<span class="comment">//如果中间下面存在块，切下来</span></span><br><span class="line">    <span class="keyword">if</span>(p.y2&gt;op[nt].y2)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(p.x1,p.x2,op[nt].y2,p.y2,op[nt].c),nt+<span class="number">1</span>),p.y2=op[nt].y2;<span class="comment">//如果中间上面存在块，切下来</span></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">    ans[<span class="number">1</span>]=n*m;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,k)<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;op[i].x1,&amp;op[i].y1,&amp;op[i].x2,&amp;op[i].y2,&amp;op[i].c);</span><br><span class="line">    <span class="keyword">for</span>(i=k;i&gt;=<span class="number">1</span>;i--)</span><br><span class="line">    {</span><br><span class="line">        ans[op[i].c]+=(j=<span class="built_in">get</span>(op[i],i+<span class="number">1</span>));</span><br><span class="line">        ans[<span class="number">1</span>]-=j;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,<span class="number">2500</span>)<span class="keyword">if</span>(ans[i])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,ans[i]);</span><br><span class="line">    <span class="comment">//system("Pause");</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>当然，这份代码有几个细节可以优化一下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p.x1&lt;op[nt].x1)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(p.x1,op[nt].x1,p.y1,p.y2,op[nt].c),nt+<span class="number">1</span>),p.x1=op[nt].x1;<span class="comment">//如果左边存在一整个块都没有被覆盖，就切割下来。</span></span><br><span class="line"></span><br><span class="line">这个相当于什么？不就相当于对两个 $x1$ 取 max 吗？</span><br><span class="line"></span><br><span class="line">因此可以化成这样：</span><br><span class="line"></span><br><span class="line">​```cpp</span><br><span class="line"><span class="keyword">int</span> x=<span class="built_in">max</span>(p.x1,op[nt].x1);</span><br><span class="line"><span class="keyword">if</span>(p.x1&lt;x)</span><br><span class="line">        ans+=<span class="built_in">get</span>(<span class="built_in">node</span>(p.x1,x,p.y1,p.y2,op[nt].c),nt+<span class="number">1</span>);<span class="comment">//如果左边存在一整个块都没有被覆盖，就切割下来。</span></span><br><span class="line"><span class="comment">//然后后面的p.x1全部用x代替。</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后，其实四个元都可以如此去做，然后我就自己打了一份代码：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这份代码其实参考了参考链接中的代码</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x1,y1,x2,y2,co;</span><br><span class="line">}a[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymin</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&lt;y?x:y;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymax</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&gt;y?x:y;}</span><br><span class="line"><span class="keyword">int</span> n,m,q;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x1,<span class="keyword">int</span> y1,<span class="keyword">int</span> x2,<span class="keyword">int</span> y2,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(k&gt;q)<span class="keyword">return</span> (x2-x1)*(y2-y1);</span><br><span class="line">    <span class="keyword">if</span>(a[k].x1&gt;=x2 || a[k].x2&lt;=x1 || a[k].y1&gt;=y2 || a[k].y2&lt;=y1)<span class="keyword">return</span> <span class="built_in">dfs</span>(x1,y1,x2,y2,k+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> k1=<span class="built_in">mymax</span>(x1,a[k].x1);</span><br><span class="line">    <span class="keyword">int</span> k2=<span class="built_in">mymin</span>(x2,a[k].x2);</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(x1&lt;k1)ans+=<span class="built_in">dfs</span>(x1,y1,k1,y2,k+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(k2&lt;x2)ans+=<span class="built_in">dfs</span>(k2,y1,x2,y2,k+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> k3=<span class="built_in">mymax</span>(y1,a[k].y1),k4=<span class="built_in">mymin</span>(y2,a[k].y2);</span><br><span class="line">    <span class="keyword">if</span>(y1&lt;k3)ans+=<span class="built_in">dfs</span>(k1,y1,k2,k3,k+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(k4&lt;y2)ans+=<span class="built_in">dfs</span>(k1,k4,k2,y2,k+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> ans[<span class="number">2600</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">    q++;a[<span class="number">1</span>].x2=n;a[<span class="number">1</span>].y2=m;a[<span class="number">1</span>].co=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=q;i++)<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;a[i].x1,&amp;a[i].y1,&amp;a[i].x2,&amp;a[i].y2,&amp;a[i].co);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)ans[a[i].co]+=<span class="built_in">dfs</span>(a[i].x1,a[i].y1,a[i].x2,a[i].y2,i+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2500</span>;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(ans[i])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,ans[i]);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>时间空间消耗等会说。</p>
+<h1 id="另外的做法"><a href="#另外的做法" class="headerlink" title="另外的做法"></a>另外的做法</h1><h2 id="此题另一种矩阵切割的实现方式"><a href="#此题另一种矩阵切割的实现方式" class="headerlink" title="此题另一种矩阵切割的实现方式"></a>此题另一种矩阵切割的实现方式</h2><p>观察就会发现，实际上上面的实现方法，是对一个矩阵，用后面的矩阵对其进行切割，但实际上，我们可以换个角度出发，从可用面积的角度出发，即将背景墙扔进去，从后往前切割，每个矩阵会对背景墙割掉一块，其实这就相当于对每一个矩阵找其没有被后面矩阵覆盖的部分。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x1,y1,x2,y2,co;</span><br><span class="line">}a[N];</span><br><span class="line"><span class="keyword">int</span> ans[<span class="number">2600</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymin</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&lt;y?x:y;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymax</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&gt;y?x:y;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x1,<span class="keyword">int</span> y1,<span class="keyword">int</span> x2,<span class="keyword">int</span> y2,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(!k)<span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(a[k].x1&gt;=x2 || a[k].x2&lt;=x1 || a[k].y1&gt;=y2 || a[k].y2&lt;=y1)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">dfs</span>(x1,y1,x2,y2,k<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">int</span> k1=<span class="built_in">mymax</span>(x1,a[k].x1);</span><br><span class="line">    <span class="keyword">int</span> k2=<span class="built_in">mymin</span>(x2,a[k].x2);</span><br><span class="line">    <span class="keyword">if</span>(x1&lt;k1)<span class="built_in">dfs</span>(x1,y1,k1,y2,k<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">if</span>(k2&lt;x2)<span class="built_in">dfs</span>(k2,y1,x2,y2,k);</span><br><span class="line">    <span class="keyword">int</span> k3=<span class="built_in">mymax</span>(y1,a[k].y1),k4=<span class="built_in">mymin</span>(y2,a[k].y2);</span><br><span class="line">    <span class="keyword">if</span>(y1&lt;k3)<span class="built_in">dfs</span>(k1,y1,k2,k3,k<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">if</span>(k4&lt;y2)<span class="built_in">dfs</span>(k1,k4,k2,y2,k<span class="number">-1</span>);</span><br><span class="line">    ans[a[k].co]+=(k2-k1)*(k4-k3);</span><br><span class="line">}</span><br><span class="line"><span class="keyword">int</span> n,m,q;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">    q++;a[<span class="number">1</span>].x2=n;a[<span class="number">1</span>].y2=m;a[<span class="number">1</span>].co=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=q;i++)<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;a[i].x1,&amp;a[i].y1,&amp;a[i].x2,&amp;a[i].y2,&amp;a[i].co);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">10000</span>,<span class="number">10000</span>,q);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2500</span>;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(ans[i])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,ans[i]);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这确实是一个不错的转化思路，从每个矩阵最后在背景板的占地面积出发做题。</p>
+<p>关于两种做法的空间以及效率问题，空间上的消耗比较小，空间复杂度 $O(q)$ ，但是时间上的消耗就比较玄学了，这个实现方法封顶是 $O(背景板面积)$ ，而上面的做法封顶应该是 $O(所有矩阵面积)$ ，但是实际远小于这个上限，都可以通过该题。</p>
+<p>但是呢，我们来比较一下这两个做法：</p>
+<p>不难发现，在小规模下，矩阵之间并未相交多次时，这个实现方法对背景板的切割次数较多，较慢，上面的方法因为相交不多，所以会较快，但实际因为规模小，可能不痛不痒，但是在超大规模下，背景板被占满好几次，那么这个方法要远远快于上面的方法，因为这个方法封顶背景板面积，而上面每个矩阵都要计算每个矩阵对其的影响，因此要慢上不少。</p>
+<p>但是在中等的规模的数据下呢，鉴于我比较菜，没有时间<del>没有实力</del>去从理论分析（或者实验分析）其在随机数据下的时间表现，也不知道这两个做法较好的卡法，所以希望如果有读者知道，私信我一下，我会写在博客内。当然，我们还是可以阿巴一下的，不难发现，背景板切割只用对一个矩阵切一次（虽然这种切割比较大型），而上面的做法对每个矩阵都要去用后面矩阵切割一次，理论来讲上面做法应该会更慢一点，而在做此例题也确实如此，上面的方法我改了一下每个矩阵后面矩阵的切割顺序（从后往前改成从前往后），超时了，但是即使不改，其依旧比该方法满了一倍的时间。再阿巴一下卡法，显然，很容易构造出一个使上面做法时间超过这个做法时间的数据（把整个背景板加入到数据中）。因此，这道题目方法的选择，我更推荐这种做法。</p>
+<p>当然，矩阵切割本身就是暴力算法，优点就是代码好打，比较灵活，空间占用小，缺点就是时间玄学，因此在使用的时候，应该根据题目，主动去思考常数更加小的实现方法，从而骗到更多的分数或者更快的AC题目。</p>
+<h2 id="关于例题线段树做法"><a href="#关于例题线段树做法" class="headerlink" title="关于例题线段树做法"></a>关于例题线段树做法</h2><p>当然，这道题目我一开始的做法是线段树做法，首先离散化，那么 $n,m$ 范围便只剩下了 $2000$ ，接着，类似最早的思考，考虑每个矩阵被其余矩阵覆盖了多少，类似扫描线一样扫过去就行。</p>
+<p>时间复杂度：$O(q^2\log{q})$</p>
+<p>空间复杂度：$O(q)$</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 2100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MM 4100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymin</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&lt;y?x:y;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mymax</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>{<span class="keyword">return</span> x&gt;y?x:y;}</span><br><span class="line"><span class="keyword">int</span> be1[M],to1,cn1,cn2,to2,be2[M];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Tree</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> lc,rc;</span><br><span class="line">    <span class="keyword">int</span> min,minsum,lazy;</span><br><span class="line">}tr[MM];<span class="keyword">int</span> len;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushlazy</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>{tr[x].min+=k;tr[x].lazy+=k;}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">updata</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[tr[x].lc].min&lt;tr[tr[x].rc].min)tr[x].min=tr[tr[x].lc].min,tr[x].minsum=tr[tr[x].lc].minsum;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(tr[tr[x].lc].min&gt;tr[tr[x].rc].min)tr[x].min=tr[tr[x].rc].min,tr[x].minsum=tr[tr[x].rc].minsum;</span><br><span class="line">    <span class="keyword">else</span> tr[x].min=tr[tr[x].rc].min,tr[x].minsum=tr[tr[x].lc].minsum+tr[tr[x].rc].minsum;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(tr[x].lazy)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">pushlazy</span>(tr[x].lc,tr[x].lazy);<span class="built_in">pushlazy</span>(tr[x].rc,tr[x].lazy);</span><br><span class="line">        tr[x].lazy=<span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bt</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">int</span> x=++len;</span><br><span class="line">    tr[x].min=<span class="number">0</span>;tr[x].minsum=be1[r]-be1[l];tr[x].lazy=<span class="number">0</span>;tr[x].lc=tr[x].rc=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l+<span class="number">1</span>&lt;r)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        tr[x].lc=len+<span class="number">1</span>;<span class="built_in">bt</span>(l,mid);</span><br><span class="line">        tr[x].rc=len+<span class="number">1</span>;<span class="built_in">bt</span>(mid,r);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ll,<span class="keyword">int</span> rr,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(l==ll &amp;&amp; r==rr){<span class="built_in">pushlazy</span>(x,k);<span class="keyword">return</span> ;}</span><br><span class="line">    <span class="built_in">pushdown</span>(x);</span><br><span class="line">    <span class="keyword">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(rr&lt;=mid)<span class="built_in">change</span>(tr[x].lc,l,mid,ll,rr,k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(mid&lt;=ll)<span class="built_in">change</span>(tr[x].rc,mid,r,ll,rr,k);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">change</span>(tr[x].lc,l,mid,ll,mid,k),<span class="built_in">change</span>(tr[x].rc,mid,r,mid,rr,k);</span><br><span class="line">    <span class="built_in">updata</span>(x);</span><br><span class="line">}</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x<span class="comment">/*ењЁ[x,x+1]жњџй—ґиї›иЎЊиЇҐж“ЌдЅњ*/</span>,l,r,k,tim<span class="comment">/*и¦†з›–ж—¶й—ґ*/</span>;</span><br><span class="line">}qu[M];<span class="keyword">int</span> cnt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp1</span><span class="params">(Query x,Query y)</span></span>{<span class="keyword">return</span> x.x&lt;y.x;}</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Ver</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> x1,y1,x2,y2,co;</span><br><span class="line">}a[M];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> *x,val;</span><br><span class="line">}b1[M],b2[M];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(node x,node y)</span></span>{<span class="keyword">return</span> x.val&lt;y.val;}</span><br><span class="line"><span class="keyword">int</span> n,m,q;</span><br><span class="line"><span class="keyword">int</span> ans[MM];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">    q++;a[<span class="number">1</span>].x1=a[<span class="number">1</span>].y1=<span class="number">0</span>;a[<span class="number">1</span>].x2=n;a[<span class="number">1</span>].y2=m;a[<span class="number">1</span>].co=<span class="number">1</span>;</span><br><span class="line">    b1[++to1].x=&amp;a[<span class="number">1</span>].x1;b1[to1].val=a[<span class="number">1</span>].x1;</span><br><span class="line">    b1[++to1].x=&amp;a[<span class="number">1</span>].x2;b1[to1].val=a[<span class="number">1</span>].x2;</span><br><span class="line">    b2[++to2].x=&amp;a[<span class="number">1</span>].y1;b2[to2].val=a[<span class="number">1</span>].y1;</span><br><span class="line">    b2[++to2].x=&amp;a[<span class="number">1</span>].y2;b2[to2].val=a[<span class="number">1</span>].y2;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=q;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d%d"</span>,&amp;a[i].x1,&amp;a[i].y1,&amp;a[i].x2,&amp;a[i].y2,&amp;a[i].co);</span><br><span class="line">        b1[++to1].x=&amp;a[i].x1;b1[to1].val=a[i].x1;</span><br><span class="line">        b1[++to1].x=&amp;a[i].x2;b1[to1].val=a[i].x2;</span><br><span class="line">        b2[++to2].x=&amp;a[i].y1;b2[to2].val=a[i].y1;</span><br><span class="line">        b2[++to2].x=&amp;a[i].y2;b2[to2].val=a[i].y2;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">sort</span>(b1+<span class="number">1</span>,b1+to1+<span class="number">1</span>,cmp2);</span><br><span class="line">    <span class="built_in">sort</span>(b2+<span class="number">1</span>,b2+to2+<span class="number">1</span>,cmp2);</span><br><span class="line">    *b1[<span class="number">1</span>].x=*b2[<span class="number">1</span>].x=cn1=cn2=<span class="number">1</span>;be1[<span class="number">1</span>]=b1[<span class="number">1</span>].val;be2[<span class="number">1</span>]=b2[<span class="number">1</span>].val;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=to1;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(b1[i<span class="number">-1</span>].val!=b1[i].val)cn1++,be1[cn1]=b1[i].val;</span><br><span class="line">        <span class="keyword">if</span>(b2[i<span class="number">-1</span>].val!=b2[i].val)cn2++,be2[cn2]=b2[i].val;</span><br><span class="line">        *b1[i].x=cn1;*b2[i].x=cn2; </span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">    {</span><br><span class="line">        qu[++cnt].x=a[i].y1;qu[cnt].l=a[i].x1;qu[cnt].r=a[i].x2;qu[cnt].tim=i;qu[cnt].k=<span class="number">1</span>;</span><br><span class="line">        qu[++cnt].x=a[i].y2;qu[cnt].l=a[i].x1;qu[cnt].r=a[i].x2;qu[cnt].tim=i;qu[cnt].k=<span class="number">-1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="built_in">sort</span>(qu+<span class="number">1</span>,qu+cnt+<span class="number">1</span>,cmp1);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=q;i++)</span><br><span class="line">    {</span><br><span class="line">        len=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[i].x1&lt;a[i].x2)<span class="built_in">bt</span>(a[i].x1,a[i].x2);</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=a[i].y1;j&lt;a[i].y2;j++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">while</span>(now&lt;=cnt &amp;&amp; qu[now].x&lt;=j)</span><br><span class="line">            {</span><br><span class="line">                <span class="keyword">if</span>(qu[now].tim&gt;i)</span><br><span class="line">                {</span><br><span class="line">                    <span class="keyword">int</span> l=<span class="built_in">mymax</span>(a[i].x1,qu[now].l),r=<span class="built_in">mymin</span>(a[i].x2,qu[now].r);</span><br><span class="line">                    <span class="keyword">if</span>(l&lt;r)<span class="built_in">change</span>(<span class="number">1</span>,a[i].x1,a[i].x2,l,r,qu[now].k);</span><br><span class="line">                }</span><br><span class="line">                now++;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(!tr[<span class="number">1</span>].min)ans[a[i].co]+=(be2[j+<span class="number">1</span>]-be2[j])*tr[<span class="number">1</span>].minsum;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2500</span>;i++)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(ans[i])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,ans[i]);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>当然，你也可以用线段树实现矩阵切割第二种方法类似的思路（每个矩阵在背景板的占地面积），但是貌似这样子常数更大。QMQ</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>介绍了矩阵切割算法，一个灵活的、空间小的、代码好打的、好想的、但时间玄学的算法，在范围在千以内的时候可以试着使用一下，万以上就不知道了。（其实我也就用过一次，什么时候可以用还是你们自己去摸索吧。）</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/modiz/article/details/38542749">&lt;模板&gt; 矩形分割_无奈滴微笑-CSDN博客</a></p>
+<p>[题解 P6432 【[USACO3.1]形成的区域 Shaping Regions】 - blog-lhm - 洛谷博客 (luogu.com.cn)</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95%E6%88%96%E6%8A%80%E5%B7%A7/" rel="tag"># 算法或技巧</a>
+          
+            <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%87%E5%89%B2/" rel="tag"># 矩阵切割</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/22/Parity-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E8%80%83%E8%99%91%E8%A7%92%E5%BA%A6/" rel="next" title="Parity 的一个比较好的考虑角度">
+                <i class="fa fa-chevron-left"></i> Parity 的一个比较好的考虑角度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/22/%E6%AF%94%E8%BE%83%E5%A5%BD%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/" rel="prev" title="比较好用的网站">
+                比较好用的网站 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+                <a href="/archives">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%9A%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%A6%E5%A4%96%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">另外的做法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A4%E9%A2%98%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%9F%A9%E9%98%B5%E5%88%87%E5%89%B2%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">此题另一种矩阵切割的实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%BE%8B%E9%A2%98%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%81%9A%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">关于例题线段树做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">player</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+</body>
+</html>
