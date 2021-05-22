@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="并查集," />
 
 
 
@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="Parity1003. Parity @ Timus Online Judge 一个 $01$ 序列。 大意就是给你一些区间的奇偶性，然后你要找到最早在哪个区间出了问题。 这个题目首先要把区间改成左闭右开，然后离散化一下，最后用带权并查集维护一下就行了，关于奇偶性的转移全部用带权并查集维护即可。 123456789101112131415161718192021222324252627282930">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Parity 的一个比较好的考虑角度">
 <meta property="og:url" content="http://oldplace.github.io/2021/05/22/Parity-%E7%9A%84%E4%B8%80%E4%B8%AA%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E8%80%83%E8%99%91%E8%A7%92%E5%BA%A6/index.html">
 <meta property="og:site_name" content="Player">
+<meta property="og:description" content="Parity1003. Parity @ Timus Online Judge 一个 $01$ 序列。 大意就是给你一些区间的奇偶性，然后你要找到最早在哪个区间出了问题。 这个题目首先要把区间改成左闭右开，然后离散化一下，最后用带权并查集维护一下就行了，关于奇偶性的转移全部用带权并查集维护即可。 123456789101112131415161718192021222324252627282930">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-05-22T10:46:00.000Z">
-<meta property="article:modified_time" content="2021-05-22T10:46:00.648Z">
+<meta property="article:modified_time" content="2021-05-22T11:17:42.979Z">
 <meta property="article:author" content="player">
+<meta property="article:tag" content="并查集">
 <meta name="twitter:card" content="summary">
 
 
@@ -358,7 +361,18 @@
       
 
       
-        
+        <h1 id="Parity"><a href="#Parity" class="headerlink" title="Parity"></a>Parity</h1><p><a target="_blank" rel="noopener" href="https://acm.timus.ru/problem.aspx?space=1&amp;num=1003">1003. Parity @ Timus Online Judge</a></p>
+<p>一个 $01$ 序列。</p>
+<p>大意就是给你一些区间的奇偶性，然后你要找到最早在哪个区间出了问题。</p>
+<p>这个题目首先要把区间改成左闭右开，然后离散化一下，最后用带权并查集维护一下就行了，关于奇偶性的转移全部用带权并查集维护即可。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 510000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">int</span> l[N],r[N],type[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">int</span> *x;<span class="keyword">int</span> val;</span><br><span class="line">}a[N];<span class="keyword">int</span> top;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node x,node y)</span></span>{<span class="keyword">return</span> x.val&lt;y.val;}</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> fa[N],val[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">findfa</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(x==fa[x])<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="built_in">findfa</span>(fa[x]);val[x]^=val[fa[x]];fa[x]=y;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">mer</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> type)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">if</span>(x&gt;y)x^=y^=x^=y;<span class="comment">//其实这句加不加无所谓，但是更方便理解</span></span><br><span class="line">    fa[y]=x;val[y]=type;</span><br><span class="line">}</span><br><span class="line"><span class="keyword">char</span> st[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)</span><br><span class="line">    {</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">-1</span>)<span class="keyword">break</span>;</span><br><span class="line">        n++;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        top=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans=m+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;l[i],&amp;r[i]);r[i]++;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,st+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>((l[i]&lt;<span class="number">1</span> || r[i]&gt;n || l[i]&gt;r[i]) &amp;&amp; ans==m+<span class="number">1</span>)</span><br><span class="line">            {</span><br><span class="line">                ans=i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">if</span>(st[<span class="number">1</span>]==<span class="string">'e'</span>)type[i]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> type[i]=<span class="number">1</span>;</span><br><span class="line">            a[++top].x=&amp;l[i];a[top].val=l[i];</span><br><span class="line">            a[++top].x=&amp;r[i];a[top].val=r[i];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(ans!=m+<span class="number">1</span>)</span><br><span class="line">        {</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">sort</span>(a+<span class="number">1</span>,a+top+<span class="number">1</span>,cmp);</span><br><span class="line">        <span class="keyword">if</span>(top&gt;=<span class="number">1</span>)(*a[<span class="number">1</span>].x)=<span class="number">1</span>;<span class="comment">//注意可能m=0的情况 </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=top;i++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">if</span>(a[i].val==a[i<span class="number">-1</span>].val)(*a[i].x)=(*a[i<span class="number">-1</span>].x);</span><br><span class="line">            <span class="keyword">else</span> (*a[i].x)=(*a[i<span class="number">-1</span>].x)+<span class="number">1</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(top&gt;=<span class="number">1</span>)n=(*a[top].x);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)fa[i]=i,val[i]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">int</span> tx=<span class="built_in">findfa</span>(l[i]),ty=<span class="built_in">findfa</span>(r[i]);</span><br><span class="line">            <span class="keyword">if</span>(tx==ty)</span><br><span class="line">            {</span><br><span class="line">                <span class="keyword">if</span>((val[l[i]]^val[r[i]])!=type[i])</span><br><span class="line">                {</span><br><span class="line">                    ans=i;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">mer</span>(tx,ty,val[l[i]]^val[r[i]]^type[i]);</span><br><span class="line">        }</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans<span class="number">-1</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>虽然会做，但是我一直在冥思苦想为什么正确，比如：$[1,3],[3,4]$ 虽然并查集上无关，但都包含 $3$ ，总归有点关系，且在并查集上，只有当左闭右开区间有个端点重合时，在并查集上才有关联，但是有没有可能一坨区间有些端点重合，有些不重合，然后解出了并查集不能处理出奇偶性区间的奇偶性。（简单来说就是我找不到一种合适的解释或者较为严谨的证明去解释这个并查集做法，因为区间之间的关联性错综复杂）</p>
+<p>但是后来翻资料发现了一种合适的解释：</p>
+<p>其实可以对数组进行异或前缀和 $f$ ，那么对于区间 $[a,b)$ ，我们就能得到 $f[a]$ 和 $f[b]$ 的关系，仔细想想 $(a,b)$ 之间的 $c$ 的 $f$ 会不会受到 $a,b$ 的影响呢？事实上并不会，因为 $f[c]$ 不管取什么，最后只要从后往前再做一遍前缀和就可以得到原数组（即原数组存在与否与 $f[c]$ 取值无关），即 $f[c]$ 的取值与 $f[a],f[b]$ 无关。</p>
+<p>类似的，即使 $f[c]$ 与 $f[d]$ 有关系，这个关系与 $a,b$ 也没有关系，因为 $f[c]$ 的取值与 $f[a],f[b]$ 无关。</p>
+<p>总的来讲，这样问题就不是一个区间了，而是只涉及到了点的关系，就非常好考虑了。（区间的错综复杂考虑起来真的好恶心QAQ）</p>
+<p>综上，在做 $01$ 异或型区间问题的时候，前缀和可以帮助我们把区间问题变成点值问题来考虑，思考难度就下降不少了。</p>
+
       
     </div>
     
@@ -372,6 +386,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag"># 并查集</a>
+          
+        </div>
       
 
       
@@ -446,8 +466,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -473,7 +502,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -496,6 +525,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Parity"><span class="nav-number">1.</span> <span class="nav-text">Parity</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
