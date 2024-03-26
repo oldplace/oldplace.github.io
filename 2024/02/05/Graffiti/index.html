@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Graffiti | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接：https:&#x2F;&#x2F;contest.ucup.ac&#x2F;contest&#x2F;1511&#x2F;problem&#x2F;8213 题目大意： 给一个树，给一个长度不超过 $3$ 的串，然后问：每个点填一个字母，最大化满足经过的点构成的字符串等于给定串的有向路径数量，输出数量。 做法显然只有长度为 $3$ 的串需要思考，当只有两个不同的字母的时候，会发现如果使用 $dp[x][0&#x2F;1]$ 的 dp 方式，会无法处理从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graffiti">
+<meta property="og:url" content="http://oldplace.github.io/2024/02/05/Graffiti/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="题目链接：https:&#x2F;&#x2F;contest.ucup.ac&#x2F;contest&#x2F;1511&#x2F;problem&#x2F;8213 题目大意： 给一个树，给一个长度不超过 $3$ 的串，然后问：每个点填一个字母，最大化满足经过的点构成的字符串等于给定串的有向路径数量，输出数量。 做法显然只有长度为 $3$ 的串需要思考，当只有两个不同的字母的时候，会发现如果使用 $dp[x][0&#x2F;1]$ 的 dp 方式，会无法处理从">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-02-05T14:15:10.000Z">
+<meta property="article:modified_time" content="2024-02-05T14:55:10.938Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="树形DP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/02/05/Graffiti/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Graffiti',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-02-05 22:55:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Graffiti</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-05T14:15:10.000Z" title="发表于 2024-02-05 22:15:10">2024-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-05T14:55:10.938Z" title="更新于 2024-02-05 22:55:10">2024-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Graffiti"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>题目链接：<a target="_blank" rel="noopener" href="https://contest.ucup.ac/contest/1511/problem/8213">https://contest.ucup.ac/contest/1511/problem/8213</a></p>
+<p>题目大意：</p>
+<p>给一个树，给一个长度不超过 $3$ 的串，然后问：每个点填一个字母，最大化满足经过的点构成的字符串等于给定串的有向路径数量，输出数量。</p>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>显然只有长度为 $3$ 的串需要思考，当只有两个不同的字母的时候，会发现如果使用 $dp[x][0/1]$ 的 dp 方式，会无法处理从 $x$ 的儿子的儿子，到 $x$ 的路径，所以我们需要再多添加一维，表示父亲填的字母，相当于提前知道了父亲填的字母，然后父亲在转移的时候直接调用就行了。</p>
+<p>但是会发现我们仍然无法处理三个字母都不同的情况，因为儿子有三种选择。</p>
+<p>但是注意到第一个字母和第三个字母并没有本质区别，将一个子树的第一个字母和第三个字母全部颠倒不会影响这个子树的贡献，所以也就只需要知道儿子应该选一/三字母或者第二个字母就行，排个序枚举一下就行了。</p>
+<p>时间复杂度：$O(n\log{n})$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> vector&lt;<span class="type">int</span>&gt; VI;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">3e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> NN=<span class="number">6e5</span>+<span class="number">5</span>;</span><br><span class="line">LL dp[N][<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line"><span class="type">int</span> ss[<span class="number">4</span>],n,m,C;<span class="type">char</span> st[<span class="number">10</span>];</span><br><span class="line"><span class="type">int</span> vis[<span class="number">300</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> y,next;</span><br><span class="line">&#125;a[NN];<span class="type">int</span> len,las[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;a[++len]=&#123;y,las[x]&#125;;las[x]=len;&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">pd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="built_in">assert</span>(m==<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> (x==ss[<span class="number">1</span>] &amp;&amp; y==ss[<span class="number">2</span>]) || (x==ss[<span class="number">2</span>] &amp;&amp; y==ss[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">pd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="built_in">assert</span>(m==<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> (x==ss[<span class="number">1</span>] &amp;&amp; y==ss[<span class="number">2</span>] &amp;&amp; z==ss[<span class="number">3</span>]) || (x==ss[<span class="number">3</span>] &amp;&amp; y==ss[<span class="number">2</span>] &amp;&amp; z==ss[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LL <span class="title">count</span><span class="params">(LL c1,LL c2,<span class="type">int</span> fc)</span></span>&#123;</span><br><span class="line">    <span class="built_in">assert</span>(C&gt;<span class="number">1</span>);</span><br><span class="line">    LL tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(C==<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pd</span>(<span class="number">1</span>,ss[<span class="number">2</span>],<span class="number">1</span>)==<span class="number">1</span>)tmp+=c1*(c1<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">// if(pd(2,ss[2],2)==1)tmp+=c2*(c2-1)/2; impossible</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pd</span>(<span class="number">1</span>,ss[<span class="number">2</span>],<span class="number">2</span>)==<span class="number">1</span>)tmp+=c1*c2;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pd</span>(<span class="number">1</span>,ss[<span class="number">2</span>],fc)==<span class="number">1</span>)tmp+=c1;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">pd</span>(<span class="number">2</span>,ss[<span class="number">2</span>],fc))tmp+=c2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(fc==<span class="number">1</span> || fc==<span class="number">3</span>)&#123;</span><br><span class="line">            LL c3=(c1+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">            tmp+=c3*(c1-c3)+c3;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            LL c3=c1/<span class="number">2</span>;</span><br><span class="line">            tmp+=c3*(c1-c3);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line">LL sta[N];<span class="type">int</span> top;</span><br><span class="line">VI son[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=las[x];k;k=a[k].next)&#123;</span><br><span class="line">        <span class="type">int</span> y=a[k].y;<span class="keyword">if</span>(y==fa)<span class="keyword">continue</span>;</span><br><span class="line">        son[x].<span class="built_in">push_back</span>(y);</span><br><span class="line">        <span class="built_in">dfs</span>(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m==<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=C;i++)&#123;</span><br><span class="line">            LL now=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> y:son[x])&#123;</span><br><span class="line">                LL tmp=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=C;j++)&#123;</span><br><span class="line">                    tmp=<span class="built_in">max</span>(dp[y][i][j],tmp);</span><br><span class="line">                &#125;</span><br><span class="line">                now+=tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> fc=<span class="number">1</span>;fc&lt;=C;fc++)&#123;<span class="comment">//father color</span></span><br><span class="line">                <span class="keyword">if</span>(x!=<span class="number">1</span> &amp;&amp; <span class="built_in">pd</span>(i,fc))dp[x][fc][i]=now+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> dp[x][fc][i]=now;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;<span class="comment">//m=3</span></span><br><span class="line">        <span class="built_in">assert</span>(m==<span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=C;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=ss[<span class="number">2</span>])&#123;<span class="comment">//only up</span></span><br><span class="line">                LL now=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> y:son[x])&#123;</span><br><span class="line">                    LL tmp=<span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=C;j++)&#123;</span><br><span class="line">                        tmp=<span class="built_in">max</span>(tmp,dp[y][i][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    now+=tmp;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> fc=<span class="number">1</span>;fc&lt;=C;fc++)&#123;<span class="comment">//father color</span></span><br><span class="line">                    dp[x][fc][i]=now;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(C==<span class="number">1</span>)&#123;</span><br><span class="line">                LL siz=son[x].<span class="built_in">size</span>();</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> y:son[x]) dp[x][<span class="number">1</span>][<span class="number">1</span>]+=dp[y][<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">                dp[x][<span class="number">1</span>][<span class="number">1</span>]+=siz*(siz<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span>(x!=<span class="number">1</span>)dp[x][<span class="number">1</span>][<span class="number">1</span>]+=siz;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                top=<span class="number">0</span>;</span><br><span class="line">                LL ini=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> y:son[x])&#123;</span><br><span class="line">                    sta[++top]=dp[y][i][<span class="number">2</span>]-dp[y][i][<span class="number">1</span>];</span><br><span class="line">                    <span class="built_in">assert</span>(C!=<span class="number">3</span> || dp[y][i][<span class="number">1</span>]==dp[y][i][<span class="number">3</span>]);</span><br><span class="line">                    ini+=dp[y][i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">sort</span>(sta+<span class="number">1</span>,sta+top+<span class="number">1</span>,[](LL x,LL y)&#123;<span class="keyword">return</span> x&gt;y;&#125;);</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> fc=<span class="number">1</span>;fc&lt;=C;fc++)&#123;</span><br><span class="line">                    LL now=<span class="number">0</span>,tmp=ini;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=top;j++)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(x!=<span class="number">1</span>)now=<span class="built_in">max</span>( now , tmp+<span class="built_in">count</span>(top-j,j,fc) );</span><br><span class="line">                        <span class="keyword">else</span> now=<span class="built_in">max</span>( now , tmp+<span class="built_in">count</span>(top-j,j,<span class="number">0</span>) );</span><br><span class="line">                        <span class="keyword">if</span>(j!=top) tmp+=sta[j+<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    dp[x][fc][i]=now;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,st+<span class="number">1</span>);m=<span class="built_in">strlen</span>(st+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> x,y;<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">        <span class="built_in">ins</span>(x,y);<span class="built_in">ins</span>(y,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[st[i]])vis[st[i]]=++C;</span><br><span class="line">        ss[i]=vis[st[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m==<span class="number">1</span>)<span class="keyword">return</span> n;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    LL ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=C;i++)ans=<span class="built_in">max</span>(ans,dp[<span class="number">1</span>][<span class="number">1</span>][i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ss[<span class="number">1</span>]==ss[m])ans*=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,<span class="built_in">work</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>题外话：<br>其实这个 dp 设计非常有意思。</p>
+<ol>
+<li><p>从树的角度考虑，我们其实有另外一种设计思路是，多添加几维表示这个节点的每个颜色的儿子选了多少个，但是可以发现这种设计是显然会超时的。</p>
+<p>这是因为一个节点的儿子数量可以很多，而父亲至多一个，因此，我们更希望通过父亲解决问题，而不是通过儿子。</p>
+<p>一个类似的例子是：一个数据结构题目，每次能够给一个点周围的所有点的点权加上 $c$ ，做法为：父亲的点权直接加上，儿子的点权加在自己身上，等查询一个点点权的时候让他自己来问父亲。</p>
+<p>当然，上面那个例子还有个单 log 做法，就是利用 BFS 序+线段树，因为 BFS 序上儿子的编号是连续的。</p>
+</li>
+<li><p>从预知未来的角度考虑：</p>
+<p>每个点先预知未来的一些信息，在这道题目上的作用是，让我们能够处理了一些本来无法处理的信息。</p>
+<p>当然也可以有其他作用，举个减少时间复杂度的例子（某一年提高组初赛的题目，忘记是哪一年了）：</p>
+<h6 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h6><p>这道题目到底是哪一年的。</p>
+<p>求长度恰好为 $k$ 且相邻数字的异或的和最大的子序列，输出最大的和，值域 $2^{8}-1$。</p>
+<p>做法为 $dp[i][x][y]$ ，$i$ 是已经有几个数字，$x$ 表示子序列目前最后一个数字的上 $4$ 位，$y$ 表示我们期望下一个数字的下 $4$ 位是多少。</p>
+<p>这样就能在 $O(n^2*2^4)$ 的复杂度处理这个问题，相较于 $dp[i][x]$ 少了 $2^4$ 。</p>
+</li>
+</ol>
+</div></details>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/02/05/Graffiti/">http://oldplace.github.io/2024/02/05/Graffiti/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A0%91%E5%BD%A2DP/">树形DP</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/02/11/Treelection/" title="Treelection"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-11</div><div class="title">Treelection</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text">坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

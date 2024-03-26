@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Border学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参考资料https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;command-block&#x2F;border-li-lun-xiao-ji 定义Border$Border$ ：字符串的某个前缀（非原串），能与后缀完全匹配。 例：$S[1,m]&#x3D;S[n-m+1,n]$ ，那么称 $S[1,m]$ 为 $S$ 的一个 $Border$ 。 接下来简称 $Border$ 为 $Bd$ 。 我们称 $mx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Border学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2024/02/11/Border%E7%90%86%E8%AE%BA/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="参考资料https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;command-block&#x2F;border-li-lun-xiao-ji 定义Border$Border$ ：字符串的某个前缀（非原串），能与后缀完全匹配。 例：$S[1,m]&#x3D;S[n-m+1,n]$ ，那么称 $S[1,m]$ 为 $S$ 的一个 $Border$ 。 接下来简称 $Border$ 为 $Bd$ 。 我们称 $mx">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-02-11T07:43:21.000Z">
+<meta property="article:modified_time" content="2024-03-21T09:32:27.283Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="Border">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/02/11/Border%E7%90%86%E8%AE%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Border学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-03-21 17:32:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Border学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-11T07:43:21.000Z" title="发表于 2024-02-11 15:43:21">2024-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-21T09:32:27.283Z" title="更新于 2024-03-21 17:32:27">2024-03-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Border学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/command-block/border-li-lun-xiao-ji">https://www.luogu.com.cn/blog/command-block/border-li-lun-xiao-ji</a></p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><h2 id="Border"><a href="#Border" class="headerlink" title="Border"></a>Border</h2><p>$Border$ ：字符串的某个前缀（非原串），能与后缀完全匹配。</p>
+<p>例：$S[1,m]=S[n-m+1,n]$ ，那么称 $S[1,m]$ 为 $S$ 的一个 $Border$ 。</p>
+<p>接下来简称 $Border$ 为 $Bd$ 。</p>
+<p>我们称 $mxBd(S)$ 为 $S$ 最长的 $Bd$ ，$Bd(S)$ 为 $S$ 的 $Bd$ 集合。</p>
+<h2 id="周期"><a href="#周期" class="headerlink" title="周期"></a>周期</h2><p>若对于 $p$ ，有 $S[i]=S[i+p]$ ，称 $p$ 是 $S$ 的周期。</p>
+<p>若 $p| |S|$ ，则称 $p$ 为整周期。</p>
+<p>显然，$S[1,p]$ 是 $Bd$ $\Leftrightarrow$ $|S|-p$ 是周期。</p>
+<h1 id="与-kmp-的关系"><a href="#与-kmp-的关系" class="headerlink" title="与 kmp 的关系"></a>与 kmp 的关系</h1><h2 id="求每个前缀的最长-Border"><a href="#求每个前缀的最长-Border" class="headerlink" title="求每个前缀的最长 Border"></a>求每个前缀的最长 Border</h2><p>显然，$fail[i]$ 表示的就是 $mxBd(S[1,i])$ 的长度。</p>
+<h2 id="求一个串的-Bd-集合。"><a href="#求一个串的-Bd-集合。" class="headerlink" title="求一个串的 $Bd$ 集合。"></a>求一个串的 $Bd$ 集合。</h2><p>无脑 Hash 可以，但是有个更加有理有据的做法：</p>
+<p>$Bd(S)=\{mxBd(S)\}+Bd(mxBd(S))$</p>
+<p>然后直接用 kmp 的 fail 指针不断跳就行了，即 $Bd(S)$ 对应了 $fail$ 树上的一条链。</p>
+<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><h2 id="弱周期引理-Weak-Periodicity-Lemma，简称：WPL"><a href="#弱周期引理-Weak-Periodicity-Lemma，简称：WPL" class="headerlink" title="弱周期引理(Weak Periodicity Lemma，简称：WPL)"></a>弱周期引理(Weak Periodicity Lemma，简称：WPL)</h2><p>$p,q$ 都是 $S$ 的周期 ，且 $p+q\le |S|$ ，则 $gcd(p,q)$ 也是 $S$ 的周期。</p>
+<p>证明：不妨假设 $p&lt;q$ 。</p>
+<p>$S[i]=S[i+q]=S[i+q-p],i\le n-q$</p>
+<p>$S[i]=S[i-p]=S[i+q-p],p\le n-q&lt;i\le n+q-p$</p>
+<p>所以 $q-p$ 也是一个周期，辗转相减即可证明该结论。</p>
+<p>PS：强周期定理：把条件改成 $p+q-gcd(p,q)\le n$ ，不会证明，大部分情况下用弱周期就行了，强周期了解即可。</p>
+<p>推论：如果一个串有 $&lt;|S|$ 的整周期，则最小周期也是整周期。</p>
+<h2 id="等差数列"><a href="#等差数列" class="headerlink" title="等差数列"></a>等差数列</h2><p><strong>性质 1</strong> ：$S,T,2|S|\ge |T|$ ，则 $S$ 在 $T$ 中的出现位置构成等差数列。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>如果出现次数小于 $3$ 次，显然成立。</p>
+<p>考虑第一次出现位置 $S1$ 、第二次出现位置 $S2$ 和任意一次（除了前两次）出现位置 $S3$ ，假设 $S2-S1=l1,S3-S2=l2$ 。</p>
+<p><img src="1.png" alt=""></p>
+<p>现在证明 $l1 | l2$ ，考虑 $S1\cup S2$ 这个字符串，显然 $l1,l2$ 都是一个周期，且 $l2\le |S|$ ，则 $l1+l2\le l1+|S|=|S1\cup S2|$ ，所以 $gcd(l1,l2)$ 也是一个周期，如果 $gcd(l1,l2)&lt;l1$ ，则在 $S1$ 和 $S2$ 中间显然还出现了至少一次，与假设矛盾，证毕。</p>
+<p>所以 $l1 | l2$ ，则结论显然成立 ，$l1$ 就是公差。</p>
+</div></details>
+<p><strong>性质 2</strong> ：一个字符串 $S$ 的长度 $\ge \frac{|S|}{2}$ 的 Border 构成等差数列。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>第一个证明方法是用周期和 Border 的等价性，然后用 WPL 很容易就能证明。</p>
+<p>还有一个证明方法是用上面的性质 $1$ ，设 $s$ 为 $\ge \frac{|S|}{2}$ 的长度最短的 Border 。</p>
+<p>考虑 $s$ 的所有出现位置，显然，一个 $\ge \frac{|S|}{2}$ 的 Border 对应一个 $s$ 的出现位置，只需要证明一个 $s$ 的出现位置（除了最后一个位置）也对应一个 Border 即可。</p>
+<p>（对应方式为：除了最后一个出现位置外的出现位置，考虑这个出现位置的右端点，右端点对应的前缀就是一个 Border ，实际上，如果把原串也视作一个 border 的话，那么最后一个出现位置也有对应了）</p>
+<p><img src="2.png" alt=""></p>
+<p>证明方法为：观察性质 $1$ 的证明可以发现，$s$ 出现位置的公差就是 $S$ 的周期，所以显然除了最后一个位置外的每一个出现位置都对应了一个 Border 。</p>
+<p>但是上面两个方法我还是推荐用周期进行考虑。</p>
+</div></details>
+<p><strong>性质 3</strong> ：一个字符串的 Border 从小到大排序可以划分成 $O(\log{|S|})$ 个等差数列。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>考虑 $\ge \frac{|S|}{2}$ 的 Border 构成等差数列，然后考虑 $&lt;\frac{|S|}{2}$ 的最大的 Border ，显然，剩下的 Border 也是这个 Border 的 Border ，然后接着考虑就行了，所以至多 $O(\log{|S|})$ 个。</p>
+</div></details>
+<p>事实上，通过上面的描述，不难发现：</p>
+<p>长度在 $(\frac{|S|}{2},|S|],(\frac{|S|}{4},\frac{|S|}{2}],(\frac{|S|}{8},\frac{|S|}{4}],(\frac{|S|}{16},\frac{|S|}{8}]…$ 即 $(\frac{|S|}{2^{k+1}},\frac{|S|}{2^k}]$ 的 Border 构成等差数列。</p>
+<p>或者长度在 $[1,2),[2,4),…,[2^i,2^{i+1}),[2^{i+1},|S|]$ 的 Border 也构成等差数列。（ $|S|&lt;2^{i+2}$ ）</p>
+<p>显然，长度在 $<a href="2a\ge b">a,b</a>$ 的 Border 都构成等差数列。</p>
+<h2 id="失配树"><a href="#失配树" class="headerlink" title="失配树"></a>失配树</h2><p>对于一个串，考虑对于每个前缀建立一个节点，其父亲是其的 $mxBd$ ，这样构成的一棵根为空串的树叫做失配树，显然，Kmp 的 fail 数组就代表了这棵树。</p>
+<p>这棵树有很多性质。</p>
+<p><strong>性质 1</strong> ：根据 $Bd(S)=\{mxBd(S)\}+Bd(mxBd(S))$ 可以得出，一个前缀的所有 Bd 就是到父亲的这条链。</p>
+<p>这个性质可以用于解决这个题目：</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5829">https://www.luogu.com.cn/problem/P5829</a></p>
+<p>题目大意：给一个串，$q$ 次询问，每次询问询问两个前缀的最长公共 border 长度。</p>
+<p>显然就是失配树上找 LCA 就行了。</p>
+<p><strong>性质 2</strong> ：每个点到根节点的路径可以划分成 $O(\log)$ 段，每段父子间长度差恒定。（也就是上面 $O(\log)$ 段等差数列的失配树版本）</p>
+<p>这个性质可以产生上面那道题目的另外一个做法：</p>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>首先，先介绍一种常数更加小的划分 Border 的方式：</p>
+<p>如果 $2fail[x]\ge x$ ，令 $p=x-fail[x]$ ，那么 $x$ 到 $x\mod {p}+p$ 构成等差数列，否则 $x$ 自己就是个等差数列。</p>
+<p>然后令 $x$ 跳到最大的没有被划分进等差数列的位置就行了，实操中当 $2fail[x]\ge x$ 时，往往直接跳到 $x\mod {p}+p$ ，即认为等差数列间可以有交叉，这样处理方便一些，而且显然，不难证明这么跳 $x’&lt;\frac{2x}{3}$ ，所以仍然是 $O(\log)$ 段。</p>
+<p>（这个划分方式还有个小性质，如果 $2fail[x]\ge x$ ，则等差数列至少有两项，否则只有一项）</p>
+<p>在划分完 Border 后，显然可以用扩展欧几里得去处理，但是这样是两个 $\log$ 的，而且写起来还没 LCA 好写。</p>
+<p>考虑利用性质进行优化，现在考虑找 $x,y$ 前缀的最长公共 Bd ，不妨认为原串也算 Bd，且 $x&gt;y$ ，考虑上述划分中 $x$ 的第一个等差数列。</p>
+<p>如果 $2fail[x]&lt;x$，那么显然 $x=fail[x]$ 即可。</p>
+<p>如果 $2fail[x]\ge x$ ，那么显然如果 $x\equiv y\mod p$ ，则 $y$ 就是最长公共 Bd ，否则考虑 $y$ 的长度：</p>
+<ol>
+<li>如果 $y&lt;2p$ ，那么显然这个等差数列，也就是分配树上的这条链除了链头没有别的串可能是公共 Bd 。</li>
+<li>如果 $y\ge 2p$ ，显然 $y$ 的最小周期也是 $p$ ，则根据 WPL 可以得出链上 $\ge 2p$ 的点都不可能是公共 Bd（考虑 $x,y$ $\ge 2p$ 的所有 Bd ，显然互不相同），也即只有链头还有可能成为答案，所以 $x=x\mod p+p$。</li>
+</ol>
+<p>不难发现，这个做法的复杂度与 $x,y$ 按照上述方法划分的等差数列个数同阶（因为上面的过程其实就是从一个等差数列的列尾，跳到下一个等差数列的列尾），也就是 $O(n+q\log{n})$ ，而且显然好写很多，空间也只用 $O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="type">int</span> fail[N],n,q;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,st+<span class="number">1</span>);n=<span class="built_in">strlen</span>(st+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    fail[<span class="number">0</span>]=<span class="number">-1</span>;<span class="type">int</span> now=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(now!=<span class="number">-1</span> &amp;&amp; st[now+<span class="number">1</span>]!=st[i])now=fail[now];</span><br><span class="line">        fail[i]=++now;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;q);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=q;i++)&#123;</span><br><span class="line">        <span class="type">int</span> x,y;<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">        x=fail[x];y=fail[y];</span><br><span class="line">        <span class="keyword">while</span>(x!=y)&#123;</span><br><span class="line">            <span class="keyword">if</span>(x&lt;y)<span class="built_in">swap</span>(x,y);</span><br><span class="line">            <span class="keyword">if</span>(fail[x]*<span class="number">2</span>&lt;x)x=fail[x];</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">assert</span>(x);</span><br><span class="line">                <span class="type">int</span> d=x-fail[x];</span><br><span class="line">                <span class="keyword">if</span>(x%d==y%d)x=y;</span><br><span class="line">                <span class="keyword">else</span> x=x%d+d;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<h2 id="一些其他性质"><a href="#一些其他性质" class="headerlink" title="一些其他性质"></a>一些其他性质</h2><ol>
+<li><p>如果一个串 $S$ 有 $\ge \frac{|S|}{2}$ 的 Border，则最小的 $\ge \frac{|S|}{2}$ 的 Border 长度 $&lt;\frac{3|S|}{4}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>假如最小周期 $p\le \frac{|S|}{4}$ ，则显然 Border $\ge \frac{3|S|}{4}$ 时，还能再去掉一个周期，直到 $&lt;\frac{3|S|}{4}$ 。</p>
+<p>假如 $&gt;$ ，显然所有的 Border 都 $&lt;\frac{3|S|}{4}$ ，所以也显然成立。</p>
+<p>证毕。</p>
+</div></details>
+</li>
+<li><p>如果一个串 $s$ 有一个 $t$ 作为 mxBd ，且 $2|t|\ge|s|$ ，那么 $t$ 在 $s$ 中只出现了两次。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>由性质 $1$ 知道出现位置是等差数列，如果出现 $3$ 次及以上可以构造出更长的 Bd ，矛盾。</p>
+<p>这个证法和性质 2 的证明 2 挺像的，都是利用了某个 Bd 的出现位置和一些 Bd 的对应关系。</p>
+</div></details>
+<p>这个性质可以应用在某些 Bd 优化题中，以确定 mxBd 上次出现的位置。</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/02/11/Border%E7%90%86%E8%AE%BA/">http://oldplace.github.io/2024/02/11/Border%E7%90%86%E8%AE%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a><a class="post-meta__tags" href="/tags/Border/">Border</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/18/WC2016-%E8%AE%BA%E6%88%98%E6%8D%86%E7%AB%B9%E7%AB%BF/" title="WC2016 论战捆竹竿"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-20</div><div class="title">WC2016 论战捆竹竿</div></div></a></div><div><a href="/2024/02/16/CF1526-E-Oolimry-and-Suffix-Array-%E4%BB%8E%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%8F%8D%E6%8E%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="CF1526 E Oolimry and Suffix Array(从后缀数组反推字符串)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-18</div><div class="title">CF1526 E Oolimry and Suffix Array(从后缀数组反推字符串)</div></div></a></div><div><a href="/2023/09/02/ECNU-2023-8-D-Mutton-string/" title="ECNU 2023.8 D Mutton string"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2023-09-04</div><div class="title">ECNU 2023.8 D Mutton string</div></div></a></div><div><a href="/2024/02/11/Strange-Keyboard/" title="Strange Keyboard"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-11</div><div class="title">Strange Keyboard</div></div></a></div><div><a href="/2024/02/18/ZJOI2017-%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="ZJOI2017 字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-20</div><div class="title">ZJOI2017 字符串</div></div></a></div><div><a href="/2024/03/21/lzqy-%E3%81%AE-Strings-Round-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" title="lzqy_ の Strings Round 赛后总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-26</div><div class="title">lzqy_ の Strings Round 赛后总结</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Border"><span class="toc-number">2.1.</span> <span class="toc-text">Border</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%A8%E6%9C%9F"><span class="toc-number">2.2.</span> <span class="toc-text">周期</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8E-kmp-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.</span> <span class="toc-text">与 kmp 的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E6%AF%8F%E4%B8%AA%E5%89%8D%E7%BC%80%E7%9A%84%E6%9C%80%E9%95%BF-Border"><span class="toc-number">3.1.</span> <span class="toc-text">求每个前缀的最长 Border</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E4%B8%80%E4%B8%AA%E4%B8%B2%E7%9A%84-Bd-%E9%9B%86%E5%90%88%E3%80%82"><span class="toc-number">3.2.</span> <span class="toc-text">求一个串的 $Bd$ 集合。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">4.</span> <span class="toc-text">性质</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%B1%E5%91%A8%E6%9C%9F%E5%BC%95%E7%90%86-Weak-Periodicity-Lemma%EF%BC%8C%E7%AE%80%E7%A7%B0%EF%BC%9AWPL"><span class="toc-number">4.1.</span> <span class="toc-text">弱周期引理(Weak Periodicity Lemma，简称：WPL)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E5%B7%AE%E6%95%B0%E5%88%97"><span class="toc-number">4.2.</span> <span class="toc-text">等差数列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E9%85%8D%E6%A0%91"><span class="toc-number">4.3.</span> <span class="toc-text">失配树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%85%B6%E4%BB%96%E6%80%A7%E8%B4%A8"><span class="toc-number">4.4.</span> <span class="toc-text">一些其他性质</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

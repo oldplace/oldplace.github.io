@@ -1,0 +1,533 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>拟阵初级学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="建议直接去看原论文，哪篇论文放在参考文献了。 前排提示，本篇中对于集合操作 $+$ 和 $\cup$ 没有区分，都表示并的意思，$-$ 和 $\setminus$ 同理。 拟阵的入门定义幂集 $2^S$ 称作 $S$ 的拟阵当且仅当 $2^S$ 是 $S$ 所有子集构成的集合。  例如：$\{1,2\}$ 的幂集是 $\{\{1,2\},\{1\},\{2\},\emptyset\}$ 。 拟阵记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拟阵初级学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2024/01/26/%E6%8B%9F%E9%98%B5%E5%88%9D%E7%BA%A7%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="建议直接去看原论文，哪篇论文放在参考文献了。 前排提示，本篇中对于集合操作 $+$ 和 $\cup$ 没有区分，都表示并的意思，$-$ 和 $\setminus$ 同理。 拟阵的入门定义幂集 $2^S$ 称作 $S$ 的拟阵当且仅当 $2^S$ 是 $S$ 所有子集构成的集合。  例如：$\{1,2\}$ 的幂集是 $\{\{1,2\},\{1\},\{2\},\emptyset\}$ 。 拟阵记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-01-26T05:57:16.000Z">
+<meta property="article:modified_time" content="2024-03-18T11:24:15.560Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="拟阵">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/01/26/%E6%8B%9F%E9%98%B5%E5%88%9D%E7%BA%A7%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '拟阵初级学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-03-18 19:24:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">拟阵初级学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-26T05:57:16.000Z" title="发表于 2024-01-26 13:57:16">2024-01-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-18T11:24:15.560Z" title="更新于 2024-03-18 19:24:15">2024-03-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>31分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="拟阵初级学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>建议直接去看原论文，哪篇论文放在参考文献了。</p>
+<p>前排提示，本篇中对于集合操作 $+$ 和 $\cup$ 没有区分，都表示<strong>并</strong>的意思，$-$ 和 $\setminus$ 同理。</p>
+<h1 id="拟阵的入门"><a href="#拟阵的入门" class="headerlink" title="拟阵的入门"></a>拟阵的入门</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="幂集"><a href="#幂集" class="headerlink" title="幂集"></a>幂集</h3><p> $2^S$ 称作 $S$ 的拟阵当且仅当 $2^S$ 是 $S$ 所有子集构成的集合。</p>
+<p> 例如：$\{1,2\}$ 的幂集是 $\{\{1,2\},\{1\},\{2\},\emptyset\}$ 。</p>
+<h3 id="拟阵"><a href="#拟阵" class="headerlink" title="拟阵"></a>拟阵</h3><p>记 $M=(S,\mathcal{I})$ 表示一个定于在有限集合 $S$ 且独立集的集合为 $\mathcal{I}$ 的当且仅当满足以下三条：</p>
+<ol>
+<li>$\mathcal{I}\subset 2^S$</li>
+<li><strong>遗传性</strong> ：如果 $J\subset I\in \mathcal{I}$，那么 $J\in \mathcal{I}$ 。</li>
+<li><strong>交换性/扩张性</strong> ：如果 $I,J\in\mathcal{I},|J|&lt;|I|$，那么 ${\exists}z\in J\setminus I , I\cup z\in \mathcal{I}$ 。</li>
+</ol>
+<p>为了方便，我们一般认为 $\emptyset \in \mathcal{I}$ ，即认为独立集的集合是非空的。</p>
+<p>我们称 $\mathcal{I}$ 的元素为独立集。</p>
+<p>例子：</p>
+<p><strong>均匀拟阵</strong> ：$U^k_n=(S,\mathcal{I})$，其中 $|S|=n,\mathcal{I}=\{I\subset S : |I| \le k \}$ 。</p>
+<p><strong>图拟阵</strong> ：令无向图 $G=(V,E)$，令图拟阵：$M=(E,\mathcal{I})$ ，其中 $\mathcal{I}=\{F\subset E : F 无环\}$ 。</p>
+<p>为啥是拟阵这件事不难自证，不再赘述。</p>
+<p>图拟阵非常的重要，因为他提供了一个形象想象拟阵的工具，在前期学习拟阵在图拟阵上想想是非常有用的方法。</p>
+<p>不过图拟阵在有向图上不一定成立，一样的定义，只不过把无向图换成有向图。</p>
+<p><img src="1.png" alt=""></p>
+<p><strong>匹配拟阵</strong> ：令无向图 $G=(V,E)$，匹配拟阵：$M=(V,\mathcal{I})$ ，其中一个点集是独立集当且仅当存在一个匹配能够覆盖点集中的所有点（可以覆盖点集外的点）。</p>
+<p>遗传性显然，交换性不会。</p>
+<p>拟阵同时还可以与高代联动，对于一个有限的向量空间，一个独立集定义为线性无关的向量组，非常有意思的是，此时下面基的定义就是高代中基的定义，环是最小的线性相关的向量组，而引理1.2对应的就是基扩张定理。（从这个角度来看，很多拿到一个子空间的极大独立集，直接扩张成大空间的极大独立集的证明，突然就熟悉多了，这也能与课内联动？）</p>
+<p>这么说的话，用线性空间来作为拟阵的例子辅助思考貌似也是一个不错的选择。</p>
+<h6 id="坑1"><a href="#坑1" class="headerlink" title="坑1"></a>坑1</h6><p>不会交换性的证明。</p>
+<h3 id="基"><a href="#基" class="headerlink" title="基"></a>基</h3><p>独立集 $I$ 是基当且仅当加入 $S/I$ 中的任何一个元素都不是独立集。</p>
+<p>这种拟阵中的极大元素，在拟阵的研究中发挥着至关重要的作用。</p>
+<h3 id="环"><a href="#环" class="headerlink" title="环"></a>环</h3><p>一个非独立集 $I’$ 是环当且仅当 $I’$ 删除其中任意一个元素都是独立集。</p>
+<p>例子：图拟阵中的简单环。</p>
+<p>我们用 $C(M)$ 表示拟阵 $M$ 中所有的环。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p><strong>引理 1.1</strong> ：基的大小相同。（用交换性显然）</p>
+<p><strong>引理 1.2</strong> ：${\forall} J \in \mathcal{I},{\exists} 基I:J\in I$ 。（用交换性显然）</p>
+<p>该引理说明任意一个元素都属于一个基，所以对于一个拟阵，只要知道基，加上遗传性就可以知道所有独立集。</p>
+<p>但是能不能凭借此定义独立集的集合呢？</p>
+<p>还需要一个定理：</p>
+<p><strong>定理 1.3(基交换定理)</strong> ：${\forall}基A,B,A\ne B,{\forall} z\in A\setminus B,{\exists} y\in B\setminus A:A-\{z\}+\{y\}\in \mathcal{I}$ 。（用遗传性显然）</p>
+<p>满足基交换定律且大小相同的基的集合可以定义一个拟阵。（可以证明交换性成立，并不困难，在此不再赘述，证明过程类似【完美匹配那个证明】）</p>
+<p>这种定义相较于原来定义的优势在于检验拟阵的工作量小了，本来对于每一对独立集都要检验，现在只需要检验基，尤其是对于自己随手写的拟阵，例如：$\{\{1,3,4\},\{2,3,4\}\}$ 。</p>
+<h6 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h6><p>完美匹配定理的编号。</p>
+<h6 id="坑2"><a href="#坑2" class="headerlink" title="坑2"></a>坑2</h6><p>其实我觉得这里的大小相同的限制可以改得再弱一点：基之间没有包含关系，我严重怀疑没有包含关系可以推出大小相同，但是水平有限，目前我证不出来。</p>
+<p>基交换定理可以放宽一下条件，仍然成立：</p>
+<p>${\forall}A,B\in \mathcal{I},|A|\le|B|,{\forall} z\in A,{\exists} y\in B\setminus (A-\{z\}):A-\{z\}+\{y\}\in \mathcal{I}$ 。</p>
+<p><strong>引理 1.4</strong> ：$I$ 不是独立集，则一定有一个子集是环 。（显然）</p>
+<p><strong>引理 1.5</strong> ：${\forall}X,Y\in C(M),X\subset Y:X=Y$ 。（显然）</p>
+<p><strong>引理 1.6</strong> ：${\forall}X,Y\in C(M),X\ne Y,e\in X\cap Y:{\exists} C\in C(M),C\subset X\cup Y-\{e\}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>等价于证明 $X\cup Y-\{e\}$ 不是独立集。</p>
+<p>证明一个集合不是独立集，思考一下条件：环、一个已知的集合。因此我们考虑利用这个已知的集合用反证法，通过构造与环产生矛盾。</p>
+<p>反证法：已知 $X\cap Y \in \mathcal{I}$ ，然后用 $X\cup Y-\{e\}$ 扩大这个集合到同样的大小，由于环的限制， $X\setminus Y,Y\setminus X$ 都要丢掉一个元素，所以集合大小最大是 $|X|+|Y|-2$ ，然而可以扩展到 $|X|+|Y|-1$ ，矛盾，证毕。</p>
+<p>至于更加严谨的写法，这里引用一下2018国集论文（根据引理编号对内容做了一点更改）：</p>
+<p>证明：由引理 1.5 可得， $X\setminus Y$ 非空，设 $f \in X\setminus Y$ 。假设 $X\cup Y − \{e\}$ 是独立集。由于 $X$ 是环，<br>所以 $X − \{f\}$ 是独立集，假设 $X\cup Y$ 中最大的包含 $X − \{f\}$ 的独立集是 $Z$ 。由于 $Y$ 不是独立<br>集，所以 $Y \not\subset Z$ 。由此可得 $|Z|\le |X\cup Y − \{f\}| − 1 \le |X \cup Y| − 2 &lt; |X \cup Y − \{e\}|$ 。因为 $Z$ 已经<br>是最大的独立集了，所以 $X\cup Y − \{e\}$ 不可能是独立集（否则由交换性可以扩大 $Z$ ），命题得证。</p>
+</div></details>
+<p><strong>引理 1.7</strong> ：$I$ 是基，$e\notin I$ ，那么 $I+\{e\}$ 包含一个唯一的环。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>至少有一个环是显然的，每个环都有 $e$ 是显然的。</p>
+<p>引理 1.6 告诉我们只要有两个环，就可以构造出不含 $e$ 的环，所以至多只有一个环。</p>
+<p>证毕。</p>
+</div></details>
+<h1 id="秩函数"><a href="#秩函数" class="headerlink" title="秩函数"></a>秩函数</h1><h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>对于拟阵 $M=(S,\mathcal{I})$ ，基的元素的个数称为拟阵的秩，对于任意一个 $U\subset S$，定义秩函数 $r(U)$ 表示 $U$ 中极大独立集的大小。</p>
+<h2 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h2><p><strong>定理 2.1(有界性)</strong> ：${\forall}U\subset S, 0\le r(U)\le|U|$</p>
+<p><strong>定理 2.2 (单调性)</strong> ：${\forall}A\subset B\subset S,r(A)\le r(B)$</p>
+<p><strong>定理 2.3 (次模性)</strong> ：${\forall}A,B\subset S,r(A\cup B)+r(A\cap B)\le r(A)+r(B)$</p>
+<p>定理1,2都是显然的，下面证明定理3。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>首先，我们使用构造方法，证明一个集合的秩的下界是更加容易的（构造一个独立集总比说明独立集大小的上界要容易得多），根据这个方向，我们得到这个证明：</p>
+<p>先找到 $A\cap B$ 的极大独立集，然后用交换性扩大成 $A\cup B$ 的极大独立集，然后把扩大的部分，按照 $A\setminus B,B\setminus A$ 分成两部分，和 $A\cap B$ 的极大独立集合成 $A,B$ 的独立集，然后就证完了。</p>
+<p>更加严谨的写法看国集论文，这里懒得复制粘贴了，思路是一样的。</p>
+</div></details>
+<p>那么问题来了，我们能否用秩函数定义拟阵？答案是：可以。</p>
+<p>如果我们有一个函数 $r$ ；$2^S\to \mathbb{Z}$，定义 $\mathcal{I}={I:r(I)=|I|}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">遗传性证明</summary><div class="toggle-content"><p>在遗传性的证明中，我们更希望证明一个集合是独立集，也就是证明 $r(I)=I$ ，显然，我们其实是需要证明 $r(I)\ge I$ ，所以在证明中应该更多的将目标集合放在 $\le$ 的右边。</p>
+<p>$A=J,B=I\setminus J$，即可证明。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">交换性证明</summary><div class="toggle-content"><p>在交换性的证明中，由于找到具体哪个集合是独立集有点困难，采用反证，则考虑限制集合秩的上界，去证明大集合（$I$）并不是独立集，此时把目标集合（$I$）放在 $le$ 左边限制上界。</p>
+<p>令 $\{b_1,b_2,…,b_n\}=I\setminus J$</p>
+<p>考虑 ：$A=J+\{b_1\},B=J+\{b_2\}$，则可以证明 $r(J+\{b_1,b_2\})=|J|$，然后将其作为新的 $A$，令 $B=J+\{b_3\}$ ，不断往下做，直到合成出 $I\cup J$ 为止，此时 $r(I\cup J)=|J|&lt;|I|=r(I)$ ，矛盾，证毕。</p>
+</div></details>
+<p>说点抽象的话：</p>
+<p>事实上，定理 3 变换一下可以得到另外一个形式：$r(A\cup B)-r(A)\le r(B)-r(A\cap B)$ ，然后变个符号：$r(A\cup C)-r(A)\le r(B\cup C)-r(B),B\subset A$ 。</p>
+<p>在面对一个集合时，小集合的增量要不劣于大集合的增量，这说明小集合比起大集合具有更大的增长潜力，在后面闭包算子中会反复提及这一点。</p>
+<p>当然，对于这一点，可以这么理解，现在假设有个空集，他可以到达任何的基，但是随着元素一个个被确定，能到达的基越来越少，选择也越来越少，因此增长潜力也在减小，极端的，当为基的时候，没有选择，增长不了，增长潜力达到最低值。</p>
+<h1 id="拟阵最优化"><a href="#拟阵最优化" class="headerlink" title="拟阵最优化"></a>拟阵最优化</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>定义函数 $w:S\to \mathbb{R}$ ，定义一个集合的权值为：$w(I)=\sum\limits_{e\in I}w(e)$，找 $\mathcal{I}$ 中最大的 $w(I)$ 。</p>
+<p>例子：最小生成树。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p><del>最小生成树plus版</del></p>
+<p>以下先默认权值非负，因此显然权值最大的基就是权值最大的独立集。</p>
+<ol>
+<li>把 $S$ 中的元素按照从大到小的顺序排序，记作 $s_1,s_2,s_3,…,s_n$ 。</li>
+<li>维护一个集合 $I$ ，初始为空，按顺序考虑 $s_i$ ，如果 $I$ 加上 $s_i$ 是独立集就加入，否则就不加入。</li>
+</ol>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>没看懂论文第二步的证明，自己瞎掰了一个。</p>
+<p>记 $U_i=\{s_1,s_2,…,s_i\}$，$I_i$ 为考虑完 $s_i$ 后的 $I$ 。</p>
+<p>$|I_i|=r(U_i)$ ，否则$|I_i|$ 可以扩大，加入的元素为 $s_j(j\le i)$ ，则一定会在考虑到 $s_j$ 的时候加入该元素，矛盾，所以成立。</p>
+<p>所以最后 $I$ 是一个基。</p>
+<p>考虑把每个独立集用其所含元素的下标从小到大呈现，例如：$\{1,2,4\}$ 表示其含有 $s_1,s_2,s_4$ 。</p>
+<p>那么对于 $I$ ，假设其呈现出来是：$a_1,a_2,…,a_t$ , 对于任意一个基而言，是：$a’_1,a’_2,…,a’_t$ ，那么显然有 $a_i\le a’_i$ ，则显然 $I$ 是权值最大的基。</p>
+</div></details>
+<p>事实上，同样的证明方法，不一定要 $I$ 是基，可以扩展，当 $|I|$ 的大小为 $t$ 时，$I$ 就是所有大小为 $t$ 的独立集中权值最大的。</p>
+<p>所以就算权值是非负的，如果指定了目标独立集的大小，仍然可以用此算法。（不过如果已经指定了大小，令总体权值加减一个数字只会让答案改变 $siz*val$，也能把问题转化到非负情形下）</p>
+<p>但是如果权值可以是负数呢？</p>
+<p>显然当 $s_i\le 0$ 时推出就行了，显然正确，考虑答案只可能出在 $I_i$ 就行了。（显然，$I_i$ 是同集合大小的独立集中权值最大的，只考虑他就行了）</p>
+<h1 id="拟阵交"><a href="#拟阵交" class="headerlink" title="拟阵交"></a>拟阵交</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>对于 $M_1=(S,\mathcal{I}_1)$，$M_2=(S,\mathcal{I}_2)$ ，定义 $M_1,M_2$ 的交是所有 $I$ 的集合 ，$I$ 满足在两个集合中都是独立集。</p>
+<p>首先，拟阵的交是拟阵吗？不是。</p>
+<p>反例：$S=\{1,2,3\},\mathcal{I}_1=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{1,3\}\},\mathcal{I}_2=\{\emptyset,\{1\},\{2\},\{3\},\{1,2\},\{2,3\}\}$ 。</p>
+<p>交为：$\{\emptyset,\{1\},\{2\},\{3\},\{1,2\}\}$</p>
+<p>显然不是拟阵。</p>
+<p>不过拟阵交虽然不是拟阵，但是显然是个集合，那问题来了，这个集合中大小最大的独立集有多大？并且求出一个合法解。</p>
+<p>这个问题在两个拟阵的交时有多项式求法，但是三个以上是 NP-hard 的。</p>
+<p>所以接下来的讨论默认是两个拟阵的交。</p>
+<h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><h3 id="闭包算子"><a href="#闭包算子" class="headerlink" title="闭包算子"></a>闭包算子</h3><p>对于 $A\subset S$ ，我们定义 $A$ 的闭包算子 $cl(A)=\{e\in S : r(A\cup \{e\})=e(A)\}$ 。</p>
+<p>也就是加入后不会影响 $A$ 的秩的元素。</p>
+<p>一个显然的事情：$A\subset cl(A)$ 。</p>
+<h3 id="交换图"><a href="#交换图" class="headerlink" title="交换图"></a>交换图</h3><p>对于 $I\in \mathcal{I}$，定义一个二分图，一边是 $I$ ，一边是 $S\setminus I$ ，存在边 $(x,y)(x\in I,y\in S\setminus I)$ 当且仅当 ：$I-\{x\}+\{y\}\in \mathcal{I}$ 。</p>
+<p>称此二分图为 $I$ 的交换图，记作 $D_M(I)$ 。</p>
+<h2 id="性质-2"><a href="#性质-2" class="headerlink" title="性质"></a>性质</h2><p><strong>引理 4.1</strong> ：如果 $A\subset B$ ，那么 $cl(A)\subset cl(B)$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>兄弟，来一个极其富有高代特色的证明。</p>
+<p>对于任意一个 $z\in cl(A)$ ，找到 $A$ 的一个极大独立集，然后在 $B+\{z\}$ 中扩大，那么一定会得到一个不含 $z$ 的极大独立集，所以 $z$ 不会扩大 $B$ 的秩。</p>
+<p>这个证明用到了一个显然正确的结论：如果加入 $z$ 后，存在一个极大独立集不包含 $z$ ，那么 $z$ 一定在该集合的闭包算子中，否则不在。</p>
+<p>论文采用秩函数证明：</p>
+<p>$r(A+\{z\})+r(B)\ge r((A+\{z\})\cap B)+r(B+\{z\})\ge r(A)+r(B+\{z\})$ 。（也可以由 $r(A+\{z\})-r(A)\ge r(B+\{z\})-r(B)$ 得到，这个式子在上面的次模性的变形中给出过）</p>
+<p>又 $r(A+\{z\})=r(A)$ ，所以 $r(B)\ge r(B+\{z\})$，所以 $r(B)=r(B+\{z\})$ ，证毕。</p>
+</div></details>
+<p>这个定理同样反映了小集合比大集合更加具有增长潜力，一个元素对小集合没有贡献，那么对大集合同样没有贡献。</p>
+<p><strong>引理 4.2</strong> ：$A\subset S,e\in cl(A)$ ，那么 $cl(A)=cl(A\cup \{e\})$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>${\forall} z \in cl(A\cup \{e\}),r(A)=r(A+\{z\})=r(A+\{e,z\})$，则 $r(A)\le r(A+\{z\})\le r(A+\{e,z\})$ ，所以 $r(A)=r(A+z)$ ，证毕。</p>
+<p>人话讲就是，如果加到大集合秩不变，由于大集合秩等于小集合，大集合的秩本来就比小集合大，如果小集合变大了，就比大集合大了，所以加入到小集合中秩也不能变大。</p>
+<p>所以如果 $r(A)=r(B),A\subset B$，那么 $cl(A)=cl(B)$ 。（引出下文）</p>
+</div></details>
+<p><strong>引理 4.3</strong> ：$cl(A)=cl(cl(A)),r(A)=r(cl(A))$ 。（反复用 引理 4.2 就行了）</p>
+<p>上面两个引理说明了个什么事呢？（包括证明过程）</p>
+<p>显然的事情：</p>
+<ol>
+<li>$A\subset B,r(A)=r(B)$，那么 $cl(A)=cl(B),B\setminus A \subset B\subset cl(B)=cl(A)$ 。（秩相同则 $cl$ 相同）</li>
+<li>${\forall} B\subset cl(A):cl(A\cup B)=cl(A),r(A\cup B)=r(A)$ 。（这一条主要是对引理4.3的扩展）</li>
+<li>$A\subset B,cl(A)=cl(B):r(A)=r(B)$ 。（因为 $B\subset cl(B)=cl(A)$，所以 $r(B)=r(A\cup B)=r(A)$ ）（ $cl$ 相同则秩相同）</li>
+</ol>
+<p>因此，如果子集之间相互包含，那么秩相同和 $cl$ 相同同时成立，也很符合直觉，集合变大，秩不变，那一定是你一直在加一些没有贡献的元素进来。同时，加入没有贡献的元素进来，也并不会改变没贡献的元素的集合，也就是说没贡献的元素之间不会产生联动，突然就产生贡献了，没用就是一直没用，直到秩增大。</p>
+<p>这几个引理还可以从另外一个视角看：若 $C\subset cl(B)$ ，$B\subset cl(A)$ ，那么 $C\subset cl(A)$ ，这体现了闭包的传递性。</p>
+<p>这也说明了一个事情：在产生秩增量这件事情上， $B$ 没用，$C$ 一定没用，$C$ 有用，$B$ 一定有用，也就是说某种程度上讲 $B$ 覆盖了 $C$ 的功能，这在后面的某些证明中有所体现。</p>
+<p>在图拟阵中的一个体现就是：$(x,y)$ 和一个简单路径 $x\to y$ 形成了一个简单环，$(x,y)$ 的作用是有他在的边集合中，最大的独立集 $x,y$ 一定是联通的，而 $x\to y$ 一样能办到这件事。（此时 $(x,y)\in cl(x\to y))$）</p>
+<p>注意一个特殊的集合：环，对于环 $I’,{\forall} z\in I’:z\in cl(I’-\{z\})$ ，这在后面的证明中会用到。</p>
+<p><strong>定理 4.4(强基交换定理)</strong> ：对于两个不同的基 $A,B$ ，${\forall}x\in A\setminus B,{\exists} y\in B\setminus A : A-\{x\}+\{y\},B-\{y\}+\{x\}$ 都是基 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>先写论文的证法：</p>
+<p>将 $x$ 加入 $B$ 中得到一个环 $C$ 。</p>
+<p>则 $x\in cl(C-\{x\})$ ，则 $x\in cl((A\cup C)-\{x\})$ ，那么 $cl((A\cup C)-\{x\})=cl(A\cup C)$ ，所以 $r((A\cup C)-\{x\})=r(A\cup C)$ ，综上，存在 $y\in C-\{x\}$ ，满足 $A-\{x\}+\{y\}$ 是基，同时因为 $y$ 是环中的一个元素，所以 $B-\{y\}+\{x\}$ 也是环中的一个基。</p>
+<p>这里其实就是用 $C-\{x\}$ 去代替 $x$ 的作用，然后找到是哪个元素起到了作用，将他作为 $y$ 。</p>
+<p>当然，可以从染色的视角去看这个问题：</p>
+<p>如果把这个问题放在图拟阵，也就是 $A$ 的一条边 $(x,y)$ 放到 $B$ 中，然后需要我去证明在 $B$ 的环中存在一条不是刚刚加入进来的边，满足能够填补 $A$ 的空缺。（一般的，我们认为 $A,B$ 都是生成树，就算是生成森林，边所在的联通块是一致的）</p>
+<p>那么把 $A$ 中 $(x,y)$ 切断，与 $x$ 联通染蓝色， $y$ 联通染红色，显然，$B$ 中与 $(x,y)$ 形成环的路径上一定存在一条边，一端红色，一端蓝色，他就是我们要找的边。（因为路径两端一端红色，一端蓝色）</p>
+<p>但是对点染色貌似和拟阵没什么关系，但是不妨换个角度看，我们要找的是路径上两端异色的边，所以我们不妨对边也染色，两端同色染为白色，异色染为黑色，观察一下这是什么？这就是 $cl(A-\{x\})$ ，也就是说 $cl$ 其实可以看成一种染色，无用染白，有用染黑。</p>
+<p>有了这个想法，证明就轻松多了，显然在图拟阵中，一个环不能只有恰好一条黑边，否则从 $x$ 的联通块走黑边到达 $y$ 联通块，就没有另外一条黑边走回来了，与简单环的定义矛盾。所以去掉这条黑边是一个独立集（环的定义），加上这条黑边还是个独立集，与环矛盾，证毕。</p>
+<p>用拟阵的话就是：反证法，如果 $C-\{x\}\subset cl(A-\{x\})$ ，那么 $x\notin cl(A-\{x\})$ ，则 $x\notin cl(C-\{x\})$ ，与环的定义矛盾，证毕。</p>
+<p>所以 $cl$ 某种角度上可以算是拟阵的染色法。（先从图拟阵的角度思考是有道理的，直观）</p>
+</div></details>
+<p>当然，由上面的证明过程，可以放宽定理条件：$A,B$ 不一定得是基，只要满足 $|A|\le|B|$ 即可。</p>
+<p>即：</p>
+<p>${\forall}A,B\in \mathcal{I},|A|\le|B|,{\forall} x\in A,{\exists} y\in B\setminus (A-\{x\}):A-\{x\}+\{y\}，B+\{x\}-\{y\}\in \mathcal{I}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$B+\{x\}$ 不是独立集就类似上面证明就行了，小改即可。</p>
+<p>是独立集，则 $|B+\{x\}|=|B|+1&gt;|A|$ ，则有交换性，存在 $y\in B:A+\{y\}\in\mathcal{I}$ 。</p>
+<p>则 $A+\{y\}-\{x\}\in \mathcal{I}$ 。</p>
+<p>这里还有个非常有意思的想法，用上面的思路证完 $|A|=|B|$ 的情况，然后对于 $|A|&lt;|B|$ 的情况，先用 $B$ 把 $A$ 扩大到相同大小，然后强交换，由于用于扩大的集合是两个集合的交集，所以不会出现在 $x,y$ 中，所以可以直接用遗传性再缩小回去，从而完成 $|A|&lt;|B|$ 的证明。</p>
+<p>但是上面的思路可以直接把两种情况都证了，也就不需要多此一举了。</p>
+</div></details>
+<p><strong>引理 4.5</strong> ：对于独立集 $I,J,I\ne J,|I|=|J|$ ，则 $I\setminus J$ 与 $J \setminus I$ 存在完美匹配。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>很有意思的构造性解，反正我没有证出来，思路确实新奇，小清新构造。（mad，没有证出来真TM不爽）</p>
+<p>对于元素 $y\in J\setminus I$ ，由强交换定理可知存在 $x\in I\setminus J$ ，使得 $I-\{x\}+\{y\},J-\{y\}+\{x\}$ 仍然是独立集。</p>
+<p>则认为 $x,y$ 匹配，然后令 $J=J+\{x\}-\{y\}$ ，接着构造，直到 $I=J$ ，构造完毕。</p>
+</div></details>
+<p><strong>引理 4.6</strong> ：对于独立集 $I$ 和集合 $J,I\ne J,|I|=|J|$ ，且 $I\setminus J$ 与 $J \setminus I$ 存在唯一的完美匹配，则 $J$ 也是独立集。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>显然，要直接证明 $J$ 是不是独立集这件事情非常的困难，所以我的思路是构造+归纳，通过已有的信息，把 $I$ 构造出 $J$ 。</p>
+<p>我们考虑把 $I\setminus J$ 换成 $J\setminus I$ 的一个元素，变成 $I’$ ，使得 $I’$ 与 $J$ 仍然只存在唯一的完美匹配。</p>
+<p>考虑对于 $(x,y),x\in I\setminus J,y\in J\setminus I$ ，如果 唯一匹配是 $(x,y)$ ，则认为是 $x\to y$ ，否则认为是 $y\to x$ ，由于无环，所以是拓扑图。（因为是唯一匹配，所以无环，唯一匹配这个信息，显然是要往无环的角度去靠）</p>
+<p>所以一定存在一个点 $x\in I\setminus J$ ，$x$ 没有入边，即在由 $I\setminus J$ 与 $J\setminus I$ 的导出子图中，$x$ 只有一条边。</p>
+<p>考虑直接把 $x$ 换成与他匹配的 $y$ 。</p>
+<p>不难证明（用交换性搞搞就行了），在 $D_M(I’)$ 中 $I’\setminus J$ 与 $J\setminus I’$ 的导出子图中的边一定在 $D_M(I)$ 中出现，同时 原来的匹配边也一定在新的导出子图中，所以仍然是唯一匹配。（匹配边还在，非匹配边减少了）</p>
+<p>然后归纳就行了。</p>
+<p>不过论文给了种更加简单的证明，不过我觉得本质应该差不多。</p>
+<p>首先把匹配写成 $(x_1,y_1),(x_2,y_2),…,(x_t,y_t)$ 的形式，一般的，当 $i&lt;j$ 时， $x_i,y_j$ 没有边。（把 $x$ 按照拓扑序从小到大排就行了） </p>
+<p>然后假设 $J$ 不是独立集，那么就存在环，假设为 $C$ ，并且其中下标最小的是 $y_i$ （显然一定有 $J\setminus I$ 的元素）。</p>
+<p>考虑 $I-\{x_i\}$ ，那么 $C-y_i\subset cl(I-\{x_i\})$ ，又 $y_i\subset cl(C-y_i)\subset cl(cl(I-\{x_i\}))=cl(I-\{x_i\})$ ，这与 $x_i,y_i$ 匹配矛盾，证毕。</p>
+<p>本质上就是 $C-\{y_i\}$ 能够替代 $y_i$ 的功能，但是由唯一匹配可以导出不能替代，从而导致了矛盾。</p>
+</div></details>
+<p><strong>引理 4.7</strong> ：$I,J\in \mathcal{I},|I|=|J|,{\forall} z\in J\setminus I,I+\{z\}\notin\mathcal{I},x\in S\setminus I,I+\{x\}\in \mathcal{I}$ ，那么 $J+\{x\}\in \mathcal{I}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$J\setminus I\subset cl(I)$ ，如果 $x\in cl(J)$ ，那么 $x\in cl(I)$ ，矛盾，证毕。</p>
+</div></details>
+<p><strong>定理 4.8(最小最大定理)</strong> ：$\max\limits_{I\in \mathcal{I_1}\cap\mathcal{I_2}} |I|=\min\limits_{U\subset S}(r_1(U)+r_2(S\setminus U))$</p>
+<p>这里证明 $\le$ 是显然的，$|I\cap U|\le r_1(U)$ ，另一边同理，加起来就行了。</p>
+<p>但是证明相等比较麻烦，后面在算法中用构造性方法证明。</p>
+<h2 id="算法-1"><a href="#算法-1" class="headerlink" title="算法"></a>算法</h2><p>现在给出算法流程。</p>
+<p>现有集合 $I,X_1=\{x\in S\setminus I:I+\{x\}\in \mathcal{I_1}\},X_2=\{x\in S\setminus I:I+\{x\}\in \mathcal{I_2}\}$ ，初始时 $I=\emptyset$ 。</p>
+<p>定义交换图（有向图） $D_{M_1,M_2}(I)$ 为 ：</p>
+<ol>
+<li>$x\in I,y\in S\setminus I$ ，如果 $(x,y)\in D_{M_1}(I)$ ，那么 $x\to y\in D_{M_1,M_2}(I)$ 。</li>
+<li>$x\in I,y\in S\setminus I$ ，如果 $(x,y)\in D_{M_2}(I)$ ，那么 $y\to x\in D_{M_1,M_2}(I)$ 。</li>
+</ol>
+<p>重复进行算法流程：</p>
+<ol>
+<li>在 $D_{M_1,M_2}(I)$ 找到一条起点属于 $X_1$ ，终点属于 $X_2$ 的最短路 $P$。（没有就结束算法）</li>
+<li>令 $I=I∆P$ 。（ $∆$ 表示集合的对称差操作）</li>
+</ol>
+<p>最后得到的 $I$ 就是一个最大大小的拟阵交，同时 $U=\{x\in S:x 在D_{M_1,M_2}(I)能够到达 X_2 中的点\}$ 。</p>
+<p>这个算法的正确性要证明两件事：</p>
+<ol>
+<li>$I$ 为什么仍然是拟阵交。</li>
+<li>为什么 $|I|=r_1(U)+r_2(S\setminus U)$ 。</li>
+</ol>
+<details class="toggle" ><summary class="toggle-button" style="">证明1</summary><div class="toggle-content"><p>先证明新的 $I\in \mathcal{I_1}$ 。</p>
+<p>令路径 $P=\{y_0,x_1,y_1,…,y_t\}$ ，令 $J=I-\{x_1,x_2,…,x_t\}+\{y_1,y_2,…,y_t\}$ ，由最短路可以导出是唯一匹配（因为 $D_{M_1}(I)$ 的结构类似 DAG 那样，BFS图），所以 $J$ 也是独立集，且同时可以直到 $y_1,y_2,…,y_t\in cl(I)$ ，由引理 4.7可知 $I+\{x\}\in \mathcal{I_1}$ 。</p>
+<p>同理可证 $I\in \mathcal{I_2}$ 。</p>
+<p>证毕。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">证明2</summary><div class="toggle-content"><p>假设 $r_1(U)&gt;|I\cap U|$ ，则 ${\exists} z\in U\setminus I,(I\cap U)+\{z\}\in\mathcal{I_1}$ ，如果 $I+\{z\}\in \mathcal{I_1}$ ，则显然存在路径 $P$ ，否则，显然，$|I|&gt;|I\cap U|$ ，所以用 $I$ 把 $I\cap U +\{z\}$ 扩大，则显然存在 $x\in S\setminus U,I-\{x\}+\{z\}\in\mathcal{I_1}$ ，所以存在 $x\to z$ ，这与 $x\notin S$ 矛盾。</p>
+<p>另外一边类似，不再赘述。</p>
+<p>证毕。</p>
+</div></details>
+<p>这样，就证明了最小最大定理，同时也给出了一个求一组 $I,U$ 的多项式算法。</p>
+<p>分析一下时间复杂度。</p>
+<p>不计建 $D_{M_1,M_2}(I)$ 的复杂度，令 $n=|S|,r=\max(r_1(S),r_2(S))$ ，每次增广的代价是 $O(rn)$ ，每轮 $|I|$ 增大 $1$ ，所以至多进行 $r$ 轮，所以时间复杂度为 $O(r^2n)$ 。</p>
+<p>非常优秀的时间复杂度。</p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="三个以上的拟阵交为什么是-NP-Hard-的"><a href="#三个以上的拟阵交为什么是-NP-Hard-的" class="headerlink" title="三个以上的拟阵交为什么是 NP-Hard 的"></a>三个以上的拟阵交为什么是 NP-Hard 的</h3><p>可以证明难于哈密顿路径：</p>
+<p>对于有向图 $G=(V,E)$ ，求 $s\to t$ 的哈密顿路径。</p>
+<p>构造拟阵：</p>
+<ol>
+<li>令 $M_1$ 为边集满足把有向边看成无向边，则无环。</li>
+<li>令 $M_2$ 为 $s$ 的入度为 $0$ ，其余点入度至多为 $1$ 。</li>
+<li>令 $M_3$ 为 $t$ 的出度为 $0$ ，其余点出度至多为 $1$ 。</li>
+</ol>
+<p>求出这三个拟阵的拟阵交显然就能求出哈密顿路径，或者证明无解。</p>
+<p>所以求三个及以上的拟阵交是 NP-Hard 的。</p>
+<h3 id="带权拟阵交"><a href="#带权拟阵交" class="headerlink" title="带权拟阵交"></a>带权拟阵交</h3><p>定义权值函数：$w:S\to \mathbb{R}$ ，求 $\max\limits_{I\in \mathcal{I_1}\cap\mathcal{I_2}}\sum\limits_{e\in I}w(e)$ 。</p>
+<p>扩展版本的最小最大定理我没看懂，这一部分建议自己去看论文。我没看懂这一部分，就不在这里胡说八道了。</p>
+<p>算法流程就是把最短路径换成，以点权和最大为第一关键字，最少边数为第二关键字找路径。</p>
+<p>其中 $I$ 的点权为 $-w(e)$ ，$S\setminus I$ 为 $w(e)$ 。</p>
+<p>论文里写的是点权和最小，但是一个很简单的例子，所有独立集大小最大为 $1$ ，然后让这个拟阵自己和自己做交，那么最大值是什么？显然是权值最大的元素，但是按照论文里写的会找权值最小的元素，这显然是错误的。</p>
+<p>更重要的是，在做题的时候，我写最长路过了。</p>
+<p>至于为什么不会有正环，为什么算法一定会停止，为什么这个算法对，我一概不知，我只知道写最长路能过，仅此而已，现在当黑盒用了。</p>
+<p>时间复杂度：$O(r^2n^2)$ 。</p>
+<h6 id="坑3"><a href="#坑3" class="headerlink" title="坑3"></a>坑3</h6><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>兄弟，学了这么久，该做做题了，不然你学拟阵干什么。</p>
+<p>拟阵交的题目一般是题目的条件无法直接使用拟阵，但是单看其中的一部分条件是满足拟阵要求的，所以就搞两个拟阵交起来，获得一个满足多个条件的集合，这种题目最难的就是怎么去构造合适的拟阵。</p>
+<h3 id="二分图匹配"><a href="#二分图匹配" class="headerlink" title="二分图匹配"></a>二分图匹配</h3><p>虽然二分图匹配的匹配点集本身就是个拟阵，但是检验一个子集是否是独立集，就需要判断是否被一个匹配覆盖，这显然是难的。（我都能找匹配了，为什么还要多此一举再用个拟阵=.=）</p>
+<p>所以构造拟阵。</p>
+<ol>
+<li>第一个拟阵 $M_1=(E,\mathcal{I_1})$ ，满足左部点的每个点的度数至多为 $1$ 。</li>
+<li>第二个拟阵 $M_2=(E,\mathcal{I_2})$ ，满足右部点的每个点的度数至多为 $1$ 。</li>
+</ol>
+<p>拟阵交即可。</p>
+<p>其实如果思考一下，会发现拟阵交找的增广路和匈牙利算法找的是一样的。</p>
+<h3 id="最小树形图"><a href="#最小树形图" class="headerlink" title="最小树形图"></a>最小树形图</h3><p>给定带权有向图 $G=(V,E)$ ，求以 $root$ 为根的最小权外向树。</p>
+<ol>
+<li>第一个拟阵 $M_1=(E,\mathcal{I_1})$ ，满足把有向边看成无向边无环。</li>
+<li>第二个拟阵 $M_2=(E,\mathcal{I_2})$ ，除 $root$ 之外入度至多为 $1$ ，$root$ 入度为 $0$ 。</li>
+</ol>
+<p>然后用带权拟阵交。</p>
+<h3 id="Colorful-Tree"><a href="#Colorful-Tree" class="headerlink" title="Colorful Tree"></a>Colorful Tree</h3><p>给定带权无向图 $G=(V,E)$ ，每条边有一个 $1$ 到 $n-1$ 的颜色，求一个最大权的生成树，满足每个颜色恰好出现一次。</p>
+<ol>
+<li>第一个拟阵 $M_1=(E,\mathcal{I_1})$ ，无环。</li>
+<li>第二个拟阵 $M_2=(E,\mathcal{I_2})$ ，每个颜色至多出现一次。</li>
+</ol>
+<p>带权拟阵交。</p>
+<h1 id="一些拟阵的操作"><a href="#一些拟阵的操作" class="headerlink" title="一些拟阵的操作"></a>一些拟阵的操作</h1><p>在理解接下来的操作时，推荐用基的定义去理解，优先考虑基的变化，会很有助于理解这个拟阵在这个操作后会发生什么变化。</p>
+<h2 id="对偶拟阵"><a href="#对偶拟阵" class="headerlink" title="对偶拟阵"></a>对偶拟阵</h2><p>定义：对于拟阵 $M=(S,\mathcal{I})$ ，定义 $M$ 的对偶拟阵 $M^{<em>}=(S,\mathcal{I^</em>})$ ，其中 $I^*=\{U\subset S:{\exists}基I\in \mathcal{I},I\subset S\setminus U\}$ 。</p>
+<p>遗传性显然，现在证明交换性：</p>
+<details class="toggle" ><summary class="toggle-button" style="">交换性的证明</summary><div class="toggle-content"><p>假设 $|U_1|&gt;|U_2|$ ，设基 $I_1\subset S\setminus U_1,I_2\subset S\setminus U_2$ 。</p>
+<p>设基 $I_3=I_1\setminus U2$ ，然后用 $I_2$ 去扩张 $I_3$ 成基 $I_4$ 。</p>
+<p>那么 $|I_4\cap U_1|\le|I_4\setminus I_3|\le |U_2|-|U_1\cap U_2|&lt; |U_1|-|U_1\cap U_2|$ 。</p>
+<p>显然 $I_4\subset S\setminus U_2$ ，所以显然 ${\exists} z\in U_1\setminus U_2: U_2+\{z\}\in \mathcal{I_2}$ 。</p>
+</div></details>
+<p>对偶拟阵的秩函数：</p>
+<p>$r^<em>(U)=\max\limits_{I\subset U,I\subset I^</em>}|I|=\max\limits_{B是M中的基}|U\setminus B|=|U|-\min\limits_{B是M中的基}|U\cap B|=|U|-r(S)+\max\limits_{B是M中的基}|B\cap (S\setminus U)|=|U|-r(S)+r(S\setminus U)$</p>
+<p>也可以用秩函数证明这是个拟阵，在这里就不展开讲了，不是很麻烦，可以自证。</p>
+<p>对偶拟阵的用途很广，他代表了一般拟阵的另外一个方面，举个例子：图拟阵的对偶就是去掉哪些边仍能保证图是联通的。</p>
+<p>对偶拟阵实际上就是把所有基的补集作为了基的集合定义的拟阵。</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>对于拟阵 $M=(S,I)$ ，和 $Z\subset S$ ，定义拟阵 $M$ 删除子集 $Z$ 的拟阵为 $(S\setminus Z,\mathcal{I’}), \mathcal{I’}=\{I:I\subset S\setminus Z, I\in \mathcal{I}\}$ 。记为 $M\setminus Z$ 。</p>
+<p>这个操作非常好理解，就是只考虑和 $Z$ 没有交集的独立集，秩函数直接用原来的就行，非常的简单。</p>
+<h2 id="收缩"><a href="#收缩" class="headerlink" title="收缩"></a>收缩</h2><p>对于拟阵 $M=(S,I)$ ，和 $Z\subset S$ ，定义拟阵 $M$ 删除子集 $Z$ 的拟阵为 $(M^<em>\setminus Z)^</em>$ 。记为 $M/Z$ 。</p>
+<p>由于是用上面两个操作定义的，所以显然是个拟阵。</p>
+<p>这个操作理解起来会比较困难。</p>
+<p>考虑 $M/Z$ 的基，首先得是 $M^<em>\setminus Z$ 的基的补集，$M^</em>\setminus Z$ 的基又得是 $M^<em>$ 中和 $Z$ 交集最小的基去掉交集部分的集合，而 $M^</em>$ 中和 $Z$ 交集最小的基对应的是 $M$ 中和 $Z$ 交集最大的基的补集。</p>
+<p>综上，可以得出，$M/Z$ 的基是原来和 $Z$ 交集最大的基去掉交集的部分，同理，独立集也是类似的。</p>
+<p>当然也可以从秩的角度考虑，这里不再赘述，直接给出秩函数的式子：</p>
+<p>$r_{M/Z}(U)=r_M(Z\cup U)-r_M(Z)$ 。</p>
+<p>例子：图拟阵中的缩边操作。</p>
+<h2 id="极小元"><a href="#极小元" class="headerlink" title="极小元"></a>极小元</h2><p>对于一个拟阵，经过一系列删除和收缩操作得到的任意拟阵 $M’$ ，称作拟阵 $M$ 的极小元。</p>
+<h1 id="拟阵并"><a href="#拟阵并" class="headerlink" title="拟阵并"></a>拟阵并</h1><h2 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h2><p>对于给定的 $k$ 个拟阵 $M_i=(S_i,\mathcal{I_i}),1\le i\le k$ 。定义这 $k$ 个拟阵的并为 $M=(S,\mathcal{I})$ ，其中 $S=\bigcup\limits_{i=1}^k S_i,\mathcal{I}=\{\bigcup\limits_{i=1}^k I_i:I_i\in \mathcal{I_i}\}$ 。</p>
+<p>遗传性非常简单，重点是交换性。</p>
+<details class="toggle" ><summary class="toggle-button" style="">交换性的证明</summary><div class="toggle-content"><p>不妨认为 $|I|&lt;|I’|$</p>
+<p>不妨这么考虑一个事情，首先不妨认为：$I_i\cap I_j=\emptyset,i\ne j$ 。</p>
+<p>同理对于 $I’_i$ 也是。</p>
+<p>这样 $|I|=\sum\limits|I_i|,|I’|=\sum\limits|I’_i|$ 。</p>
+<p>所以一定存在 $i:|I’_i|&gt;|I_i|$ ,所以考虑一定存在 $x\in I’_i,I_i+\{x\}\in \mathcal{I_i}$ ，如果 $x\in \mathcal{I}$ ，则说明 $x\in I_j,i\ne j$ ，所以令 $I_j$ 删掉 $x$ ，$I_i$ 加上 $x$ ，然后重新进行这个过程，反之，则交换性成立。</p>
+<p>由于 $\sum\limits |I_i\cap I’_i|$ 会不断变大，所以这个过程一定会停下来，即交换性一定成立，证毕。</p>
+<p>论文是一开始就找使 $\sum\limits |I_i\cap I’_i|$ 最大的 $I_i$ ，所以不用重复这个过程。</p>
+</div></details>
+<h2 id="秩函数-1"><a href="#秩函数-1" class="headerlink" title="秩函数"></a>秩函数</h2><script type="math/tex; mode=display">r_M(U)=\min\limits_{T\subset U}(|T|+\sum\limits_{i=1}^k r_{M_i}((U\setminus T)\cap S_i))</script><p>要证明这个定理，我们需要证明一个引理：</p>
+<p><strong>引理 6.1</strong> ：拟阵 $\hat{M}=(\hat{S},\hat{\mathcal{I}})$ ，定义函数 $f:\hat{S}\to S$ ，定义拟阵 $M=(S,\mathcal{I}),I=\{f(\hat{I})\:\hat{I}\in\hat{\mathcal{I}}\}$ ，则 $M$ 的秩函数为：</p>
+<script type="math/tex; mode=display">r_M(U)=\min\limits_{T\subset U}(r_{\hat{M}}(f^{-1}(U\setminus T))+|T|)</script><p>注 ： $f^{-1}(T)=\{x\in\hat{U}:f(x)\in T\}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>这个证明不需要证明这是个拟阵，但是这并不难证，交换性的证明，和拟阵并交换性的证明是几乎一样的。（也可以先证了秩函数再导出其是个拟阵）</p>
+<p>考虑构造一个划分拟阵 $(\hat{S},\mathcal{I_p})$ ，其中 $I\in \mathcal{I_p}$ 当且仅当 $I$ 中不存在两个元素 $f$ 的映射值相等。</p>
+<p>这样的话，$r_M(U)$ 实际上就是拟阵 $\hat{M}$ 和 $(\hat{S},\mathcal{I_p})$ 限制在 $f^{-1}(U)$ 集合的拟阵交，用最小最大定理便可证明。</p>
+</div></details>
+<p>用引理证明秩函数并不困难，令 $S_i$ 中的元素 $e$ 变成二元元素 $(e,i)$ ，从而区分开所有的元素，再构造函数 $f((e,i))=e$ 即可得证。</p>
+<h6 id="坑4"><a href="#坑4" class="headerlink" title="坑4"></a>坑4</h6><p>后面那些判断独立集啥的，还有表示法啥的还没有学，以后再说，先咕咕了，得去做些题目了，太久没敲代码手感不对了，现在。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>国家集训队2018论文：《浅谈拟阵的一些拓展及其应用》—- 江苏省淮阴中学 杨乾澜</p>
+<p>图片生成：<a target="_blank" rel="noopener" href="https://csacademy.com/app/graph_editor/">https://csacademy.com/app/graph_editor/</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/01/26/%E6%8B%9F%E9%98%B5%E5%88%9D%E7%BA%A7%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://oldplace.github.io/2024/01/26/%E6%8B%9F%E9%98%B5%E5%88%9D%E7%BA%A7%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8B%9F%E9%98%B5/">拟阵</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/31/Game-of-Connect-Shannon-s-Switching-Game/" title="Game of Connect(Shannon&#39;s Switching Game)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-01-31</div><div class="title">Game of Connect(Shannon&#39;s Switching Game)</div></div></a></div><div><a href="/2024/01/30/MEXimum-Spanning-Tree/" title="MEXimum Spanning Tree"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-01-30</div><div class="title">MEXimum Spanning Tree</div></div></a></div><div><a href="/2024/01/31/Milk-Candy/" title="Milk Candy"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-01-31</div><div class="title">Milk Candy</div></div></a></div><div><a href="/2024/01/31/Rainbow-Graph/" title="Rainbow Graph"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-01-31</div><div class="title">Rainbow Graph</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9F%E9%98%B5%E7%9A%84%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">拟阵的入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%82%E9%9B%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">幂集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%9F%E9%98%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">拟阵</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9D%911"><span class="toc-number">1.1.2.0.0.1.</span> <span class="toc-text">坑1</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">基</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF"><span class="toc-number">1.1.4.</span> <span class="toc-text">环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">1.2.</span> <span class="toc-text">性质</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">补充</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9D%912"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">坑2</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%A9%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">秩函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8-1"><span class="toc-number">2.2.</span> <span class="toc-text">性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9F%E9%98%B5%E6%9C%80%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">拟阵最优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9F%E9%98%B5%E4%BA%A4"><span class="toc-number">4.</span> <span class="toc-text">拟阵交</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98-1"><span class="toc-number">4.1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="toc-number">4.2.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%AE%97%E5%AD%90"><span class="toc-number">4.2.1.</span> <span class="toc-text">闭包算子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E5%9B%BE"><span class="toc-number">4.2.2.</span> <span class="toc-text">交换图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8-2"><span class="toc-number">4.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95-1"><span class="toc-number">4.4.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.5.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E4%BB%A5%E4%B8%8A%E7%9A%84%E6%8B%9F%E9%98%B5%E4%BA%A4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-NP-Hard-%E7%9A%84"><span class="toc-number">4.5.1.</span> <span class="toc-text">三个以上的拟阵交为什么是 NP-Hard 的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E6%9D%83%E6%8B%9F%E9%98%B5%E4%BA%A4"><span class="toc-number">4.5.2.</span> <span class="toc-text">带权拟阵交</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9D%913"><span class="toc-number">4.5.2.0.0.1.</span> <span class="toc-text">坑3</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">4.6.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D"><span class="toc-number">4.6.1.</span> <span class="toc-text">二分图匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE"><span class="toc-number">4.6.2.</span> <span class="toc-text">最小树形图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Colorful-Tree"><span class="toc-number">4.6.3.</span> <span class="toc-text">Colorful Tree</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8B%9F%E9%98%B5%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">一些拟阵的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E6%8B%9F%E9%98%B5"><span class="toc-number">5.1.</span> <span class="toc-text">对偶拟阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">5.2.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E7%BC%A9"><span class="toc-number">5.3.</span> <span class="toc-text">收缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%B0%8F%E5%85%83"><span class="toc-number">5.4.</span> <span class="toc-text">极小元</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9F%E9%98%B5%E5%B9%B6"><span class="toc-number">6.</span> <span class="toc-text">拟阵并</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-3"><span class="toc-number">6.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%A9%E5%87%BD%E6%95%B0-1"><span class="toc-number">6.2.</span> <span class="toc-text">秩函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9D%914"><span class="toc-number">6.2.0.0.0.1.</span> <span class="toc-text">坑4</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
