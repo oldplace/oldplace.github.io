@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CCPC Final 2023 赛后总结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这就最纯粹的坐牢的乐趣啊。 B题目大意： 一个合法的字符串数组（不是字符数组），满足：  $1\le |S_i| \le n$ $S_{i}$ 是 $S_{i+1}$ 的周期。 $S_i$ 互不相同  这里 $S$ 是 $T$ 的周期的定义是： 如果 $|S|&gt;|T|$ ，则 $T$ 是 $S$ 的前缀，否则和一般的周期定义一致。 问对于 $n$ 从 $1$ 到 $n$ ，每个 $n$ 能构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CCPC Final 2023 赛后总结">
+<meta property="og:url" content="http://oldplace.github.io/2024/04/10/CCPC-Final-2023-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="这就最纯粹的坐牢的乐趣啊。 B题目大意： 一个合法的字符串数组（不是字符数组），满足：  $1\le |S_i| \le n$ $S_{i}$ 是 $S_{i+1}$ 的周期。 $S_i$ 互不相同  这里 $S$ 是 $T$ 的周期的定义是： 如果 $|S|&gt;|T|$ ，则 $T$ 是 $S$ 的前缀，否则和一般的周期定义一致。 问对于 $n$ 从 $1$ 到 $n$ ，每个 $n$ 能构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-04-10T13:42:44.000Z">
+<meta property="article:modified_time" content="2024-04-29T13:25:52.221Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/04/10/CCPC-Final-2023-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CCPC Final 2023 赛后总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-04-29 21:25:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">CCPC Final 2023 赛后总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-10T13:42:44.000Z" title="发表于 2024-04-10 21:42:44">2024-04-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-29T13:25:52.221Z" title="更新于 2024-04-29 21:25:52">2024-04-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CCPC Final 2023 赛后总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>这就最纯粹的坐牢的乐趣啊。</p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p>题目大意：</p>
+<p>一个合法的字符串数组（不是字符数组），满足：</p>
+<ol>
+<li>$1\le |S_i| \le n$</li>
+<li>$S_{i}$ 是 $S_{i+1}$ 的周期。</li>
+<li>$S_i$ 互不相同</li>
+</ol>
+<p>这里 $S$ 是 $T$ 的周期的定义是：</p>
+<p>如果 $|S|&gt;|T|$ ，则 $T$ 是 $S$ 的前缀，否则和一般的周期定义一致。</p>
+<p>问对于 $n$ 从 $1$ 到 $n$ ，每个 $n$ 能构造的最大的合法字符串数组有多大。</p>
+<details class="toggle" ><summary class="toggle-button" style="">观察</summary><div class="toggle-content"><p>这是个计数题，但我们首先要知道我们在记什么。</p>
+<p>一个基本的观察是：</p>
+<p>我们构造 $S_1$ 为 $n$ 个不同的字符组成。</p>
+<p>那么一个显然的上界是：能由 $S_1$ 的所有前缀拼接出来的不同字符串数量。</p>
+<p>现在证明这个上界是对的：</p>
+<p>我们可以将上面的字符串集建成一棵字典树，我们令这棵字典树左儿子为这个位置在 $S_1$ 中的下一个字符（这个位置指的是在前缀中的位置），右儿子为第一个字符。</p>
+<p>然后考虑做中序遍历，得到的就是一个合法的构造。</p>
+<p>证毕。</p>
+<p>但是字符集是小写字母咋办，其实可以发现，把 $S_1$ 换成 $ab….$ 仍然成立，只要满足任意一个字符串的 $S_1$ 的前缀表示不存在或者唯一即可。</p>
+<p>而这样的字符串构造也非常的简单，只要字符串中除了第一个位置以外的其余位置都和第一个位置不一样就行了，这是充要条件。</p>
+<p>那么现在问题可以等价的转换为：</p>
+<p>问多少个数列满足：</p>
+<p>$1 \le \sum a_i \le n, a_{i}\le a_1$</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">大佬做法</summary><div class="toggle-content"><p>来自于机房的大佬。</p>
+<p>首先根据上面的说法，我们不难设计一个计数方法：</p>
+<p>$dp[i][j]$ 表示第一个数字为 $i$ ，同时当前的 $\sum a_i = j$ 的方案数。</p>
+<p>初始时 $dp[i][i] = dp[i][i + 1] = 1$ 。</p>
+<p>当 $j &gt; i + 1$ 时，满足 $dp[i][j] = dp[i][j - 1] * 2 - dp[i][j - i -1]$ 。</p>
+<p>原因是你可以在 $dp[i][j - 1]$ 的基础上选择使最后一个 $a_m+1$ 或者新增一个 $a_m=1$ ，当需要容斥掉 $a_m&gt;i$ 的情况。</p>
+<p>另外一方面，从背包的角度看：</p>
+<p>$dp[i][j] = \sum\limits_{k=1}^{i}dp[i][j-k]$ 。</p>
+<p>然后用 $dp[i][j]$ 的式子减去 $dp[i][j - 1]$ 的式子即可得到上面的转移式。</p>
+<p>我们设 $f[n]$ 为 $\sum a_i = n, a_{i}\le a_1$ 的方案数，显然这就是答案的差分，又显然 $f[n] = \sum dp[i][n]$</p>
+<p>那么如何维护 $dp[i][n]$ 呢？</p>
+<p>可以发现，对于 $dp[i][n]$ ，显然我们只要知道 $dp[i][n],dp[i][n-i],dp[i][n-2i]…$ 就足以完成转移。</p>
+<p>即：$b[j]=dp[i][n-(j-1)i]$ 。</p>
+<p>显然，下一次：$b[i]=b[i]*2-b[i+1]$ 。</p>
+<p>观察到多个 $dp$ 数组的 $b$ 数组转移类似，可以直接累加，而 $b_{1}$ 即为所求。</p>
+<p>但是这样还是 $O(n^2)$ ，怎么优化？</p>
+<p>注意到当 $i&gt;\sqrt{n}$ 时，$b$ 数组只会开到 $\sqrt{n}$ ，所以直接暴力处理 $i\le \sqrt{n}$ 的 $dp$ 数组，大的用 $b$ 数组转移即可做到 $O(n\sqrt{n})$ 的复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> B1 = <span class="number">450</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> B2 = <span class="number">450</span>;</span><br><span class="line">LL mod;</span><br><span class="line">LL ans[N];</span><br><span class="line">LL a[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x, LL val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i * i &lt;= x; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x % i == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">int</span> j = x / i;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; B1)&#123;</span><br><span class="line">                a[j] = (a[j] + val) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(j != i &amp;&amp; j &gt; B1)&#123;</span><br><span class="line">                a[i] = (a[i] + val) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; mod;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= B1; i++)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        a[i] = <span class="number">1</span>;</span><br><span class="line">        a[i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">2</span>; j &lt;= n; j++) a[j] = (a[j - <span class="number">1</span>] * <span class="number">2</span> - a[j - i - <span class="number">1</span>] + mod) % mod;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) ans[j] = (ans[j] + a[j]) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= B2; j++)&#123;</span><br><span class="line">            a[j] = (a[j] * <span class="number">2</span> - a[j + <span class="number">1</span>] + mod) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">add</span>(i, <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">add</span>(i - <span class="number">1</span>, mod - <span class="number">1</span>);</span><br><span class="line">        ans[i] = (ans[i] + a[<span class="number">1</span>]) % mod;</span><br><span class="line">        ans[i] = (ans[i] + ans[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        cout &lt;&lt; ans[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我观察到了一般，可惜一没观察到 $b$ 是可以合并的，二没观察到可以根号分治（不过一没观察到自然也就观察不到二了）。</p>
+<p>对于这个做法一个更加形象的解释是：</p>
+<p><img src="1.png" alt=""></p>
+<p>如果把 $b[i]$ 看成维护一条条直线的话，那么 $b[i]$ 的斜率就是 $i-1$ ，因此在 $i&gt;\sqrt{n}$ 后，直线就只会处在 $i&lt;\sqrt{n}$ 的位置了，直接根号分治，这样就只用维护 $\sqrt{n}$ 条直线了。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">官方做法</summary><div class="toggle-content"><p>我最学不懂的东西，生成函数启动！</p>
+<p>考虑做法 $1$ 中背包的角度开始算生成函数：</p>
+<p>先枚举第一个数字是啥，再枚举有多少个 $a$ ，则对于 $n$ 的答案就是：</p>
+<script type="math/tex; mode=display">\begin{align*}
+
+ & [x^{n}]\frac{1}{1-x}\sum\limits_{k=1}^n x^{k} \sum\limits_{i=0}^{\infty} (x\frac{1-x^{k}}{1-x})^i \\
+ = & [x^{n}]\frac{1}{1-x}\sum\limits_{k=1}^n \frac{x^{k}}{1-x\frac{1-x^k}{1-x}} \\
+ = & [x^{n}]\sum\limits_{k=1}^n \frac{x^{k}}{(1-x)-x+x^k} \\
+ = & [x^{n}]\sum\limits_{k=1}^n \frac{x^{k}}{1-2x+x^k}
+\end{align*}</script><p>然后这个咋处理呢？</p>
+<p>不会。</p>
+</div></details>
+<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>另外开了篇题解详细讲述。</p>
+<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>题目大意：</p>
+<p>给一个 $n*n$ 的网格，要求在网格上放一些顶着上边界的竖棒或者贴着左边界的横棒，要求棒之间不能相交，且要求一些位置不能被棒覆盖，一些位置必须被棒覆盖，问有多少种合法的放棒方案，两种方案不同当且仅当被覆盖的位置集合不同。</p>
+<p>形式化的：</p>
+<p>合法的 $a,b$ 数组（长度都为 $n$ ，$a$ 表示横着的棒长，$b$ 表示竖着的棒长）需要满足：</p>
+<p>$0\le a_{i},b_{i} \le n$</p>
+<p>$[a_{i}\ge j] \ne [b_{j}\ge i]$ </p>
+<p>且有一些额外的要求：</p>
+<p>$[a_{c_{k}}\ge d_{k}]+[b_{d_{k}}\ge c_{k}]=1$</p>
+<p>$[a_{c’_{k}}\ge d_{k}]+[b_{d_{k}}\ge c’_{k}]=0$</p>
+<p>但是不是问有多少种不同的合法数组，具体见原题意。</p>
+<details class="toggle" ><summary class="toggle-button" style="">我的做法</summary><div class="toggle-content"><p>我们要计数的话，更好计数的是合法的 $a,b$ 数组个数，而不大可能去以覆盖的位置集合为状态去计数（后效性太强）。</p>
+<p>但是问题是：不同的 $a,b$ 数组可能是同一个放棒方案。</p>
+<p>因此我们需要给合法的 $a,b$ 数组加上一些限制，使其与放棒方案构成双射。</p>
+<p>我加上的条件是：</p>
+<p>$\forall 1 \le i\le n : a_{b_{i} + 1} \ne i$</p>
+<p>证明：</p>
+<p>单射：</p>
+<p>假设有两组 $a,b$ 、$a’,b’$ 不同但对应的是同一个放棒方案。</p>
+<p>不妨设 $b_{i} &gt; b’_{i}$ ，那么 $a’_{b’_{i} + 1} \ge i$ 。</p>
+<p>那么显然：$\forall i\le j \le a’_{b’_{i} + 1}:b_{j}\ge b’_{i} + 1,b’_{j} = b’_{i}$ 。</p>
+<p>因此 $a’_{1+b’_{a’_{b’_{i} + 1}}} = a’_{b’_{i} + 1}$ ，所以 $a’,b’$ 不是合法的，矛盾。</p>
+<p><img src="2.png" alt=""></p>
+<p>满射：</p>
+<p>对于任意一个没加限制的合法的 $a,b$ 数组，如果违反了限制，那么显然可以让 $b_{i}+1$ ，$a_{b_{i}+1}-1$ ，这样就得到了一个覆盖位置集合不变的新的 $a,b$ 数组，由于 $\sum b$ 在不断增加，因此这个过程一定可以停下来，所以是个满射。</p>
+<p>证毕。</p>
+<p>接下来就是计数了，还挺麻烦的。</p>
+<p>设 $dp[i][j]$ 表示前 $i-1$ 个 $b$ 的值都 $&lt;j$ 且 $b_{i}=j$ ，且已经填了 $a_{1}\sim a_{j}$ 的方案数。</p>
+<p>$dp[i][j]\to dp[i’][j’]$ 需要考虑的贡献有 $i\to i’$ 的贡献（填 $b$ 的方案）和 $j\to j’$ 的贡献（填 $b$ 的方案）。</p>
+<p>然后优化这个 $dp$ 过程就行了。</p>
+<p>时间复杂度 ： $O(n^2)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">3e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line">LL nf[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    nf[<span class="number">0</span>] = nf[<span class="number">1</span>] = <span class="number">1ll</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= <span class="built_in">max</span>(n, m); i++) nf[i] = (mod - mod / i) * nf[mod % i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Key</span>&#123;</span><br><span class="line">    LL val;</span><br><span class="line">    <span class="type">int</span> cnt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> row[N][N], col[N][N];</span><br><span class="line"><span class="type">bool</span> br[N][N], bc[N][N];</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> st[N][N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getst</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) s[i + <span class="number">1</span>] = ss[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//g is consider next row</span></span><br><span class="line">LL f[N], g[N], tmp[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    m = n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="built_in">getst</span>(st[i]);</span><br><span class="line">        st[i][m + <span class="number">1</span>] = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    m++;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        br[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> cnt = row[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">bool</span> lock = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[i][j] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(lock) cnt = <span class="number">0ll</span>;</span><br><span class="line">                <span class="keyword">else</span> cnt = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(st[i][j] == <span class="string">&#x27;0&#x27;</span>) lock = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!lock) cnt++;</span><br><span class="line">            <span class="keyword">if</span>(!lock) br[i][j] = <span class="number">1</span>;</span><br><span class="line">            row[i][j] = cnt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">        bc[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> cnt = col[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">        <span class="type">bool</span> lock = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[i][j] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(lock) cnt = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span> cnt = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(st[i][j] == <span class="string">&#x27;0&#x27;</span>) lock = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(!lock) cnt++;</span><br><span class="line">            <span class="keyword">if</span>(!lock) bc[i][j] = <span class="number">1</span>;</span><br><span class="line">            col[i][j] = cnt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1ll</span>;</span><br><span class="line">    g[<span class="number">0</span>] = <span class="number">1ll</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) tmp[i] = g[i];</span><br><span class="line">        LL now = <span class="number">0ll</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            now = now * row[i][j - <span class="number">1</span>] % mod;</span><br><span class="line">            <span class="keyword">if</span>(i)&#123;</span><br><span class="line">                now = (now + tmp[i - <span class="number">1</span>]) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!bc[i][j]) now = <span class="number">0ll</span>;</span><br><span class="line">            <span class="keyword">if</span>(i != n)&#123;</span><br><span class="line">                <span class="keyword">if</span>(st[i + <span class="number">1</span>][j] != <span class="string">&#x27;1&#x27;</span>) g[i] = g[i] * col[i][j] % mod;</span><br><span class="line">                <span class="keyword">else</span> g[i] = <span class="number">0ll</span>;</span><br><span class="line">                <span class="keyword">if</span>(i &amp;&amp; br[i + <span class="number">1</span>][j] &amp;&amp; st[i][j] != <span class="string">&#x27;1&#x27;</span>) g[i] = (g[i] + f[i] * col[i - <span class="number">1</span>][j]) % mod;</span><br><span class="line">                <span class="keyword">if</span>(st[i + <span class="number">1</span>][j] != <span class="string">&#x27;1&#x27;</span>) g[i] = (g[i] + now * row[i + <span class="number">1</span>][j - <span class="number">1</span>]) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            f[i] = (f[i] * col[i][j] + now) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; f[n] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大概的优化就是注意到 $a$ 的贡献可以用类似前缀和的方式搞搞，也就是代码中的 $now$ 。</p>
+<p>而 $b$ 的贡献也是类似前缀和，在每一列的转移结束后，用 $O(n)$ 的时间维护一下 $b$ 的贡献，就可以得到对下一列的贡献了。</p>
+<p>大概解释一下 $f,g$ ，就是注意到 $a$ 的贡献中，恰好处于 $j + 1$ 位置的行的贡献，由于限制的存在，这一行的限制要比其余行的限制要多，因此 $g$ 就是存储考虑 $j+1$ 行的列的贡献，而 $f$ 就是不考虑 $j+1$ 行的列的贡献，作用是去维护出新的 $g$ 。</p>
+<p>我感觉正解肯定不是这么做的，感觉这个做法有一种力大砖飞的感觉，太不优美了。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">官方做法</summary><div class="toggle-content"><p>如何判断一个 $01$ 矩阵是合法的？（下面以 $f$ 为 $01$ 矩阵）</p>
+<p>只需要找到一条从左上到右下的路径（只能向下或者向右），满足左边的都是横条，上面的都是竖条。</p>
+<p>但问题是，一个矩阵可能对应多条路径，怎么办？</p>
+<p>我们设 $a$ 数组满足：$a_{i}$ 是最小的满足：$f_{i,a_{i}}=0,f_{i,a_{i}+1}=1$ ，如果这一行没有这种东西则认为 $a_{i}=0$ 。</p>
+<p>可以用 $a$ 可以表示出一条路径 $p_{l}$ ，同理，可以用 $b$ 表示列，然后同样表示出一条路径 $p_r$ 。</p>
+<p>如果这个矩阵是合法的，则一条路径是合法的充要条件是在 $p_l,p_r$ 之间。</p>
+<p>显然，$f$ 合法当且仅当 $p_l,p_r$ 合法，因此只需要将 $f$ 放在 $p_l$ 或者 $p_r$ 计数就行了。</p>
+<p>简单来说，用 $dp$ 计算每个 $p$ 作为 $p_l$ 时有多少合法的 $f$ 与其对应就行了。</p>
+<p>时间复杂度：$O(n^2)$ 。</p>
+<p>可以发现，与 $p_r$ 对应的合法的 $f$ 的充要条件就是我的做法所加的那个新限制。</p>
+<p>非常的 $interesting$ ，相当于是从不同的角度得到了同一个做法了。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">更好的实现：</summary><div class="toggle-content"></div></details>
+<h1 id="M"><a href="#M" class="headerlink" title="M"></a>M</h1><p>题目大意：在一个数轴上有 $n+1$ 个洞 $n$ 个球，间隔分布，然后假设球的滚动方向确定，你可以自由确定球的滚动顺序使最大化不会落入相邻洞的球的数量，然后现在给你一些球的滚动方向，要求你确定一些球的滚动方向使最大化数量。</p>
+<details class="toggle" ><summary class="toggle-button" style="">我的做法</summary><div class="toggle-content"><p>这道题目最难的就是：假设确定了滚动方向，如何找出最大数量。</p>
+<p>这个问题可以等价的转化为：将 $&gt;$ 变成 $($ ，将 $&lt;$ 变成 $)$ ，删除若干个括号，使得最终是个合法括号序列，那么这个删法的贡献为：删除的括号数量加上，原来的 $()$ 且最后没有删除其中任何一个括号的数量。</p>
+<p>这里可以解释以下后面那个的数量代表什么：和 $&gt;&lt;$ 一定会至少浪费一个球的原因一致。</p>
+<p>首先，上面的一种删法可以对应一种顺序。</p>
+<p>证明：</p>
+<p>首先，对于一个区间的球，其能覆盖的洞的情况分三种：左闭右开，左开右闭，左闭右闭中间开。</p>
+<p>但无论是哪种，对于 $()$ ，只要中间其实是有球且已经滚完了，都一定存在一种方式使得这两个球都不会被浪费，滚完以后认为 $()$ 已经被删了就行，所以，初始条件就是对于所有的 $()$ ，要么中间已经有球，要么一开始就是 $()$ ，因此综上，至多浪费上面那个数量，证毕。</p>
+<p>其次，最优顺序一定对应上面的一种删法。</p>
+<p>证明：</p>
+<p>考虑最优顺序一定可以调整成下面的情况：先让所有被浪费的球滚进去，然后每次让一个球跨过一个区间。</p>
+<p>现在归纳的证明：对于任意一个左闭右开的区间，一定存在一个上面的一个删法使得在浪费的数量相等的情况下，剩下的括号序列要么是合法的，要么多一个 $)$ ，左开右闭则是 $($ 。</p>
+<p>比如一开始有个 $)$ ，那么形成的就是一个左闭右开的洞，所以下次如果有洞跨过它一定是左边有一个 $($ 跨过来，那么合法多个 $($ ，$)$ 和 $($ 匹配，同时左闭右开变成左开右闭。</p>
+<p>区间合并同理。</p>
+<p>证毕。</p>
+<p>然后直接拿着这东西 DP 一下就行了，时间复杂度：$O(n^2)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">5e3</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> inf=<span class="number">1e9</span>;</span><br><span class="line"><span class="type">int</span> dp[N][N][<span class="number">2</span>];<span class="comment">//need destroy?</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        cin &gt;&gt; (st + <span class="number">1</span>);</span><br><span class="line">        n = <span class="built_in">strlen</span>(st + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[i] == <span class="string">&#x27;&gt;&#x27;</span>) st[i] = <span class="string">&#x27;(&#x27;</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(st[i] == <span class="string">&#x27;&lt;&#x27;</span>) st[i] = <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= n; j++) dp[i][j][<span class="number">0</span>]=dp[i][j][<span class="number">1</span>]=inf;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> t = <span class="number">0</span>; t &lt;= <span class="number">1</span>; t++)&#123;</span><br><span class="line">                    <span class="comment">//add &#x27;(&#x27;</span></span><br><span class="line">                    <span class="keyword">if</span>(st[i] != <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                        dp[i][j + <span class="number">1</span>][<span class="number">0</span>] = <span class="built_in">min</span>(dp[i][j + <span class="number">1</span>][<span class="number">0</span>], dp[i - <span class="number">1</span>][j][t]);</span><br><span class="line">                        dp[i][j + <span class="number">1</span>][<span class="number">1</span>] = <span class="built_in">min</span>(dp[i][j + <span class="number">1</span>][<span class="number">1</span>], dp[i<span class="number">-1</span>][j][t] + <span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(st[i] != <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(j &amp;&amp; t) dp[i][j - <span class="number">1</span>][<span class="number">1</span>] = <span class="built_in">min</span>(dp[i][j - <span class="number">1</span>][<span class="number">1</span>], dp[i - <span class="number">1</span>][j][t]);</span><br><span class="line">                        <span class="keyword">if</span>(j) dp[i][j - <span class="number">1</span>][<span class="number">1</span>] = <span class="built_in">min</span>(dp[i][j - <span class="number">1</span>][<span class="number">1</span>], dp[i<span class="number">-1</span>][j][t] + <span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    dp[i][j][<span class="number">1</span>] = <span class="built_in">min</span>(dp[i][j][<span class="number">1</span>], dp[i<span class="number">-1</span>][j][t] + <span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; n-<span class="built_in">min</span>(dp[n][<span class="number">0</span>][<span class="number">0</span>], dp[n][<span class="number">0</span>][<span class="number">1</span>]) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">反思</summary><div class="toggle-content"><p>感觉这一类题目就是没想出来脑子里面就是一坨，想出来了就豁然开朗。</p>
+<p>赛时花了很多时间还没有做出来，我的问题。</p>
+<p>感觉确实难，但做这么久确实蠢。</p>
+<p>基本上这道题目知道如何根据滚动方向判断出最大数量就做完了。</p>
+<p>但这一步我就卡了很久，下面是最小化浪费的球数。</p>
+<ol>
+<li><p>首先以为是当成括号匹配，然后是 $&gt;&lt;$ 的数量加上失配的数量。<br>否决理由：</p>
+<p>$&gt;&lt;&lt;$，注意到 $&gt;&lt;$ 可以把洞填成左开右闭和左闭右开。</p>
+</li>
+<li><p>然后以为是相邻两个失配的 $&lt;$ 中间如果有匹配的括号对，那么右边的 $&lt;$ 不会浪费。<br>否决理由：</p>
+<p>$&gt;&lt;&gt;&lt;&lt;&lt;$，注意到只有 $&gt;&lt;$ 会浪费中间的洞。</p>
+</li>
+<li>发现只要有一个 $&gt;&lt;$ 就可以改变一次洞的分布，得到最终做法。</li>
+</ol>
+<p>别看上面这个过程非常短，实际过了很长的时间。</p>
+<p>虽然我认为这里犯了和之前一样的错误：没有先想着证伪（找例子），而是先想着证明（这个往往是困难的），但是我认为以我当时觉得很对的脑子，我觉得我也找不到例子。（虽然这个时候更好的解决方法是找队友，询问他们对这个正确性的看法，因为队友没经过错误的思考回路，当局者迷，旁观者清，反而更容易找到错误）</p>
+<p>可以发现，上面最终发现错误的原因都是：找到了个反例，从而加深了对这道题目的认知，最终更加靠近了正解。</p>
+<p>然而我找到上面反例的过程都是写了代码，发现没过样例，发现样例里面就有反例。</p>
+<p>因此改进措施为（仅针对比较难的题目）：</p>
+<ol>
+<li>比赛时先手玩一遍数据（非比赛时不手玩是因为我觉得这样其实比较应试，找数据也是实力的一部分）</li>
+<li>难题多想一想比较极端或者有代表性的数据，很多时候，在大多数情况足够最优就是在全体情况足够最优，某些数据的最优解法是能够指引最终做法的，我认为这不是一种应试，因为找到数据并说明这个数据的最优做法我认为也是实力的一部分。（简单来说，就是用更多手玩数据的过程去代替更多想证明的过程）</li>
+</ol>
+<p>第二条其实已经比较接近队长的思考方式了，就是先想一些极端数据，然后找到一个在这些极端数据下仍然对的做法，根据对的理由思考出最终做法，然后再基于大量数据的思考下，给出最终做法的正确性，这其实是一个很好的思考方式，至少比抓瞎要好得多。</p>
+<p>希望下一次能够更快的想出这些题目。</p>
+</div></details>
+<p>官方题解没看懂，感觉非常的奇妙。</p>
+<p>还有一些奇奇怪怪的做法，比如花费 $1$ 的代价删除具有某种形式的子串等等，感觉这个题目的做法很多，在此就不一一赘述了。<del>其实是因为我都没看懂</del></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/04/10/CCPC-Final-2023-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">http://oldplace.github.io/2024/04/10/CCPC-Final-2023-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">1.</span> <span class="toc-text">B</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#L"><span class="toc-number">2.</span> <span class="toc-text">L</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#K"><span class="toc-number">3.</span> <span class="toc-text">K</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M"><span class="toc-number">4.</span> <span class="toc-text">M</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

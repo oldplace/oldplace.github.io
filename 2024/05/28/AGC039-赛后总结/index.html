@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AGC039 赛后总结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="A. Connection and Disconnection题目链接：https:&#x2F;&#x2F;atcoder.jp&#x2F;contests&#x2F;agc039&#x2F;tasks&#x2F;agc039_a 题目大意：字符串 $S$ 放置 $K$ 次，对字符串修改最少的字符满足使相邻字符不同。 做法我的做法是找到所有相同的字符构成的连续段，然后统计答案，开头和结尾特判一下就行了。 时间复杂度：$O(n)$ 。 12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AGC039 赛后总结">
+<meta property="og:url" content="http://oldplace.github.io/2024/05/28/AGC039-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="A. Connection and Disconnection题目链接：https:&#x2F;&#x2F;atcoder.jp&#x2F;contests&#x2F;agc039&#x2F;tasks&#x2F;agc039_a 题目大意：字符串 $S$ 放置 $K$ 次，对字符串修改最少的字符满足使相邻字符不同。 做法我的做法是找到所有相同的字符构成的连续段，然后统计答案，开头和结尾特判一下就行了。 时间复杂度：$O(n)$ 。 12345678910">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-05-28T02:03:56.000Z">
+<meta property="article:modified_time" content="2024-05-28T06:22:59.761Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/05/28/AGC039-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AGC039 赛后总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-05-28 14:22:59'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">AGC039 赛后总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-28T02:03:56.000Z" title="发表于 2024-05-28 10:03:56">2024-05-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-28T06:22:59.761Z" title="更新于 2024-05-28 14:22:59">2024-05-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AGC039 赛后总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="A-Connection-and-Disconnection"><a href="#A-Connection-and-Disconnection" class="headerlink" title="A. Connection and Disconnection"></a>A. Connection and Disconnection</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc039/tasks/agc039_a">https://atcoder.jp/contests/agc039/tasks/agc039_a</a></p>
+<p>题目大意：字符串 $S$ 放置 $K$ 次，对字符串修改最少的字符满足使相邻字符不同。</p>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>我的做法是找到所有相同的字符构成的连续段，然后统计答案，开头和结尾特判一下就行了。</p>
+<p>时间复杂度：$O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e2</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">LL K;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">get_char_array</span>(st);</span><br><span class="line">    n = <span class="built_in">strlen</span>(st + <span class="number">1</span>);</span><br><span class="line">    cin &gt;&gt; K;</span><br><span class="line">    <span class="type">int</span> len0 = <span class="number">0</span>;</span><br><span class="line">    LL ans = <span class="number">0ll</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> l = <span class="number">1</span>; l &lt;= n; l++)&#123;</span><br><span class="line">        <span class="type">int</span> r = l;</span><br><span class="line">        <span class="keyword">while</span>(r &lt; n &amp;&amp; st[r + <span class="number">1</span>] == st[l]) r++;</span><br><span class="line">        <span class="keyword">if</span>(l &gt; <span class="number">1</span> &amp;&amp; r &lt; n) ans += (r - l  + <span class="number">1</span>) / <span class="number">2</span> * K;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(l == <span class="number">1</span> &amp;&amp; r &lt; n)&#123;</span><br><span class="line">            len0 = r - l + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(st[<span class="number">1</span>] != st[n]) ans += (r - l + <span class="number">1</span>) / <span class="number">2</span> * K;</span><br><span class="line">            <span class="keyword">else</span> ans += (r - l + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(l &gt; <span class="number">1</span> &amp;&amp; r == n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[<span class="number">1</span>] != st[n]) ans += (r - l + <span class="number">1</span>) / <span class="number">2</span> * K;</span><br><span class="line">            <span class="keyword">else</span> ans += (r - l + <span class="number">1</span>) / <span class="number">2</span> + (r - l + <span class="number">1</span> + len0) / <span class="number">2</span> * (K - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> ans += n * K / <span class="number">2</span>;</span><br><span class="line">        l = r;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">其余做法</summary><div class="toggle-content"><p>看到一个很有意思的搞法：先统计 $S$ 的答案，再统计 $SS$ 的答案，两者相减得到在已经有字符串的情况下再添加字符串的贡献。</p>
+<p>需要特判所有字符相同的情况。</p>
+<p>这个做法感觉很牛啊。</p>
+</div></details>
+<h1 id="B-Graph-Partition"><a href="#B-Graph-Partition" class="headerlink" title="B. Graph Partition"></a>B. Graph Partition</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc039/tasks/agc039_b">https://atcoder.jp/contests/agc039/tasks/agc039_b</a></p>
+<p>题目大意：给你一张无向图，将点分成尽可能多的部分满足任何一条边只会出现在相邻两个部分之间。</p>
+<details class="toggle" ><summary class="toggle-button" style="">我的做法</summary><div class="toggle-content"><p>首先注意到一个事情，这个图没有奇环是这个图有解的充要条件。（证明方法就是沿着奇数走一圈）</p>
+<p>换个角度来看：题目的要求等价于相邻两个点的部分编号奇偶性不同，由这一点可以很自然的联想到二分图染色，从而知道如果二分图染色失败则无解，从而自然的想到有解的充要条件。</p>
+<p>然后发现，$x\to y$ 的任何一条路径的边数都一定 $\ge |id_x-id_y|$ 。</p>
+<p>我们不妨考虑从部分 $1$ 的角度来看，由于这个图是联通的，设 $h_x$ 表示 $1$ 中的点到 $x$ 的最短路，那么 $id_x\le h_x+1$ 。</p>
+<p>我们不妨直接拉满，就设置一个中心 $st$ ，$id_x=h_x+1$，可以发现，在二分图上，这样子划分是一定合法的。</p>
+<p>而且不难证明最优解一定长这样。</p>
+<p>直接枚举 $st$ 就行了。</p>
+<p>时间复杂度：$O(n^3)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e2</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> st[N][N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> y, next;</span><br><span class="line">&#125;a[N * N]; <span class="type">int</span> len, las[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;a[++len] = &#123;y, las[x]&#125;; las[x] = len;&#125;</span><br><span class="line"><span class="type">int</span> h[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> spos)</span></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(spos);</span><br><span class="line">    <span class="built_in">memset</span>(h, <span class="number">0</span>, <span class="built_in">sizeof</span>(h));</span><br><span class="line">    h[spos] = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> laspos = spos;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> x = q.<span class="built_in">front</span>();</span><br><span class="line">        laspos = x;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k = las[x]; k; k = a[k].next)&#123;</span><br><span class="line">            <span class="type">int</span> y = a[k].y;</span><br><span class="line">            <span class="keyword">if</span>(!h[y])&#123;</span><br><span class="line">                h[y] = h[x] + <span class="number">1</span>;</span><br><span class="line">                q.<span class="built_in">push</span>(y);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((h[y] &amp; <span class="number">1</span>) == (h[x] &amp; <span class="number">1</span>)) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h[laspos];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="built_in">get_char_array</span>(st[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[i][j] == <span class="string">&#x27;1&#x27;</span>) <span class="built_in">ins</span>(i, j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) ans = <span class="built_in">max</span>(ans, <span class="built_in">bfs</span>(i));</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<h1 id="C-Division-by-Two-with-Something"><a href="#C-Division-by-Two-with-Something" class="headerlink" title="C. Division by Two with Something"></a>C. Division by Two with Something</h1><p>题目链接：<a target="_blank" rel="noopener" href="https://atcoder.jp/contests/agc039/tasks/agc039_c">https://atcoder.jp/contests/agc039/tasks/agc039_c</a></p>
+<p>题目大意：给 $n,X(X&lt;2^{n})$ ，求 $[0,X]$ 的权值和，权值定义为一个数字 $x$ 经过下述操作最少花几次回到自己。</p>
+<p>操作：$x$ 是奇数就除二向下取整，偶数就除二后，加上 $2^{n-1}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">我的做法</summary><div class="toggle-content"><p>注意到一个事情，上面这个操作等价于把一个 $n$ 位二进制的最低位翻转放到最高位。</p>
+<p>于是，所有数字都一定会在 $2n$ 次操作后回到自己。</p>
+<p>注意到，如果存在 $x,y(x&lt;y)$ 都能让 $x$ 回到自己，那么 $y-x$ 也可以，因此存在一个最小的次数 $ans$ 整除所有可行的次数，且 $ans$ 的所有倍数都可行。</p>
+<p>也就是答案一定是 $2n$ 的因子。</p>
+<p>又注意到 $n$ 次后一定回不到自己，因此 $ans$ 是 $2n$ 的因子而不是 $n$ 的因子。</p>
+<p>注意到 $\frac{ans}{2}$ 整除于 $n$ ，我们不妨以 $\frac{ans}{2}$ 审视 $S$ ，可以发现 $S$ 可以写成 $010101010…0$ 。</p>
+<p>即在 $len|n$ 的条件下，$S$ 可以以 $len$ 为单位写成 $010101…0$ 等价于 $S$ 在 $2len$ 后会回到自己。</p>
+<p>综上可以得到以 $len$ 为单位的 $0101…0$ 的字符串数量等于 $ans|2len$ 的字符串数量。</p>
+<p>容斥一下就可以得到每个 $ans$ 对应的字符串数量了。</p>
+<p>时间复杂度：$O(n\log{n})$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> st[N], t[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">(<span class="type">int</span> len)</span></span>&#123;</span><br><span class="line">    LL now = <span class="number">0ll</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= len; i++) now = (now * <span class="number">2</span> + st[i] - <span class="string">&#x27;0&#x27;</span>) % mod;</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">1</span>, type = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        t[i] = ((st[pos] - <span class="string">&#x27;0&#x27;</span>) ^ type) + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>(pos == len) pos = <span class="number">1</span>, type ^= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> pos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(t[i] &lt; st[i]) <span class="keyword">return</span> (now + <span class="number">1</span>) % mod;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(t[i] &gt; st[i]) <span class="keyword">return</span> now;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (now + <span class="number">1</span>) % mod;</span><br><span class="line">&#125;</span><br><span class="line">LL cnt[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">get_char_array</span>(st);</span><br><span class="line">    LL ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n % i == <span class="number">0</span> &amp;&amp; n % (i * <span class="number">2</span>) != <span class="number">0</span>)&#123;</span><br><span class="line">            cnt[i] = (cnt[i] + <span class="built_in">solve</span>(i)) % mod;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">2</span>; k &lt;= n / i; k++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(n / i % k == <span class="number">0</span>) cnt[i * k] = (cnt[i * k] - cnt[i] + mod) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += cnt[i] * i * <span class="number">2</span>;</span><br><span class="line">            ans %= mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/05/28/AGC039-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">http://oldplace.github.io/2024/05/28/AGC039-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">68</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">52</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Connection-and-Disconnection"><span class="toc-number">1.</span> <span class="toc-text">A. Connection and Disconnection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-Graph-Partition"><span class="toc-number">2.</span> <span class="toc-text">B. Graph Partition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-Division-by-Two-with-Something"><span class="toc-number">3.</span> <span class="toc-text">C. Division by Two with Something</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
