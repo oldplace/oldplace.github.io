@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>World Final 2015 K. Tours | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;280&#x2F;problem&#x2F;4686 题目大意：给每个点染色，问有多少种染色数满足存在一种染色方案使得：  每个颜色至少被染了一次，每个点都被染了一种颜色。 任意一个简单环上每种颜色的数量一样。  做法注意到一个事情，两个环像个 $8$ 一样的相交，那么中间的那条路径也满足每种颜色的数量一样。 这启示我们或许可以把第二条当成方程一样，解一下方程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="World Final 2015 K. Tours">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/01/World-Final-2015-K-Tours/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="题目链接：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;280&#x2F;problem&#x2F;4686 题目大意：给每个点染色，问有多少种染色数满足存在一种染色方案使得：  每个颜色至少被染了一次，每个点都被染了一种颜色。 任意一个简单环上每种颜色的数量一样。  做法注意到一个事情，两个环像个 $8$ 一样的相交，那么中间的那条路径也满足每种颜色的数量一样。 这启示我们或许可以把第二条当成方程一样，解一下方程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-01T11:50:20.000Z">
+<meta property="article:modified_time" content="2024-07-01T12:49:30.434Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="图论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/01/World-Final-2015-K-Tours/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'World Final 2015 K. Tours',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2024-07-01 20:49:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">World Final 2015 K. Tours</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T11:50:20.000Z" title="发表于 2024-07-01 19:50:20">2024-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-01T12:49:30.434Z" title="更新于 2024-07-01 20:49:30">2024-07-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="World Final 2015 K. Tours"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>题目链接：<a target="_blank" rel="noopener" href="https://qoj.ac/contest/280/problem/4686">https://qoj.ac/contest/280/problem/4686</a></p>
+<p>题目大意：给每个点染色，问有多少种染色数满足存在一种染色方案使得：</p>
+<ol>
+<li>每个颜色至少被染了一次，每个点都被染了一种颜色。</li>
+<li>任意一个简单环上每种颜色的数量一样。</li>
+</ol>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>注意到一个事情，两个环像个 $8$ 一样的相交，那么中间的那条路径也满足每种颜色的数量一样。</p>
+<p>这启示我们或许可以把第二条当成方程一样，解一下方程。想到方程就想到了向量空间。<del>虽然这一步是队长想的，并不是我想的，也许这并不自然</del></p>
+<p>设一个 $n$ 维的向量空间，定义其中一个子空间 $S$ 满足：</p>
+<p>其为 $span\{L_i\}$ ，其中 $L_i$ 为第 $i$ 个环所生成的向量，即 $L_{i,x}=1$ 当且仅当 $x$ 在环上，否则为 $0$ 。</p>
+<p>可以看到，对于任意一个合法的染色方案：元素 $(a_1,a_2,….,a_n)\in S$ 满足每种颜色的加权和相等，其中加权和表示如果 $x$ 染色某种颜色，其对这个颜色的贡献为 $a_x$ 。</p>
+<p>由于我们实际上只是用方程多生成了一些线性无关的方程，所以这与前面第二条是相互充要的，即一个方案是合法的当且仅当其在 $S$ 内任意一个元素下的颜色加权和相等。</p>
+<p>这意外着如果我们能找到 $S$ 的另外一组基，就可以把问题变成求这组基下的合法染色方案。</p>
+<p>不妨猜基中每个分量要么 $0$ 要么 $1$ ，且每个分量最多在一个元素中不为 $0$，由此可以发现，两个分量在一个元素中同时为 $1$ 等价于这两个元素在任何方程中的值都相等且存在一个方程中，其系数不为 $0$ 。</p>
+<p>因此基实际上可以等价的看成，把每条边按照其所在的环的集合作为标准划分等价类（空集的点扔掉）。</p>
+<p>而这又可以等价于按照其所在的 DFS 环的集合作为标准划分等价类（DFS 环指的是做一遍 DFS 后，由恰好一条非树边构成的环），原因是根据异或路径那个结论，每个环都可以当成若干个 DFS 环在异或意义下的线性表示，所以 DFS 环划分的等价类和所有环划分的等价类是一样的。</p>
+<p>这样的话题目就好做了，答案就是每条链的长度的最大公约数，就做完了。</p>
+<p>时间复杂度：$O(nm)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;<span class="keyword">return</span> !x ? y : <span class="built_in">gcd</span>(y % x, x);&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	<span class="type">int</span> y, next;</span><br><span class="line">&#125;a[N * <span class="number">2</span>]; <span class="type">int</span> len = <span class="number">1</span>, las[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;a[++len] = &#123;y, las[x]&#125;; las[x] = len;&#125;</span><br><span class="line"><span class="type">int</span> col[N], tmp[N], fa[N];</span><br><span class="line"><span class="type">bool</span> v[N];</span><br><span class="line"><span class="type">int</span> rk[N][<span class="number">2</span>], cnt;</span><br><span class="line"><span class="type">int</span> dfn[N], ti;</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(vector&lt;<span class="type">int</span>&gt; x)</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(v, <span class="number">0</span>, <span class="built_in">sizeof</span>(v));</span><br><span class="line">	<span class="built_in">swap</span>(col, tmp);</span><br><span class="line">	<span class="built_in">memset</span>(rk, <span class="number">0</span>, <span class="built_in">sizeof</span>(rk));</span><br><span class="line">	rk[<span class="number">1</span>][<span class="number">0</span>] = cnt = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> y : x) v[y] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!rk[tmp[i]][v[i]]) rk[tmp[i]][v[i]] = ++cnt;</span><br><span class="line">		col[i] = rk[tmp[i]][v[i]];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	dfn[x] = ++ti;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> k = las[x]; k; k = a[k].next)&#123;</span><br><span class="line">		<span class="type">int</span> y = a[k].y;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[y])&#123;</span><br><span class="line">			fa[y] = k ^ <span class="number">1</span>;</span><br><span class="line">			<span class="built_in">dfs</span>(y);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(dfn[y] &lt; dfn[x] &amp;&amp; k != fa[x])&#123;</span><br><span class="line">			vector&lt;<span class="type">int</span>&gt; now;</span><br><span class="line">			now.<span class="built_in">push_back</span>(k / <span class="number">2</span>);</span><br><span class="line">			<span class="type">int</span> z = x;</span><br><span class="line">			<span class="keyword">while</span>(z != y)&#123;</span><br><span class="line">				now.<span class="built_in">push_back</span>(fa[z] / <span class="number">2</span>);</span><br><span class="line">				z = a[fa[z]].y;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">add</span>(now);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> sum[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	cnt = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">		<span class="type">int</span> x, y;</span><br><span class="line">		cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">		<span class="built_in">ins</span>(x, y);</span><br><span class="line">		<span class="built_in">ins</span>(y, x);</span><br><span class="line">		col[i] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!dfn[i]) <span class="built_in">dfs</span>(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">		sum[col[i]]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> d = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= cnt; i++)&#123;</span><br><span class="line">		d = <span class="built_in">gcd</span>(d, sum[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(d % i == <span class="number">0</span>)&#123;</span><br><span class="line">			cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是怎么证明呢？</p>
+<p><details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>首先，一个容易犯的误区是：等价类可以用 DFS 环划分，但是不代表 $S$ 就是可以只有 DFS 环所构成的元素生成。<del>因为我当时犯了这个错误</del></p></p>
+<p>所以问题关键就是如何利用所有环进行线性组合，组合出那组基来。（显然 $S$ 是那组基的子空间，现在只要证明这组基能够被生成就行了）</p>
+<p>设每个环都是异或意义下 DFS 环的线性组合（这是唯一的，我之前另外一篇博客有介绍）：$L=\{L_{x_1}\oplus L_{x_2}…\oplus L_{x_{k}}\}$ ，而 $L$ 的方程也是由 $L_{x_1},…,L_{x_{k}}$ 的方程异或出来的。</p>
+<p>设 $L_y\notin L$ ，考察环 $\{L_y\}\cup L$ ，可以发现，就是对 $L_{y}$ 中的所有元素取个反，设 $f(L)$ 表示 $L$ 代表的元素。</p>
+<p>考察 $f(\{L_y\}\cup L)-f(L)$ ，可以得到其在 $L_y$ 上的每个点的分量是 $±2$ 。</p>
+<p>现在证明，每个基都可以求出来。</p>
+<p>对于等价类 $L=\{L_1,L_2,…,L_k\}$ ，假设其补集为 $L’=\{L’_1,L’_2,…,L’_t\}$ ，那么我们这么计算：</p>
+<script type="math/tex; mode=display">\sum\limits_{l\subset L,l'\subset L'}(-1)^{|L|-|l|}f(l\cup l')</script><p>这个值是多少呢？</p>
+<p>假设对于一个点 $x$，其的等价类 $\cap L’≠\emptyset$ （设交集为 $A$），那么其的系数可以用下面这个式子证明为 $0$ ：</p>
+<p>$f(S\cup a)+f(S)$ 在 $x$ 处的分量为 $0$，其中 $a\notin S$ ，即可证明。</p>
+<p>假设为 $\emptyset$ ，但是等价类为 $L$ 的一个真子集，假设 $a\in L$ 不在里面。</p>
+<p>那么有 $f(S\cup a)-f(S)$ 在 $x$ 处的分量为 $0$，其中 $a\notin S$ ，即可证明。</p>
+<p>可以证明，等价类在恰好等于 $L\cup L_1$ 的点的分量为 $±2^{|L|+|L’|}≠ 0$ ，其中正负号一致。</p>
+<p>证毕。</p>
+</div></details>
+<p>高中的时候，我知道了那个异或环的性质，但是不会证明，然后在今年会证了，这个结论在去年知道了，今年也会证了，感叹时光的流逝，在我会证明这些结论的时候，也是我即将退役的时候，哎。</p></div></details>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/01/World-Final-2015-K-Tours/">http://oldplace.github.io/2024/07/01/World-Final-2015-K-Tours/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>NCPC 2020 L. Languages | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;531&#x2F;problem&#x2F;886 题目大意：给你一个矩阵，每个位置为 $1&#x2F;2$ ，分别表示恰有一种颜色，和 $\ge 2$ 种颜色。 要求给出三种颜色的染色方案，满足符合上面的矩形，且单个染色是联通的。 我的做法说来话长，特判掉没有 $2$ ，$n&#x3D;1$ 和 $m&#x3D;1$ 的情况。 然后假设每行都有一个 $2$ ，那么两种颜色就够了，奇偶行分别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NCPC 2020 L. Languages">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/01/NCPC-2020-L-Languages/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="题目链接：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;531&#x2F;problem&#x2F;886 题目大意：给你一个矩阵，每个位置为 $1&#x2F;2$ ，分别表示恰有一种颜色，和 $\ge 2$ 种颜色。 要求给出三种颜色的染色方案，满足符合上面的矩形，且单个染色是联通的。 我的做法说来话长，特判掉没有 $2$ ，$n&#x3D;1$ 和 $m&#x3D;1$ 的情况。 然后假设每行都有一个 $2$ ，那么两种颜色就够了，奇偶行分别">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-01T13:31:01.000Z">
+<meta property="article:modified_time" content="2024-07-01T13:45:30.532Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="构造">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/01/NCPC-2020-L-Languages/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NCPC 2020 L. Languages',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2024-07-01 21:45:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">NCPC 2020 L. Languages</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-01T13:31:01.000Z" title="发表于 2024-07-01 21:31:01">2024-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-01T13:45:30.532Z" title="更新于 2024-07-01 21:45:30">2024-07-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="NCPC 2020 L. Languages"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>题目链接：<a target="_blank" rel="noopener" href="https://qoj.ac/contest/531/problem/886">https://qoj.ac/contest/531/problem/886</a></p>
+<p>题目大意：给你一个矩阵，每个位置为 $1/2$ ，分别表示恰有一种颜色，和 $\ge 2$ 种颜色。</p>
+<p>要求给出三种颜色的染色方案，满足符合上面的矩形，且单个染色是联通的。</p>
+<details class="toggle" ><summary class="toggle-button" style="">我的做法</summary><div class="toggle-content"><p>说来话长，特判掉没有 $2$ ，$n=1$ 和 $m=1$ 的情况。</p>
+<p>然后假设每行都有一个 $2$ ，那么两种颜色就够了，奇偶行分别主要染不同的颜色，次要染不同的颜色。（表示 $1/2$ 分别染什么颜色，$1$ 染主要颜色 ，$2$ 主要次要都染）</p>
+<p>假设有一个行没有 $2$ ，很自然的想把这一行作为枢纽，用来连接所有的 $0$ ，然后上面主要为 $1$ ，下面主要为 $2$ 。</p>
+<p>具体来说，不妨只看单侧，即假设这一行为最后一行：</p>
+<p>一种自然的想法是，如果这一列有 $2$ ，那么整一列主要染 $0$ ，次要染 $1$ ，但是这样如果相邻列都有 $2$ ，$1$ 就不连通了，因此会想这种情况下就让下一列主要染 $1$ ，次要染 $0$ 就行了。</p>
+<p>综上得到做法，若某列有 $2$ ，先把这一列全部先染个 $0$ ，同时如果下一列相邻格子也有 $2$ ，就把这个格子也染成 $2$ ，然后跳过下一列，染完后，如果一个格子为 $2$ 或者没染过色，就染 $1$ ，对两边分别做一次就行了。</p>
+<p>时间复杂度：$O(nm)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e2</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">	cin &gt;&gt; ss;</span><br><span class="line">	<span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> type;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="type">int</span> a[N][N], tmp[N][N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">bool</span> be[<span class="number">3</span>][N][N];</span><br><span class="line"><span class="type">bool</span> vr[N], vc[N];</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">work1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	vector&lt;PII&gt; seg;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l = <span class="number">1</span>; l &lt;= m; l++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">1</span>][l] == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="type">int</span> r = l;</span><br><span class="line">		<span class="keyword">while</span>(r &lt; m &amp;&amp; a[<span class="number">1</span>][r + <span class="number">1</span>] == <span class="number">2</span>) r++;</span><br><span class="line">		seg.<span class="built_in">push_back</span>(&#123;l, r&#125;);</span><br><span class="line">		l = r;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(seg.<span class="built_in">size</span>() &gt;= <span class="number">3</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j = seg[<span class="number">0</span>].first; j &lt;= seg[<span class="number">0</span>].second; j++) be[<span class="number">2</span>][<span class="number">1</span>][j] = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> t = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(seg.<span class="built_in">size</span>() == <span class="number">1</span>) t = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= seg[t].second; j++) be[<span class="number">0</span>][<span class="number">1</span>][j] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j = seg[t].first; j &lt;= m; j++) be[<span class="number">1</span>][<span class="number">1</span>][j] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">putone</span><span class="params">(<span class="type">int</span> t)</span></span>&#123;</span><br><span class="line">	<span class="type">bool</span> bk = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i][j] == <span class="number">2</span>)&#123;be[t][i][j] = <span class="number">1</span>; bk = <span class="number">1</span>; <span class="keyword">break</span>;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(bk) <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">work2</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">putone</span>(<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i][j] == <span class="number">2</span>) be[<span class="number">0</span>][i][j] = be[<span class="number">1</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> be[i &amp; <span class="number">1</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">auto</span> f)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) tmp[j][i] = f[i][j];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) f[i][j] = tmp[i][j];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> sta[N], top;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="type">bool</span> b2 = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="built_in">get_char_array</span>(st);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">			a[i][j] = st[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">			<span class="keyword">if</span>(a[i][j] == <span class="number">2</span>)&#123;</span><br><span class="line">				vr[i] = vc[j] = <span class="number">1</span>;</span><br><span class="line">				b2 = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!b2)&#123;</span><br><span class="line">		<span class="keyword">if</span>(n * m &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) be[<span class="built_in">min</span>(cnt, <span class="number">2</span>)][i][j] = <span class="number">1</span>, cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> <span class="built_in">work1</span>();</span><br><span class="line">	<span class="keyword">if</span>(m == <span class="number">1</span>)&#123;</span><br><span class="line">		type = <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">rotate</span>(a);</span><br><span class="line">		<span class="built_in">swap</span>(n, m);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">work1</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> posi = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vr[i])&#123;posi = i; <span class="keyword">break</span>;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!posi) <span class="keyword">return</span> <span class="built_in">work2</span>();</span><br><span class="line">    <span class="keyword">if</span>(posi == <span class="number">1</span>) <span class="built_in">putone</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(posi == n) <span class="built_in">putone</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) be[<span class="number">0</span>][posi][j] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">        <span class="type">bool</span> bk = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; posi; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] == <span class="number">2</span>) bk = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(bk)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; posi; i++)&#123;</span><br><span class="line">                be[<span class="number">0</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(j &lt; m &amp;&amp; a[i][j + <span class="number">1</span>] == <span class="number">2</span>) be[<span class="number">0</span>][i][j + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">        <span class="type">bool</span> bk = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = posi + <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] == <span class="number">2</span>) bk = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(bk)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = posi + <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                be[<span class="number">0</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(j &lt; m &amp;&amp; a[i][j + <span class="number">1</span>] == <span class="number">2</span>) be[<span class="number">0</span>][i][j + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] == <span class="number">2</span> || !be[<span class="number">0</span>][i][j])&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &lt; posi) be[<span class="number">1</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> be[<span class="number">2</span>][i][j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">solve</span>()) cout &lt;&lt; <span class="string">&quot;impossible\n&quot;</span>;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(type)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> t = <span class="number">0</span>; t &lt;= <span class="number">2</span>; t++) <span class="built_in">rotate</span>(be[t]);</span><br><span class="line">			<span class="built_in">swap</span>(n, m);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> t = <span class="number">0</span>; t &lt;= <span class="number">2</span>; t++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">					<span class="keyword">if</span>(be[t][i][j]) st[j] = t + <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">					<span class="keyword">else</span> st[j] = <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				cout &lt;&lt; st + <span class="number">1</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">官方做法</summary><div class="toggle-content"><p>蚌埠住了，我太菜了，看到第一句话的那一刻起，我感觉赛时构造了一两个小时还没构造出来的我像个小丑一样，构造题真难啊。</p>
+<p>注意到，如果我们能给这个矩阵划分成三个独立的连通块，且满足每个点四联通附近都有一个别的连通块的点，那么就显然做完了。</p>
+<p>以下是一种可能的方案：</p>
+<p><img src="1.png" alt=""></p>
+<p>在 $n,m$ 小的时候这种方案可能用不了，特判一下就行了，在此不再赘述。（<del>其实是因为我没细想</del>，因为我觉得最关键的就是上面那句话，以及一种可能的方案，在完成这些后，后面的细节处理就只是时间问题了）</p>
+</div></details></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/01/NCPC-2020-L-Languages/">http://oldplace.github.io/2024/07/01/NCPC-2020-L-Languages/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9E%84%E9%80%A0/">构造</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/05/28/AGC041-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" title="AGC041 赛后总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-05-28</div><div class="title">AGC041 赛后总结</div></div></a></div><div><a href="/2023/09/06/AGC061-B-Summation-By-Construction/" title="AGC061 B. Summation By Construction"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">AGC061 B. Summation By Construction</div></div></a></div><div><a href="/2023/09/01/AGC063-C-Add-Mod-Operations/" title="AGC063 C. Add Mod Operations"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">AGC063 C. Add Mod Operations</div></div></a></div><div><a href="/2024/04/02/AGC066-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/" title="AGC066 赛后总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-05-16</div><div class="title">AGC066 赛后总结</div></div></a></div><div><a href="/2024/03/18/ARC172-D-Distance-Ranking/" title="ARC172 D. Distance Ranking"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">ARC172 D. Distance Ranking</div></div></a></div><div><a href="/2024/04/28/CCPC-final-2023-L-Exchanging-Kubic-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E7%9A%84%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90/" title="CCPC final 2023 L. Exchanging Kubic(最大子段和的深入分析)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">CCPC final 2023 L. Exchanging Kubic(最大子段和的深入分析)</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

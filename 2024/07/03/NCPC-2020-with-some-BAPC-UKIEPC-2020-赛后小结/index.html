@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>NCPC-2020 with some BAPC/UKIEPC 2020 赛后小结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="比赛链接：NCPC-2020 with some BAPC&#x2F;UKIEPC 2020 前期，B,G 队友秒了，K 不难，但是我和队友交流了一会，得出了必须写高精度的结论，上去写，写完后发现结论有点问题，下来改了又上去写，然后才过了。 感觉最大的问题在于结论错了一次，其余没有犯什么大的罪。 但是呢，在看了最短的代码，发现我实际上实现糟糕了。 123456789101112131415161718192">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NCPC-2020 with some BAPC&#x2F;UKIEPC 2020 赛后小结">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/03/NCPC-2020-with-some-BAPC-UKIEPC-2020-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="比赛链接：NCPC-2020 with some BAPC&#x2F;UKIEPC 2020 前期，B,G 队友秒了，K 不难，但是我和队友交流了一会，得出了必须写高精度的结论，上去写，写完后发现结论有点问题，下来改了又上去写，然后才过了。 感觉最大的问题在于结论错了一次，其余没有犯什么大的罪。 但是呢，在看了最短的代码，发现我实际上实现糟糕了。 123456789101112131415161718192">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-03T09:08:21.000Z">
+<meta property="article:modified_time" content="2024-07-03T09:59:08.293Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/03/NCPC-2020-with-some-BAPC-UKIEPC-2020-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'NCPC-2020 with some BAPC/UKIEPC 2020 赛后小结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2024-07-03 17:59:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">NCPC-2020 with some BAPC/UKIEPC 2020 赛后小结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-03T09:08:21.000Z" title="发表于 2024-07-03 17:08:21">2024-07-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-03T09:59:08.293Z" title="更新于 2024-07-03 17:59:08">2024-07-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="NCPC-2020 with some BAPC/UKIEPC 2020 赛后小结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>比赛链接：NCPC-2020 with some BAPC/UKIEPC 2020</p>
+<p>前期，B,G 队友秒了，K 不难，但是我和队友交流了一会，得出了必须写高精度的结论，上去写，写完后发现结论有点问题，下来改了又上去写，然后才过了。</p>
+<p>感觉最大的问题在于结论错了一次，其余没有犯什么大的罪。</p>
+<p>但是呢，在看了最短的代码，发现我实际上实现糟糕了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//https://qoj.ac/submission/191620</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,v,x,m,b,A[<span class="number">1</span>&lt;&lt;<span class="number">20</span>],k;</span><br><span class="line">string s,t;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;s&gt;&gt;t;</span><br><span class="line">	<span class="keyword">if</span>(s.<span class="built_in">size</span>()&lt;t.<span class="built_in">size</span>())</span><br><span class="line">		<span class="built_in">swap</span>(s,t);</span><br><span class="line">	<span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>()),<span class="built_in">reverse</span>(t.<span class="built_in">begin</span>(),t.<span class="built_in">end</span>()),n=s.<span class="built_in">size</span>(),s=<span class="string">&#x27; &#x27;</span>+s,t=<span class="string">&#x27; &#x27;</span>+t+<span class="built_in">string</span>(n-t.<span class="built_in">size</span>(),<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		x+=s[i]-<span class="string">&#x27;0&#x27;</span>+t[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">		<span class="keyword">if</span>(x&gt;<span class="number">9</span>)</span><br><span class="line">			m=i;</span><br><span class="line">		x/=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">		<span class="keyword">if</span>(s[i]&gt;t[i])</span><br><span class="line">			v=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(s[i]&lt;t[i])</span><br><span class="line">			v=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!v)</span><br><span class="line">		<span class="built_in">swap</span>(s,t);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		A[i]=(b-s[i]+<span class="string">&#x27;0&#x27;</span>)%<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(A[i]&lt;<span class="number">0</span>)</span><br><span class="line">			b=<span class="number">-1</span>,A[i]+=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">		<span class="keyword">if</span>(A[i])</span><br><span class="line">			k=i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=k;i;i--)</span><br><span class="line">		cout&lt;&lt;A[i]; </span><br><span class="line">	<span class="keyword">if</span>(!k)</span><br><span class="line">		cout&lt;&lt;<span class="number">0</span>;</span><br><span class="line">	cout&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意到就是找到最大的符合条件的 $k$ ，然后求出：$10^{k}-(a\mod 10^k)$ ，或者是 $b$ ，而这个位置我们是用 $a,b$ 分别与 $a+b$ 比较去找的，但实际上这个位置就是 $a+b$ 最后一次发生进位的位置。</p>
+<p>为啥呢，设 $a=a_n…a_5a_4a_3a_2a_1a_0,b=b_n…b_5b_4b_3b_2b_1b_0$ ，从低位到高位。</p>
+<p>如果第 $i$ 位进位了，说明 $a_{i}…a_{0}+b_{i}…b_{0}\ge 10^{i+1}$ ，所以操作的时候不让 $a$ 或者 $b$ 在第 $i$ 位进位，$a+b$ 就一定会在第 $i$ 位进位，所以直接操作 $a,b$ 中的一个让其进位就行了，而且由于 $a_{i}…a_{0}+b_{i}…b_{0}\ge 10^{i+1}$ ，所以另外一个不会退位，所以这一定是合法的，因此这是最优的，就做完了。</p>
+<p>但你要说这是我们策略上的问题吗？我觉得不是，只是我们菜了。</p>
+<p>C,D 队友秒了，但是这个时候队长上 I 了，我觉得比赛时可以炸，但是中期开炸我觉得很不合理，队长记大过一次，虽然最后过了，但是这个决策确实浪费了很多时间。</p>
+<p>反正我觉得很多时候卡题了不如直接跳，逻辑是什么呢？首先红了以后效率会降低，其次可能会错失一些其余机会，比如某个题你很擅长，在干完其余事后头脑清醒了，再回来调试或许效率会更高点。</p>
+<p>或者这么说，我个人认为，激进一点就是直接跳，赌跳的收益会比调的收益高，稳健点就调试，都已经会了，只要做法假了，期望的调的时间不会很长，当然，至于两种策略谁激进谁稳健，最终都要根据实际情况来定，不能一概而论。</p>
+<p> J 板子，抄了个板子过了。</p>
+<p> F 队长神力，将前面的犯罪都弥补了，E 队友神力，队长还秒了个 H 。</p>
+<p>那 fw 的我在干嘛呢？我在构造 L ，然后提出一个做法假一个做法，在最后都没有过。</p>
+<p>最后来看，总体上而言，过不了 A,L 是实力问题，大的决策问题只有队长的 I 。</p>
+<p>但实际上呢？我前期啥事没干，后期构造了半个比赛。</p>
+<p>首先，我认为那个构造时间长还没做出来是实力问题，但是前期我其实在偷偷犯罪，我看到 A 的第一眼，我就觉得这是道好题，就很想把他做出来，在想了半天后，发现其不是 dp 而是模拟后，就已经意识到最后的代码可能很难写了。</p>
+<p>后面的大部分时间，我一直都在想 A 怎么快速的判断一个方案是合法的，到我开始拿起 L 的时候都没搞出来。</p>
+<p>最后在赛后做出来 A 后回头来看，A 或许不难，但也绝对没有这么简单，更别提我当时方向错了，这道题目得先猜出答案再做，而我当时一直在想怎么快速判断一个方案是合法的。</p>
+<p>首先，榜上大部分情况下就是可以反映实际的难度，我深刻检讨，或许是在之前的比赛做出来了几道少人的题目，让我以为我在某些题目特别擅长，超过了我自己的平均水平，导致这场比赛直接莽 A 了，但结合所以比赛来看，前面几场就是意外，实际比赛中基本不会发生这种情况，就得一步一个脚印。</p>
+<p>其次，我当时还有点私心，我觉得这个题目非常的好，很想自己做出来，但 ACM 是个团队比赛，除非你有超人的能力，否则纯凭个人力量是没法打出好的名次的，团队赛要注重的是配合，如果我那么想独立做题，就应该平时自己多加训，而不是赛时直接去莽题。深刻检讨我自己，希望以后不要在比赛时犯这种错误，多和队友合作交流。</p>
+<p>再回头来看 A ，我当时实际上并没有发现答案的一个下界，也没有发现答案就是下界，也没有想出快速模拟的方法，而是一直在想只知道每个区间操作了多少次能否快速判断，这很 ATcoder ，ATcoder 中很多 1000 的题目就是这么做的，所以赛时我没有做出来。</p>
+<p>回头来看，这道题目实际就是找下界，证明是下界，然后模拟，如果要快点，就用数据结构加速模拟。不是特别难，是能做的题目，但是我当时的思维就限制在 ATcoder 类型的题目上面，导致根本没有想到，这启示我要多开阔思维，不要把思维局限在某一类方法上。</p>
+<p>还记得 NOI D1T2 我就是因为这个原因寄掉的，希望未来不会出现重蹈覆辙的情况，ATcoder 上的题目终究只是一类题目，不能代表所有题目，要想思维开阔要广刷题，多刷题，不能只刷 ATcoder 的题目，我也不能呆在舒适圈里，要多去做些别的题库的题，感受不一样的风格，这样才能变强。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/03/NCPC-2020-with-some-BAPC-UKIEPC-2020-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/">http://oldplace.github.io/2024/07/03/NCPC-2020-with-some-BAPC-UKIEPC-2020-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
