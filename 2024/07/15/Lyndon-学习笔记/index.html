@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Lyndon 学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概念定义与符号约定字符串一般记大写字母 $S,A,B$ （下面的字符串基本都不能是空的，但还是请根据语境自行判断），空字符串用 $\emptyset$ ，确定的字符用字体 $\mathrm{abcde}$ 表示（基本不会在定理和证明中出现，只会在例子中出现），不定字符用小写字母 $xyz$ 表示。 对于字符串 $S$ ：  长度：$|S|$ ，有时候用 $n$ 代替。 字符：$S[i]$ 表示字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lyndon 学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/15/Lyndon-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="概念定义与符号约定字符串一般记大写字母 $S,A,B$ （下面的字符串基本都不能是空的，但还是请根据语境自行判断），空字符串用 $\emptyset$ ，确定的字符用字体 $\mathrm{abcde}$ 表示（基本不会在定理和证明中出现，只会在例子中出现），不定字符用小写字母 $xyz$ 表示。 对于字符串 $S$ ：  长度：$|S|$ ，有时候用 $n$ 代替。 字符：$S[i]$ 表示字符">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-15T12:32:59.000Z">
+<meta property="article:modified_time" content="2024-07-17T09:35:23.272Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="Lyndon">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/15/Lyndon-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Lyndon 学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-07-17 17:35:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">86</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Lyndon 学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-15T12:32:59.000Z" title="发表于 2024-07-15 20:32:59">2024-07-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-17T09:35:23.272Z" title="更新于 2024-07-17 17:35:23">2024-07-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Lyndon 学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="概念定义与符号约定"><a href="#概念定义与符号约定" class="headerlink" title="概念定义与符号约定"></a>概念定义与符号约定</h1><p>字符串一般记大写字母 $S,A,B$ （下面的字符串基本都不能是空的，但还是请根据语境自行判断），空字符串用 $\emptyset$ ，确定的字符用字体 $\mathrm{abcde}$ 表示（基本不会在定理和证明中出现，只会在例子中出现），不定字符用小写字母 $xyz$ 表示。</p>
+<p>对于字符串 $S$ ：</p>
+<ul>
+<li><strong>长度</strong>：$|S|$ ，有时候用 $n$ 代替。</li>
+<li><strong>字符</strong>：$S[i]$ 表示字符串的第 $i$ 个字符，下标从 $1$ 开始。</li>
+<li><strong>字符集</strong>：$\sum_{S}$</li>
+<li><strong>子串</strong>：$s[l,r]$ 表示 $s[l]s[l+1]…s[r]$ 。</li>
+<li><p><strong>前缀&amp;后缀</strong>：$S\langle i]=S[1,i]$，$S[i\rangle=S[i,n]$ 。</p>
+<p>称一个前缀/后缀为严格的，单且仅当它≠原串 $S$ 。</p>
+<p>记 $\mathrm{pre}(S)$ 为前缀集合，$\mathrm{suf}(S)$ 为后缀集合， $\mathrm{pre}’(S)$ 为严格前缀集合，$\mathrm{suf}’(S)$ 为严格后缀集合。</p>
+</li>
+<li><p><strong>出现位置</strong>：对于串 $t$ ，记：</p>
+<p>$\mathrm{Beg}_{S}(t)$ 为 $t$ 在 $S$ 中所有出现位置的左端点集合。</p>
+<p>$\mathrm{End}_{S}(t)$ 为 $t$ 在 $S$ 中所有出现位置的右端点集合。</p>
+<p>对于区间集合 $L$ ，类似地记：</p>
+<p>$\mathrm{Beg}(L)$ 为 $L$ 地左端点集合。</p>
+<p>$\mathrm{End}(L)$ 为 $L$ 地右端点集合。</p>
+</li>
+<li><p><strong>字符串的拼接,幂</strong> ： 记 $st$ 。 $S\cdot t$ 为字符串 $S,t$ 顺次连接而得的串。</p>
+<p>定义 ： $S^k=\overbrace{ss\ldots S}^{\text{共 k 个}}$ ，即 $S$ 重复 $k$ 次后形成的串。</p>
+</li>
+<li><p><strong>循环节 $\mathbf{period}$</strong>：若对于所有 $1\leq i\leq n-c$ ，均有$s_i=s_{i+c}$ ,则称 $c$ 是 $S$ 的一个循环节。</p>
+<p>若 $c|n$ 则称$c$为整周期。</p>
+<p>记 $\mathrm{period}(S)$ 为 $S$ 的循环节集合。</p>
+</li>
+<li><p><strong>Border</strong> : 若有 $S\langle i]=S[n-i+1\rangle\left(1\leq i&lt;n\right)$ （等于后缀的严格前缀） ，则称之为 $\mathrm{Border}$ ，简称为 $\mathrm{Bd}$ </p>
+<p>记 $\mathrm{Bd}(S)$ 为 $S$ 的 Bd 集合。（ 注意 $S\not\in\operatorname{Bd}(S)$ ）</p>
+<p>$\mathrm{Bd}$ 和 $\mathrm{period}$ 是一一对应的。其中，一个长度为 $k$ 的 $\mathrm{Bd}$ 对应一个长度为 $n-k$ 的循环节。</p>
+</li>
+<li>串 $S$ 的循环位移：$S$ 和 $\forall 1\le i&lt;|S|,S[i+1\rangle S\langle i]$ 所构成的字符串集合称为 $S$ 的循环位移。</li>
+<li><p><strong>Lyndon Word</strong>: 若字符串 $S$ 的最小后缀是其本身，即 $S&lt;\mathrm{suf}^{\prime}(S)$ ,则称之为 $\mathrm{Lyndon Word},简称为 $\mathrm{Ly}$。</p>
+<p>例：$abc,ababc$ 是 $\mathrm{Ly}$ ，而 $ba,acabc$ 不是。</p>
+</li>
+<li><strong>Lyndon 分解</strong> ：$L_1L_2,…,L_k$ 称为 $S$ 的 $\mathrm{Lyndon}$ 分解当且仅当：$L_i\ge L_{i+1}$ ，且 $L_{i}$ 是 $\mathrm{Ly}$ 。</li>
+<li><p><strong>Runs</strong>: 三元组 $\mathbf{r}=(l,r,p)$ 是串 $S$ 的一个 $\mathrm{run}$ ,当且仅当：</p>
+<ul>
+<li>$S[l,r]$ 的最小循环节为 $p$ ，满足 $2p\leq\left|S_{l,r}\right|=r-l+1$</li>
+<li>该循环不能延伸，即 $S_{l-1}\neq S_{l+p-1},S_{r+1}\neq S_{r-p+1}$</li>
+</ul>
+<p>实数 $e_{\mathrm{r}}=\frac{r-l+1}p$ 被称为该 $\mathrm{run}$ 的指数记 $\mathrm{Runs}(S)$ 为 $S$ 的所有 $\mathrm{run}$ 构成的集合。$\rho_{\mathrm{run}}(n)$ 表示长度为 $n$ 的字符串中至多含有的 $\mathrm{run}$ 个数。$\sigma_{\mathrm{run}}(n)$ 表示长度为 $n$ 的字符串的 $\mathrm{run}$ 的指数和的最大值。</p>
+</li>
+<li>设 $sa[i]$ 表示在后缀排序中 ，排名第 $i$ 的后缀是 $S[sa[i]\rangle$ ，$rk[i]$ 表示 $S[i\rangle$ 的排名。</li>
+</ul>
+<p>上面的符号和定义部分使用了 cmd 博客的符号，这些符号有部分是他个人规定的，并不完全正规。</p>
+<h1 id="字符串的基本性质"><a href="#字符串的基本性质" class="headerlink" title="字符串的基本性质"></a>字符串的基本性质</h1><p>字符串比较都认为虚空最小，在此基础上有两种视角，第一种：将比较的字符通过在末尾填虚空的方式，填到等长，比较。第二种是直接关于长度进行讨论。我个人喜欢第二种，至少目前是，个人感觉第一种只能用在比较简单的性质上，直观易懂，但第二种比较灵活。</p>
+<p><strong>性质 1</strong> （字符串不等式的传递性）：若 $A&lt;B,B&lt;C$ ，则 $A&lt;C$ 。（换成非严格不等号一样）</p>
+<p><strong>性质 2</strong> ： $A&lt;B$ 当且仅当 $CA&lt;CB$ 。（换成非严格不等号一样）</p>
+<p><strong>性质 3</strong> ：若 $|A|=|B|$ ，且 $AC&lt;BD$ ，则 $A\le B$ 。</p>
+<p><strong>性质 4</strong> ：若 $|A|\ge |B|$ ，$A&lt;B$ ，则 $AC&lt;B$ 。</p>
+<p><strong>性质 5</strong> ：若 $A\ge B$ ，则对于所有的 $i$ 有 ：$A\langle i] \ge B\langle i]$ 。（假设 $|A|&lt;i$ ，则 $A\langle i]=A$ ，$B$ 同理）</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>两种情况讨论一下就行了：$B$ 是 $A$ 的前缀和 $B$ 不是 $A$ 的前缀（因为字符不同产生的 $&gt;$）。</p>
+</div></details>
+<h1 id="Lyndon-Word"><a href="#Lyndon-Word" class="headerlink" title="Lyndon Word"></a>Lyndon Word</h1><h2 id="重要的性质"><a href="#重要的性质" class="headerlink" title="重要的性质"></a>重要的性质</h2><p><strong>性质 1</strong> ： $\mathrm{Ly}$ 串 $S$ 没有 $\mathrm{Bd}$ 。</p>
+<p><strong>性质 2</strong> ：一个串 $S$ 是 $\textrm{Ly}$ 当且仅当 $S$ 是 $S$ 的所有循环位移中严格唯一最小的一个。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>必要性：设 $S=AB$ ，故 $BA&gt;B&gt;AB$ ，证毕，</p>
+<p>充分性：$AB<BA$ ，若 $|A|\ge |B|$ ，若 $B\notin \mathrm{pre}(A)$ ，则 $A<B$ ，则有 $AB<B$ ，否则 $A=BC$ （显然 $A≠B$ ，则有 $|A|>|B|$） ，则有 $BCB&lt;BBC$ ，又有：$CBB&lt;BCB$ ，但是根据假设有：$AB=BCB&lt;CBB$ ，矛盾。</p>
+<p>若 $|A|&lt;|B|$ ，若 $A\notin\mathrm{pre}(B)$ ，同理 $AB&lt;B$ 。</p>
+<p>否则设 $B=A^KC(k\ge 1)$ ，满足 $A\notin \mathrm{pre}(C)$ ，故有 $A^{k+1}C<CA^{k+1}$ ，重复上面的讨论可以证明：$C>A^{k+1}C=S$ ，若 $|C|\le |A|$ ，则有 $C&gt;A$ ，故有 $A^{k}C&gt;A^{k+1}$ ，故有 $B&gt;S$ ，否则 $|C|&gt;|A|$ ，则有 $C\langle i]&gt;A$ ，同理 $B&gt;S$ ，证毕。</p>
+</div></details>
+<p>推论 ：$S$ 的循环位移有严格唯一最小值当且仅当 $S$ 没有整周期。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>显然，$S$ 的循环位移同时有或没有整周期。</p>
+<p>若有严格唯一最小值，设 $S’$ 为最小值，则 $S’$ 为 $\mathrm{Ly<br>}$ ，所以 $S’$ 无 $\mathrm{Bd}$ ，所以无整周期。</p>
+<p>否则设 $S’$ 是其中一个最小值， $S’=AB$ ，其中 $BA$ 为另外一个最小值 ，则 $A,B$ 都是 $S’$ 的周期，故 $S’$ 有整周期 $(|A|,|B|)$ （最大公约数），证毕。</p>
+<p>其实这个结论不用 Lyndong Word 也很好证明，证明 $S$ 在有整周期的情况下不可能有唯一最小值就行了。</p>
+</div></details>
+<p><strong>性质 3</strong> ： $\mathrm{Lyndon}$ 分解若存在，则唯一。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>设 $L_{1}L_{2}…L_{k}$ 和 $L’_{1}…L’_{m}$ 都是 $S$ 的 $\mathrm{Ly}$ 分解，不妨设 $|L_{1}|&lt;|L’_{1}|$ （否则考虑 $S’=L_{2}…L_{k}=L’_{2}…L’_{m}$）。</p>
+<p>设 $t$ 为最小的满足：$L’_{1}\in \mathrm{pre}(L_{1}L_{2}…L_{t})$ ，设 $S=L_{t}\langle|L’_{1}|-\sum\limits_{i=1}^{t-1}|L_{i}|]$ ，$S\le L_{t}\le L_{1}&lt;L’_{1}$ ，但 $S&gt;L’_{1}$ ，矛盾，证毕。</p>
+</div></details>
+<p><strong>性质 4</strong> ：若 $A&lt;B$ ，且 $A,B$ 都是 $\mathrm{Ly}$ ，那么 $AB$ 是 $\mathrm{Ly}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$\forall T\in \mathrm{suf}’(AB)$ ，若 $|T|&gt;|B|$ ，则有：$T\langle |T|-|B|]&gt;A$ ，则有：$T&gt;AB$ 。</p>
+<p>若 $|T|\le |B|$ ，则有 $A&lt;B&lt;T$ ，证毕。</p>
+</div></details>
+<p><strong>性质 5</strong> ：$S$ 的 $\mathrm{Lyndon}$ 分解一定存在。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$\forall 1\le i\le |S|,L_{i}=S_{i}$ 。</p>
+<p>考虑调整，若 $L_{i}&gt;L_{i+1}$ ，则合并，直到没有为止，则为一组解，证毕。</p>
+</div></details>
+<p>推论：若 $L_{1}L_{2}…L_{k}=S$ ，$L_{i}$ 为 $\mathrm{Ly}$ ，设 $L’_{1}…L’_{t}$ 为 $S$ 的 $\mathrm{Lyndon}$ 分解 ，则存在 $0=a_{0}&lt;a_{1}&lt;a_{2}&lt;…&lt;a_{t}=k$ 满足：$L_{a_{i-1}+1}…L_{a_{i}}=L’_{i}$ 。</p>
+<p>证明方法和性质 5 一样，在此不再赘述。</p>
+<p>所以一个串 $S$ 的 $\mathrm{Lyndon}$ 分解存在且唯一。</p>
+<p><strong>性质 6</strong> ：若 $S=L^kA$ 满足：$L$ 为 $\mathrm{Ly}$ ，$L^{k}\ge A$ ，则设 $L_{1}…L_{t}$ 为 $A$ 的 $\mathrm{Lyndon}$ 分解，则 $L^{k}L_{1}…L_{t}$ 为 $A$ 的 $\mathrm{Lyndon}$ 分解。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>反证法，如果 $L_{1} &gt; L$ ，那么如果 $|L_{1}|\le |L|$ ，那么有 $A&gt;L^{k}$ 矛盾。</p>
+<p>否则若 $|L_{1}|&gt;L$ ，同理可得到 $L\in \mathrm{pre}(L_{1})$ （否则和上面的情况没区别），设 $L_{1}=L^{v}B$ ，$L\notin \mathrm{pre}(B)$ ，其中，根据 $L^{k}\ge A$ 以及 $L_{1}&gt;L$ ，$L$ 是个 $\mathrm{Ly}$ ，可以得到 $v&lt;k,B≠\emptyset$ 。</p>
+<p>那么 $B\notin \mathrm{pre}(L)$ ，否则，不构成 $\mathrm{Ly}$ ，所以可以根据 $L_{k}\ge S$ 得到 $B&lt;L$ （由于字符不同产生的小于），所以 $B&lt;L_{1}$ ，矛盾，证毕。</p>
+</div></details>
+<p><strong>性质 7</strong> ：设 $i$ 是第一个 $rk_{i}&lt;rk_{1}$ 的数字，如果不存在， $i=|S|+1$ ，那么有 $L_{1}=S\langle i-1]$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>先证明 $S\langle i-1]$ 是 $\mathrm{Ly}$ ：</p>
+<p>设 $1<j<i$ ，则有 $rk_{j}>rk_{1}$ ，则有 $S_{j,i-1}\ge S_{1,i-j}$ 。</p>
+<p>若 $S_{j,i-1}=S_{1,i-j}$ ，则有 $rk_{i}&gt;rk_{i-j+1}&gt;rk_{1}$ ，矛盾，故 $S_{j,i-1}&gt;S_{1,i-j}$ ，故 $S_{j,i-1}&gt;S\langle i-1]$ ，证毕。</p>
+<p>设 $A=S\langle i-1]$ ，$S=AB$ ，已知 $B&lt;AB$ ，若 $A&lt;B$ ，则有 $A\in\mathrm{pre}’(B)$ ，若 $S=A^{k}$ ，则显然 $L_{1}=A$ ，否则若 $S=A^{k}C$ ，即 $B=A^{k-1}C$ ，$A\notin \mathrm{pre}(C)$ ，则有 $C&lt;A&lt;A^{k}$ ，根据性质 $6$ 可以知道 $L_{1}=A$ 。</p>
+<p>证毕。</p>
+</div></details>
+<p>这个性质可以用于在 $O(n\log{n})$ 的时间找到 $\mathrm{Lyndon}$ 分解，而且在求每个后缀的 $\mathrm{Lyndon}$ 分解的相关问题上有奇效。</p>
+<p>可以用一个单调栈，从后往前跑出所有后缀的 $\mathrm{Lyndon}$ 分解。</p>
+<p><strong>性质 8</strong> ：如果 $S$ 和字符 $x$ 满足 $Sx\in \mathrm{pre}(L)$ ，$L$ 是个 $\mathrm{Ly}$ ，那么 $\forall y&gt;x,Sx$ 是 $\mathrm{Ly}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>显然 ，$y&gt;S_{1}$ ，如果 $\exists 1&lt;i\le |S|:S[i\rangle y \le Sy$ ，那么 $S[i\rangle x&lt;S[i\rangle y\le Sy$ ，而且一定是因为字母比较产生的 $&lt;$ ，所以 $S[i\rangle x&lt;L$ ，矛盾。</p>
+</div></details>
+<p>推论：把 $L$ 改成 $L^{k}$ 仍然正确，因为在 $L^k$ 后面加上一个无限大字符后 ，得到的 $L’$ 仍然是 $\mathrm{Ly}$ 。</p>
+<h2 id="Duval-算法"><a href="#Duval-算法" class="headerlink" title="Duval 算法"></a>Duval 算法</h2><p>定义 $T$ 为近似 $\mathrm{Ly}$ 当且仅当 $S=L^{k}\overline{L}$ ，其中 $\overline{L}=\mathrm{pre}’(L)$ ，$\overline{L}$ 可以为空。</p>
+<p>整个算法采用增量的方式去找到 $\mathrm{Lyndon}$ 分解 。</p>
+<p>假设 $S=L_{1}L_{2}…L_{k}T$ ，其中 $T$ 为近似 $\mathrm{Ly}$ ，$T=L^{t}\overline{L}$ 。（其中 $L_{i}$ 为已经确定的部分，可以不用管了）</p>
+<p>假设现在加入字符 $c$ 。</p>
+<ol>
+<li>如果 $c=L_{|\overline{L}+1|}$ ，那么继续，扩展 $T$ 。</li>
+<li>如果 $c&lt;L_{|\overline{L}+1|}$ ，那么根据上面的性质 $6$ ，可以知道 $L^{t}$ 可以扔出去了，然后剩下的部分继续处理。</li>
+<li>如果 $c&gt;L_{|\overline{L}+1|}$ ，那么根据根据性质 $8$ 的推论可以知道 $Tc$ 此时是个 $\mathrm{Ly}$ ，更新 $T=L=Tc$ 。</li>
+</ol>
+<p>直到最后，如果 $\overline{L}=\emptyset$ ，则结束，否则 $L^t$ 扔出去，继续处理 $\overline{L}$ 。</p>
+<p>下面代码中，$i=|L_{1}…L_{k}|+1,k=|L_{1}…L_{k}T|-|L|+1,j=|L_{1}…L_{k}T|+1$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;)&#123;</span><br><span class="line">    <span class="type">int</span> j = i + <span class="number">1</span>, k = i;</span><br><span class="line">    <span class="keyword">for</span>(; j &lt;= n &amp;&amp; st[k] &lt;= st[j]; j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(st[k] &lt; st[j]) k = i;</span><br><span class="line">        <span class="keyword">else</span> k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt;= k; i += j - k) ;</span><br><span class="line">    <span class="comment">//[i,i+j-k)即为对应的Lyndon分解 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>时间复杂度：注意到每层循环下来，$i$ 会加上 $\frac{j-i+1}{2}$ ，而内层每层循环 $j$ 会 $+1$ ，所以内层最多跑 $2n$ 次，外层每次 $i$ 至少 $+1$ ，所以至多跑 $n$ 次，所以总时间复杂度：$O(n)$ 。</p>
+<p>相比起后缀数组求法，Duval 算法在求每个前缀的 $\mathrm{Lyndon}$ 分解的问题上有奇效。</p>
+<p>UPD：这里补充一下所谓的已经完成的 $\mathrm{Ly}$ 的意思是什么，意思是 $\forall j\ge i$ ，$S\langle j]$ 的 $\mathrm{Lyndon}$ 分解都是 $S\langle i-1]$ 的分解拼接上 $S[i-1,j]$ 的分解，熟悉这个理解有助于后面理解求前缀最小/大后缀的做法。</p>
+<h2 id="一些补充的性质"><a href="#一些补充的性质" class="headerlink" title="一些补充的性质"></a>一些补充的性质</h2><p>可以自己证证玩玩的性质。</p>
+<p><strong>性质 9</strong> ：对于 $\mathrm{Ly}$ $A=BC$ ，由 $B&lt;C$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$B&lt;BC&lt;C$</p>
+</div></details>
+<p><strong>性质 10</strong> ：$\mathrm{Ly}$ 串 $S$ 的任意子串 $S_{l,r}\ge S\langle r-l+1]$ ，且若 $r=|S|$ ，则改为严格不等号。</p>
+<p>这个性质某种意义上很重要，它反映了 $\mathrm{Ly}$ 串的一个性质：在求字符串的最小解问题时，$\mathrm{Ly}$ 串往往作为一个整体存在。在后面的例题中我们能更加直观的看到这一点。</p>
+<p><strong>性质 11</strong> ：对于 $\mathrm{Ly}$ $B$ 和另一个串 $A$ ，有 $A&lt;B\Leftrightarrow AB&lt;B$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>$\leftarrow$ ：$A&lt;AB&lt;B$ 。</p>
+<p>$\rightarrow$ ：若 $A\notin \mathrm{pre}(B)$ ，则显然成立（因为 $&lt;$ 由字符不同产生，而不是长度不同）。</p>
+<p>否则设 $B=AC$ ，即证明：$AAC&lt;AC$ ，即证明 $AC&lt;C$ ，由 $\mathrm{Ly}$ 定义可得，证毕。</p>
+</div></details>
+<p><strong>性质 12</strong> ：$A$ 是 $\mathrm{Ly}$ ，且 $|A|\ge 2$ ， 则一定存在 $S=AB,A&lt;B$ ，且 $A,B$ 均为 $\mathrm{Ly}$ 。（这可以看作上面性质 $4$ 的一个反方向）</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明 1</summary><div class="toggle-content"><p>先证明一个引理：如果 $S=ABC$ ，其中 $C$ 是 $\mathrm{Ly}$ ，那么 $AC$ 是 $\mathrm{Ly}$ 。</p>
+<p>对于 $AC$ ，$\forall T\in \mathrm{suf}’(AC)$ ，如果 $A\notin \mathrm{pre}(T)$ ，那么由于 $T&gt;ABC$ 可以得到 $T&gt;A$ （因字符不同而产生的 $&gt;$），所以 $T&gt;AC$ ，否则有 $T=AD$ ，那么有 $D&gt;C$ ，$AD&gt;AC$ ，证毕。</p>
+<p>那么设 $B$ 为 $\mathrm{suf}’(S)$ 中最长的是 $\mathrm{Ly}$ 的串，则 $S=AB$ ，$A$ 不能有 $\mathrm{Bd}$ ，否则 $B$ 可以伸长，矛盾。</p>
+<p>所以 $\forall T\in \mathrm{suf}’(A)$ ，如果 $T<A$ ，则有 $TB<AB=S$ ，矛盾，所以 $T>A$ ，所以 $A$ 是 $\mathrm{Ly}$ ，证毕。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">证明 2</summary><div class="toggle-content"><p>来自 cmd 的证明。</p>
+<p>考虑 $S[i\rangle$ 是最小的严格后缀。</p>
+<p>那么显然 ，$S[i\rangle$ 是 $\mathrm{Ly}$ 。</p>
+<p>现证明 $S\langle i-1]$ 是 $\mathrm{Ly}$ ，显然只需要证明 $S\langle i]$ 没有 $\mathrm{Bd}$ 即可。</p>
+<p>假设有长度为 $k$ 的 $\mathrm{Bd}$ ，那么有：$S[1,k]=S[i-k,i-1]$ ，根据前面的定义，有 $S_{k+1}&gt;S_{i}$ 。（这里也可以用我证明中的引理，证明 $S[i-k\rangle$ 是 $\mathrm{Ly}$ ，所以 $rk[i-k]&lt;rk[i]$ ，矛盾）</p>
+<p>所以 $S&gt;S_{i-k}$ ，矛盾，证毕。</p>
+</div></details>
+<p><strong>性质 13</strong> ：$S=L_{1}…L_{k}$ ，则 $1\le i<j\le k,L_{i}...L_{k}>L_{j}…L_{k}$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>从后缀数组的角度看显然，因为排名递降。</p>
+<p>但是从 $\mathrm{Lyndon}$ 角度看呢？</p>
+<p>不妨假设 $L_{i}≠L_{j}$ ，否则去掉 $L_{i}$ 直接归纳，即认为 $L_{i}&gt;L_{j}$。</p>
+<p>如果 $|L_{i}|\le |L_{j}|$ ，那么根据上面假设，显然成立。</p>
+<p>否则假设 $t$ 为最小的数字满足： $|L_{j}L_{j+1}…L_{t}|\ge L_{i}$ ，那么有：</p>
+<p>$\forall j\le v \le t-1,L_{v}\le L_{i}\langle |L_{v}|]\le L_{i}[|L_{j}…L_{v-1}|+1,|L_{j}…L_{v}|]$</p>
+<p>$L_{t}\langle |L_{i}|-|L_{j}…L_{t-1}| ]\le L_{i}\langle |L_{i}|-|L_{j}…L_{t-1}|]&lt;L_{i}[|L_{j}…L_{t-1}|+1\rangle$ 。</p>
+<p>若不存在 $t$ 同理，证毕。</p>
+<p>这个证明就很好的反映了 $\mathrm{Lyndon}$ 串的性质。</p>
+</div></details>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="1-板子题"><a href="#1-板子题" class="headerlink" title="1. 板子题"></a>1. 板子题</h3><p>题目链接：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6114">https://www.luogu.com.cn/problem/P6114</a></p>
+<p>题目大意：求 $\mathrm{Lyndon}$ 分解。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">get_char_array</span>(st);</span><br><span class="line">    n = <span class="built_in">strlen</span>(st + <span class="number">1</span>);</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;)&#123;</span><br><span class="line">        <span class="type">int</span> j = i + <span class="number">1</span>, k = i;</span><br><span class="line">        <span class="keyword">for</span>(; j &lt;= n &amp;&amp; st[k] &lt;= st[j]; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(st[k] &lt; st[j]) k = i;</span><br><span class="line">            <span class="keyword">else</span> k++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(; i &lt;= k; i += j - k) ans ^= i + j - k - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-求最小表示法"><a href="#2-求最小表示法" class="headerlink" title="2. 求最小表示法"></a>2. 求最小表示法</h3><p>求一个串的最小表示法。</p>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>我一开始在想能不能只通过一个串的 $\mathrm{Lyndon}$ 分解得到最小表示法，后面发现不行，思考为什么，会发现原因和不能只通过单串的后缀数组得到最小表示法一样，就是循环位移字符串的不等式，不等价于后缀的不等式。</p>
+<p>因此，这个题目不太能用单串的 $\mathrm{Lyndon}$ 分解来做。</p>
+<p>具体做法为：求 $SS$ 的 $\mathrm{Lyndon}$ 分解，然后从 $\le |S|$ 的最后一个 $\mathrm{Ly}$ 串的开头开始就是最小表示法。（用性质 13 和 $\mathrm{Ly}$ 的性质不难证明这是对的）</p>
+</div></details>
+<h3 id="3-求每个前缀的最小后缀"><a href="#3-求每个前缀的最小后缀" class="headerlink" title="3. 求每个前缀的最小后缀"></a>3. 求每个前缀的最小后缀</h3><p>题目链接：<a target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=6761">https://acm.hdu.edu.cn/showproblem.php?pid=6761</a></p>
+<p>题目大意：求所有前缀的字典序最小的后缀。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>首先，给你一个串，怎么求它的最小后缀，显然是最后一个 $\mathrm{Ly}$ 串。</p>
+<p>但是怎么求前缀的最后一个 $\mathrm{Ly}$ 串呢？</p>
+<p>假设现在在求前缀 $i$ 的答案，答案数组是 $f$ 数组（记录最小后缀长度）。</p>
+<p>根据 $Duval$ 算法的性质，我们只关心这个位置近似 $\mathrm{Ly}$ $T=L^t\overline{L}$ 。</p>
+<p>如果 $T=L$ ，那么答案就是 $L$ 。</p>
+<p>否则注意到，这个 $T$ 的 $\mathrm{Lyndon}$ 分解是 $L^t$ 拼接上 $\overline{L}$ 的$\mathrm{Lyndon}$ 分解，也可以看作是 $L$ 拼接上 $L^{t-1}\overline{L}$ 的 $\mathrm{Lyndon}$ 分解，所以可以看作求 $L^{t-1}\overline{L}$ 的最小后缀，注意到这等于 $f[i-|L|]$ ，做完了。</p>
+<p>时间复杂度：$O(n)$ 。</p>
+<p>代码的 $f$ 记录的是位置，魔改了一下上面的结论。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e7</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mnsuf</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> *mn, <span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;)&#123;</span><br><span class="line">        <span class="type">int</span> j = i + <span class="number">1</span>, k = i; mn[i] = i;</span><br><span class="line">        <span class="keyword">for</span>(; j &lt;= n &amp;&amp; s[k] &lt;= s[j]; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[k] &lt; s[j]) mn[j] = k = i;</span><br><span class="line">            <span class="keyword">else</span> mn[j] = mn[k] + j - k, k++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(; i &lt;= k; i += j - k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="type">int</span> n, f[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin.<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">get_char_array</span>(st);</span><br><span class="line">        n = <span class="built_in">strlen</span>(st + <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">mnsuf</span>(st, f, n);</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = n; i &gt;= <span class="number">1</span>; i--) ans = (ans * <span class="number">1112ll</span> + f[i]) % mod;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
+<h3 id="4-求每个前缀的最大后缀"><a href="#4-求每个前缀的最大后缀" class="headerlink" title="4. 求每个前缀的最大后缀"></a>4. 求每个前缀的最大后缀</h3><p>这个没找到题目，直接口胡了。</p>
+<details class="toggle" ><summary class="toggle-button" style="">做法</summary><div class="toggle-content"><p>怎么求出一个串的最大后缀。</p>
+<p>先把所有字母的偏序关系倒过来，近似的变为最小后缀，但是虚空大小无限大而不是无限小。</p>
+<p>注意到，如果 $S=L_{1}L_{2}^{t_2}…L_{k}$ ，显然答案一定是 $L_{i}…L_{k}$ 。</p>
+<p>注意到对于一个字符串链 $S_{1}\le S_{2}\le S_{3}…\le S_{t}$ ，如果存在 $i$ 满足：$S_{i} &lt; S_{i+1}$（ $&lt;$ 由于字符不同产生），那么 $S_{i} &lt; S_{j} , j &gt; i$（ $&lt;$ 由于字符不同产生），也就是说，对于这个字符串链，如果我们认为虚空大小无限大，那么最小字符串应该是最小的 $S_{i}$ 满足：$\forall 1\le j&lt;i,S_{j}$ 是 $S_{j+1}$ 的前缀，而且 $S_{i}$ 不是 $S_{i+1}$ 的前缀。</p>
+<p>设 $S_{i}=L_{k-i+1}…L_{k}$ ，那么答案是什么就显然了。</p>
+<p>问题来了，有没有等价的、更好用的说法呢？</p>
+<p>我们设 $S=L_{1}^{t_1}…L_{p}^{t_{p}}$ （把相同的 $\mathrm{Ly}$ 合并）。</p>
+<p>显然，如果 $L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 是 $L_{i}L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 的前缀，那么 $L_{i}^{o-1}L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 是 $L_{i}^{o}L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 的前缀 。</p>
+<p>所以只需要考虑 $L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 是不是 $L_{i}L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 的前缀就行了。</p>
+<p>根据性质 13 的证明可以得到，$L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 是 $L_{i}L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 当且仅当 $L_{i+1}^{t_{i+1}}…L_{k}^{p_{k}}$ 是 $L_{i}$ 的前缀。</p>
+<p>所以可以得到，答案是 $L_{i}^{t_{i}}…L_{i}^{t_{p}}$ ，其中 $i$ 是最大的满足：$L_{i}^{t_{i}}…L_{p}^{t_{p}}$ 不是 $L_{i-1}$ 前缀的数字。</p>
+<p>注意到，答案等价于最后一个位置在 Duval 算法中，第一次被近似 $\mathrm{Ly}$ $T$ 覆盖时的 $T$ 。</p>
+<p>原因是 Duval 算法每次实际上是一次性添加：$L_{u}^{t_{u}}$ ，所以当 $i$ 恰好在 $L_{ans}^{t_{ans}}…L_{p}^{t_{p}}$ 的左端点时，根据前面的假设可以知道，此时 $j$ 一定在 $|S|$ ，也就是最后一个位置。（这里的 $i,j$ 表示代码中的 $i,j$ ）</p>
+<p>而当 $j$ 第一次到 $|S|$ 时，$T$ 对应的 $L_{u}^{t_{u}}…L_{p}^{t_{p}}$ 满足 $L_{u+1}^{t_{u+1}}…L_{p}^{t_{p}}$ 是 $L_{u}$ 的前缀，只需要证明对于 $\forall v&gt;u$ ，仍然满足这个性质就行了，一个显然的事情是，既然后面是 $L_{u}$ 的前缀，那么下一次跑的时候 $j$ 一定能跑到 $n$ ，类似跑 $L_{u}$ 的过程，归纳下去即可证明（即每次跳出内层循环的 $j$ 一定是不降的）。</p>
+<p><details class="toggle" ><summary class="toggle-button" style="">扩展</summary><div class="toggle-content"><p>其实注意到，$L_{u+1}^{t_{u+1}}…L_{p}^{t_{p}}$ 是 $L_{u}$ 的前缀 $\Leftrightarrow$ 生成 $L_{u}^{t_{u}}$ 时 $j=n$ ，根据上面的证明可以证得满足这样的 $u$ 是一个后缀，即存在 $u_{limie}$ 满足 $u\ge u_{limie}$ ，$L_{u+1}^{t_{u+1}}…L_{p}^{t_{p}}$ 是 $L_{u}$ 的前缀，如果 $u&lt;u_{limit}$ ，则不满足。</p></p>
+<p>进一步的有满足 $L_{u+1}^{t_{u+1}}…L_{p}^{t_{p}}$ 是 $L_{u}L_{u+1}^{t_{u+1}}…L_{p}^{t_{p}}$ 前缀的是一个区间。</p>
+<p>由于 $U$ 是 $V$ 的前缀 $\Leftrightarrow$ $AU$ 是 $AV$ 的前缀。</p>
+<p>所以设 $S=L_{1}…L_{k}$ ，则存在 $i_{limit}$ ：$\forall i\ge i_{limit}$ ，$L_{i+1}…L_{k}$ 是 $L_{i}L_{i+1}…L_{k}$ 的前缀，$i&lt;i_{limit}$ 不是。</p>
+<p>也就是说这样构造的字符串链的前缀关系是特殊的。</p>
+<p>所以，上面的答案是 $L_{i}^{t_{i}}…L_{i}^{t_{p}}$ ，其中 $i$ 是最大的满足：$L_{i}^{t_{i}}…L_{p}^{t_{p}}$ 不是 $L_{i-1}$ 前缀的数字。</p>
+<p>可以改成最小的 $i$ 满足：$L_{i+1}^{t_{i+1}}…L_{p}^{t_{p}}$ 是 $L_{i}$ 前缀的数字。</p>
+</div></details>
+<p>求前缀的答案的话，只需要在第一次跑到的时候更新一下就行了，时间复杂度：$O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> ss[N];</span><br><span class="line">    cin &gt;&gt; ss;</span><br><span class="line">    <span class="built_in">memcpy</span>(s + <span class="number">1</span>, ss, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(ss) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mxsuf</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> *mx, <span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;)&#123;</span><br><span class="line">        <span class="type">int</span> j = i + <span class="number">1</span>, k = i; !mx[i] ? mx[i] = i : <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(; j &lt;= n &amp;&amp; s[k] &lt;= s[j]; j++)&#123;</span><br><span class="line">            !mx[j] ? mx[j] = i : <span class="number">0</span>;</span><br><span class="line">            s[k] &lt; s[j] ? k = i : k++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(; i &lt;= k; i += j - k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n, f[N];</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">get_char_array</span>(st);</span><br><span class="line">    n = <span class="built_in">strlen</span>(st + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">mxsuf</span>(st, f, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cout &lt;&lt; f[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>某种无意义的占位符，防止排版垮掉。</p></div></details>
+<h3 id="更多例题正在咕咕咕咕咕"><a href="#更多例题正在咕咕咕咕咕" class="headerlink" title="更多例题正在咕咕咕咕咕"></a>更多例题正在咕咕咕咕咕</h3><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>command_block 的洛谷博客 ：<a target="_blank" rel="noopener" href="https://www.luogu.com/article/d4y3zqqv">https://www.luogu.com/article/d4y3zqqv</a></p>
+<p>OIwiki ：<a target="_blank" rel="noopener" href="https://oi-wiki.org/string/lyndon/">https://oi-wiki.org/string/lyndon/</a></p>
+<p>国家集训队 2021 年论文：《胡昊 浅谈Lyndon分解》</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/15/Lyndon-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://oldplace.github.io/2024/07/15/Lyndon-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Lyndon/">Lyndon</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">86</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">57</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E5%AE%9A%E4%B9%89%E4%B8%8E%E7%AC%A6%E5%8F%B7%E7%BA%A6%E5%AE%9A"><span class="toc-number">1.</span> <span class="toc-text">概念定义与符号约定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">2.</span> <span class="toc-text">字符串的基本性质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lyndon-Word"><span class="toc-number">3.</span> <span class="toc-text">Lyndon Word</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">3.1.</span> <span class="toc-text">重要的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Duval-%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">Duval 算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%A1%A5%E5%85%85%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">3.3.</span> <span class="toc-text">一些补充的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">3.4.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9D%BF%E5%AD%90%E9%A2%98"><span class="toc-number">3.4.1.</span> <span class="toc-text">1. 板子题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B1%82%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">3.4.2.</span> <span class="toc-text">2. 求最小表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B1%82%E6%AF%8F%E4%B8%AA%E5%89%8D%E7%BC%80%E7%9A%84%E6%9C%80%E5%B0%8F%E5%90%8E%E7%BC%80"><span class="toc-number">3.4.3.</span> <span class="toc-text">3. 求每个前缀的最小后缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B1%82%E6%AF%8F%E4%B8%AA%E5%89%8D%E7%BC%80%E7%9A%84%E6%9C%80%E5%A4%A7%E5%90%8E%E7%BC%80"><span class="toc-number">3.4.4.</span> <span class="toc-text">4. 求每个前缀的最大后缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E5%A4%9A%E4%BE%8B%E9%A2%98%E6%AD%A3%E5%9C%A8%E5%92%95%E5%92%95%E5%92%95%E5%92%95%E5%92%95"><span class="toc-number">3.4.5.</span> <span class="toc-text">更多例题正在咕咕咕咕咕</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
