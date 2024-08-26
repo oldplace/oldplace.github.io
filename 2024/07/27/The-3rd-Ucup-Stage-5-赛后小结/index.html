@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>The 3rd Ucup Stage 5 赛后小结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="比赛链接 ：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;1741 开局队长秒了 M ，Imakf 秒了 A 。 然后队长秒了 I ，我秒了 F ，然后和队友交流 B ，但这时比较幽默的事情发生了，我以为交换 $x,y$ 是位置，但没想到是数值，应该问清楚的，难怪当时完全没听懂队友做法。 在过完这个题目后，和队友交流 K ，我说了一个 dp 状态，$dp[x][j]$ 表示在 $x$ 往上走 $j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The 3rd Ucup Stage 5 赛后小结">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/27/The-3rd-Ucup-Stage-5-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="比赛链接 ：https:&#x2F;&#x2F;qoj.ac&#x2F;contest&#x2F;1741 开局队长秒了 M ，Imakf 秒了 A 。 然后队长秒了 I ，我秒了 F ，然后和队友交流 B ，但这时比较幽默的事情发生了，我以为交换 $x,y$ 是位置，但没想到是数值，应该问清楚的，难怪当时完全没听懂队友做法。 在过完这个题目后，和队友交流 K ，我说了一个 dp 状态，$dp[x][j]$ 表示在 $x$ 往上走 $j">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-27T12:32:34.000Z">
+<meta property="article:modified_time" content="2024-07-29T03:44:48.293Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/27/The-3rd-Ucup-Stage-5-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'The 3rd Ucup Stage 5 赛后小结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-07-29 11:44:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">The 3rd Ucup Stage 5 赛后小结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-27T12:32:34.000Z" title="发表于 2024-07-27 20:32:34">2024-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-29T03:44:48.293Z" title="更新于 2024-07-29 11:44:48">2024-07-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="The 3rd Ucup Stage 5 赛后小结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>比赛链接 ：<a target="_blank" rel="noopener" href="https://qoj.ac/contest/1741">https://qoj.ac/contest/1741</a></p>
+<p>开局队长秒了 M ，Imakf 秒了 A 。</p>
+<p>然后队长秒了 I ，我秒了 F ，然后和队友交流 B ，但这时比较幽默的事情发生了，我以为交换 $x,y$ 是位置，但没想到是数值，应该问清楚的，难怪当时完全没听懂队友做法。</p>
+<p>在过完这个题目后，和队友交流 K ，我说了一个 dp 状态，$dp[x][j]$ 表示在 $x$ 往上走 $j$ 条边的最大收益，但是实际我在想另外一个做法，然后 Imakf 和队长说这个玩意完全可以启发式合并，然后我就没再细想了，Imakf 上机写启发式合并。</p>
+<p>这里我直接放弃我那个想法有问题吗？我觉得没问题，首先我没想明白，想明白花的时间 + 写的时间不一定小于队友直接上启发式合并，其次我这个搞法好不好写还说不一定呢（复盘发现确实难写，还要写个数据结构维护），而且甚至不一定可行，启发式合并是三人公认可行，所以稳健的搞法是直接上启发式合并，为什么我不上，我只能说我当时确实没想明白，因为一开始就没往启发式合并的角度想。</p>
+<p>此时一小时过去了。</p>
+<p>能启发式合并的原因是：$dp[x]$ 的有用的 $j$ 和其子树内的车厢个数有关，所以可以启发式合并。</p>
+<p>然后 Imakf 接下来写了一段时间的 K ，这玩意我脑补了一下确实难写。</p>
+<p>然后是 E ，和队长讨论情况，讨论到最后，队长很果断地上了，坚信这就是所有情况，但我没有一个确切地证明，所以不敢肯定是不是对的，队长送了过了，这里队长的决策是对的，队长伟大，无需多言。原因是证明花的时间很长，而队长已经写了个搜，在搜基础可以很快的加上我们当前已经讨论的所有情况，送一发过了血赚，没过 20 min 没亏到哪去，更何况队长的讨论一般不会漏情况，所以这确实是正确的抉择，只能说打 ACM 不需要证明了。</p>
+<p>然后我先和队长讨论了一下 G ，搞了个泰勒展开，但精度不够，突然队长灵机一动，既然泰勒展开的精度在零点附近很高，那么能不能通过某种手段把 $x$ 压到零点附近，很有道理，怎么压呢？快速幂，注意到 $e^{x}=(e^{\frac{x}{2}})^2$ ，然后就可以压到 $\frac{x}{2^{k}}$ 了。（说起来也搞笑，快速幂是队长说了个搞法，我听错成快速幂了，结果发现快速幂很对，只能说沟通不畅有时候可以产生想法了）</p>
+<p>然后队长上机写 G ，但是精度仍然不够，我对这种题没啥想法，去搞 C ，后面 Imakf AC 了 K ，和队长合理搞 G ，后面发现先泰勒展开两项再快速幂，调调参过了，队长说这种题以后要早点写 check 。</p>
+<p>此时两小时过去了（指 Imakf AC K）</p>
+<p>期间我在写 C ，写之前和 Imakf 交流了一下，发现只有 log 个不同的宽要关心，所以可以 $O(nm\log)$ 实现此题，感觉这题并不困难，留到后面纯属唐了。</p>
+<p>但是越是开香槟，似地越惨，C 有个细节不对，此时三小时过去了，下机搞了半小时，再上机过了。</p>
+<p>剩下一个半小时，队长看出 L 做法，差分约束，上机，我去想 D 。</p>
+<p>最后剩半个小时，我上机 D ，过了，全队 try L ，被卡时，拼尽全力，期间尝试各种卡时技巧，不乏唐氏钢棍说 Bellman-Ford 改 SPFA 能快很多的唐氏言论（主要我对最短路不是很了解，当时还唐了，以为一个负环 SPFA 只用跑一遍），最后 Imakf 不知用了何种力量，以 2971ms 惊险 AC 。</p>
+<p>最后 11 题结束比赛。</p>
+<p>最大的问题：B 应该问清楚题意的，毕竟当时队友不是描述交换 $a[x],a[y]$ ，而是用了另外一种描述，这种异于平常的描述应该问清楚的，不然也不会跨服交流了。</p>
+<p>接下来是部分的题解：</p>
+<h1 id="M"><a href="#M" class="headerlink" title="M"></a>M</h1><p>最终答案一定是每个数字有个系数，考虑最大的 $k$ 个数字（如果有相同的数字则给他们贴上一个不影响数值的第二关键字，使得比较不存在等于号），其系数和一定 $\ge k-1$ ，原因是考虑只关心有关这 $k$ 个数字的合并，每次合并一定会使得其中至少一个数字的系数 $+1$ ，证毕。</p>
+<p>所以答案下界是除最大值以外的数字和，而这显然可以构造，每次拿最大的数字和相邻数字合并即可。</p>
+<p>时间复杂度：$O(n\log{n})$</p>
+<p>PS：严格来说，这里的第二关键字可以是先把数组排序后的排名，两个集合比较如果和相同比较最小的排名是多少，由于所有数字排名不同，所以不存在等于号（两个集合交集为 $\empty$）。</p>
+<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>注意到只有两个坐标都相同的点会有多的贡献。</p>
+<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><p>一个比较简单的区间 dp ，注意到区间长度相同的时候，同层的更新是个最短路，用 Dijkstra 即可。</p>
+<p>时间复杂度：$O(n^3)$</p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p>注意到最后排序前只关心每个数字在左还是在右，在最后一次排序后的操作模拟即可。</p>
+<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p>注：后面的木板既有可能指没切的木板，也有可能指切了的木板，请根据语境自行甄别。</p>
+<p>一个关键的观察：最终搞法可能是每个木板都切了一刀，然后拼起来，不一定只有边角料部分切了。</p>
+<p>不妨假设 $h\le w$ 。</p>
+<p>注意到 $h+w\ge 2s$ 的时候答案一定为 $\left\lceil\frac{2h+2w}{s}\right\rceil$ ，因为可以在两个 $h$ 处不断放木板，超出部分切掉放在同一个 $s$ ，然后从放了木板的 $s$ 出发，不断放木板，超出切了放另外一边，然后接着放直到超出，就是这个结果，而且显然这是下界。</p>
+<p>然后队长声称剩下的情况只有两种可能的放置方案：</p>
+<ol>
+<li>四条边按照某个顺序依次放置，超出部分尝试裁了放到下一条边里面。</li>
+<li>两条短边超出部分放到一条长边里。</li>
+</ol>
+<p>然后就过了，不懂，说的道理。</p>
+<p>现在来讨论一下为啥是对的，先证明一个引理：</p>
+<p>如果一边用了两个木板 $a,b$ ，且 $a+b\le s$ ，那么存在一种不劣的方案把这两个木板合为一体。</p>
+<p>证明就是讨论一下，如果 $s-a,s-b$ 的两个木板都扔了，这个显然正确，不妨认为 $s-a$ 没扔，则我们设置一块 $s-(a+b)$ 的木板放在 $s-a$ ，然后剩余的部分有 $b,s-b$ ，所以仍然是对的。</p>
+<p>这个引理有个妙用，如果我们已经确定了若干块木板的拜访，现在有一边的长度 $\le s$ ，我们就可以直接用一个木板放置，而接下来的讨论，就是根据这个这个木板放置后，其另外一块木板放在哪里展开的，不断讨论剩余木板的传递性，下面是一个图片展示：</p>
+<p><img src="1.png" alt=""></p>
+<p>依据这个引理，我们展开讨论，显然，答案为 $2$ 等价于 $h+w=s$ ，而且这个方案可以由上面的方案 $1$ 生成，严谨的证明考虑木板切开只有 $4$ 块，因此一定有两边加起来等于 $s$ ，讨论一下即可。</p>
+<p>而我们要讨论 $h+w&lt;2s$ 的情况，显然答案只能是 $3/4$ ，而 $4$ 的方案显然也一定能由方案 $1$ 生成，所以现在讨论能不能是 $3$ ，相对应的方案能否用上面两个方案生成。</p>
+<p>答案为 $3$ 的必要条件是 $h+w\le 1.5s,h+w≠s$ 。</p>
+<p>因此考虑每次枚举一条边，放置一块木板并讨论另一块木板放在哪的传递链：$h-w,h-w-w$ （起点一定是 $h$ ，因为 $h&lt;s$ ），都能保证下一条边在放置了上一条边剩余的木板时剩余长度 $\le s$ 。</p>
+<p>所以考虑讨论的过程，可以公式化成以下过程：</p>
+<ol>
+<li>如果只剩下长边 $w$，如果 $w\le s$ ，则仍然用引理讨论传递剩下木板，如果 $w&gt;s$ ，则显然答案为 $\left\lceil \frac{2w}{s} \right\rceil$ ，显然也可以用传递木板的方式生成，即第一种方案生成。</li>
+<li>如果有短边，从短边出发，依次传递木板，直到放不下扔掉为止，或者主动扔掉。</li>
+</ol>
+<p>注意到，如果把 “ 主动扔掉 ” 的选择去掉，上述过程就是方案 $1$ 的子集，但是怎么证明如果空间够一定不会主动扔掉木板呢？</p>
+<p>我们不妨给四条边编号 $1,2,3,4$ ，怎样编无所谓，后面不区分长短边了，假设存在 $3$ 块木板的方案。</p>
+<p>如果每个边只有一块木板，那么恰好有两条边共享一块大木板，不妨认为 $1,2$ ，则按照 $1,2,3,4$ 的顺序一定可以跑出 $3$ 。</p>
+<p>由于只有三块大木板，如果要丢掉一块木板，则在场上至多五块木板，所以剩余情况为恰好有一边有两块木板，不妨认为是 $1$ 边，如果 $2,3,4$ 中不共享一块木板，不妨认为 $1$ 和 $2,3$ 分别共享木板，则 $2,1,3,4$ 可以跑出 $3$ 。</p>
+<p>如果共享，不妨设 $2,3$ 共享，则 $2,3,4,1$ 可以跑出 $3$ ，综上，只要存在 $3$ 块的方案，就一定可以用方案 $1$ 跑出来答案，证毕。</p>
+<p>所以甚至第二种方案是多余的，只在证明 $h+w\ge 2s$ 的时候用到了这个方案，去掉后提交也 AC 了，至此，讨论结束，做毕。</p>
+<p>有一说一，讨论起来确实麻烦，当然也有可能是我讨论烦了，这玩意要是再赛时讨论就炸了，直接送确实是明智之举，队长伟大，无需多言。</p>
+<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>我其实不知道队友具体实现，大概意思是：$dp[x][j]$ 表示 $x$ 往上霸占 $j$ 条边的最大收益，当然 $j$ 也可以是霸占到深度 $j$ ，这样不用数组偏移，然后 $j$ 的个数只与子树内车厢数量有关，因此可以启发式合并。</p>
+<p>队友写的树上启发式合并，显然只用记录 $O(\log)$ 个数组，这样空间就能有保障了。</p>
+<p>至于我那个搞法，我就只编所有边长为 $1$ 的情况好了，注意到可以设 $dp[x]$ 表示 $x$ 到父亲这条边被占据的最大收益，然后按照从深往浅的顺序 dp ，每次可以把能到这个深度的列车往上扩一节，时间复杂度：$O(n\log{n})$ ，边长为 $1$ 是好写的，但是不是就难写了，因为要用数据结构维护 $dp[x]$ ，原因是列车往上扩可能直接扩一条链，要维护一条链的增量，而启发式合并一层一层跳，然后全局加减，所以没有这个问题。</p>
+<p>本来想赛后自己实现实现的，还要写个数据结构，太难写了，弃了，我人麻了。</p>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>观察到最终答案一定是由一个矩形扩展出来的，原因是：可以注意到翻转后的最大面积黑矩形一定是由翻转前的某个黑矩形翻转得到的，溯源即可证明。</p>
+<p>问题转变为，现在全是白色的纸上恰好只有一个矩形，如何求其的最小答案？</p>
+<p>注意到可以关心最长有黑色的行的连续段和最长有黑色的列的连续段，和上面的证明过程一样，同时如果对称轴平行于行/列，那么只会增长行/列的最长连续段，可以得到下界是将上述两个变量全部变成对应的最大值的操作次数，而且显然这就是答案。</p>
+<p>稍稍解释一下，假设矩形是 $[2,3]*[1,4]$ ，那么初始有黑色的行是 $[2,3]$ ，最长的有黑色的行的连续段是 $[2,3]$ ，而后面每次操作后的最长连续段一定是操作前的某个连续段翻转生成，例如如果翻转后为 $[2,5]$ ，那么一定是 $[2,3]$ 沿着 $3,4$ 行中间那条线翻转后生成的 $2,5$ ，而最终这个连续段是 $[1,n]$ ，溯源回去即可得到结论。</p>
+<p>所以问题变成行列独立的问题，注意到每一维的答案量级为 $O(\log)$ ，所以钦定右下角，然后关心行的每一个答案所需要的最小行，用其找到最长的列，然后求列的答案即可，时间复杂度：$O(nm\log{n})$ 。</p>
+<p>但还有个问题，就是怎么求答案，其实是这么个问题：</p>
+<p>一段序列由 $x$ 个白色， $b$ 个黑色， $y$ 个白色依次构成，问最小翻转次数（ $x\le y,y≠0$ ）。</p>
+<p>注意到一个下界是 ：$\log_2{(\left\lceil \frac{x}{b} \right\rceil+\left\lceil \frac{y}{b} \right\rceil)}$ ，而且这个下界 $+1$ 是一定能够成功的。</p>
+<p>所以问题是什么时候能达到这个下界，不妨考虑在希望能够达到下界的条件下的可能的最优策略，注意到只有两种可能最优策略（考虑 $i$ 次操作后黑色区间长度和 $2^{i}*b$ 差值即可，这个证明在此不再赘述）：</p>
+<p>不妨设 $2^{k}\le \left\lceil \frac{x}{b} \right\rceil&lt;2^{k+1}$</p>
+<ol>
+<li>当 $\left\lceil \frac{x}{b} \right\rceil$ 二进制从小到大第 $i$ 位是 $1$ 时，就在第 $i$ 次往左翻，否则往右翻。</li>
+<li>选择某一次 $i&gt;k$ 的时间往左翻，其余向右翻。</li>
+</ol>
+<p>一个明显的直觉是，第一种策略优于第二种策略，现在证明之。</p>
+<p>在第 $k+1$ 次操作中，选择了向左翻，此时黑色长度为 ：$b<em>2^{k+1}-r$ ，其中 $r=\left\lceil \frac{x}{b} \right\rceil</em>b-x$ ，所以往右翻后续的长度为 ：$b<em>2^{i}-r</em>2^{i-(k+1)}$ 。</p>
+<p>而第二种，在第 $i$ 次操作后，为 $b*2^{i-1}+x$ ，两者相减可以得到：</p>
+<p>$b<em>2^{i-1}-r</em>2^{i-(k+1)}-x&gt;b*(2^{i-1}-2^{i-(k+1)}-2^{k+1})$ ，如果 $k\ge 1$ 这显然 $\ge 0$ ，如果 $k=0$ ，则 $x+r=b$ ，显然也 $\ge 0$ ，所以就是第一种策略更优，所以直接用第一种策略判断一下是不是下界就行了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">get_char_array</span><span class="params">(<span class="type">char</span> *s)</span></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">char</span> st[N];</span><br><span class="line">	cin &gt;&gt; st;</span><br><span class="line">	<span class="built_in">memcpy</span>(s + <span class="number">1</span>, st, <span class="built_in">sizeof</span>(<span class="type">char</span>) * (<span class="built_in">strlen</span>(st) + <span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; a[N], b[N];</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">char</span> st[N];</span><br><span class="line">PII sta[N];</span><br><span class="line"><span class="type">int</span> top, len[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gt</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> k, <span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!x &amp;&amp; !y) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(x &gt; y) <span class="built_in">swap</span>(x, y);</span><br><span class="line">	<span class="type">int</span> ans = __lg((x + k - <span class="number">1</span>) / k + (y + k - <span class="number">1</span>) / k) + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x % k == <span class="number">0</span>) <span class="keyword">return</span> ans;</span><br><span class="line">	<span class="type">int</span> res = k - x % k;</span><br><span class="line">	<span class="type">int</span> lcnt = __lg((x + k - <span class="number">1</span>) / k) + <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> base = (<span class="number">1</span> &lt;&lt; lcnt) * k - res;</span><br><span class="line">	<span class="keyword">if</span>((base &lt;&lt; (ans - lcnt)) &gt;= x + k + y) <span class="keyword">return</span> ans;</span><br><span class="line">	<span class="keyword">return</span> ans + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="built_in">get_char_array</span>(st);</span><br><span class="line">		b[i].<span class="built_in">resize</span>(m + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) b[i][j] = st[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(n &gt; m)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)&#123;</span><br><span class="line">			a[i].<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) a[i][j] = b[j][i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">swap</span>(n, m);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">			a[i].<span class="built_in">resize</span>(m + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) a[i][j] = b[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	a[<span class="number">0</span>].<span class="built_in">resize</span>(m + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++) a[i][j] += a[i - <span class="number">1</span>][j];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans = <span class="number">1e9</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		top = <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> pre = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= i; j++)&#123;</span><br><span class="line">			<span class="type">int</span> cnt = <span class="built_in">gt</span>(i - j, j, n - i);</span><br><span class="line">			<span class="keyword">if</span>(cnt != pre) sta[++top] = &#123;j, cnt&#125;, pre = cnt;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">memset</span>(len, <span class="number">0</span>, <span class="built_in">sizeof</span>(len));</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= top; k++)&#123;</span><br><span class="line">				<span class="keyword">auto</span> [l, c] = sta[k];</span><br><span class="line">				<span class="keyword">if</span>(a[i][j] - a[i - l][j] == l) len[k]++;</span><br><span class="line">				<span class="keyword">else</span> len[k] = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">if</span>(!len[k]) <span class="keyword">continue</span>;</span><br><span class="line">				ans = <span class="built_in">min</span>(ans, c + <span class="built_in">gt</span>(j - len[k], len[k], m - j));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="G"><a href="#G" class="headerlink" title="G"></a>G</h1><p>不知道队友怎么搞过去的，反正大概思路是泰勒展开两项 $e^{\frac{x}{2^{20}}}$ （到平方项），然后快速幂到 $e^{x}$ 。</p>
+<p>听队友说道理是每次快速幂的相对误差会翻倍，但是离原点距离除 $2$ （$(1+\Delta)^2=1+2\Delta$ ，二阶小项忽略不计），两者权衡一下，可以得到最小误差是在泰勒展开两项的时候取得。（怎么得到这个结果的呢？如果我没猜错应该是试出来的，感觉不太能定量计算，而且队友确实在机上捣鼓了一段时间）</p>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>首先可以注意到，最大值点一定只在 $a_{i}$ 处取得，而且只需要知道 $b=10^{5}$ 的构造即可。</p>
+<p>这个题目什么个搞法呢？</p>
+<p>首先不妨假设相邻两项的最大值分别在下标 $i,i+t$ 处取得，列个式子。（这个列出来是不会亏的，因为任何情况式子都适用，我们并没有在前面假定什么最大值点都是相邻的之类的东西）</p>
+<p>则有 ：$a_{i}<em>(n-i+1)+\sum\limits_{k=i}^{i+t-1}a_{k}=a_{i+t}</em>(n-i-t+1)$</p>
+<p>整理一下可以得到：$(a_{i+t}-a_{i})<em>(n-i+1)-t</em>(a_{i}+a_{i+t}-a_{i})=\sum\limits_{k=i}^{i+t-1}a_{k}$</p>
+<p>再整理一下可以得到：$(a_{i+t}-a_{i})(n-i-t+1)=t*a_{i}+\sum\limits_{k=i}^{i+t-1}a_{k}$</p>
+<p>$(a_{i+t}-a_{i})=\frac{t*a_{i}+\sum\limits_{k=i}^{i+t-1}a_{k}}{(n-i-t+1)}$</p>
+<p>这个时候，敏锐的察觉到一种可能的答案模式，每隔一个小间隔得到一个最大值点，中间不是最大值点的 $a_{k}$ 只有很小的不会影响最大值的增幅，来让右边这个式子是整除的，所以可以认为上面基本是 $2t*a_{i}$ 量级的，而下面只要在最后一个最大值来临之后，$n-i+1$ 足够大，我们就可以认为分母也是足够量级的。</p>
+<p>来尝试一手，不妨认为 $t=2$ （因为只要有 $a_{i+1}$ 就足够调整余数了，不够 $t$ 再变大）</p>
+<p>为了让分母量级固定，不妨让 $n=5*10^5$ ，直接拉满</p>
+<p>注意到调整余数会让 $a_{i+1}$ 增加不超过 $n$ 的增幅，为了让这个增幅不会成为最大值，我们需要让 $\frac{2a_{i}}{n-i}$ （也就是 $t=1$ 的增幅）大于 $n$ ，所以不妨让 $a_{1}&gt;\frac{n^2}{2}$ 。因此我选择了 $2*10^{11}$ 。</p>
+<p>同时为了让 $a_{i+2}&gt;a_{i+1}$ ，同样需要让 $\frac{4a_{i}}{n-i-1}$ 大于 $n$ ，这显然被上面的要求包含，所以不用管。</p>
+<p>在得到 $10^5$ 的最大值点后，贪心的，显然只要让后面的增量固定为 $1$ 就行了。</p>
+<p>现在只有这么两个问题：</p>
+<ol>
+<li>后面增量为 $1$ 的部分有没有可能成为最值。</li>
+<li>数字是否都在值域里。</li>
+</ol>
+<p>第一个问题非常的简单，从最后一个最值出发，有：$\frac{2ta_{i}}{n-i-t+1}$ 远大于 $n$ ，所以不会，而且从这个式子不难看出，越到后面，分子越大，分母越小，显然成为最大值的增量是总体上升的，前面的增量都大于 $n$ ，后面就不可能只有 $n$ 了，所以第一个问题不需要担心。</p>
+<p>第二个问题显然跑一下就行了，当然也可以大概的估计一下，分母 $\le 3<em>10^5$ ，则相邻两项增量至多为 $\frac{2a_{i}}{3</em>10^{5}}+1$ ，不妨认为前面的数字都 $\le 7<em>10^{11}$ ，则有增量为 $\le 10^{5}</em>(\frac{14<em>10^{11}}{3</em>10^{5}} + 1)\le 4.9<em>10^{11}+10^{5}\le 5</em>10^{11}$ ，加上初始值，就似乎 $\le 7*10^{11}$ ，后面增量为 $1$ ，显然不会爆，证毕。</p>
+<p>然后就做完了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> LL L = <span class="number">1e12</span>;</span><br><span class="line">LL a[N], sum[N];</span><br><span class="line"><span class="type">int</span> n = <span class="number">5e5</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">1e5</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; n &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	a[<span class="number">1</span>] = <span class="number">2e11</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> t = <span class="number">2</span>; t &lt;= b; t++)&#123;</span><br><span class="line">		<span class="type">int</span> i = t * <span class="number">2</span> - <span class="number">1</span>;</span><br><span class="line">		<span class="type">int</span> base = n - i + <span class="number">1</span>;</span><br><span class="line">		LL val = a[i - <span class="number">2</span>] * <span class="number">4</span> + <span class="number">1</span>;</span><br><span class="line">		LL res = <span class="number">0ll</span>;</span><br><span class="line">		<span class="keyword">if</span>(val % base != <span class="number">0</span>) res = base - (val % base);</span><br><span class="line">		a[i - <span class="number">1</span>] = a[i - <span class="number">2</span>] + res + <span class="number">1</span>;</span><br><span class="line">		val += res;</span><br><span class="line">		a[i] = a[i - <span class="number">2</span>] + val / base;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = b * <span class="number">2</span>; i &lt;= n; i++) a[i] = a[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">		cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	<span class="comment">// fflush(stdout);</span></span><br><span class="line">	<span class="comment">// sum[1] = a[1];</span></span><br><span class="line">	<span class="comment">// for(int i = 2; i &lt;= n; i++)&#123;</span></span><br><span class="line">	<span class="comment">// 	assert(a[i] &gt; a[i - 1]);</span></span><br><span class="line">	<span class="comment">// 	sum[i] = sum[i - 1] + a[i];</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">	<span class="comment">// assert(a[n] &lt;= L);</span></span><br><span class="line">	<span class="comment">// LL maxnum = 0ll;</span></span><br><span class="line">	<span class="comment">// int cnt = 0;</span></span><br><span class="line">	<span class="comment">// for(int i = 1; i &lt;= n; i++)&#123;</span></span><br><span class="line">	<span class="comment">// 	LL val = a[i] * (n - i + 1) + sum[n] - sum[i - 1];</span></span><br><span class="line">	<span class="comment">// 	if(val &gt; maxnum) maxnum = val, cnt = 1;</span></span><br><span class="line">	<span class="comment">// 	else if(val == maxnum) cnt++;</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">	<span class="comment">// cerr &lt;&lt; cnt &lt;&lt; &quot;\n&quot;;</span></span><br><span class="line">	<span class="comment">// fflush(stdout);</span></span><br><span class="line">	<span class="comment">// assert(cnt &gt;= b);</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>非常牛的题，当时看到 $2*10^3$ 的数据范围，以为是找个结论然后 $dp$ ，鉴定为 ATcoder 做多了。</p>
+<p>但是队长差分约束大师，一语道破天机，你说有没有可能是二分然后差分约束，最后找个离他最近的分数转成模意义下的答案，但这依赖于分母要是 $O(m)$ 量级的。</p>
+<p>然后队长就上机了，后面 Imakf 证明了分母是 $O(m)$ 量级的，相当于直接把图建出来后，每个环有多少正边和负边，然后答案就是使得没有环是负环的最大值，显然这时一定有环是零环，所以分母一定是点数量级的，也就是至多 $2m$ 的。</p>
+<p>但是 $O(m^2\log{m})$ 卡时限卡出痛苦面具，最后不知道改了什么，最后一分钟一发入魂 2971 ms AC ，Imakf 伟大，无需多言。</p>
+<p>队长名言：看到比例就应该想到分数规划，然后就应该想到差分约束啊。</p>
+<p>队长伟大，无需多言。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/27/The-3rd-Ucup-Stage-5-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/">http://oldplace.github.io/2024/07/27/The-3rd-Ucup-Stage-5-%E8%B5%9B%E5%90%8E%E5%B0%8F%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#M"><span class="toc-number">1.</span> <span class="toc-text">M</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A"><span class="toc-number">2.</span> <span class="toc-text">A</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F"><span class="toc-number">3.</span> <span class="toc-text">F</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">4.</span> <span class="toc-text">B</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E"><span class="toc-number">5.</span> <span class="toc-text">E</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#K"><span class="toc-number">6.</span> <span class="toc-text">K</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C"><span class="toc-number">7.</span> <span class="toc-text">C</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#G"><span class="toc-number">8.</span> <span class="toc-text">G</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D"><span class="toc-number">9.</span> <span class="toc-text">D</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#L"><span class="toc-number">10.</span> <span class="toc-text">L</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于如何思考有向图游戏上的不对称博弈问题 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="讲个笑话，这篇文章本来是想用来辅助证明 Moscow-International-Workshops-2017-Day-4-赛后小结中 I 的结论的，但是最后没有用到。 首先关于能建出 DAG 的不对称博弈，我们需要先确定一个事情，DAG dp 得到的 $ans$ 的就是答案。 原因是如果我是后手，只要给我 DAG 的 dp 转移过程，无论你是什么决策，我就一定能让你 $\ge ans$ ，而后手">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于如何思考有向图游戏上的不对称博弈问题">
+<meta property="og:url" content="http://oldplace.github.io/2024/08/01/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%80%9D%E8%80%83%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F%E4%B8%8A%E7%9A%84%E4%B8%8D%E5%AF%B9%E7%A7%B0%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="讲个笑话，这篇文章本来是想用来辅助证明 Moscow-International-Workshops-2017-Day-4-赛后小结中 I 的结论的，但是最后没有用到。 首先关于能建出 DAG 的不对称博弈，我们需要先确定一个事情，DAG dp 得到的 $ans$ 的就是答案。 原因是如果我是后手，只要给我 DAG 的 dp 转移过程，无论你是什么决策，我就一定能让你 $\ge ans$ ，而后手">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-08-01T03:11:49.000Z">
+<meta property="article:modified_time" content="2024-08-11T11:49:04.486Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/08/01/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%80%9D%E8%80%83%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F%E4%B8%8A%E7%9A%84%E4%B8%8D%E5%AF%B9%E7%A7%B0%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于如何思考有向图游戏上的不对称博弈问题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2024-08-11 19:49:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">关于如何思考有向图游戏上的不对称博弈问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-01T03:11:49.000Z" title="发表于 2024-08-01 11:11:49">2024-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-11T11:49:04.486Z" title="更新于 2024-08-11 19:49:04">2024-08-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="关于如何思考有向图游戏上的不对称博弈问题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>讲个笑话，这篇文章本来是想用来辅助证明 Moscow-International-Workshops-2017-Day-4-赛后小结中 I 的结论的，但是最后没有用到。</p>
+<p>首先关于能建出 DAG 的不对称博弈，我们需要先确定一个事情，DAG dp 得到的 $ans$ 的就是答案。</p>
+<p>原因是如果我是后手，只要给我 DAG 的 dp 转移过程，无论你是什么决策，我就一定能让你 $\ge ans$ ，而后手绝顶聪明，故答案 $\ge ans$ 。</p>
+<p>同理，我是先手，可以证明 $\le ans$ ，所以是答案。</p>
+<p>所以直接在 DAG 上 dp 是对的，问题是很多问题并不能在 DAG 上 dp ，所以就涉及了脱离 DAG 怎么思考不对称博弈的问题了。</p>
+<p>不妨声称，我们只需要思考下面形式的决策：认为对手什么操作都做的出来，在任意一个状态，对手做出任何一个可行的操作后，我们会做出一个怎样的决策（即状态和对手操作唯一决定我的策略，没有任何别的因素）。这种决策很符合理性直觉。至于证明也非常简单，只要我们能构造一个答案相等的问题就行了。</p>
+<p>为此，我们需要先思考一个问题，怎么知道一种决策对应的答案呢？即后手遵循怎样的策略呢？</p>
+<ol>
+<li>后手目的是为了使你的答案最劣，根据你的决策。（即在 DAG 上根据这个决策进行 dp ，得到使先手最劣的决策；也可以认为是后手根据先手的决策穷举所有的决策，最终得到使先手决策答案最劣的决策；或者认为是根据先手决策改造 DAG ，然后在这 DAG 上跑最长路）</li>
+<li>后手目的是为了使你的答案最劣，根据你的最优决策。（这一句话指，忽略前面的操作，在当前状态下，后手会认为你绝顶聪明的情况下进行操作，使你的答案最劣。换句话说：其的决策是 DAG dp 上的其中一个最优转移）</li>
+</ol>
+<p>（如果你看过我后面写的内容，这里可以说一下为什么这里的方案 1 不会出现我预判你的预判的情况，因为这里先手指定策略完全不会受后手的具体决策影响，所以不会有这个问题）</p>
+<p>显然，从 DAG dp 的角度可以证明，采用上面任意一种方案给每个决策赋予其答案，最终的最优答案都等于原问题的答案。<del>甚至混合使用也是，但是显然正常人不会这么干</del></p>
+<p>但是采用方案 $2$ 有一个问题，就是可能会使不是最优决策的决策拥有最优答案，这在某些找最优决策的题可能会出问题。</p>
+<p>总之，这个思考方法的核心就是，不要管别的乱七八糟的可能的决策，我们就划分出一块可以思考而且答案在里头的决策用于思考。</p>
+<p>类似的，也可以用 DAG dp 证明一些别的思考方法，反正只要证明这个思考方法的答案不变就行了。</p>
+<p>这里举个例子：一种可能的思考方式是认为后手在每个状态的决策是固定的，是 DAG dp 最优决策的其中一个（是哪一个在一开始就固定了，不会中途改变，虽然可以改变也是对的，但是思考起来可能会比较麻烦），在此基础上，先手要最优化答案，根据 DAG dp ，这显然也是对的。两个思考方法各有优劣，如果你能够思考出后者的最优策略，那么你就能直接当成一个非博弈题来做，但是如果你思考不出最优策略，那么一个存在但是你不知道的后手的固定策略反而会让你的思考僵化。</p>
+<p>当然，除了直接思考不对称博弈的策略，还有许多种方法可以绕过这个过程，直接得到答案是啥：</p>
+<ol>
+<li>证明先手存在策略使得答案 $\le ans$ ，无论后手策略是啥；证明后手存在策略使得答案 $\ge ans$ ，无论先手策略是啥。所以答案就是 $ans$ 。</li>
+</ol>
+<p>下面的可以不用看了，想知道这篇博客背景的可以看看，上面已经总结完我最终得到的思考方法了。</p>
+<hr>
+<p>说起来，我在写小结的时候突然发现，我在思考不对称博弈的时候思维总是是混乱的，所以这里写一篇博客来理一理怎么思考不对称博弈。</p>
+<p>这里放一个不对称博弈的例子：</p>
+<p><a target="_blank" rel="noopener" href="https://qoj.ac/contest/1213/problem/6370">https://qoj.ac/contest/1213/problem/6370</a></p>
+<p>在思考这一类问题的时候，我总是会陷入一个误区，为什么不会出现我预判了你的预判的这种情况，就总是会想，虽然我可以证明这个世界线这样变方案不会更劣，但是说不定对手不如我的愿，改变了策略，反而使这种改变更劣了呢？</p>
+<p>虽然直觉上，我改变了一条世界线，肯定不应该改变另外一条世界线，两者的决策应该是根据当前状态，而不会根据对手的策略，但是真要严谨证明上述过程，不借助具体模型，纯口胡总是很难表达清楚，总会陷入循环证明的情况；要么就十分的复杂，最后把自己都绕晕了；要么就涉及一点感性，怎么想都感觉别扭，什么一定最优，不会改变之类的（当然也有可能我是先天笨蛋圣体）。</p>
+<p>以上面的例子为例，显然的，可以建出一个 DAG ，表示转移，显然最小值可以通过 DAG 转移出来，这样得出最小值的方法简单明了，清晰易懂，不会有任何争议。但是直接让我在原问题上想怎么通过优化决策的方式得到最小值，我就不知道为什么，总会觉得哪里很不对劲，哪里想错了，而且事实是在比赛时也确实想错了几次。</p>
+<p>update ：后面发现有些疑惑的产生是因为题目让对手在大局上绝顶聪明，目标是阻止我，而细化到局部，“阻止我”这句话太过感性，没有具体的模型思考的话，我就总会感觉感性，会感觉怪怪的，所以解决方法就是找个模型就行了，具体见上面。</p>
+<p>所以这里提供几个方法。</p>
+<ol>
+<li><p>直接证明这是答案的下界，然后取得到。</p>
+<p>这种方法相当于直接规避掉了决策方案的讨论，类似投机取巧的方法，上面的那个问题就比较难用，但是方便直观。</p>
+</li>
+<li><p>仔细思考一下，上面我们为什么会陷入疑惑，即为什么两者的决策会跟对手有关，我思考了一下，感觉可能是潜意识中对下述两个问题的混淆：</p>
+<ol>
+<li><p>如何在知道对手决策的情况下使得其答案更劣？（指裁判方的决策，下个问题同）</p>
+</li>
+<li><p>如何在知道对手决策的情况下使得其在最优情况下答案更劣，或者换句话说，如果这个时候，对手换成绝顶聪明的人，我们什么操作能使对方得到最劣的答案？</p>
+<p>说到底我会疑惑主要是很多时候陷入到了前者，但实际我们应该考虑后者。注意到后半句话其实和题目要求很像：认为对手绝顶聪明。这两个问题的本质区别在于，实际想问题的时候，我们在追求最优方案，即我们在尝试模拟绝顶聪明的人是怎么想的。但绝顶聪明是怎么定义的呢？怎样算绝顶聪明的呢？</p>
+<p>如果在类似 LOL 这种游戏，必须要考虑对手决策的情况下，这种问题是难以回答的，但是在 DAG 上时，这种绝顶聪明是可以定义的，就是只要决策符合 DAG 上 dp 的最优转移，这个操作就是绝顶聪明的人能干出来的。</p>
+<p>而我们在尝试找到己方最优方案的同时，我们在模拟对方的方案的时候，其实潜意识中认为了对方知道我们不是绝顶聪明的这个信息，从而对方会尝试通过我们的决策找到最劣的答案（问题 1）。但实际的问题一定是我们就是绝顶聪明，对手也知道（问题 2）。因此在 DAG 问题上，对手的操作可以认为是基本固定的。</p>
+<p>因此，我们可以在疑惑的时候，多想想我们是不是把问题 2 搞错成了问题 1 。</p>
+<p>所以一个好的<strong>解决方法</strong>就是，既然对手在问题 2 的情况下，操作是基本固定的，那么我们不妨就直接固定下来，具体来说，将问题转化为：</p>
+<p>当对手碰到某个状态，一定会进行 DAG dp 上所指示的其的最优策略，有多个进行其中任意一个即可。显然这样不会改变答案（证明就 dp 一下就行了，发现转移是不变的），这样就将对手操作固定，从活物变成规则集，这样会好思考很多。</p>
+<p>在这个新的问题上，为啥改变其中一条时间线不会影响到其他时间线的原因就显然了，只要我其他时间线的决策不变，而对手的决策是固定的，所以显然就不会变。</p>
+</li>
+</ol>
+</li>
+<li><p>就认为对手并不是绝顶聪明的，是一个会给出任意策略的神经，因此你在思考最优策略的时候，必须在所有状态，都决定好其打出任意可行操作后的策略，这个思考方法可以认为就是在有向图游戏上 dp 过程的具象化，有向图游戏上的 dp 过程在得到我方某个状态的最优解的时候，实际上就是穷举了对手下一步的所有操作并转移的。</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/08/01/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%80%9D%E8%80%83%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F%E4%B8%8A%E7%9A%84%E4%B8%8D%E5%AF%B9%E7%A7%B0%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98/">http://oldplace.github.io/2024/08/01/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E6%80%9D%E8%80%83%E6%9C%89%E5%90%91%E5%9B%BE%E6%B8%B8%E6%88%8F%E4%B8%8A%E7%9A%84%E4%B8%8D%E5%AF%B9%E7%A7%B0%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

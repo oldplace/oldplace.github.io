@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>KMP 和 PAM 的可持久化 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="KMP 和 PAM 的可持久化主要解决一个问题：去均摊分析。 KMP 的可持久化操作：  插入字符 回溯 问最大周期  希望能维护一个 KMP 形状的可持久化结构。 方法 1为了去除时间复杂度中的均摊分析部分，类似 AC 自动机一样，如果一个前缀的某个儿子不是其下一个字符，那么记录其的失配（不知道叫不叫这个名字，反正这么个意思）。 所以，将每个节点的儿子数组用可持久化结构维护，同时把 fail 树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP 和 PAM 的可持久化">
+<meta property="og:url" content="http://oldplace.github.io/2024/07/26/KMP-%E5%92%8C-PAM-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="KMP 和 PAM 的可持久化主要解决一个问题：去均摊分析。 KMP 的可持久化操作：  插入字符 回溯 问最大周期  希望能维护一个 KMP 形状的可持久化结构。 方法 1为了去除时间复杂度中的均摊分析部分，类似 AC 自动机一样，如果一个前缀的某个儿子不是其下一个字符，那么记录其的失配（不知道叫不叫这个名字，反正这么个意思）。 所以，将每个节点的儿子数组用可持久化结构维护，同时把 fail 树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-07-26T11:54:34.000Z">
+<meta property="article:modified_time" content="2024-07-26T13:07:21.573Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="字符串">
+<meta property="article:tag" content="可持久化">
+<meta property="article:tag" content="KMP">
+<meta property="article:tag" content="PAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/07/26/KMP-%E5%92%8C-PAM-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KMP 和 PAM 的可持久化',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-07-26 21:07:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">KMP 和 PAM 的可持久化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-26T11:54:34.000Z" title="发表于 2024-07-26 19:54:34">2024-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-26T13:07:21.573Z" title="更新于 2024-07-26 21:07:21">2024-07-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KMP 和 PAM 的可持久化"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>KMP 和 PAM 的可持久化主要解决一个问题：去均摊分析。</p>
+<h1 id="KMP-的可持久化"><a href="#KMP-的可持久化" class="headerlink" title="KMP 的可持久化"></a>KMP 的可持久化</h1><p>操作：</p>
+<ol>
+<li>插入字符</li>
+<li>回溯</li>
+<li>问最大周期</li>
+</ol>
+<p>希望能维护一个 KMP 形状的可持久化结构。</p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法 1"></a>方法 1</h2><p>为了去除时间复杂度中的均摊分析部分，类似 AC 自动机一样，如果一个前缀的某个儿子不是其下一个字符，那么记录其的失配（不知道叫不叫这个名字，反正这么个意思）。</p>
+<p>所以，将每个节点的儿子数组用可持久化结构维护，同时把 fail 树的结构也给类似的可持久化一下（这个可持久化不是指用可持久化数据结构维护，是指后一个版本的 fail 树可以借用前一个版本 fail 树的一些节点，只要这些节点信息相同）。</p>
+<p>所以每次插入字符只需要修改两个节点：一个原来的后缀，一个新增的后缀，同时新的 fail 树除了这两个节点以外的部分都不用动，而且原后缀在 fail 树中没有节点指向他，所以可以直接在新 fail 树上偷梁换柱，以下是一个例子：</p>
+<p>![1.png]</p>
+<p>时间复杂度：$O(q\log{S})$ 。</p>
+<p>但是需要注意，这样子形成的失配结构和 AC 自动机有本质区别，什么意思呢？</p>
+<p>如果我们按照回溯的情况，来建出一个 Trie ，然后在这个 Trie 上跑出 AC 自动机，那么这个 AC 自动机的失配和可持久化的失配是不同的。</p>
+<p>例如：$ab$ 后回溯，插入 $b$ ，如果 AC 自动机，回溯后 $ab$ 会指向 $b$ ，可持久化不会。</p>
+<p>这种做法的本质是在时间 Trie 上维护每个点到根的失配数组，由于不基于均摊，时间复杂度是对的，当然，既然都这样了，也可以不用可持久化的方式维护失配树组，直接开一个数组，时间复杂度是：$O(qS)$ 的。</p>
+<p>如果还要维护原串信息，原串也得用可持久化线段树维护一下。</p>
+<p>一点变式：</p>
+<p>众所周知，字符串的数据结构往往可以在维护的时候往上跳几个 fail ，有时候会有奇效，比如 SAM 时间复杂度的证明就要看 last 的 fail 相关的信息。</p>
+<p>而这里也可以，我们可以维护一个新的 $\mathrm{quick[c]}$ 数组，表达的意思是，如果这个节点失配了，那么其最长的前缀满足下一个字符是 $c$ 是哪个节点。</p>
+<p>这个的意义在哪呢？它弱化了字符串的存在，认为每个节点都是一个字符串（原字符串的前缀），而 $\mathrm{quick[c]}$ 只由这个节点的字符串决定，而不由总的字符串决定，这有时候会方便思考。</p>
+<p>而这种遍历在 KMP 上体现的一般不多，但是在其余数据结构例如 PAM 上体现就比较多了，因为 KMP 上每个节点的字符串和原串前缀一一对应，因此即使只看每个节点的字符串，两者关系也是藕断丝连，但是 PAM 不一样，他是从原串中抽离出所有回文串，因此这个变式就显得很有用了。</p>
+<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法 2"></a>方法 2</h2><p>KMP 的失配有一个很重要的结论：</p>
+<p>如果 $x$ 在跳 $fail$ 的时候失败了，而且 $2\mathrm{len[fail[x]]}&gt;\mathrm{len[x]}$ ，那么可以直接跳到 $len[x]\%(len[x]-len[fail[x]])+(len[x]-len[fail[x]])$ ，用这个结论，再用可持久化数据结构维护一下 $fail$ 数组和原串就轻轻松松了。</p>
+<p>时间复杂度：$O(q\log^2{n})$ 。</p>
+<p>慢了，但是好写得多，而且原串信息也顺便维护了，所以这是 KMP 可持久化的主流写法。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5287">https://www.luogu.com.cn/problem/P5287</a></p>
+<h1 id="PAM-的可持久化"><a href="#PAM-的可持久化" class="headerlink" title="PAM 的可持久化"></a>PAM 的可持久化</h1><h2 id="PAM-的去均摊化"><a href="#PAM-的去均摊化" class="headerlink" title="PAM 的去均摊化"></a>PAM 的去均摊化</h2><p>PAM 和 KMP 不同的是，每个节点和原串关系，但不多，因为你不能说每个回文串在原串中的前一个字符和后一个字符是啥，回文串是原串中抽象的概念。</p>
+<p>但是注意到，现在我们从一个 PAM 上的节点开始匹配，我们只关心两个值：这个串在现在串位置中的前一个字符 $c_1$ 和后一个字符 $c_2$ 。</p>
+<p>那我们是不是要维护 $S^2$ 种结果呢？</p>
+<p>不然，还是那句话，字符串的数据结构总是可以往 fail 上跳一跳，我们维护在这个节点失配后往上跳的匹配结果，注意到这时上面的回文前后缀一定在这个回文串的里面，所以只要我们知道这个回文串，下面的串所需要的他们的前一个字符我们就已知了。</p>
+<p>所以，我们维护 $\mathrm{quick[c]}$ 表示这个节点失配后，后一个字符是 $c$ 的匹配结果，类似 KMP 的，可以 $O(S)$ 数组维护或者 $O(\log{S})$ 可持久化维护。</p>
+<h2 id="PAM-的各种扩展"><a href="#PAM-的各种扩展" class="headerlink" title="PAM 的各种扩展"></a>PAM 的各种扩展</h2><h3 id="后面添加-删除"><a href="#后面添加-删除" class="headerlink" title="后面添加/删除"></a>后面添加/删除</h3><p>直接用去均摊化的 PAM 即可。</p>
+<p>注意在每个节点维护这个节点作为最长后缀的次数，归零删除。</p>
+<h3 id="Trie-上的-PAM"><a href="#Trie-上的-PAM" class="headerlink" title="Trie 上的 PAM"></a>Trie 上的 PAM</h3><p>如果不均摊化，类似 AC 自动机，时间复杂度是所有叶子节点深度和。</p>
+<p>均摊化是 size ，原串信息可以在 DFS 时记录。</p>
+<h3 id="可持久化-PAM"><a href="#可持久化-PAM" class="headerlink" title="可持久化 PAM"></a>可持久化 PAM</h3><p>同样的，只不过需要用可持久化数据结构维护一下原串信息。</p>
+<h2 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h2><p>Trie PAM ：<a target="_blank" rel="noopener" href="https://vjudge.net/problem/CodeChef-TREEPAL">https://vjudge.net/problem/CodeChef-TREEPAL</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/07/26/KMP-%E5%92%8C-PAM-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/">http://oldplace.github.io/2024/07/26/KMP-%E5%92%8C-PAM-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a><a class="post-meta__tags" href="/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96/">可持久化</a><a class="post-meta__tags" href="/tags/KMP/">KMP</a><a class="post-meta__tags" href="/tags/PAM/">PAM</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/02/11/Border%E7%90%86%E8%AE%BA/" title="Border学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-21</div><div class="title">Border学习笔记</div></div></a></div><div><a href="/2024/02/16/CF1526-E-Oolimry-and-Suffix-Array-%E4%BB%8E%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%8F%8D%E6%8E%A8%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="CF1526 E. Oolimry and Suffix Array(从后缀数组反推字符串)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">CF1526 E. Oolimry and Suffix Array(从后缀数组反推字符串)</div></div></a></div><div><a href="/2023/09/02/ECNU-2023-8-D-Mutton-string/" title="ECNU 2023.8 D. Mutton string"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-06-03</div><div class="title">ECNU 2023.8 D. Mutton string</div></div></a></div><div><a href="/2024/08/11/Lyndon-Runs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Lyndon &amp; Runs 学习笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-08-12</div><div class="title">Lyndon &amp; Runs 学习笔记</div></div></a></div><div><a href="/2024/02/11/Strange-Keyboard/" title="Strange Keyboard"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-02-11</div><div class="title">Strange Keyboard</div></div></a></div><div><a href="/2024/05/30/The-2nd-Ucup-Stage-2-SPb-M-Hardcore-String-Counting/" title="The 2nd Ucup Stage 2: SPb M. Hardcore String Counting"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-05-30</div><div class="title">The 2nd Ucup Stage 2: SPb M. Hardcore String Counting</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">61</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#KMP-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">KMP 的可持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-number">1.1.</span> <span class="toc-text">方法 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-number">1.2.</span> <span class="toc-text">方法 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.3.</span> <span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PAM-%E7%9A%84%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">PAM 的可持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM-%E7%9A%84%E5%8E%BB%E5%9D%87%E6%91%8A%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">PAM 的去均摊化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM-%E7%9A%84%E5%90%84%E7%A7%8D%E6%89%A9%E5%B1%95"><span class="toc-number">2.2.</span> <span class="toc-text">PAM 的各种扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E9%9D%A2%E6%B7%BB%E5%8A%A0-%E5%88%A0%E9%99%A4"><span class="toc-number">2.2.1.</span> <span class="toc-text">后面添加&#x2F;删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trie-%E4%B8%8A%E7%9A%84-PAM"><span class="toc-number">2.2.2.</span> <span class="toc-text">Trie 上的 PAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96-PAM"><span class="toc-number">2.2.3.</span> <span class="toc-text">可持久化 PAM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-1"><span class="toc-number">2.3.</span> <span class="toc-text">练习</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
