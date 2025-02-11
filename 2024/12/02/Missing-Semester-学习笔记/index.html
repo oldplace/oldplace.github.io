@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Missing Semester 学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="7. Debugging and Profiling杂项 使用颜色高亮输出，以更方便的获取信息，比如日志中使用不同颜色高亮不同严重程度的信息。 在大多数的 UNIX 系统，日志通常放在 &#x2F;var&#x2F;log 下。 logger(shell 指令) :  可以用来记录日志，例如：logger &quot;Hello&quot; 可以将 Hello 记录在系统日志中。 time(shell 指令) : 计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Missing Semester 学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2024/12/02/Missing-Semester-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="7. Debugging and Profiling杂项 使用颜色高亮输出，以更方便的获取信息，比如日志中使用不同颜色高亮不同严重程度的信息。 在大多数的 UNIX 系统，日志通常放在 &#x2F;var&#x2F;log 下。 logger(shell 指令) :  可以用来记录日志，例如：logger &quot;Hello&quot; 可以将 Hello 记录在系统日志中。 time(shell 指令) : 计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2024-12-02T01:15:41.000Z">
+<meta property="article:modified_time" content="2024-12-17T14:30:46.091Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2024/12/02/Missing-Semester-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Missing Semester 学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-12-17 22:30:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Missing Semester 学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-02T01:15:41.000Z" title="发表于 2024-12-02 09:15:41">2024-12-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-17T14:30:46.091Z" title="更新于 2024-12-17 22:30:46">2024-12-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">CS学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Missing Semester 学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="7-Debugging-and-Profiling"><a href="#7-Debugging-and-Profiling" class="headerlink" title="7. Debugging and Profiling"></a>7. Debugging and Profiling</h1><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul>
+<li>使用颜色高亮输出，以更方便的获取信息，比如日志中使用不同颜色高亮不同严重程度的信息。</li>
+<li>在大多数的 UNIX 系统，日志通常放在 <code>/var/log</code> 下。</li>
+<li><code>logger</code>(shell 指令) :  可以用来记录日志，例如：<code>logger &quot;Hello&quot;</code> 可以将 <code>Hello</code> 记录在系统日志中。</li>
+<li><code>time</code>(shell 指令) : 计算程序运行所花的三种时间。</li>
+<li><code>strace</code>(shell 指令) : UNIX 系统上操作分为两种，用户级代码(user level code)，内核级代码(kernel level code) ，该指令可以追踪程序执行了那些系统调用。</li>
+<li><code>tac</code>(shell 指令) : (<code>cat</code> 反过来写) 读取文件并从下往上输出，在 shell 可以免去翻滚看顶部的苦恼。</li>
+<li><code>perf</code>(shell 指令) : 分析程序表现，比如执行了多少个 CPU 时钟等等。</li>
+</ul>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>调试方式：</p>
+<ul>
+<li>printf debugging : 在代码中插入输出语句输出需要的信息进行调试。</li>
+<li>logging : 使用日志进行调试。优点：可以定义严重性程度，并进行过滤；</li>
+<li>调试器调试 : 比较大的错误不如上面两者，效率比较低，但是对于某些错误使用这个方法有奇效，比如比较短的代码发生 Runtime error。</li>
+<li>静态分析工具：以源代码为输入，输出可能有问题的部分。（有英语的静态分析工具，狂喜）</li>
+</ul>
+<h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>实际时间(real)：代码运行的实际时间<br>用户时间(user)：执行用户级指令所花的时间。<br>系统时间(sys)：执行内核指令所花的时间。</p>
+<p>例子：</p>
+<ol>
+<li><code>sleep x</code> 的实际时间不是 x 秒，会有些误差，很好理解，有别的程序在占用程序资源，导致实际时间大于理论实践，且会浮动。</li>
+<li><code>time curl URL</code>(URL是某个网站) 得到 $real=x,user=y,sys=z$ ，则实际本机执行命令时间为 $y+z$ ，而在等待网站响应等其他事情上花了 $x-(y+z)$ 。</li>
+</ol>
+<p>分析方式：</p>
+<ul>
+<li>printf profiling : 获取每段代码前后两个时间点，作差输出时间差得到运行时间，得到代码运行的实际时间。</li>
+<li>分析器：分为跟踪分析和采样分析，跟踪分析：跟着程序一起执行，返回每个部分的时间（因此会影响程序的性能，会得到偏差的数据）。采样分析：执行一段时间终止程序，根据堆栈等信息返回程序现在的位置。</li>
+</ul>
+<h1 id="8-Metaprogramming"><a href="#8-Metaprogramming" class="headerlink" title="8. Metaprogramming"></a>8. Metaprogramming</h1><p>标题欺诈，实际是将软件开发流程的。</p>
+<h2 id="构建系统"><a href="#构建系统" class="headerlink" title="构建系统"></a>构建系统</h2><p>为了得到一个文件，有时候会执行一系列的指令，使用某些工具可以自动化这个过程，甚至减少构建过程中的工作量，加快构建之间，比如 : <code>make</code> ，配置 $\text{makefile}$ 文件可以自动化执行指令并生成一些列你需要的文件，其会自动执行指令、寻找执行指令需要的依赖项和避免不必要的工作（比如依赖项没变，就不执行命令生成一个一样的文件）。</p>
+<h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2><h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>在编写版本号时，一个可行的版本号设计是 <code>x.y.date</code> 其中 $\text{x,y}$ 是版本号，$\text{date}$ 是日期，这样的版本号有个问题，以编写函数库为例子，现在有三种更新：</p>
+<ol>
+<li>打补丁，补漏洞。</li>
+<li>添加新的功能。</li>
+<li>减少功能、重命名功能。</li>
+</ol>
+<p>$\text{1}$ 对依赖的影响最小，甚至如果用到的特性与补丁漏洞无关，用低版本没有任何区别，$\text{2}$ 不具有向前兼容性，旧版本无法适应高版本，$\text{3}$ 则不具有向后兼容性，依赖低版本的软件在高版本中使用。因此，如果不在版本号中对这三者加以区分，可能会使使用者十分痛苦，也就是无法根据版本号看出哪些版本可能是兼容的（兼容是十分重要的，如果每个软件都依赖一个库的特定版本，不兼容其他版本，那为了同时运行这些软件就要下很多个版本的同一个库，这显然是痛苦的）。</p>
+<p>比如都是小的版本号，$\text{1.0}\to\text{1.1}$ 修改了补丁，而 $\text{1.1}\to\text{1.2}$ 增加了新的特性，可能会让使用软件的人疑惑，为啥依赖 $\text{1.1}$ 的可以依赖于 $\text{1.0}$ ，而依赖 $\text{1.2}$ 的则无法向前兼容。所以使用者很难根据版本号，推断出哪些版本是能够兼容的。</p>
+<p>因此一个方法是采用 <code>x.y.z</code> ，$\text{x}$ 表示破坏向后兼容的更新，$\text{y}$ 表示破坏向前兼容的更新，$\text{z}$ 则是补丁，Python 的版本号就遵循类似的规则。</p>
+<h3 id="锁定文件"><a href="#锁定文件" class="headerlink" title="锁定文件"></a>锁定文件</h3><p>在构建依赖关系的时候，锁定某个文件在某个版本或者某个状态。</p>
+<p>好处：</p>
+<ol>
+<li>加快构建时间，不用每次构建都更新这个文件（构建系统可能会每次更新所需的依赖项）或者更新状态。</li>
+<li>将软件锁定在某个状态，比如和安全有关的软件，可能因为依赖项更新所产生的安全漏洞，而导致软件的不安全。</li>
+</ol>
+<p>坏处：失去更新依赖项新版本的好处，比如新版本修复了一个安全漏洞等等。</p>
+<h3 id="持续集成-Continuous-Integration-CI"><a href="#持续集成-Continuous-Integration-CI" class="headerlink" title="持续集成(Continuous Integration/CI)"></a>持续集成(Continuous Integration/CI)</h3><p>本质上是云构建系统，将构建系统存储在网上，对项目进行构建，持续集成可以干很多事情，一个经典的操作是将系统设置为条件触发，在触发条件后，执行一系列指令。</p>
+<p>网上有很多持续集成的服务，例如 : Github Action，dependabot（一个能在依赖项更新时提醒你更新的工具，也就是说持续集成可能在项目没有发生任何改变的时候也有可能触发，总之触发条件可以各种各样，十分灵活）。</p>
+<p>在将持续集成嵌入项目中时，可以设置该持续集成项目提供的徽章来表明你设置了这个服务，下面是视频中的例子。</p>
+<p><img src="1.png" alt=""></p>
+<p>还有一个例子是我现在就在用的 Github Pages，将用户上传的 Markdown 文件通过 Jekyll 解析为 HTML 文件并且部署在 Github 提供的子域名上形成静态网站。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>讲了些术语。</p>
+<p>测试套件：程序所有测试的简称。</p>
+<p>单元测试：通常是比较小的，自包含的测试，用来测试某项特定的功能</p>
+<p>集成测试：测试程序不同子系统间的交互。</p>
+<p>回归测试：在发现 BUG 并修复后，将测试该 BUG 的测试加入到测试中防止未来再次发生。</p>
+<p>模拟(mocking)：用虚拟的方式替换掉某些部分，起到检测特定功能的目的，比如测试 SSH 进行文件拷贝的工具时，可以将 SSH 的部分改成另外一个模拟函数，正常的输入输出，让其余部分认为这一部分在正常工作，这样就可以专门测试文件拷贝的部分。</p>
+<h1 id="Security-and-Cryptography"><a href="#Security-and-Cryptography" class="headerlink" title="Security and Cryptography"></a>Security and Cryptography</h1><h2 id="熵与密码"><a href="#熵与密码" class="headerlink" title="熵与密码"></a>熵与密码</h2><p>这里的熵指信息量，以 bit 为单位，计算公式为：$\log_{2}{p}$ ，其中 $p$ 表示可能性，比如投硬币只有正反两面，所以是 $\log_{2}{2}=1$ 表示 $1\text{bit}$ 的可能性。</p>
+<p>而在平时设计密码的时候，根据设计密码的逻辑不同，对应的密码会有一定的熵，熵越高的密码理论上越难暴力破解，因为要尝试更多的可能性。同时给出了些数据，如果网站有一定保护，比如在密码错误若干次后会锁住一段时间之类的机制，则熵在 $40\text{bit}$ 左右就比较强了，但是如果没有，则要升到 $80\text{bit}$ 左右。</p>
+<p>同时讲了些比较强的密码生成规则，比如给一个字典，然后每次随机几个单词作为密码，那就有 $\text{单词数量}^{随即次数}$ 种可能，又或者将一句话中比较像数字的字母替换成数字，然后末尾加些标点符号之类的东西。</p>
+<h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>哈希函数打 OI 的再熟悉不过了，具体来说，是一个将任意输入变成固定长度输出的一个函数，具有以下性质：</p>
+<ol>
+<li>不可逆性，不能从输出倒退输入。</li>
+<li>结果确定，同一个输入只会有一个输出。</li>
+<li>抗碰撞性，很难构造具有同样输出的输入。（一般来说，根据需求，对抗碰撞性的强弱要求会有所不同，比如加密哈希函数的抗碰撞性要求会比较高）</li>
+</ol>
+<p><code>sha1sum</code>(shell指令)：从标准输入流读入并用 SHA1 算法输出加密结果。</p>
+<p>用途：</p>
+<ol>
+<li>生成存储地址，例如 git ，根据内容用哈希函数生成唯一的存储地址，可想而知，这对抗碰撞性的要求很高。</li>
+<li>验证文件，给文件生成哈希值，在下载时对比确定下载的就是目标文件。</li>
+<li>承诺方案，在进行类似猜你心中在想哪个数字之类的事情时，可以先把所猜数字的哈希值公布，然后在结束后验证结果，当然，可以采用某些手段来防止暴力试出结果，比如在加密前加入一些显然不会干扰验证的话：5 is the answer. 之类的。</li>
+<li>验证密码，数据库存储密码的哈希值，防止数据库泄露的时候直接泄露原密码，降低损失。</li>
+</ol>
+<h3 id="密钥生成函数-key-derivation-functions-KDFs"><a href="#密钥生成函数-key-derivation-functions-KDFs" class="headerlink" title="密钥生成函数(key derivation functions,KDFs)"></a>密钥生成函数(key derivation functions,KDFs)</h3><p>哈希函数的变种，但有个额外的特性：计算速度较慢。</p>
+<p>用途：用来加密密码，来每次验证单个用户不会有明显的速度感觉，但是如果在破解的时候，涉及到大量的加密操作时，就会明显降低破解速度。</p>
+<h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><p>主要有以下三个函数：</p>
+<p>密钥生成函数(key gen)：随机或者按照某个规则生成密钥</p>
+<p>加密函数：给出明文和密钥，生成密文。</p>
+<p>解密函数：给出密文和密钥，生成明文。</p>
+<p>如果怕忘记密钥，可以用口令生成密钥，类似密码那样，但是要考虑强度问题，可能通过暴力尝试口令尝试所有密钥，所以要类似密码那样考虑可能性的问题。</p>
+<p><code>openssl</code>(shell指令)：加密解密内容，可指定算法。</p>
+<p>用途：在自己保留密钥的情况下，加密自己的文件防止被查看，比如上传到不信任的公共空间或者云盘上等，或者在私底下交换了密钥后，公开和别人进行加密通信。</p>
+<p>一种可能的破解方式：彩虹表，存储大量密文对应的明文，然后查询破解。</p>
+<p>应对手段：撒盐，给加密过程加上一些外部的随机因素，例如，外部加入一段随机出来的固定的字符串在文件末尾参与加密，这样原信息就不会因为收录在彩虹表中而导致破解。</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p>密钥生成函数：生成公钥和私钥。</p>
+<p>加密函数：给出明文和公钥，生成密文。</p>
+<p>解密函数：给出密文和私钥，生成明文。</p>
+<p>好处：可以公开公钥，让别人用公钥加密，发送给持有私钥的人，可以用于加密通信。</p>
+<p>用处：</p>
+<ol>
+<li>数字签名，签名者用私钥加密，然后公开公钥，发送密文，别人可用公钥解密验证身份，没有私钥的人无法伪造签名。</li>
+<li>加密通信，只要互相公开公钥，就可以进行加密通信。</li>
+<li>git也有类似的签名操作，但是我没看懂，相关的操作是 <code>tag</code> 。</li>
+</ol>
+<p>密钥分发(key distribution)：如何确保别人得到的是我的公钥，而不是别人的公钥。（感觉这个翻译成密钥有点奇怪，感觉应该是公钥）</p>
+<p>一些方法：</p>
+<ol>
+<li>非网络渠道交换，比如线下交换。</li>
+<li>由第三方平台的安全性保障，比如加密通信平台 Signal 的安全性就是由其服务器安全性保证。</li>
+<li>社会证明，将公钥和一系列社交平台用户绑定，只要没有一次性大量平台的账号被黑，就能确保公钥的安全性，一个对应的网站叫 keybase.io 。</li>
+</ol>
+<p>对应的一个更加宏大的问题是</p>
+<p>引导问题：通常指在没有预共享密钥和信任基础的情况下建立安全通信渠道的问题。</p>
+<h2 id="混合加密技术"><a href="#混合加密技术" class="headerlink" title="混合加密技术"></a>混合加密技术</h2><p>非对称加密比较慢，但是对称加密比较快，有没有综合两者优点的方法，对应的就是混合加密技术。</p>
+<p>用密钥对称加密源文件，再用非对称加密加密密钥，然后将加密后的密钥和密文发送过去，就可以综合两者的有点。</p>
+<h2 id="威胁模型-Threat-Modeling"><a href="#威胁模型-Threat-Modeling" class="headerlink" title="威胁模型(Threat Modeling)"></a>威胁模型(Threat Modeling)</h2><p>课上提到，去搜了一下，大概是说：</p>
+<p>在构建安全方案之前，先建立对应的问题模型，为安全设置合适的目标，比如假定现在服务器是安全的，而可能产生问题的是哪些环节，可能的攻击者是哪些，他们可能采取什么手段进行攻击等等。</p>
+<h1 id="大杂烩-Potpourri"><a href="#大杂烩-Potpourri" class="headerlink" title="大杂烩(Potpourri)"></a>大杂烩(Potpourri)</h1><p>介绍了很多概念，以及一些可能会用到的计算机工具（涉及的软件可能需要自行寻找）。</p>
+<h2 id="Key-mapping"><a href="#Key-mapping" class="headerlink" title="Key mapping"></a>Key mapping</h2><p>将键盘上的操作映射到一些别的操作，下面是一些具体的例子：</p>
+<ol>
+<li>将一个键或组合按键映射到另外一个键。</li>
+<li>将一个键或组合按键映射到一个具体的计算机操作，类似快捷键那样，例如打开一个浏览器窗口或者粘贴某段具体的文本。</li>
+<li>用键盘序列去映射到某个具体的操作，具体来说就是一连串的按键产生具体操作，例如 tmux 中 C-A 再 C-B 会对应着一个操作。</li>
+<li>一个按键在不同状态下对应不同的操作，例如将 CapsLock 在短按状态下对应 Esc，长按状态下 Ctrl 。</li>
+</ol>
+<h2 id="守护进程-daemons"><a href="#守护进程-daemons" class="headerlink" title="守护进程(daemons)"></a>守护进程(daemons)</h2><p>在后台运行，在系统启动运行到系统结束，或者在某种条件下运行的进程。</p>
+<p>系统中通常有个大的系统守护进程，用来管理系统中的所有守护进程，例如：Linux 中的 systemd 。</p>
+<p><code>systemctl</code>(shell指令)：用来查询现在执行的所有守护进程的状态。</p>
+<p>注：系统守护进程通常以 ‘d’ 结尾，例如：sshd, systemd 。</p>
+<h2 id="文件系统-file-system"><a href="#文件系统-file-system" class="headerlink" title="文件系统(file system)"></a>文件系统(file system)</h2><p>通常执行一个文件操作的时候，用户层面会将操作发送到内核，然后内核先判断对应的文件处在哪个文件系统（现在的文件系统可以模块化使用，也就是可以使用多个文件系统），再根据内置的文件系统去执行相应的操作，一个坏处是，我们无法在中间插入用户操作。</p>
+<p>FUSE 文件系统允许用户在文件操作时插入用户操作，所以有一些很酷的操作：</p>
+<ol>
+<li>在每次创建文件时发送一封邮件。</li>
+<li>将每次的文件操作都链到远程服务器，这样就相当于将远程服务器作为一个本地的一个文件夹。</li>
+<li>在文件操作时加密或解密对应的内容，这样在将磁盘取出置于另外一个文件系统时，看到的就是加密文件了。</li>
+</ol>
+<p>备份，课上提到了很多很有意思的备份观点。</p>
+<ol>
+<li>备份时考虑攻击者需要什么样的信息，才能将数据删除，从而采取不同的备份方式，例如：离线存储、云上存储等等。</li>
+<li>一些远程服务器的数据本地可能没有备份，比如邮件，如果账号丢失，封禁等等，数据就直接丢失了，有一些工具可以储存这些东西。</li>
+</ol>
+<h2 id="接口-API"><a href="#接口-API" class="headerlink" title="接口(API)"></a>接口(API)</h2><p>在使用一些服务的时候，这些服务会提供一些 API ，方便我们与服务交互，获取数据或者执行操作之类的。</p>
+<p>一个例子就是：有些网站可以通过访问 URL 的方式，根据 URL 中填写的参数，服务器会响应并返回结果。</p>
+<p><code>curl</code>(shell执行)：访问 URL 并返回结果。</p>
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>在涉及到需要文件名作为参数的时候，可以用 <code>-</code> 作为标准输入/输出的代称。</p>
+<p>在一些指令时，我们希望某些参数不要被识别为选项或者标志，例如我们像删除名叫 -r 的文件，但 rm 会将其视为选项，一个方法是 <code>--</code> ，会让命令将之后的所有东西都不识别为选项，前面的例子就是：<code>rm -- -r</code> 。</p>
+<h2 id="窗口管理器"><a href="#窗口管理器" class="headerlink" title="窗口管理器"></a>窗口管理器</h2><p>我们比较常用的是浮动窗口管理器，好处是简单易上手，有一些别的窗口管理器以效率为主。</p>
+<p>例如平铺窗口管理器，会将窗口填满整个总空间，类似于 tmux 那样，可以通过快捷键快速在窗口间切换。</p>
+<h2 id="虚拟专用网络-VPN"><a href="#虚拟专用网络-VPN" class="headerlink" title="虚拟专用网络(VPN)"></a>虚拟专用网络(VPN)</h2><p>一个经典的操作是，更改网络服务提供商。</p>
+<p>但如果目的是安全性，这未必安全，因为只是将信任主体从网络提供商变成了 VPN 提供商而已，他们可以监视你的流量。</p>
+<h2 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h2><p>一种标识文本的语言，太熟悉了。</p>
+<h2 id="Hammerspoon"><a href="#Hammerspoon" class="headerlink" title="Hammerspoon"></a>Hammerspoon</h2><p>MacOS的窗口管理工具，可以与操作系统进行交互实现一些很酷的操作，其他操作系统应该有类似的功能。</p>
+<p>可以通过 Lua 语言编写脚本，与显示管理、文件系统、电池等各种操作系统管理的东西交互。</p>
+<p>例如：</p>
+<ol>
+<li>执行键盘映射。</li>
+<li>用快捷键进行窗口布局。</li>
+<li>在窗口创建一个小菜单，上面提供一些会执行预设好的操作的选项。</li>
+<li>识别所处 Wi-Fi 环境，如果不是家中则静音防止外放。</li>
+</ol>
+<h2 id="Live-USB"><a href="#Live-USB" class="headerlink" title="Live USB"></a>Live USB</h2><p>电脑通常会配有一个 BIOS 系统用来在开机时启动系统，在开机时根据电脑的不同可以按不同的按键进入这个系统，来配置一些系统相关的东西，如果要在电脑上安装系统甚至多系统，应该对这个东西很熟。</p>
+<p>而 Live USB 是将操作系统和软件安装在 USB 上的一个工具，电脑在插入 Live USB 后，可以在 BIOS 上选择启动 Live USB 上的操作系统，来对计算机上的文件进行操作，例如计算机安装系统失败了等等，都可以用这种方式来补救。</p>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>用软件创造一个孤立的环境运行一个独立的操作系统，在这儿操作系统上隔离的执行一些操作防止影响到主机。</p>
+<p>还有一些类似思想的工具，例如 Docker ，在不安装系统的情况下，配备相应环境并运行该系统下的软件，比较轻量级。</p>
+<h2 id="笔记本编程环境"><a href="#笔记本编程环境" class="headerlink" title="笔记本编程环境"></a>笔记本编程环境</h2><p>这个比较抽象，大概是说可以将编程界面变得更加交互，例如一个叫 Jupyter notebook 的编程软件，可以分段式的运行 Python 代码，逐渐的构建起程序，听老师说在机器学习中会用到？不懂。</p>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p>主要讲了如何给 github 的项目做贡献。</p>
+<ol>
+<li>issue ，也就是反馈 BUG 或者是问题。</li>
+<li>pr(pull request) ，提供具体的代码给管理者。一般流程是将仓库克隆到本地，做出修改，提高 pr ，然后和管理者交流，管理者认同后将提交合并到主仓库。</li>
+</ol>
+<h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><p>C-o 跳转到上次停留的位置</p>
+<p>d/{string} 搜索是个名词</p>
+<p>C-i</p>
+<p>:eariler</p>
+<p>撤销记录</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2024/12/02/Missing-Semester-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://oldplace.github.io/2024/12/02/Missing-Semester-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Debugging-and-Profiling"><span class="toc-number">1.</span> <span class="toc-text">7. Debugging and Profiling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">1.1.</span> <span class="toc-text">杂项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-number">1.2.</span> <span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">性能分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-Metaprogramming"><span class="toc-number">2.</span> <span class="toc-text">8. Metaprogramming</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">构建系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.</span> <span class="toc-text">依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-number">2.2.1.</span> <span class="toc-text">版本号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%81%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.2.</span> <span class="toc-text">锁定文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90-Continuous-Integration-CI"><span class="toc-number">2.2.3.</span> <span class="toc-text">持续集成(Continuous Integration&#x2F;CI)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Security-and-Cryptography"><span class="toc-number">3.</span> <span class="toc-text">Security and Cryptography</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%86%B5%E4%B8%8E%E5%AF%86%E7%A0%81"><span class="toc-number">3.1.</span> <span class="toc-text">熵与密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-key-derivation-functions-KDFs"><span class="toc-number">3.2.1.</span> <span class="toc-text">密钥生成函数(key derivation functions,KDFs)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">3.3.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">3.4.</span> <span class="toc-text">非对称加密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF"><span class="toc-number">3.5.</span> <span class="toc-text">混合加密技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A8%81%E8%83%81%E6%A8%A1%E5%9E%8B-Threat-Modeling"><span class="toc-number">3.6.</span> <span class="toc-text">威胁模型(Threat Modeling)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E6%9D%82%E7%83%A9-Potpourri"><span class="toc-number">4.</span> <span class="toc-text">大杂烩(Potpourri)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-mapping"><span class="toc-number">4.1.</span> <span class="toc-text">Key mapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B-daemons"><span class="toc-number">4.2.</span> <span class="toc-text">守护进程(daemons)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-file-system"><span class="toc-number">4.3.</span> <span class="toc-text">文件系统(file system)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3-API"><span class="toc-number">4.4.</span> <span class="toc-text">接口(API)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="toc-number">4.5.</span> <span class="toc-text">命令行参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">4.6.</span> <span class="toc-text">窗口管理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91%E7%BB%9C-VPN"><span class="toc-number">4.7.</span> <span class="toc-text">虚拟专用网络(VPN)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown"><span class="toc-number">4.8.</span> <span class="toc-text">Markdown</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hammerspoon"><span class="toc-number">4.9.</span> <span class="toc-text">Hammerspoon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Live-USB"><span class="toc-number">4.10.</span> <span class="toc-text">Live USB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">4.11.</span> <span class="toc-text">虚拟机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%BC%96%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="toc-number">4.12.</span> <span class="toc-text">笔记本编程环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#github"><span class="toc-number">4.13.</span> <span class="toc-text">github</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">5.</span> <span class="toc-text">Q&amp;A</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

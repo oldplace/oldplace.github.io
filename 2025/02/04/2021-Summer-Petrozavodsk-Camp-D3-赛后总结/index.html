@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2021 Summer Petrozavodsk Camp D3 赛后总结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;103469 A没看，队友切了。 B一道答辩的数据结构题。 核心思路是维护每次修改所可能造成的影响。 显然，除 $w$ 向下取整这个部分显然是通过取模然后减去余数再除的方式搞定。 那么就是怎么维护这个乘法的问题了。 每次改变一个数字，会使得一些数字的排名减一或者加一，然后就是计算 $b_i * (i^k-(i-1)^k)$ ，然后就是拆组合数，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021 Summer Petrozavodsk Camp D3 赛后总结">
+<meta property="og:url" content="http://oldplace.github.io/2025/02/04/2021-Summer-Petrozavodsk-Camp-D3-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;103469 A没看，队友切了。 B一道答辩的数据结构题。 核心思路是维护每次修改所可能造成的影响。 显然，除 $w$ 向下取整这个部分显然是通过取模然后减去余数再除的方式搞定。 那么就是怎么维护这个乘法的问题了。 每次改变一个数字，会使得一些数字的排名减一或者加一，然后就是计算 $b_i * (i^k-(i-1)^k)$ ，然后就是拆组合数，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2025-02-04T11:52:06.000Z">
+<meta property="article:modified_time" content="2025-02-04T11:55:52.977Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2025/02/04/2021-Summer-Petrozavodsk-Camp-D3-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2021 Summer Petrozavodsk Camp D3 赛后总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-02-04 19:55:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">2021 Summer Petrozavodsk Camp D3 赛后总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-04T11:52:06.000Z" title="发表于 2025-02-04 19:52:06">2025-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-04T11:55:52.977Z" title="更新于 2025-02-04 19:55:52">2025-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2021 Summer Petrozavodsk Camp D3 赛后总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://codeforces.com/gym/103469">https://codeforces.com/gym/103469</a></p>
+<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>没看，队友切了。</p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p>一道答辩的数据结构题。</p>
+<p>核心思路是维护每次修改所可能造成的影响。</p>
+<p>显然，除 $w$ 向下取整这个部分显然是通过取模然后减去余数再除的方式搞定。</p>
+<p>那么就是怎么维护这个乘法的问题了。</p>
+<p>每次改变一个数字，会使得一些数字的排名减一或者加一，然后就是计算 $b_i * (i^k-(i-1)^k)$ ，然后就是拆组合数，即只要我们维护了：</p>
+<p>$b_i*i^j(j\le k)$ ，然后用组合数维护一下转移不就做完了吗？</p>
+<p>类似求 $\sum i^k$ 的思路转移就行了。</p>
+<p>时空复杂度都懒得算了，没写。</p>
+<p>当然，题解写的 $w^2$ 我觉得可以 $w$ ，即他认为 $b_i$ 和 $i$ 都需要维护模 $w$ 的结果，构成一个二维数组，但是我觉得 $b_i$ 那维没有必要。</p>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>答辩题，$\frac{n^3}{w}$ 的题目 $n=4000$ ，乐。</p>
+<p>不太难想，就是每次区间只可能更新一次，然后用 bitset 维护一下合并区间对其余区间的贡献就行了。</p>
+<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p>非常的 interesting ，就是每次将图分成两个部分，然后两个部分之间的边数必须是偶数条。</p>
+<p>当时搞错了一个事情，以为只要是两个部分的边加起来是偶数也可以。</p>
+<p>但是实际上不对，一个很简单的道理：欧拉回路的边数有可能是奇数的，减一减就知道这个说法不对了。</p>
+<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><p>非常的有意思，两次操作和固定，所以实际上我们只需要关心一个变量。</p>
+<p>两次操作分别为：$2x,2x-sum$ ，这个时候题目给的总和不能被 $p$ 整除就有用了，如果我们将目标和 $x$ 都除 $sum$ ，那么就可以变成枚举 $x*2^k$ ，然后减去一些 $2$ 的次幂，直接判断 $x-goal$ 能不能被拼出来就行了。</p>
+<p>时间复杂度：$q\log{p}$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line">LL mod;<span class="type">int</span> n;</span><br><span class="line"><span class="function">LL <span class="title">ksm</span><span class="params">(LL x,LL y)</span></span>&#123;</span><br><span class="line">    LL ans=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)&#123;</span><br><span class="line">        <span class="keyword">if</span>(y&amp;<span class="number">1</span>)ans=ans*x%mod;</span><br><span class="line">        x=x*x%mod;y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">check</span><span class="params">(<span class="type">int</span> val,LL x1,LL x2)</span></span>&#123;</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,val)x1=x1*<span class="number">2</span>%mod;</span><br><span class="line">    LL fuck=(x1-x2+mod)%mod;</span><br><span class="line">    <span class="keyword">while</span>(val &amp;&amp; fuck)fuck&gt;&gt;=<span class="number">1</span>,val--;</span><br><span class="line">    <span class="keyword">return</span> !fuck;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// freopen(&quot;std.in&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%d&quot;</span>,&amp;mod,&amp;n);</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        LL x1,y1,x2,y2;<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld%lld&quot;</span>,&amp;x1,&amp;y1,&amp;x2,&amp;y2);</span><br><span class="line">        LL sum=(x1+y1)%mod;</span><br><span class="line">        <span class="keyword">if</span>((x1+y1)%mod!=(x2+y2)%mod)&#123;<span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>);<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">2</span>)<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,x1!=x2);</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">int</span> x=<span class="number">0</span>;LL ni=<span class="built_in">ksm</span>(sum,mod<span class="number">-2</span>);x1=x1*ni%mod;x2=x2*ni%mod;</span><br><span class="line">            <span class="comment">// printf(&quot;%lld %lld\n&quot;,x1,x2);</span></span><br><span class="line">            <span class="keyword">while</span>(!<span class="built_in">check</span>(x,x1,x2))x++;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="G"><a href="#G" class="headerlink" title="G"></a>G</h1><p>非常神奇的计数题。</p>
+<p>实际上队友1说的话非常的正确，你的每种计数都能得到一个方程，现在就是用方程去拼出想要的方程。</p>
+<p>这道题目的技巧在于灵活的应用正图和反图进行容斥，比如有些只用正图得不到的方程是可以通过在反图中的计数得到结果的。</p>
+<p>计数过程需要用到 bitset 。</p>
+<p>时间复杂度：$O(\frac{n^3}{w})$ 。</p>
+<p><img src="1.png" alt=""></p>
+<p>结果就为：$\frac{2+3}{2}-1-4$ 。</p>
+<h1 id="H"><a href="#H" class="headerlink" title="H"></a>H</h1><p>大分类讨论题，不知道队友怎么过的。</p>
+<h1 id="I"><a href="#I" class="headerlink" title="I"></a>I</h1><p>不会。</p>
+<h1 id="J"><a href="#J" class="headerlink" title="J"></a>J</h1><p>简单来说，假设 $p,q$ 序列已知，那么我们能构造一种映射使得 $s$ 和矩阵一一对应。</p>
+<p>对应方法如下：</p>
+<p>特殊的，我们可以认为：$p_i=n-i+1$ ，那么从大到小依次放下 2n~1 ，假设我们 $p$ 放了 $x$ 个，$q$ 放了 $y$ 个，$s_{x+1}=1$ ，显然直接放在 $p$ ，否则只有当 $q_{x+1}$ 被放了数字才能且必须立即在 $p_{x+1}$ 的位置放下数字。</p>
+<p>然后就做完了。</p>
+<p>现在考虑怎么维护 $0$ ，多加一维不就行了？</p>
+<p>显然，我们只要知道 $q$ 序列中 $0$ 的对应位置有多少个位置矩阵上下都放了数字，我们就能推出所有的情况。</p>
+<p>即：$00,01,10,11$ ，知其一即可知所有。</p>
+<p>然后按照对应方法转移即可。</p>
+<p>时间复杂度：$O(n^3)$ 。</p>
+<p>当然，实际转移是 $4$ 维的，需要维护一维 $0/1$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">官方题解</summary><div class="toggle-content"><p>我们不妨认为 $p_i=i$ ，那么一个合法的 $01$ 序列有多少呢？</p>
+<p>答案是 $q$ 的上升子序列个数。</p>
+<p><details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>定义一个序列的标志子序列为从第一个位置开始，每次往后跳到第一个大于自己的位置所构成的子序列，叫做标志子序列。</p></p>
+<p><p>把 $1$ 对应位置的 $q$ 抽出来构成一个子序列，那么任意两个子序列中的的标志子序列不会相同。</p></p>
+<p><p>简单来说，我们考虑一个标志子序列可以找到多少个序列。</p></p>
+<p><p>可以发现如果 $i<j,q_i>q_j$ ，那么 $s_i=1,s_j=0$ 不能同时成立。</p></p>
+<p><p>所以当我们把标志子序列的对应位置标为 $1$ 时，就会有很多位置也对应的标记为 $1$ ，而不是 $1$ 的位置观察一下可以发现，如果将其标为 $1$ ，就会改变标志子序列，所以一个标志子序列只能找到一个序列，同理，一个序列只能找到一个标志子序列。</p></p>
+<p><p>但是标志子序列这样找到的 $s$ 序列一定合法吗？手操一下就发现一定可以构造出对应的矩阵，所以一定合法。</p><br>&lt;/div&gt;&lt;/details&gt;</p>
+<p><p>然后做法也是类似的，从小到大考虑 $q$ 。</p></p>
+<p><p>$f[i][j][k][0/1]$ 表示前 $i$ 个数字，目前进行到了 $j$ ，前面有 $k$ 个空，$0/1$ 表示强不强制让 $j$ 成为上升子序列的一部分的方案数。</p></p>
+<p><p>基本 DP 都差不多。</p></p>
+<p><p>那么这个做法有什么优势呢？</p></p>
+<ol>
+<li>更加本质，这个定理的判定脱离了矩阵的影响。</li>
+<li>更加易懂。（其实更加本质的做法一般都是更加易懂的）</li>
+</ol>
+<p>但是我的做法可以算序列中 $1$ 的数量，他的算不了，只能说，只能判定是否合法的定理是这样子的。</p>
+<p>会导致这两个做法区别的原因是方向不同：</p>
+<ol>
+<li>在处理如何找到一个合法的 $s$ 序列时，官方是直接去找判定 $s$ 的合法条件，从而摆脱了矩阵的影响。</li>
+<li>而我则是借助矩阵，只要矩阵的填数过程是合法的（即上下离散化是 $p,q$ ），那么跑出来的 $s$ 序列也一定是合法，这样我就不需要处理合法性的问题了，但是我需要解决判重的问题，所以我构建了一个一一映射，并且在这个映射的基础上进行 DP 。</li>
+</ol>
+<p>但是你要说这两个做法完全没有一点联系吗？那还是有的，就是：</p>
+<ol>
+<li>官方做法中判断标志子序列找到的序列是否一定合法时可以用我的做法构造矩阵。</li>
+<li><p>我的做法其实也可以推出更加本质的官方做法。<br>对于 $i$ 如果 $j&gt;i$ 的位置填了一个 $0$ ，且 $q_j<q_i$ ，那么 $i$ 就不能放 $0$ 了。
+更加形式化的表述是：在我的做法中，$s_i=0$ 是随意的， $s_i=1$ 仅当对于 $\forall j,s_j=0$ ，满足 $q_j>q_i$。</p>
+<p>那么显然，只要我放下了一个 $0$ ，前面的所有 $q$ 大于我的都必须标 $0$ ，有没有发现和前面的官方做法莫名类似？</p>
+<p>所以，这个时候就可以这样干：从后往前跑一个递减序列，类似的定义，递减序列的位置必须为 $0$ ，同时其余必须标为 $0$ 的位置也标为 $0$ ，这个时候没有被标为 $0$ 的位置也不能标为   $0$ ，否则会破坏递减序列。正过来看发现也是找递增子序列，这样就得到了官方做法。</p>
+<p> 但是可以发现这两个做法有点冲突，怎么一个放 $0$ ，一个放 $1$ 呢？但其实也不难理解，不过是一个从 $0$ 的角度考虑计数，一个从 $1$ 的角度考虑计数罢了，没有什么冲突的点。</p>
+<p> 但是我们不妨还是来找一点事情来做，对于一个 $s$ 序列，我们找到其的标志递增序列和标志递减序列，现在证明一下一个数字不可能既强制标记为 $0$，又强制标记为 $1$ 。（其实这个事情是完全没必要的，因为对于一个合法序列，其一定存在两种标志序列，而又是因为合法，所以两种强制标记不可能同时作用在一个位置，否则与合法这个前提相矛盾。但是从序列的角度研究一下其为什么不会标记在同一个位置说不定可以发现一些新的东西。）</p>
+<p> 其实也很简单：在一个合法序列中，假设 $i$ 标志递增序列 ，而 $j$ 是 标志递减序列，且 $i<j$ ，那么显然，$q_j>q_i$ （其实这里还是用到了合法序列的合法性的），则当一个数字在 $(i,j)$ 中，$<q_i$ 和 $>q_j$ 显然是不能同时满足的，然后就结束了。</p>
+</li>
+</ol></div></details>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 110</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> LL mod=<span class="number">998244353</span>;</span><br><span class="line">LL dp[N][N][N][<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> a[N],ba[N],b[N],bb[N],f1[N],f2[N],n;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);ba[a[i]]=i;&#125;</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;b[i]);</span><br><span class="line">        <span class="keyword">if</span>(!b[i])f1[a[i]]++;</span><br><span class="line">        <span class="keyword">else</span> f2[b[i]]++;</span><br><span class="line">        bb[b[i]]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    bb[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">feq</span>(i,n,<span class="number">1</span>)f1[i]+=f1[i+<span class="number">1</span>],f2[i]+=f2[i+<span class="number">1</span>];</span><br><span class="line">    dp[n][n][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">feq</span>(i,n,<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">feq</span>(j,n,<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">feq</span>(k,f1[i+<span class="number">1</span>],<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">feq</span>(t,<span class="number">1</span>,<span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="type">int</span> v10=f1[i+<span class="number">1</span>]-k,v01=(n-j)-f2[j+<span class="number">1</span>]-k,v00=(n-f2[<span class="number">1</span>])-v01-v10-k;</span><br><span class="line">                    <span class="keyword">if</span>(i)&#123;</span><br><span class="line">                        <span class="type">int</span> x=ba[i];</span><br><span class="line">                        <span class="comment">// if(i==n &amp;&amp; j==n &amp;&amp; !k &amp;&amp; !t)&#123;</span></span><br><span class="line">                        <span class="comment">//     printf(&quot;%d %d\n&quot;,x,b[x]);</span></span><br><span class="line">                        <span class="comment">// &#125;</span></span><br><span class="line">                        <span class="keyword">if</span>(!b[x])&#123;</span><br><span class="line">                            <span class="comment">/*OK*/</span></span><br><span class="line">                            <span class="keyword">if</span>(v00 &amp;&amp; t==<span class="number">0</span>)dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]=(dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]+dp[i][j][k][t])%mod;</span><br><span class="line">                            <span class="keyword">if</span>(v01 &amp;&amp; t==<span class="number">0</span>)dp[i<span class="number">-1</span>][j][k+<span class="number">1</span>][<span class="number">0</span>]=(dp[i<span class="number">-1</span>][j][k+<span class="number">1</span>][<span class="number">0</span>]+dp[i][j][k][t]*v01)%mod;</span><br><span class="line">                            <span class="keyword">if</span>(j &amp;&amp; !bb[j])dp[i<span class="number">-1</span>][j<span class="number">-1</span>][k+<span class="number">1</span>][<span class="number">0</span>]=(dp[i<span class="number">-1</span>][j<span class="number">-1</span>][k+<span class="number">1</span>][<span class="number">0</span>]+dp[i][j][k][t])%mod;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">else</span>&#123;</span><br><span class="line">                            <span class="comment">/*OK*/</span></span><br><span class="line">                            <span class="keyword">if</span>(b[x]&gt;j)&#123;dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]=(dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]+dp[i][j][k][t])%mod;<span class="keyword">continue</span>;&#125;</span><br><span class="line">                            <span class="keyword">if</span>(j&gt;=b[x] &amp;&amp; t==<span class="number">0</span>)dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]=(dp[i<span class="number">-1</span>][j][k][<span class="number">0</span>]+dp[i][j][k][t])%mod;</span><br><span class="line">                            <span class="comment">// d2[i-1][j][k]=(d2[i-1][j][k]+d2[i][j][k])%mod;</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(j)&#123;</span><br><span class="line">                        <span class="comment">// if(i==n &amp;&amp; j==n &amp;&amp; !k &amp;&amp; !t)&#123;printf(&quot;%d %lld\n&quot;,bb[j],dp[i][j][k][t]);&#125;</span></span><br><span class="line">                        <span class="keyword">if</span>(!bb[j])&#123;</span><br><span class="line">                            <span class="keyword">if</span>(v00)dp[i][j<span class="number">-1</span>][k][<span class="number">1</span>]=(dp[i][j<span class="number">-1</span>][k][<span class="number">1</span>]+dp[i][j][k][t])%mod;</span><br><span class="line">                            <span class="keyword">if</span>(v10)dp[i][j<span class="number">-1</span>][k+<span class="number">1</span>][<span class="number">1</span>]=(dp[i][j<span class="number">-1</span>][k+<span class="number">1</span>][<span class="number">1</span>]+dp[i][j][k][t]*v10)%mod;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">else</span> dp[i][j<span class="number">-1</span>][k][<span class="number">1</span>]=(dp[i][j<span class="number">-1</span>][k][<span class="number">1</span>]+dp[i][j][k][t])%mod;<span class="comment">//OK</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,(dp[<span class="number">0</span>][<span class="number">0</span>][n-f2[<span class="number">1</span>]][<span class="number">0</span>]+dp[<span class="number">0</span>][<span class="number">0</span>][n-f2[<span class="number">1</span>]][<span class="number">1</span>])%mod);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>即使是调试，也是讲究技巧的，能否在最短的时间找到输出调试中的异常数据，以及查明异常数据产生的来龙去脉，以及明白出错原因，以及找到最优秀的更正方法，以及在最短的时候改掉错误，都是十分讲究方法的。</p>
+<p>很多在调试的时候，往往需要去认为哪个地方是绝对正确的，防止无效查错，同时缩小查错范围，但是又要避免错误的认为绝对正确，否则就可能一万年都发现不了眼皮子底下的错误了，这就很考验一个选手的调试功力了。</p>
+<p>当然，提醒一点，当你认为整个代码都是绝对正确且做法绝对正确时，那大概率就是题读错了，我已经犯过至少两次这样的错误了，刻骨铭心啊。</p>
+<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>不会，人类智慧。</p>
+<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>大性质题，悲。</p>
+<p>其中的某几个性质是特别关键的，找不到这题就寄了，然后我就寄了。</p>
+<p>简单来说，对于序列 $A,B$ 和相邻的两个位置，一定存在一个一对相同的字母，因为其是好的字符串。</p>
+<p>这样可以发现，任意两个长度为 $2n+1$ 的字符串最长公共长度至少是 $n$ ，所以我们不能让其退化到 $n+1$ 。（实际上你继续看下面的做法就会发现，这两个结论的限制能力是多么的恐怖，可以说这道题目没发现这两个性质就是几乎做不了的。）</p>
+<p>然后，接下来就需要你打表或者手模找规律了。</p>
+<p>因为其实可行的串的模式就两种（这里的 $A,B,C$ 可以轮换）：</p>
+<ol>
+<li><p>?A?A?A?A?…</p>
+<p>?A?A?A?A?…</p>
+<p>模式为在第一个串中，选一个分界点，左边填 $B/C$ 的其中一个，另外一边填另一个，同时第二个字符串的 $?$ 填第一个字符串相同位置的相反字符。（如果是 $B$ 就填 $C$ ，反之亦然）</p>
+</li>
+<li><p>ABABABABABAB…</p>
+<p>C?C?C?C?C?C?…</p>
+<p>? 里面随便填 $A,B$ 。</p>
+</li>
+</ol>
+<p>至于证明，没有详细证过，但是感觉就是归纳证明。</p>
+<p>首先证明只要符合这种模式就一定可行（好证），然后证明不符合这种模式就不可行。</p>
+<p>证明不可行我感觉就是归纳，反正我是手模了前 $5$ 个位置发现确实只有这两种模式符合，然后往后归纳的部分没怎么想，感觉基本就是讨论一下就证完了，但是是讨论，所以我就没细想了。</p>
+<p>但是感觉是不是从前 $1$ 个位置开始直接归纳是不是也可以啊，到时候再看看吧，现在先鸽了。</p>
+<p>反正做法就是这么一个做法，直接扫描一下所有的情况差不多就做完了，时空复杂度应该是 $O(n)$ 的，就是可能要扫很多情况，2333。</p>
+<p>到时候看看有没有更加容易实现的方法吧，现在先鸽了，2333。</p>
+<h1 id="M"><a href="#M" class="headerlink" title="M"></a>M</h1><p>啊？根号过 1e6 ？</p>
+<p>逆天。</p>
+<p>暴力跑，$O(n+m\sqrt{m})$ 。</p>
+<p>相信奇迹。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1100000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">int</span> a[N],n,m=<span class="number">1e6</span>;</span><br><span class="line">LL ans=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="type">int</span> x;<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">        a[x]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fep</span>(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[i])<span class="keyword">continue</span>;</span><br><span class="line">        LL x=i,y=x+<span class="number">1</span>,z;</span><br><span class="line">        <span class="keyword">while</span>((z=y*y-x*x)&lt;=m)ans+=(LL)a[i]*a[z],y++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><ol>
+<li>亲手写一些代码。</li>
+<li>补充一个关于状态转移和状态转移优化的理解。</li>
+<li>把没有做的题目自己做一遍。</li>
+<li>自己去看一遍官方题解并且补充一下官方题解的做法。</li>
+<li>补充一下 L 题的详细证明。</li>
+<li>仔细思考一下 G 题的本质，好像说是给了正图跟反图，是可以通过容斥把同色四元环给消掉，所以这道题目才做的了的，不太清楚，到时候再看看。（同机房的同学说的，但是我没有细想。）</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2025/02/04/2021-Summer-Petrozavodsk-Camp-D3-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">http://oldplace.github.io/2025/02/04/2021-Summer-Petrozavodsk-Camp-D3-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A"><span class="toc-number">1.</span> <span class="toc-text">A</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">2.</span> <span class="toc-text">B</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D"><span class="toc-number">3.</span> <span class="toc-text">D</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E"><span class="toc-number">4.</span> <span class="toc-text">E</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F"><span class="toc-number">5.</span> <span class="toc-text">F</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#G"><span class="toc-number">6.</span> <span class="toc-text">G</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#H"><span class="toc-number">7.</span> <span class="toc-text">H</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I"><span class="toc-number">8.</span> <span class="toc-text">I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#J"><span class="toc-number">9.</span> <span class="toc-text">J</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D"><span class="toc-number">9.1.</span> <span class="toc-text">反思</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#K"><span class="toc-number">10.</span> <span class="toc-text">K</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#L"><span class="toc-number">11.</span> <span class="toc-text">L</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#M"><span class="toc-number">12.</span> <span class="toc-text">M</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9D%91"><span class="toc-number">13.</span> <span class="toc-text">坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

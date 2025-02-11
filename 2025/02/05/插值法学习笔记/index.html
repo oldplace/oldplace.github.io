@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>插值法学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="插值告诉你一个函数会经过 $n$ 个点（$n$个点各不相同），然后让你计算其余几个位置的取值。（应该吧，个人理解） 一般情况下可能会用在一些数据统计中函数的拟合。（不然为什么会有这么多乱七八糟的拟合啊QAQ） 当然，这里主要涉及的是多项式插值，即利用经过这$n$个点的最高次项次数小于$n$的关于$x$的那个多项式，通过代入或者其他方法求出这几个位置的取值。 当然，这里给出一道模板题，在拉格朗日插值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="插值法学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2025/02/05/%E6%8F%92%E5%80%BC%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="插值告诉你一个函数会经过 $n$ 个点（$n$个点各不相同），然后让你计算其余几个位置的取值。（应该吧，个人理解） 一般情况下可能会用在一些数据统计中函数的拟合。（不然为什么会有这么多乱七八糟的拟合啊QAQ） 当然，这里主要涉及的是多项式插值，即利用经过这$n$个点的最高次项次数小于$n$的关于$x$的那个多项式，通过代入或者其他方法求出这几个位置的取值。 当然，这里给出一道模板题，在拉格朗日插值">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2025-02-05T01:02:58.000Z">
+<meta property="article:modified_time" content="2025-02-05T01:03:18.350Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="插值">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2025/02/05/%E6%8F%92%E5%80%BC%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '插值法学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-02-05 09:03:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">插值法学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-05T01:02:58.000Z" title="发表于 2025-02-05 09:02:58">2025-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-05T01:03:18.350Z" title="更新于 2025-02-05 09:03:18">2025-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>24分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="插值法学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h1><p>告诉你一个函数会经过 $n$ 个点（$n$个点各不相同），然后让你计算其余几个位置的取值。（应该吧，个人理解）</p>
+<p>一般情况下可能会用在一些数据统计中函数的拟合。（不然为什么会有这么多乱七八糟的拟合啊QAQ）</p>
+<p>当然，这里主要涉及的是多项式插值，即利用经过这$n$个点的最高次项次数小于$n$的关于$x$的那个多项式，通过代入或者其他方法求出这几个位置的取值。</p>
+<p>当然，这里给出一道模板题，在拉格朗日插值和牛顿插值时就是用这个模板题的。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4781">模板题</a></p>
+<p>当然，这种题目暴力用高斯消元也是能做的，可惜A不了，毕竟时间复杂度时$O(n^3)$</p>
+<p>下文都认为给出的是$n+1$个点，点的标号从$0$开始，同时设第$k$个点为$(x_{k},y_{k})$。</p>
+<h1 id="拉格朗日插值法"><a href="#拉格朗日插值法" class="headerlink" title="拉格朗日插值法"></a>拉格朗日插值法</h1><h2 id="普通拉格朗日插值法"><a href="#普通拉格朗日插值法" class="headerlink" title="普通拉格朗日插值法"></a>普通拉格朗日插值法</h2><p>观察模板题和高斯消元，你会发现我们把这个多项式解出来真的太浪费啦。</p>
+<p>有没有不用求出多项式也能求值的方法呢？</p>
+<p>有！</p>
+<p>拉格朗日发表了这么一个方法：</p>
+<p>$L(x)=\sum\limits_{i=0}^nℓ_{i}(x)y_{i}$</p>
+<p>其中$ℓ_{i}(x)$叫 拉格朗日基本多项式 ，$L(n)$叫 拉格朗日插值多项式 。</p>
+<p>$ℓ_{i}(x)=\prod\limits_{j=0,j≠i}^n\frac{(x-x_{j})}{(x_{i}-x_{j})}$</p>
+<p>这个多项式有个非常NB的性质（其实也非常显然）</p>
+<p>就是$ℓ_{i}(x)$在$x_{j}(j≠i)$处为$0$，在$x_{i}$处为$1$。</p>
+<p>那么显然，$L(x)$经过这$n$个点。</p>
+<p>这样，我们就只需要把$k$代入，就可以在$O(n^2)$的时间内求解了。</p>
+<p>显然，我们节省的是求出这个多项式的时间。</p>
+<p>当然，可以证明的是，这个拉格朗日插值多项式是唯一一个次数≤$n$的经过这$n+1$个点的多项式。</p>
+<h3 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h3><p>假设存在两个$n$次多项式，都经过这$n+1$个点，假设这两个多项式为$P_1,P_2$</p>
+<p>$P_3=P_2-P_1$</p>
+<p>那么$P_3$显然$≠0$。</p>
+<p>而且因为都经过$n+1$个点，所以有$n+1$个根，所以$P_3$的次数为$n$。</p>
+<p>而且可以写成</p>
+<p>那么$P_{3}$可以写成$k\prod\limits_{i=0}^n(x-x_i)$</p>
+<p>但是这样次数是$n+1$的，显然不对，矛盾，证毕。</p>
+<p>所以最多存在这样唯一一个多项式。</p>
+<h3 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h3><p>首先，不一定存在次数为 $n$ 的多项式，举个例子：</p>
+<p>$(1,1),(2,2),(3,3)$就不能被一个二次方程经过。</p>
+<p>当然，能经过这$n+1$个点的也不一定要是个次数大于$0$的多项式，比如你给$n+1$个$y$值相等的点，怎么可能存在一个$n$次多项式能够经过$n+1$个$y$值相同的点啊（因为这和一个多项式能有$n+1$个点的命题是等价的，这个命题先让错误，不然可以写成$(x-x_{i})$的形式，证明这个形式次数大于$n$）。</p>
+<p>所以下面假定至少存在两个点 $y$ 值不同。</p>
+<p>在这个条件下，我们可以证明$L(x)$是一个次数大于$0$的多项式。</p>
+<p>我们假设存在一组$a_0,a_1,a_2,…a_{n+1}$系数，使得：</p>
+<p>$P(x)=\sum\limits_{i=0}^na_{i}ℓ(i)=a_{n+1}$</p>
+<p>首先，因为$ℓ_{i}(x)$函数只有在$x_{i}$处为$1$，其余$x_{j}$处都是为$0$的，所以显然$P(x_{i})=a_{i}$，但是呢，这个函数的值又是恒定的，所以$a_{0}=a_{1}=a_{2}=….=a_{n+1}$。</p>
+<p>又因为$y_{i}$并不相同，所以证毕。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>当然，这道题目我还是有🐎代码的。</p>
+<p>时间复杂度$O(n^2)$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  N  2100</span></span><br><span class="line"><span class="keyword">using</span>  <span class="keyword">namespace</span>  std;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="type">long</span>  <span class="type">long</span>  LL;</span><br><span class="line"><span class="type">const</span>  LL  mod=<span class="number">998244353</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  LL  <span class="title">ksm</span><span class="params">(LL  x,LL  y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x%=mod;</span><br><span class="line">	LL  ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(y)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(y&amp;<span class="number">1</span>)ans=ans*x%mod;</span><br><span class="line">		x=x*x%mod;y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>  ans;</span><br><span class="line">&#125;</span><br><span class="line">LL  n,k;</span><br><span class="line">LL  xx[N],yy[N];</span><br><span class="line"><span class="function"><span class="type">void</span>  <span class="title">calc</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL  ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">0</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		LL  shit=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span>  j=<span class="number">0</span>;j&lt;=n;j++)<span class="keyword">if</span>(i!=j)shit=(k-xx[j]+mod)*<span class="built_in">ksm</span>(xx[i]-xx[j]+mod,mod<span class="number">-2</span>)%mod*shit%mod;</span><br><span class="line">		ans=(shit*yy[i]+ans)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;k);n--;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">0</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;xx[i],&amp;yy[i]);</span><br><span class="line">	<span class="built_in">calc</span>();</span><br><span class="line">	<span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，这样🐎是$O(n^2\log{n})$的，改进的方法也比较简单，分母乘起来最后求逆元就行了。</p>
+<p>这样就可以到严格的$O(n^2)$了。</p>
+<h3 id="优点与缺点"><a href="#优点与缺点" class="headerlink" title="优点与缺点"></a>优点与缺点</h3><p>这里直接照搬<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html的，因为我自己根本就不了解插值，OI中也基本上不会去处理数据拟合，下面是OI的貌似也不太需要的亚子。">https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html的，因为我自己根本就不了解插值，OI中也基本上不会去处理数据拟合，下面是OI的貌似也不太需要的亚子。</a></p>
+<p>拉格朗日插值法的公式结构整齐紧凑，在理论分析中十分方便，然而在计算中，当插值点增加或减少一个时，所对应的基本多项式就需要全部重新计算，于是整个公式都会变化，非常繁琐。这时可以用重心拉格朗日插值法或牛顿插值法来代替。此外，当插值点比较多的时候，拉格朗日插值多项式的次数可能会很高，因此具有数值不稳定的特点，也就是说尽管在已知的几个点取到给定的数值，但在附近却会和“实际上”的值之间有很大的偏差（如右下图）。这类现象也被称为龙格现象，解决的办法是分段用较低次数的插值多项式。</p>
+<h3 id="连续情况"><a href="#连续情况" class="headerlink" title="连续情况"></a>连续情况</h3><p>当然，在给定的取值是连续的情况下（即等差数列），可以做到$O(n)$的插值。（当然，前提是你得花$n\log{n}$检验其是否是等差数列，当然，有时候是已知条件）</p>
+<p>你可以通过函数的缩放，把$x$转变成：$x_{i}=i$的情况。</p>
+<p>至于怎么做，照搬你谷日报：<br><img src="https://i-blog.csdnimg.cn/blog_migrate/aee6b9c74bffe68289f482c96cbf6dd2.png" alt="我们可以用"><br>而且，如果是在模运算的情况下，只要$O(n)$预处理逆元，也一样可以办到$O(n)$。</p>
+<p>代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//你谷日报的代码</span></span><br><span class="line"><span class="comment">//当x_i=i时求L_n(k) </span></span><br><span class="line"><span class="type">double</span> L_n_k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    <span class="keyword">if</span> ((n-i)%<span class="number">2</span>) L_n_k+=y[i]*((pre[i<span class="number">-1</span>]*suf[i+<span class="number">1</span>])/(-fac[i]*fac[n-i]));</span><br><span class="line">    <span class="keyword">else</span> L_n_k+=y[i]*((pre[i<span class="number">-1</span>]*suf[i+<span class="number">1</span>])/(fac[i]*fac[n-i]));</span><br></pre></td></tr></table></figure></p>
+<h2 id="重心型拉格朗日插值法"><a href="#重心型拉格朗日插值法" class="headerlink" title="重心型拉格朗日插值法"></a>重心型拉格朗日插值法</h2><h3 id="Ⅰ型"><a href="#Ⅰ型" class="headerlink" title="Ⅰ型"></a>Ⅰ型</h3><p>总所周知，普通拉格朗日插值法在新增加一个点的时候就需要重新$O(n^2)$计算一下。（雾</p>
+<p>不是，为什么啊(・∀・(・∀・(・∀・*)，难道不是只要把$ℓ_{i}(x)$用数组存起来，计算不也是轻轻松松的事吗，当然，如果不用模运算的话时间复杂度是$O(n)$，如果要用模运算，计算逆元的时间就比较久了，会到达$O(n\log{n})$。</p>
+<p>如果是要另外求个点，求先把分子求出来，然后不断逆元乘法也能解决，复杂度跟上面同理。</p>
+<p>为什么要$O(n^2)$。<del>不过我没有去打代码验证</del></p>
+<p>但是仔细想想上述的做法如果处理不好还是有一定弊端的，如果要另外求个点，而且是浮点数运算的话，这种做法可能掉精比较厉害，严重的可能精度直接起飞了，不过一般去到$10^3$一般也会加$\mod{}$运算吧，不过也很好解决，只要处理出现在分子和新的分子的比值再乘，那么掉精问题估计也就没有那么严重了。</p>
+<p>额，认真的讲一下你谷博客中的$Ⅰ$型吧。</p>
+<p>如果我们改变一下上述的式子：</p>
+<p>$L(n)=\sum\limits_{i=0}^ny_{i}\frac{\prod\limits_{j=0}^n(x-x_{i})}{(x-x_{i})\prod\limits_{j=0,i≠j}^n(x_{i}-x_{j})}$</p>
+<p>当然，这样插值的前提是要求$x≠x_{i}$，否则式子就爆炸了啊。</p>
+<p>设$ℓ(x)=\prod\limits_{i=0}^n(x-x_{i}),w_{i}=\frac{y_{i}}{\prod\limits_{j=0,i≠j}^n(x_{i}-x_{j})}$</p>
+<p>那么$L(n)=ℓ(x)\sum\limits_{i=0}^n\frac{w_{i}}{(x-x_{i})}$</p>
+<p>其中$w_{i}$叫做重心权。</p>
+<p>同样的，这个可以支持$O(n)$撤销点，加入点。</p>
+<p>同时也支持$O(n)$求另外一个点。</p>
+<p>但是如果在模运算下，这些运算的复杂度统统都是$O(n\log{n})$的，我是真的没有找到这个东西到底有什么用，而且如果在非模运算下，这个做法求新的$f(k)$好像更加的容易掉精…，而且补救方法我也没有想到，除非直接像普通的那样维护，把$ℓ(x)$乘进$\sum$里面同时维护，好像就不太需要担心掉精问题了。</p>
+<p>可能这一块内容就是为引出下一块内容准备的吧QAQ。</p>
+<p>Ⅰ型具有向后稳定性。</p>
+<h3 id="Ⅱ型"><a href="#Ⅱ型" class="headerlink" title="Ⅱ型"></a>Ⅱ型</h3><p>我们插值一下$f(x)=1$：</p>
+<p>$f(x)=ℓ(x)\sum\limits_{i=0}^n\frac{w_{i}}{(x-x_{i})}$</p>
+<p>然后用$L(x)$除$f(x)$。</p>
+<p>$L(x)=\frac{\sum\limits_{i=0}^ny_{i}\frac{w_{i}}{(x-x_{i})}}{\sum\limits_{i=0}^n\frac{w_{i}}{(x-x_{i})}}$</p>
+<p>就得到了Ⅱ型。</p>
+<p>当然，分母一般情况下是不为$0$的，同理也是要求$k≠x_{i}$</p>
+<p>$f(x)=ℓ(x)\sum\limits_{i=0}^n\frac{w_{i}}{(x-x_{i})}=1$</p>
+<p>所以$\sum\limits_{i=0}^n\frac{w_{i}}{(x-x_{i})}$是绝对不为 $0$ 的。</p>
+<p>可以发现，这个式子不用去计算$ℓ(x)$，计算也是比较方便，可以说是一个优势。</p>
+<p>它的另一个优势是，结合切比雪夫节点（$x_{i}=cos(\frac{(2i+1)\pi}{2(n+1)}),i∈[0,n]∩Z$）进行插值的话，可以很好地模拟给定的函数，使得插值点个数趋于无穷时，最大偏差趋于零。同时，重心拉格朗日插值结合切比雪夫节点进行插值可以达到极佳的数值稳定性。（这段话来自<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html）">https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html）</a></p>
+<p>Ⅱ型具有向前稳定性，并且勒贝格常数很小。</p>
+<p>个人认为，复杂度其实也是类似$Ⅰ$型，但是在浮点数误差下，这个貌似更难去处理误差，只能硬生生的维护重心权$w_{i}$，但是在$n$去到较大级别时，$w_{i}$要么太大，要么太小，都是难伺候的主啊，特别容易产生较大的精度误差，所以我也是没有找到这个的作用在哪。。。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在OI中感觉这三种类型都差不多，其实，那些向前稳定和向后稳定我都不知道是什么，阿巴QAQ，OI中应该不会涉及这么一些东西。（上面那些专业术语都是看别人博客的QAQ）</p>
+<p>而且这三种类型在OI中应该可以算是等价的了。</p>
+<p>我还是用普通型的吧，告辞。</p>
+<h1 id="牛顿插值"><a href="#牛顿插值" class="headerlink" title="牛顿插值"></a>牛顿插值</h1><p>差商是什么？</p>
+<p>准确定义我反复读了三遍也没有看懂定义在阿巴什么，但是这里给出下面会用到的式子定义。</p>
+<p>设$f[x_0,x_1,…x_k]$为$f(x)$的$k$阶差商。（所以我觉得 $k$ 阶差商应该是有很多值的）</p>
+<p>定义：$f[x_0]=f(x_0)$<br>$f[x_{0},x_{1}…,x_{k}]=\frac{f[x_{1},x_{2}…,x_{k}]-f[x_0,x_1,x_2…,x_{k-1}]}{x_{k}-x_{0}}$</p>
+<p>同时要求$x_{i}≠x_j(i≠j)$（其实你可以发现如果把$k$阶差商全部展开成$0$阶差商并且不通分约分合并，你会发现对于任意的 $(x_{i}-x_{j})$ ，存在 $k∈${$1,-1$} 使得 $k(x_i-x_j)$ 存在在某个分数的分母）。</p>
+<p>那么$f(x)=f[x]$</p>
+<p>$\frac{f[x]-f[x_{0}]}{x-x_0}=f[x,x_0]$</p>
+<p>$f[x]=(x-x_0)f[x,x_0]+f[x_0]$</p>
+<p>代回原式：$f(x)=f[x_0]+(x-x_0)f[x,x_0]$</p>
+<p>由于计算$f[x,x_0]$仍然需要我们计算$f(x)$的值，所以我们继续像刚才一样展开：</p>
+<p>$f[x,x_0]=(x-x_1)f[x,x_0,x_1]+f[x_0,x_1]$<br>$f[x,x_0,x_1]=(x-x_2)f[x,x_0,x_1,x_2]+f[x_0,x_1,x_2]$<br>…</p>
+<p>然后不断的代回原式，直到出现$f[x,x_0,x_1,x_2,…,x_{n+1}]$，此时停止展开，式子为：</p>
+<p>$f(x)=f[x,x_0,x_2,…,x_{n+1}]\prod\limits_{j=0}^{n}(x-x_i)+\sum\limits_{i=0}^nf[x_0,x_1,x_2,…,x_i]\prod\limits_{j=0}^{i-1}(x-x_i)$</p>
+<p>然后我们设$R_n(x)=f[x,x_0,x_2,…,x_{n+1}]\prod\limits_{j=0}^{n}(x-x_i),N_{n}(x)=\sum\limits_{i=0}^nf[x_0,x_1,x_2,…,x_i]\prod\limits_{j=0}^{i-1}(x-x_i)$</p>
+<p>那么$f(x)=N_{n}(x)+R_{n}(x)$。</p>
+<p>其中$N_{n}(x)$为牛顿插值公式，$R_{n}(x)$为插值余项。</p>
+<p>而在插值的时候，我们忽略$R_{n}(x)$，用$N_{n}(x)$的值表示$f(x)$</p>
+<p>当然，至于正确性吗。</p>
+<p>当然，为什么在展开到$f[x,x_0,x_2,…,x_{n+1}]$的时候就停下来了呢？</p>
+<p>因为$\prod\limits_{j=0}^{n}(x-x_i)$已经是个$n+1$次数的多项式，已经没有用了，反正我们是用$n$次多项式拟合的，$n+1$次已经超了，直接扔掉。</p>
+<p>但是目前的任务是确定$N_{n}(x)$是不是一个经过这$n+1$个点的多项式？（实际上拟合出来的多项式应该是和拉格朗日插值多项式是一模一样的）</p>
+<p>当然，其实也特别好证明，因为$R_{n}(x_i)=0$，所以$f(x_{i})=N_{n}(x_{i})$。</p>
+<p>就证明完了，所以在求$n$次多项式拟合的时候，其实这两种插值法求出的多项式，我个人认为都没有什么区别好吧。</p>
+<p>至于计算，可以直接用递推计算$n$阶差商的值，然后从左往右暴力硬推，处理好一点，应该可以做到空间上的$O(n)$，但是时间上因为要用递推定义式计算，所以还是要$O(n^2)$。</p>
+<p>但是呢，这个牛顿插值我个人认为最NB的东西也就在这，就是他同样可以做到$O(n^2)$的时间插出原来多项式的系数，而且是全部系数，只要多项式加乘即可，当然，其实拉格朗日用上多项式除法（都是只用乘除$x+a$，非常的简单）同样可以办到一样的效果，其实这两个也没什么区别啦QMQ。</p>
+<p>当然，比较鸡肋的是，如果你不花$O(n^2)$的空间记录下所有差商的信息，你会发现添点你做起来跟掐了 * 一样难搞，我个人认为搞不了，因为新的差商那也是真的难计算，当然，计算一个新的$f(k)$就只需要记录系数就行了，这个推起来还是挺简单的好吧。</p>
+<p>当然，在牛顿插值中如果新增了一个点，那么只会增加一个项，这或许是优点，但是这个项的系数很难计算啊。</p>
+<p>当然，其实还是有方法的，这个就要涉及到差商的通项公式了，这样只要记录通项公式中的分母，一样可以做到$O(n)$计算猛如虎，求新的点值在模意义下可以到达$O(n)$，只要你$O(n)$记录系数，这个做法最妙的地方估计就是$x$不在分母位置，不用计算跟$x$有关的逆元，不过在模意义下，添加新点的代价依旧是$O(n\log{n})$，没什么好说的。</p>
+<p>但是呢，虽然新的点值可以到达$O(n)$，但是与之相对的，如果是浮点数运算，在规模较大的情况下，系数的值可能会偏小，导致误差高涨，总之就是误差问题，如果不担心误差随便用好吧。</p>
+<p>当然，扩展一下，这里介绍一下差商的性质。</p>
+<h2 id="差商的性质"><a href="#差商的性质" class="headerlink" title="差商的性质"></a>差商的性质</h2><h3 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h3><p>$f[x_{0},x_1,x_2,x_3…,x_n]=\sum\limits_{j=0}^k\frac{f(x_j)}{\prod\limits_{i=0,i≠j}^k(x_{j}-x_i)}$</p>
+<p>证明：</p>
+<p>数学归纳法证明，当$k=0$时，显然成立。</p>
+<p>当$k&gt;0$时。</p>
+<p>$\frac{\sum\limits_{j=1}^{k+1}\frac{f(x_j)}{\prod\limits_{i=1,i≠j}^{n+1}(x_{j}-x_i)}-\sum\limits_{j=0}^k\frac{f(x_j)}{\prod\limits_{i=0,i≠j}^k(x_{j}-x_i)}}{(x_{k+1}-x_0)}$</p>
+<p>对于$j=k+1$，分母乘$(x_{k+1}-x_0)$直接变成$\frac{f(x_{k+1})}{\prod\limits_{i=0}^{n}(x_{k+1}-x_i)}$</p>
+<p>对于$j=0$，分母乘$(x_{k+1}-x_0)$，可以把负号和这个合并，变成$(x_{0}-x_{k+1})$，于是和$k+1$一样，变成了$k+1$阶差商中应该有的样子。</p>
+<p>对于$j=[1,k]∩Z$</p>
+<p>$\frac{f(x_j)}{\prod\limits_{i=1,i≠j}^{n+1}(x_{j}-x_i)}-\frac{f(x_j)}{\prod\limits_{i=0,i≠j}^{n}(x_{j}-x_i)}=\frac{x_j(x_{k+1}-x_0)}{\prod\limits_{i=0,i≠j}^{n+1}(x_{j}-x_i)}$</p>
+<p>刚好除去$(x_{k+1}-x_0)$，同理也变成$k+1$阶差商的样子，归纳法证明完毕。</p>
+<p>这个式子可以说明顺序在差商中是没有用的，差商具有对称性。</p>
+<p>当然，我这里给出一个我认为正确的另外一种差商的计算式：</p>
+<p>定义 $c(A)$ 为这个集合的大小，集合 $A$ 中的元素都是实数，如果集合$A,B$大小相同，且$A,B$中只有一个元素不同，那么$A-B=x$当且仅当$x∈A且x∉B$。（这里是我个人定义，请不要带到这篇博客以外的地方使用）</p>
+<p>那么 $f[A]$ 为 $c(A)-1$ 阶差商，定义$A_1,A_2$为$A$的两个不同的大小为$c(A)-1$的子集，那么 $f[A]=\frac{f[A_1]-f[A_2]}{(A_1-A_2)-(A_2-A_1)}$ </p>
+<p><del>其实就是把定义式利用顺序不影响结果这一条结论改了一下而已QMQ</del></p>
+<h3 id="一个我不知道是什么的导数性质"><a href="#一个我不知道是什么的导数性质" class="headerlink" title="一个我不知道是什么的导数性质"></a>一个我不知道是什么的导数性质</h3><p>对于$f(x)$的$k$阶差商，如果一个区间$[a,b]$满足$x_{i}(0≤i≤k)∈[a,b]$，且$[a,b]$存在$k$阶导数，那么存在一个$t∈[a,b]$，满足：</p>
+<p>$f[x_0,x_1,x_2,x_3…,x_t]=\frac{f^{(k)}(t)}{k!}$</p>
+<p>至于证明，学完微积分补，好吧。</p>
+<p>当然，证明文档的链接放在参考文献中了，可以自行消化。</p>
+<p>用处吗，不知道，就当扩展眼界了。</p>
+<h2 id="等距节点的牛顿插值"><a href="#等距节点的牛顿插值" class="headerlink" title="等距节点的牛顿插值"></a>等距节点的牛顿插值</h2><p>看这个也就图一乐好吧。</p>
+<p>插值，其中$x_{i}-x_{i-1}(i&gt;0)$是个定值，我们设其为$h$。</p>
+<p>这个东西貌似也是只要根据等距的性质来，基本也不会有什么问题，不过如果你直接把其的节点缩放成$x_{i}=i$，岂不美哉，这样就更加好处理了啊QMQ。</p>
+<p>定义差分：<br>一阶前向差分：$△f_{k}=f_{k+1}-f_{k},k=0,1,2,…,n-1$<br>$t$阶前向差分：$△^tf_{k}=△^{t-1}f_{k+1}-△^{t-1}f_{k}$</p>
+<p>一阶后向差分：$∇f_{k}=f_{k}-f_{k-1},k=0,1,2,…,n-1$<br>$t$阶后向差分：$∇^tf_{k}=∇^{t-1}f_{k}-∇^{t-1}f_{k-1}$</p>
+<h3 id="差分公式"><a href="#差分公式" class="headerlink" title="差分公式"></a>差分公式</h3><p>差分公式：<br>$△^tf_{k}=\sum\limits_{i=0}^t(-1)^iC_{t}^if(k+t-i)$<br>$∇^tf_{k}=\sum\limits_{i=0}^t(-1)^iC_{t}^if(t-i)$</p>
+<p><del>可能写错了</del></p>
+<p>证明的话也是非常的简单，这里证明前向差分，后向差分类似证明。</p>
+<p>回归到杨辉三角形：<br>$△^tf_{k}$<br>$△^{t-1}f_{k+1}$ $△^{t-1}f_{k}$<br>$△^{t-2}f_{k+2}$ $△^{t-2}f_{k+1}$ $△^{t-2}f_{k}$<br>…</p>
+<p>其实对于$f(i)$的系数就是所有从$△^tf_{k}$到达$f(i)$的路径方案的权值和。</p>
+<p>那么一个路径方案的权值是多少呢？</p>
+<p>一个路径从起点出发，权值为$1$，如果往下走，乘$1$，往右下走，乘$-1$，最终得到的值为此方案的权值，又发现，往右下走列数$+1$，所以方案的权值大小只与终点列数相关。</p>
+<p>所以所有从$△^tf_{k}$到达$f(i)$的路径方案的权值都是一样的，要么$1$，要么$-1$，显然，为$(-1)^{t+k-i}$。</p>
+<p>至于系数，你可以发现，如果把每个值的系数算成绝对值，这就是一个活生生的杨辉三角形啊。</p>
+<p>得证。</p>
+<h3 id="差商与差分的关系"><a href="#差商与差分的关系" class="headerlink" title="差商与差分的关系"></a>差商与差分的关系</h3><p>等距节点差商与差分的关系：</p>
+<p>那么有：</p>
+<p>$f[x_0,x_{1},…,x_{m}]=\frac{△^mf_0}{m!h^m}=\frac{∇^mf_m}{m!h^m}$</p>
+<p>至于证明，也是非常的简单，代入就可以轻松证明（这里证明前向差分，后向不证明了，类似）：</p>
+<p>计算对于$f(x_{i})$的系数。</p>
+<p>那么值就等于：$\frac{(-1)^{m-i}C_{m}^if(x_{i})}{m!h^m}$</p>
+<p>对比一下$\frac{f(x_i)}{\prod\limits_{j=0,i≠j}^m(x_i-x_j)}=\frac{f(x_i)}{h^mi!(m-i)!*(-1)^{m-i}}$</p>
+<p>整理一下就发现两者一模一样。</p>
+<h3 id="牛顿前向插值公式"><a href="#牛顿前向插值公式" class="headerlink" title="牛顿前向插值公式"></a>牛顿前向插值公式</h3><p>$x_{i}=x_{0}+ih$</p>
+<p>设$x=x_0+th$（在模运算中，可以通过同余方程得到，在浮点数运算中，直接除法得到$t$）</p>
+<p>所以设$w_{i}(x)=\prod\limits_{j=0}^{i-1}(x-x_j)=\prod\limits_{j=0}^{i-1}(t-j)h=h^i\prod\limits_{j=0}^{i-1}(t-j)$</p>
+<p>插值公式：<br>$N_{n}(x)=f[x_0]+\sum\limits_{i=1}^nf[x_0,x_1…,x_i]w_{i}(x)$<br>$N_{n}(x_0+th)=f[x_0]+\sum\limits_{i=1}^n[\frac{△^if_{0}}{i!h^i}h^i\prod\limits_{j=0}^{i-1}(t-j)]=f[x_0]+\sum\limits_{i=1}^n[\frac{△^if_{0}}{i!}\prod\limits_{j=0}^{i-1}(t-j)]$</p>
+<p>貌似计算还是$O(n^2)$的，额，那好像还是没有太大用处。</p>
+<p>插值余项就不算了，当然，后向插值公式也懒得搞了，这些都与OI没有太大关系，扩展到这里其实也就差不多了（其实就是我累了），有兴趣的可以在参考资料中自行进行学习，后续补一下导数性质的证明吧。</p>
+<p>至于其余扩展的东西，等我大学无聊有时间学一下吧，现在学这么久与OI无关的东西已经很拖时间了，告辞。</p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>摘自<a target="_blank" rel="noopener" href="https://blog.csdn.net/littlely_ll/article/details/71107092：">https://blog.csdn.net/littlely_ll/article/details/71107092：</a><br>牛顿插值法优缺点<br>牛顿插值法的优点是计算较简单，尤其是增加节点时，计算只增加一项，这是拉格朗日插值无法比的。<br>缺点是仍没有改变拉格朗日的插值曲线在节点处有尖点，不光滑，插值多项式在节点处不可导等缺点。</p>
+<p>摘自<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/zhang-xu-jia/ji-zhong-cha-zhi-fang-fa-yang-xie">https://www.luogu.com.cn/blog/zhang-xu-jia/ji-zhong-cha-zhi-fang-fa-yang-xie</a><br>不过它比拉格朗日插值更好的是，它可以插出多项式的系数。当给出的节点等距时，使用差分能达到更优的效果，其计算更加简便。</p>
+<p>不过我是真的没有看出来牛顿插值方便计算在哪了？（估计是我傻吧，只会口胡阿巴，望各位大佬指点一下我）</p>
+<p>但是模意义求新的点值可以到$O(n)$是真的香好吧。</p>
+<h1 id="泰勒插值"><a href="#泰勒插值" class="headerlink" title="泰勒插值"></a>泰勒插值</h1><p>基本就是阿巴过了。</p>
+<p>已知函数在$x_0$处的$i$阶导数。$0≤i≤k$</p>
+<p>$0$阶导数其实就是它的函数值。</p>
+<p>求一个多项式满足这个条件。</p>
+<p>泰勒展开随便搞。（当然，其实不用也可以，直接导数的定义也是可以处理的）</p>
+<p>$f(x)=f(x_i)+\sum\limits_{i=1}^n\frac{f^{(i)}(x_i)}{i!}(x-x_0)^i$</p>
+<p>然后就搞定啦。</p>
+<p>时间复杂度：$O(n^2)$</p>
+<p>应该是唯一的，且存在的。</p>
+<p>你谷奆佬评价：<br>又慢，限制又多。<br>不过有的时候还是比较方便的。</p>
+<h1 id="多项式快速插值"><a href="#多项式快速插值" class="headerlink" title="多项式快速插值"></a>多项式快速插值</h1><p>也就是求一个小于$n+1$次的多项式经过给定的$n+1$个点。</p>
+<p>要求输出多项式的系数。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5158">例题</a></p>
+<p>高斯消元$O(n^2)$，牛顿迭代$O(n^2)$，但是还有更快的，想不到吧。</p>
+<h2 id="nlog-3做法"><a href="#nlog-3做法" class="headerlink" title="nlog^3做法"></a>nlog^3做法</h2><p>没🐎代码，后面补，现在更多学的是理论的东西。</p>
+<p>其实就是分治，但是我不会QAQ。</p>
+<p>学还是学得懂，就是比较阿巴。</p>
+<p>同分治一样，把点拆分成$0-\left \lfloor \frac{n}{2} \right \rfloor$和$(\left \lfloor \frac{n}{2} \right \rfloor+1)-n$的两个部分，分别命名为点集$X_0,X_1$。</p>
+<p>设多项式$A_0(x)$是$X_0$的插值。</p>
+<p>设$P(x)=\prod\limits_{i=0}^{\left \lfloor \frac{n}{2} \right \rfloor}(x-x_i)$。</p>
+<p>那么我们可以得到：</p>
+<p>$A(x)=P(x)A_1(x)+A_0(x)$。</p>
+<p>$A_1(x)$是什么，看下去就知道了。</p>
+<p>怎么求出$A_1(x)$呢？</p>
+<p>$y_i=P(x_i)A_1(x_i)+A_0(x_i)((\left \lfloor \frac{n}{2} \right \rfloor+1)≤i≤n)$</p>
+<p>$A_{1}(x_i)=\frac{y_i-A_0(x_i)}{P(x_i)}$</p>
+<p>这样，我们就可以得到新的$X_1$，而$A_{1}(x)$是这个新的$X_{1}$的插值多项式。</p>
+<p>但是呢，这里有几个细节，首先是关于如何求出新的$X_1$，原文没说，这里推测是用多项式多点求值（但是我不会QAQ），至于求$P(x)$，分治一下就行了，将$(x-a)$左右分成两半再用$NTT$乘起来，时间复杂度都是$O(n\log^2{n})$。</p>
+<p>这样就可以完成多项式插值了。</p>
+<p>于是就得到了这条式子：</p>
+<p>$T(n)=2T(\frac{n}{2})+n\log^2{n}$</p>
+<p>然后就可以得到时间复杂度是$O(n\log^3{n})$，常数还有亿点点大。。。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/zhang-xu-jia/ji-zhong-cha-zhi-fang-fa-yang-xie">https://www.luogu.com.cn/blog/zhang-xu-jia/ji-zhong-cha-zhi-fang-fa-yang-xie</a><br>（讲真你谷初中生随便吊打我个高中生QAQ，我到现在都不会微积分）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/littlely_ll/article/details/71107092">https://blog.csdn.net/littlely_ll/article/details/71107092</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/568b7fbb336c1eb91b375df4.html">https://wenku.baidu.com/view/568b7fbb336c1eb91b375df4.html</a></p>
+<p>百度百科</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html">https://www.cnblogs.com/ECJTUACM-873284962/p/6833391.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.docin.com/p-632016518.html">https://www.docin.com/p-632016518.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66793653">https://zhuanlan.zhihu.com/p/66793653</a></p>
+<p>论如何在参考文献一坨的情况下学得一知半解的QAQ。</p>
+<p>可恶，欺负我个不会微积分的人QAQ。</p>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><p>补导数证明</p>
+<p>补充你谷日报中提到的其余差分。</p>
+<p>补充代码</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2025/02/05/%E6%8F%92%E5%80%BC%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://oldplace.github.io/2025/02/05/%E6%8F%92%E5%80%BC%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8F%92%E5%80%BC/">插值</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%92%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">插值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">拉格朗日插值法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">普通拉格朗日插值法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E6%80%A7"><span class="toc-number">2.1.1.</span> <span class="toc-text">唯一性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E6%80%A7"><span class="toc-number">2.1.2.</span> <span class="toc-text">存在性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.1.3.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%E4%B8%8E%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.4.</span> <span class="toc-text">优点与缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E6%83%85%E5%86%B5"><span class="toc-number">2.1.5.</span> <span class="toc-text">连续情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%BF%83%E5%9E%8B%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">重心型拉格朗日插值法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0%E5%9E%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">Ⅰ型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1%E5%9E%8B"><span class="toc-number">2.2.2.</span> <span class="toc-text">Ⅱ型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.3.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%9B%E9%A1%BF%E6%8F%92%E5%80%BC"><span class="toc-number">3.</span> <span class="toc-text">牛顿插值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E5%95%86%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">3.1.</span> <span class="toc-text">差商的性质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E6%98%AF%E4%BB%80%E4%B9%88%E7%9A%84%E5%AF%BC%E6%95%B0%E6%80%A7%E8%B4%A8"><span class="toc-number">3.1.2.</span> <span class="toc-text">一个我不知道是什么的导数性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E8%B7%9D%E8%8A%82%E7%82%B9%E7%9A%84%E7%89%9B%E9%A1%BF%E6%8F%92%E5%80%BC"><span class="toc-number">3.2.</span> <span class="toc-text">等距节点的牛顿插值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E5%85%AC%E5%BC%8F"><span class="toc-number">3.2.1.</span> <span class="toc-text">差分公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%95%86%E4%B8%8E%E5%B7%AE%E5%88%86%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.2.2.</span> <span class="toc-text">差商与差分的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%9B%E9%A1%BF%E5%89%8D%E5%90%91%E6%8F%92%E5%80%BC%E5%85%AC%E5%BC%8F"><span class="toc-number">3.2.3.</span> <span class="toc-text">牛顿前向插值公式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="toc-number">3.3.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%B0%E5%8B%92%E6%8F%92%E5%80%BC"><span class="toc-number">4.</span> <span class="toc-text">泰勒插值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%BF%AB%E9%80%9F%E6%8F%92%E5%80%BC"><span class="toc-number">5.</span> <span class="toc-text">多项式快速插值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nlog-3%E5%81%9A%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">nlog^3做法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9D%91"><span class="toc-number">7.</span> <span class="toc-text">坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

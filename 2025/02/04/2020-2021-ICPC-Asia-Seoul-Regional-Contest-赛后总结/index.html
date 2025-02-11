@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2020-2021 ICPC Asia Seoul Regional Contest 赛后总结 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;102920 C**，打的是真尼玛的屎啊！ 大败而归了，哭。 A纯纯暴力题，队友写的。 不过还是要注意实现细节，以后还是要自己多做一下这种题，不能天天交给队友。 B签到题，交给队友了。 C题意：给你一棵树，有一些点是公寓，现在一个点 $x$ 是好点，当且仅当：$\forall y,\exists z$ 使得 $z$ 是公寓且 $dis(x,z)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-2021 ICPC Asia Seoul Regional Contest 赛后总结">
+<meta property="og:url" content="http://oldplace.github.io/2025/02/04/2020-2021-ICPC-Asia-Seoul-Regional-Contest-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="https:&#x2F;&#x2F;codeforces.com&#x2F;gym&#x2F;102920 C**，打的是真尼玛的屎啊！ 大败而归了，哭。 A纯纯暴力题，队友写的。 不过还是要注意实现细节，以后还是要自己多做一下这种题，不能天天交给队友。 B签到题，交给队友了。 C题意：给你一棵树，有一些点是公寓，现在一个点 $x$ 是好点，当且仅当：$\forall y,\exists z$ 使得 $z$ 是公寓且 $dis(x,z)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2025-02-04T11:50:10.000Z">
+<meta property="article:modified_time" content="2025-02-04T11:55:01.213Z">
+<meta property="article:author" content="player">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2025/02/04/2020-2021-ICPC-Asia-Seoul-Regional-Contest-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2020-2021 ICPC Asia Seoul Regional Contest 赛后总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-02-04 19:55:01'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">2020-2021 ICPC Asia Seoul Regional Contest 赛后总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-04T11:50:10.000Z" title="发表于 2025-02-04 19:50:10">2025-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-04T11:55:01.213Z" title="更新于 2025-02-04 19:55:01">2025-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="2020-2021 ICPC Asia Seoul Regional Contest 赛后总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p><a target="_blank" rel="noopener" href="https://codeforces.com/gym/102920">https://codeforces.com/gym/102920</a></p>
+<p>C**，打的是真尼玛的屎啊！</p>
+<p>大败而归了，哭。</p>
+<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p>纯纯暴力题，队友写的。</p>
+<p>不过还是要注意实现细节，以后还是要自己多做一下这种题，不能天天交给队友。</p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p>签到题，交给队友了。</p>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>题意：给你一棵树，有一些点是公寓，现在一个点 $x$ 是好点，当且仅当：$\forall y,\exists z$ 使得 $z$ 是公寓且 $dis(x,z)&lt;dis(y,z)$ 。</p>
+<p>做法也是非常简单，显然公寓一定是好点。</p>
+<p>其余点是好点的充要条件是以这个点为根时，必须要有两棵子树里面有公寓。</p>
+<p>时空复杂度：$O(n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 110000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NN 210000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">  <span class="type">int</span> y,next;</span><br><span class="line">&#125;a[NN];<span class="type">int</span> len,last[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;len++;a[len].y=y;a[len].next=last[x];last[x]=len;&#125;</span><br><span class="line"><span class="type">int</span> siz[N],n,m,sum[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> k=last[x];k;k=a[k].next)&#123;</span><br><span class="line">    <span class="type">int</span> y=a[k].y;<span class="keyword">if</span>(y==fa)<span class="keyword">continue</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(y,x);siz[x]+=siz[y];</span><br><span class="line">    <span class="keyword">if</span>(siz[y])sum[x]++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(m-siz[x])sum[x]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">2</span>,n)&#123;</span><br><span class="line">    <span class="type">int</span> x,y,c;<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;c);</span><br><span class="line">    <span class="built_in">ins</span>(x,y);<span class="built_in">ins</span>(y,x);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">    <span class="type">int</span> x;<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">    siz[x]=<span class="number">1</span>;sum[x]=<span class="number">100</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">  <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">1</span>,n)ans+=(sum[i]&gt;=<span class="number">2</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><p>非常巧妙的一道 DP 题，但是不可否认的是 n^3 过 1000 真的非常的屎。</p>
+<p>题意是这样的：你有一辆车，有个油量 $W$ ，有 $n$ 个加油站，从一个城市到另外一个城市消耗的油量是曼哈顿距离，每个加油站加油有费用，然后问你从起点到终点的最小费用，同时还有限制，加油次数不能超过一个值。</p>
+<p>这道题目用到了一个很有意思的点，一定存在一个最优方案，使得：当一辆车在连续两个加油站都加了油时，一定会有一个加油站加满了油或者到达时没有了油。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>第一个加油站的费用设为 $w1$ ，第二个设为 $w2$。</p>
+<p>当 $w1\le w2$ 时，我们显然可以在第一次把一些第二次加的油提前加了。</p>
+<p>反之，则可以在第二次加上第一次的油使得第一次不加油或者到达第二个加油站时恰好没有油。</p>
+</div></details>
+<p>利用这个性质，我们可以设计出 DP 状态。</p>
+<p>$f_i$ 表示从一个加油站出发且加满油时的代价，$g_i$ 表示到达一个加油站且没有油时的代价。</p>
+<p>然后转移有两种，一种是只走一条边的，一种是走两条边的，处理两条边转移的复杂度是 $n^3$ 的，所以是 $n^3$ 的。</p>
+<p>至于 $\Delta$ 的话，可以先处理出 $n^2$ 的转移矩阵，然后就可以 $n^2\Delta$ 做完了。</p>
+<p>时间复杂度：$O(n^2(n+\Delta))$ 。</p>
+<p>至于转移，有四种：$f,g-&gt;f,g$ ，但是实际上需要 $n^3$ 处理的只有一种。</p>
+<p>思考一下，加入司机没油出发，那么显然需要加油再走，这时途径一个加油站并且加了油，设出发加油站加油费用 $w1$ ，中间站 $w2$ 。</p>
+<p>当 $w1\leq w2$ 时，显然我们要么加满出发，或者不用去中间站加油，反之我们到达中间站的时候油量为 $0$ 更加优秀。</p>
+<p>而当我们到达终点站时加满油，同样可以与中间进行比较，发现中间可以存在中继状态。所以我们其实只需要在转移 $g-&gt;g$ 时转移一下就行了。</p>
+<p>状态转移方程：</p>
+<p>对于点 $x,y$ ，且 $dis(x,y)\le W$ 。</p>
+<p>四种转移都是比较显然的。</p>
+<p>然后枚举 $x,y,z$ ，转移一下即可。</p>
+<h2 id="扩展：关于循环论证"><a href="#扩展：关于循环论证" class="headerlink" title="扩展：关于循环论证"></a>扩展：关于循环论证</h2><p>刚刚在证明转移的时候突然发现的一个事情：</p>
+<p>一个很简单的例子，现在有一个圆盘，上面有 $n$ 个格子，其中一个格子放了小球，这个时候你放了一个球进去，然后证明：圆盘中任意的相邻个位置有一个小球，逻辑是这样的：</p>
+<p>现在小球在 $1$ 号位置，你观测 1,2 ，发现的确，然后推球进了 $2$ 号位置，观测 $2,3$ ，也发现的确。</p>
+<p>这样子的证明问题在于方案不一定是同一个了，同理，当我们在证明一个事情的时候，总是会说，显然存在一个最优方案满足一个局部条件，但是不一定存在一个最优方案满足所有的局部条件。</p>
+<p>这个时候有两种解决方法：</p>
+<ol>
+<li>人为的给最优方案之间加上另外一个限制条件，使得最优方案中也有优劣之分，类似相等时加上浮动使其存在偏序关系，本质为人为构造了偏序关系。</li>
+<li>证明确实就是存在最优方案满足所有的局部条件，证明方法很多，例如可以证明最优方案经过调整某个值只减不增等等。</li>
+</ol>
+<p>为什么突然提到这一个问题呢？</p>
+<p>因为上面在证明的时候我突然意识到一个问题，我上面有句话：总是存在一种最优方案使得 $x-&gt;y-&gt;z$ 的转移只用转移 $g-&gt;g$ 。</p>
+<p>其中的证明逻辑为：其余的情况我总是可以通过其余的转移完成，这在这道题目是对的，但是有时候其又有可能是错的，因为可能会循环论证，虽然这种情况一般不会发生，但是我毕竟是遇到过的，还是要引以为戒。</p>
+<p>至于这题，为什么这样的证明是正确呢？</p>
+<p>原因很简单：举个例子，当我需要从 $f-&gt;g$ 时，如果需要经过 $x-&gt;y-&gt;z$ 转移，我也一定可以通过 $f_x-&gt;g_x-&gt;g_z$ 或者是 $f_x-&gt;f_y-&gt;g_z$ 进行转移，我证明的，只是某种转移总是可以被另外一些转移覆盖，你可以理解为优化后的转移方式 $S$ 是原来转移方式 $G$ 的子集，但是 $S$ 可以实现 $G$ 的所有功能，我们仅仅证明了这个，而这种优化的证明，显然不会出现循环论证的情况，因为这种证明既不会影响前面的决策，也不会影响后面的决策，仅仅是改变了中间转移时的决策，证明了有些决策是冗杂的，可以去掉的而已，所以不会出现循环论证的情况（相对应的，所有类似的证明方式都不会出现这种情况）。</p>
+<p>当然，也需要注意，如果你证明优化转移的方式并不常规，也就是和我们上面讲的证明并不类似，有一些本质的区别，那就需要注意会不会循环论证了，毕竟我们上面只是针对某种证明方式去论述其不会出现循环论证，如果你的证明方法并不是这一种，那还是多加小心为好。</p>
+<p>毕竟，我之前是真的有过因为这种事情而假过做法的QAQ，如果这种事情出现在了重大的赛事上，那真的就是永生难忘了QAQ。</p>
+<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><p>也是非常简单的题目。</p>
+<p>做法为，出现奇数次的 $1$ 和后面出现偶数次的 $1$ 配对，$2$ 只能出现在配对的 $1$ 中间。</p>
+<p>时空复杂度：$O(n)$ 。</p>
+<details class="toggle" ><summary class="toggle-button" style="">证明</summary><div class="toggle-content"><p>证明奇偶性的简单方法：去掉绝对值，给一些数字标上 $-$ ，那么权值和应该为 $0$ ，所以加上绝对值后 $D$ 序列的总和应该为偶数。</p>
+<p>考虑本质，显然我们只需要考虑相邻两个数字的比较关系，我们可以在相邻两个数字间画上箭头，一个数字被箭头所指向的次数，我们可以认为就是这个位置的有效权值，显然，非相邻数字的比较关系不可能贡献给 $D$ 序列的。</p>
+<p>而我们现在就是要改变箭头的方向从而得到一个位置有效权值的改变量。</p>
+<p>显然，对于任意一种我们认为的合法 $D$ 序列，我们总是可以构造出来一种箭头和改变箭头的方案使得其满足 $D$ 序列。</p>
+<p>而只有连续改变箭头，才会在端点处出现 $1$ ，否则都为偶数，所以 $2$ 只能被成对的 $1$ 包含在里面，证毕。</p>
+</div></details>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1100000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,a[N],bk;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">    <span class="type">int</span> x;<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;x);</span><br><span class="line">    <span class="keyword">if</span>(x&gt;<span class="number">2</span>)&#123;<span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(x==<span class="number">1</span>)bk^=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(x==<span class="number">2</span> &amp;&amp; !bk)&#123;<span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(bk)&#123;<span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反思：找不到错误的时候。"><a href="#反思：找不到错误的时候。" class="headerlink" title="反思：找不到错误的时候。"></a>反思：找不到错误的时候。</h2><p>当你实在找不到代码和做法的问题的时候，不妨考虑一下是不是题意读错了，赶紧去重新读一遍题意或者叫队友读一遍题意。</p>
+<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><p>题意：有 $n$ 个颜料桶，有 $m$ 个初始有不同的颜色，同时还有一些有向管子，表示颜料从第 $x$ 个颜料流到第 $y$ 个颜料桶。</p>
+<p>然后颜料混合会产生新的颜色，注意：因为管子流速不同，所以即使是同两种颜色，只要是在不同的桶中，就会配出不同的颜色。</p>
+<p>最后问你稳定状态有多少种颜色。</p>
+<p>至于颜料会不会流完等等问题，不太确定，反正也不会做，先鸽着。</p>
+<h1 id="G"><a href="#G" class="headerlink" title="G"></a>G</h1><p>纯纯傻鸟题，二分卡我时间。</p>
+<p>但是存在 $O(n)$ 做法，简单来说就是终止状态有两种，递增，递减，直接针对两种情况判一下就行了，判断过程不难，自己想。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 1100000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fep(i,x,y) for(int i=x;i&lt;=y;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> feq(i,x,y) for(int i=x;i&gt;=y;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;LL,LL&gt; PII;</span><br><span class="line"><span class="type">int</span> f;</span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getz</span><span class="params">(T &amp;x)</span></span>&#123;</span><br><span class="line">  x=<span class="number">0</span>;f=<span class="number">1</span>;<span class="type">char</span> c=<span class="built_in">getchar</span>();</span><br><span class="line">  <span class="keyword">while</span>(c&gt;<span class="string">&#x27;9&#x27;</span> || c&lt;<span class="string">&#x27;0&#x27;</span>)c==<span class="string">&#x27;-&#x27;</span>?f=<span class="number">-1</span>:<span class="number">1</span>,c=<span class="built_in">getchar</span>();</span><br><span class="line">  <span class="keyword">while</span>(c&lt;=<span class="string">&#x27;9&#x27;</span> &amp;&amp; c&gt;=<span class="string">&#x27;0&#x27;</span>)x=(x&lt;&lt;<span class="number">3</span>)+(x&lt;&lt;<span class="number">1</span>)+(c-<span class="string">&#x27;0&#x27;</span>),c=<span class="built_in">getchar</span>();</span><br><span class="line">  f==<span class="number">-1</span>?x=-x:x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n;LL dd,a[N],b[N],c[N];</span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">(LL *d)</span></span>&#123;</span><br><span class="line">  LL minval=d[<span class="number">1</span>],maxval=d[<span class="number">1</span>];</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">2</span>,n)minval=<span class="built_in">min</span>(d[i],minval),maxval=<span class="built_in">max</span>(d[i],maxval);</span><br><span class="line">  <span class="keyword">return</span> (maxval-minval)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="built_in">getz</span>(n);<span class="built_in">getz</span>(dd);dd*=<span class="number">2</span>;</span><br><span class="line">  <span class="built_in">fep</span>(i,<span class="number">1</span>,n)&#123;<span class="built_in">getz</span>(a[i]);a[i]*=<span class="number">2</span>;b[i]=a[i]-dd*(i<span class="number">-1</span>);c[i]=a[i]+dd*(i<span class="number">-1</span>);&#125;</span><br><span class="line">  <span class="comment">// fep(i,1,n)printf(&quot;%lld %lld\n&quot;,b[i],c[i]);</span></span><br><span class="line">  LL ans=<span class="built_in">min</span>(<span class="built_in">solve</span>(b),<span class="built_in">solve</span>(c));</span><br><span class="line">  <span class="keyword">if</span>(ans&amp;<span class="number">1</span>)<span class="built_in">printf</span>(<span class="string">&quot;%lld.5\n&quot;</span>,ans&gt;&gt;<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;%lld.0\n&quot;</span>,ans&gt;&gt;<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="H"><a href="#H" class="headerlink" title="H"></a>H</h1><p>没看题，神仙队友AC了。</p>
+<h1 id="I"><a href="#I" class="headerlink" title="I"></a>I</h1><p>啊，我心中的痛啊！！！</p>
+<p>显然，$n^2$ 个区间跑出来，就可以三位偏序了，按权值排序，然后用树状数组套数组爽过。</p>
+<p>时间复杂度：$O((n^2+q)\log^2{n})$</p>
+<details class="toggle" ><summary class="toggle-button" style="">根号做法</summary><div class="toggle-content"><p>这里先讲讲：$O(n^2\sqrt{n}+nm)$ 的根号做法，但是这种做法大概率不如树状数组优秀，因为这边有一个组只维护了两个分块数组（指的是每次更新要根号的数组）用了 1500ms 。</p>
+<p>考虑按照权值从小到大加入区间，维护以下几个数组：</p>
+<p>$bel[i]$ 表示 $i$ 在第 $bel[i]$ 个块。</p>
+<p>$f1[i]$ 表示块内答案。</p>
+<p>$f2[i]<a href="j&lt;bel[i]">j</a>$ 表示右端点为 $i$ ，左端点在 $j$ ~ $bel[i]-1$ 的块内的最大答案。</p>
+<p>$f3[i]<a href="bel[j]&lt;bel[i]">j</a>$ 表示左端点在 $j$ ~ $bel[j]$ 块的右端，右端点为 $i$ 的最大答案。</p>
+<p>不难发现，插入一个区间可以 $O(sqrt{n})$ 更新。</p>
+<p>然后每次修改暴力枚举 $i$ $O(n)$ 查询完就行了，块的两端随便处理一下就行了。</p>
+<p>接着讲一下我自己的同复杂度做法，但是多维护了一个分块数组，大概率是过不了的。</p>
+<p>$f1[l][r]$ 表示块 $l$ ~ $r$ 的最优答案。</p>
+<p>$f2[i][j]$ 同上。</p>
+<p>$f3[i][j]$ 类似 $f2$ ，只不过 $j&gt;bel[i]$ 。</p>
+<p>怎么更新 $f1$ 呢？其实只需要转换一下更新模式就行了。</p>
+<p>我们每过 $\sqrt{n}$ 个区间更新一下 $f1$ ，单次更新 $O(n)$ ，这样时间复杂度就是 $O(n^2\sqrt{n})$ 了，毕竟更新 $f1$ 最麻烦的就是枚举 $l,r$ ，我们把多次更新并到一起岂不美哉。</p>
+<p>这里就要说一下为什么他是三个数组我是两个数组了，实际上就是我没有灵活应用好这个 $nq$ 了，因为询问的时间复杂度实在是太松了，所以实际上很多操作可以等到询问再处理，例如他的做法之所以比我的做法少了一个分块数组，实际上就是他多了枚举区间所有位置统计答案的步骤，而我只用枚举区间两端的散块，也就是我牺牲了修改的常数换取了询问的尝试。</p>
+<p>实际上如果我也进行遍历区间的操作，我也能省掉 $f1$ ，只维护两个分块数组。</p>
+<p>UPD：其实写到这里我突然又觉得我的不一定会比上面的做法慢，因为虽然我比他多了一个分块数组，$n^2\sqrt{n}$ 常数多了 $1$ ，但是询问少了一次遍历整个区间，所以 $nm$ 少了一个 $1$ ，而 $n^2\sqrt{n}&lt;nm$ ，说不定还能跑的比上面的做法快，所以说到底没有 AC 纯粹就是懒得写。</p>
+<p>重回正题，不难发现，这两个做法合一起就能 $O((n^2+m)\sqrt{n})$ 了。</p>
+<p>整块对整块的方法用我的方法处理，整块对散块就必须两个方向都处理一遍了，即我的做法的 $f2,f3$ ，区间两端的散块对散块，采用上面做法的 $f3$ 处理，至于散块内部（散块内部用于询问在块内和区间两端的散块内部），也很简单，定义类似 $f1$ ，但是更新却很简单。</p>
+<p>即：$ff[l][r]$ 表示一个块内 $[l,r]$ 的最小值，每次出现这个块内的答案就更新一下，单次更新 $O(n)$ ，但是一个块最多更新 $\sqrt{n}*\sqrt{n}=n$ 次，只有 $\sqrt{n}$ 个块，所以至多更新 $O(n^2\sqrt{n})$ 次，这样就完成了对 $ff$ 的更新，人话讲就是：暴力更新，复杂度是对的。</p>
+<p>当然，你也可以采用和 $ff$ 类似的技巧，将其的更新复杂度降到：$O(n^2)$ ，但是没有这个必要，因为这道题目的时间复杂度瓶颈多了去了，你去掉一个瓶颈时间复杂度照样下不来，还更难写了，没有这个必要，直接暴力更新就是最好的选择。</p>
+</div></details>
+<details class="toggle" ><summary class="toggle-button" style="">队友做法</summary><div class="toggle-content"><p>队友赛时想的 $O(nm\alpha(n))$ 做法。（但是赛时被心态已经爆炸的我认为很难写且会超时，给直接给否决掉，导致我们最后都没有 AC 这道题目。）&lt;/summary&gt;</p>
+<p>简单来说，前缀和，然后排好序（从小到大），然后每次查询就按排好序的方式拿出序列。</p>
+<p>假设 $A$ 是我们询问的区间 ，$A’$ 是 $A$ 排序好的区间。</p>
+<p>使用双指针，找每个位置 $i$ 最靠左的 $j$ 满足 $A_i-A_j\le U_i$ ，显然，如果 $j\le i$ ，这就是当 $i$ 为右端点的最优方案。</p>
+<p>但是不一定，因此我们考虑从右到左删除数字，到 $x$ ，先看其的贡献，然后删除，那指向他的那些 $i$ 怎么办呢？答案是指向 $x$ 右边那个数字。</p>
+<p>那么我们就需要一个支持单点删除，并且快速查询一个位置右边第一个没有被删除的位置是哪个的数据结构，显然就是并查集了。</p>
+<p>然后就做完了。</p>
+</div></details>
+<h1 id="J"><a href="#J" class="headerlink" title="J"></a>J</h1><p>纯纯傻鸟题，线性基就做完了。</p>
+<p>显然如果你能构造出来每一种方案，那么你原来的方程组一定是满秩的。（线性变换前后秩不变，而最终方案的秩为 $n$ ）</p>
+<p>那么线性基的时候用 bitset 记录一下方案，不就做完了吗。</p>
+<p>时间复杂度：$O(\frac{n^3}{w})$</p>
+<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>当时做这道题目犯了一个致命的失误，我以为可能会无解，然后觉得太难了，就没想这道题目，但实际上我当时想的误解情况是非法的。</p>
+<p>当时觉得一个“工”字不存在方案，现在突然发现工字不满足题目的限制，做这种构造题就特别容易出现构造一个在自己认为无解的反例，然后觉得题目太难不可做，扔了，但实际上反例是非法的情况。</p>
+<p>先说一点，题目应该是一定有解的，这是做这道题目一开始就应该要有的直觉，不然出题人给这么多限制条件干嘛，又是洞又是周围必须要有两个 $1$ 啥的。</p>
+<p>关于洞的描述，其实有个很规范且简单的说法，假设地图无限大，那么 $0$ 的连通块应该只有一个。</p>
+<p>然后就是怎么做的问题了，显然，对于一个长度 $\ge 2$ 的横条，一定存在解。</p>
+<p>因此我们考虑将这个连通块不断竖切，得到一堆长条，然后就差不多做完了。</p>
+<p>但是有一个例外：如果一个格子上下没有连接 $1$ 而左右连接了 $1$ 咋整，形成了一个类 “工” 字，因此我们考虑对于一个连通图的某些部分横切，某些部分纵切，显然，对于刚刚的情况，我们就希望两边连接的部分有一个部分是横切的。</p>
+<p>这个时候，联系一下为什么题目要限制洞？不难发现，整个图形成了一个类似树的形状，再想想一棵树除根节点外的每个点都能独立对应一条边，再结合我们希望一个特殊格子其连接的两端有一端能对他负责，就不难想到最终的做法。</p>
+<p>我们将只有上下联通 $1$ 或者左右联通 $1$ 的格子抽象为边，将不是这种的 $1$ 形成的连通块抽象成点，然后从一个点出发，每个点和其边绑定，方向由边决定，然后这样切一下就解决了。</p>
+<p>注意，一条边其实不一定由一个格子构成，可能是由一条特殊的 $1$ 构成的链组成。</p>
+<p>这个做法最大的误区是以为一个阶梯状的链上面全是特殊点，实际上这个阶梯状的链上一个特殊点都没有，因为其不符合之前说的要么上下，要么左右。</p>
+<p><img src="1.png" alt=""></p>
+<p>感觉这道题目虽然难写，但是思维难度也是不低的，非常的有意思。</p>
+<p>可惜不是我想出来的QAQ，是别的队伍在赛时做出来了，赛后跟我们讲的QAQ。</p>
+<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>这道题目没做出来，可是真的就差点了QAQ。</p>
+<p>之前做过一道类似的题目，这道题目也是很快就想到了应该有决策单调性，但是一直搁那列式，就是找不到单调性（机房中还是有人是列式找到单调性的，比较NB），最后画了个图找出来了。</p>
+<p>显然，题目可以转化为求梯形面积（经典数形结合），需要考虑的点构成一个八字，且只需要考虑八字的左边与八字的右边匹配的情况。</p>
+<p><img src="2.png" alt=""></p>
+<p>假如 $1$ 在 $4$ 的决策比在 $3$ 好，那么 $2$ 的在 $4$ 的决策也比 $3$ 好。</p>
+<p>从图中就可以看出来：蓝&lt;红 ，绿&lt;蓝，紫&gt;红，显然紫&gt;绿。</p>
+<p>然后分治一下就做完了，时间复杂度：$O(n\log{n})$</p>
+<details class="toggle" ><summary class="toggle-button" style="">另外引用一下同机房另外一个人的直觉流做题法</summary><div class="toggle-content"><p>在八字上，$(h_i+h_j)*(j-i)$ 。</p>
+<p>$i$ 往右移动，$(j-i)$ 下降，$(h_i+h_j)$ 上升。</p>
+<p>$j$ 往右移动，$(j-i)$ 下降，$(h_i+h_j)$ 上升。</p>
+<p>$j$ 往左移动，$(j-i)$ 上升，$(h_i+h_j)$ 下降。</p>
+<p>那么根据和固定，两数越接近乘积越大的均衡思想（这里不是说和是固定的，是从这个定理中可以看出应该数字越接近，乘积越大的均衡思想），我们应该用让 $j$ 往左移动，所以这道题目应该存在决策单调性，且方向是 $i,j$ 同向的。（不过他们赛时脑子有点晕，没有很肯定方向，求稳把两个方向都做了一遍。）</p>
+<p>当然这种直觉流做题不能太过依赖啊，只有刷题量大的选手才能用的好，因为大量的题目能让他们做出正确的判断，比如这个大佬可能就是以前做过类似的乘积存在单调性的题目才能这么快察觉应该有决策单调的（毕竟感觉这个题目比较经典，他应该是做过的），上面这一套说法应该是其在察觉到决策单调后所想的一个比较简单的方法用于去阐释决策单调的，也就是先射箭后画靶。（也有可能没有做过，的确是通过这么一个想法想到的决策单调，但是不可否认的是这个大佬的刷题量确实很大）</p>
+<p>毕竟，同样的说法，我换个说法，就又是另外一个方向，假如 $(h_i+h_j)$ 很大，那我为什么不能 $i,j$ 全部往外走，减少 $(h_i+h_j)$ ，增大 $(j-i)$ 呢？</p>
+<p>所以，如果对直觉做题法不够放心的话，还是老老实实确定了正确性再写吧，不过感觉最正确的姿势应该是：先用直觉找到大致方向，再确定正确性，然后开写。当然，如果感觉很难证，结论又感觉很正确，又不难写，队伍里面有没有要写的题目，也可以不妨写一下尝试一下，说不定就过了，过的了血赚，过不了就换个方向，以写代证伪，节省了证伪的时间。</p>
+</div></details>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><ol>
+<li>亲手写一些代码。</li>
+<li>补充一个关于状态转移和状态转移优化的理解。</li>
+<li>把没有做的题目自己做一遍。</li>
+<li>自己去看一遍官方题解并且补充一下官方题解的做法。</li>
+<li>补充 $L$ 题的推式子证明方法。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2025/02/04/2020-2021-ICPC-Asia-Seoul-Regional-Contest-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/">http://oldplace.github.io/2025/02/04/2020-2021-ICPC-Asia-Seoul-Regional-Contest-%E8%B5%9B%E5%90%8E%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A"><span class="toc-number">1.</span> <span class="toc-text">A</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">2.</span> <span class="toc-text">B</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C"><span class="toc-number">3.</span> <span class="toc-text">C</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D"><span class="toc-number">4.</span> <span class="toc-text">D</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%BE%AA%E7%8E%AF%E8%AE%BA%E8%AF%81"><span class="toc-number">4.1.</span> <span class="toc-text">扩展：关于循环论证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E"><span class="toc-number">5.</span> <span class="toc-text">E</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D%EF%BC%9A%E6%89%BE%E4%B8%8D%E5%88%B0%E9%94%99%E8%AF%AF%E7%9A%84%E6%97%B6%E5%80%99%E3%80%82"><span class="toc-number">5.1.</span> <span class="toc-text">反思：找不到错误的时候。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F"><span class="toc-number">6.</span> <span class="toc-text">F</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#G"><span class="toc-number">7.</span> <span class="toc-text">G</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#H"><span class="toc-number">8.</span> <span class="toc-text">H</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I"><span class="toc-number">9.</span> <span class="toc-text">I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#J"><span class="toc-number">10.</span> <span class="toc-text">J</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#K"><span class="toc-number">11.</span> <span class="toc-text">K</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#L"><span class="toc-number">12.</span> <span class="toc-text">L</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9D%91"><span class="toc-number">13.</span> <span class="toc-text">坑</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

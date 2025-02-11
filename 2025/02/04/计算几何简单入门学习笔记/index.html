@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算几何简单入门学习笔记 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="参照文献你谷日报真好用：https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;wjyyy&#x2F;geometry1 B站UP主：https:&#x2F;&#x2F;space.bilibili.com&#x2F;88461692?spm_id_from&#x3D;333.788.b_765f7570696e666f.1 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiexinxinlove&#x2F;p&#x2F;3708147.html 点、向量书写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算几何简单入门学习笔记">
+<meta property="og:url" content="http://oldplace.github.io/2025/02/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="参照文献你谷日报真好用：https:&#x2F;&#x2F;www.luogu.com.cn&#x2F;blog&#x2F;wjyyy&#x2F;geometry1 B站UP主：https:&#x2F;&#x2F;space.bilibili.com&#x2F;88461692?spm_id_from&#x3D;333.788.b_765f7570696e666f.1 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiexinxinlove&#x2F;p&#x2F;3708147.html 点、向量书写">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2025-02-04T11:11:00.000Z">
+<meta property="article:modified_time" content="2025-02-04T11:43:48.626Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="计算几何">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2025/02/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算几何简单入门学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-02-04 19:43:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">计算几何简单入门学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-04T11:11:00.000Z" title="发表于 2025-02-04 19:11:00">2025-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-04T11:43:48.626Z" title="更新于 2025-02-04 19:43:48">2025-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>23分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计算几何简单入门学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="参照文献"><a href="#参照文献" class="headerlink" title="参照文献"></a>参照文献</h1><p>你谷日报真好用：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/wjyyy/geometry1">https://www.luogu.com.cn/blog/wjyyy/geometry1</a></p>
+<p>B站UP主：<a target="_blank" rel="noopener" href="https://space.bilibili.com/88461692?spm_id_from=333.788.b_765f7570696e666f.1">https://space.bilibili.com/88461692?spm_id_from=333.788.b_765f7570696e666f.1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiexinxinlove/p/3708147.html">https://www.cnblogs.com/xiexinxinlove/p/3708147.html</a></p>
+<h1 id="点、向量"><a href="#点、向量" class="headerlink" title="点、向量"></a>点、向量</h1><h2 id="书写约定"><a href="#书写约定" class="headerlink" title="书写约定"></a>书写约定</h2><p>上了初中就应该学过直角坐标系了，这里不多阐述，本文 $(x,y)$ 表示点的坐标，$A(x,y)$ 中的 $A$ 表示点的编号，特殊的，$O$ 点是坐标系的圆点。</p>
+<p>向量呢，是一个有向线段，通常表示为：$\vec{AB}$ 就表示由$A$到$B$的有向线段。</p>
+<p>但是呢，许多情况，向量默认起点是在坐标系的原点：$O$，因此向量经常看到的形式都是：$\vec{OA}$，且由于起点固定，所以向量还有种表示方法，就是直接用终点$A$来表示向量，$\begin{bmatrix}x_A\\y_A\end{bmatrix}$ 也是一种表示方法。</p>
+<p>下文中一般情况下默认起点不一定在 $O$ 点（很大多数情况都是），但是当看到用终点表示向量时，默认起点是 $O$ 或者是前文规定的某个基准点（表示以这个点建立坐标系），如果一般是 $\vec{AB}$ 这样两个端点给出的向量乘积，那么就以两个向量的共同端点为基准点建立坐标系。（当然还是有特例，一般会有特殊说明<del>可能会忘记写</del>）</p>
+<p>向量的模呢，其实就是其的长度，比如向量 $\vec{A}$ 的模写作：$|\vec{A}|$。</p>
+<p>向量的幅角呢，其实就是其和 $x$ 正半轴形成的夹角。</p>
+<p><img src="1.png" alt="在这里插入图片描述"></p>
+<p>一般可以用 $atan2$ 函数进行计算，但是需要注意 $C++$ 用的是弧度制。（其实没啥区别，正负性没有变，值域变了而已。）</p>
+<h2 id="向量运算"><a href="#向量运算" class="headerlink" title="向量运算"></a>向量运算</h2><p>实际上，这些运算实际指的是起点在$O$点的运算。</p>
+<h3 id="普通运算"><a href="#普通运算" class="headerlink" title="普通运算"></a>普通运算</h3><p>加法运算：$\begin{bmatrix}x_A\\y_A\end{bmatrix}+\begin{bmatrix}x_B\\y_B\end{bmatrix}=\begin{bmatrix}x_A+x_B\\y_A+y_B\end{bmatrix}$</p>
+<p>减法运算：$\begin{bmatrix}x_A\\y_A\end{bmatrix}-\begin{bmatrix}x_B\\y_B\end{bmatrix}=\begin{bmatrix}x_A-x_B\\y_A-y_B\end{bmatrix}$</p>
+<p>乘常数运算：</p>
+<script type="math/tex; mode=display">\begin{bmatrix}x_A\\y_A\end{bmatrix}*w=\begin{bmatrix}x_A*w\\y_A*w\end{bmatrix}</script><p>其余的运算对于信息学计算几何用处不大，因此不再赘述。</p>
+<p><del>你放屁，叉积不重要吗。</del></p>
+<p><del>我也知道叉积重要</del></p>
+<p><del>所以下面开始讲叉积</del></p>
+<h3 id="叉积"><a href="#叉积" class="headerlink" title="叉积"></a>叉积</h3><p>叉积的运算法则：</p>
+<script type="math/tex; mode=display">\begin{bmatrix}x_B\\y_B\end{bmatrix}\times \begin{bmatrix}x_A\\y_A\end{bmatrix}=x_B*y_A-y_B*x_A</script><p>（考虑到图片标识问题，所以 $AB$ 换个位置。）</p>
+<p>你没有看错，就是这么个东西，返回值竟然还是实数，甚至还没有交换律（因此叉积一定要注意前后顺序）。</p>
+<p>那么其有什么实际作用呢？</p>
+<p><img src="2.png" alt="在这里插入图片描述"></p>
+<p>对于向量 $\vec{OB}$ 和 $\vec{OA}$ ，如果 $\vec{OB}$ 绕 $O$ 点逆时针旋转 $0°\sim 180°$ 能够与 $\vec{OA}$ 共线，那么 $\vec{OB}\times \vec{OA}&gt;0$，但是如果不能，代表 $\vec{OA}$ 逆时针旋转 $0°\sim 180°$ 能够与 $B$ 重合，那么 $\vec{OB}\times \vec{OA}<0,\vec{OB}\times \vec{OA}>0$ ，当然，如果一开始就共线，那么为 $0$ 。</p>
+<p>至于叉积还有什么作用，也就是求 $▲OAB$ 的面积了。</p>
+<p>实际上，这其实是叉积在线性代数中的意义，叉积求的是 $\vec{OB}$ 和 $\vec{OA}$ 为边的平行四边形的面积（除 $2$ 即可），但是为什么会有正负之分呢？额，这个跟线性变换有关，不再赘述，反正意义差不多就这两个。</p>
+<p>额，至于证明吗，其实用几何就能证明了，至于线性代数的证明呢？我也不知道。<del>可能根本就没有吧。</del></p>
+<p><img src="3.png" alt="在这里插入图片描述"></p>
+<p>同机房的CLB奆佬用割补法给出了证明，但是实际上和上面的本质是差不多的，在此不再赘述。</p>
+<p>当然，叉积的记忆也很简单。</p>
+<p><img src="4.png" alt="在这里插入图片描述"></p>
+<p>交叉相乘再相减。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">double</span>  <span class="title">mu</span><span class="params">(dian  x,dian  y,dian  z)</span><span class="comment">//以点z为圆点的叉积</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">double</span>  x1=(x.x-z.x),y1=(x.y-z.y),x2=(y.x-z.x),y2=(y.y-z.y);</span><br><span class="line">	<span class="keyword">return</span>  x1*y2-x2*y1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，叉积有一个性质大家应该也看出来了：$\vec{A}\times \vec{B}=-\vec{B}\times \vec{A}$</p>
+<h1 id="多边形的面积"><a href="#多边形的面积" class="headerlink" title="多边形的面积"></a>多边形的面积</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">【题意】</span><br><span class="line">在一个平面坐标系上随意画一条有n个点的封闭折线（按画线的顺序给出点的坐标），保证封闭折线的任意两条边都不相交。最后要计算这条路线包围的面积。</span><br><span class="line">（注意，不能相交）</span><br></pre></td></tr></table></figure>
+<p><img src="5.jpeg" alt="在这里插入图片描述"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">【输入格式】</span><br><span class="line">第一行整数 n (3 &lt;= n &lt;= 1000),表示有n个点。</span><br><span class="line">下来n行，每行两个整数x（横坐标）和y（纵坐标），表示点坐标（-10000&lt;x,y&lt;=10000）。</span><br><span class="line">【输出格式】</span><br><span class="line">一行一个实数，即封闭折线所包围的面积（保留4位小数）。</span><br><span class="line">【样例1输入】</span><br><span class="line">4</span><br><span class="line">2 1</span><br><span class="line">5 1</span><br><span class="line">5 5</span><br><span class="line">2 5</span><br><span class="line">【样例1输出】</span><br><span class="line">12.0000</span><br><span class="line"></span><br><span class="line">【样例2输入】</span><br><span class="line">5</span><br><span class="line">2 1</span><br><span class="line">5 1</span><br><span class="line">3 2</span><br><span class="line">5 3</span><br><span class="line">2 3</span><br><span class="line">【样例2输出】</span><br><span class="line">4.0000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>先考虑凸多边形：</p>
+<p>只要这样子分就行了</p>
+<p><img src="6.png" alt="在这里插入图片描述"></p>
+<p>可以看出只要选一个点然后以这个点分割成一堆三角形就行了，而且用叉积都是一个方向。</p>
+<p>公式的话，设点的序列是从某个顶点开始，逆时针给出，为$a_1,a_2,a_3,…,a_k$，那么就为$(\vec{a_1a_2}\times \vec{a_1a_3}+\vec{a_1a_3}\times \vec{a_1a_4}+…+\vec{a_1a_{k-1}}\times \vec{a_1a_k})/2$ 。</p>
+<p>需要注意的是，由于是逆时针给出，且是正数，所以其中的每一个叉积都是正数，不需要加绝对值，但是如果在不知道是逆时针还是顺时针给出的情况下，最好还是加上绝对值。</p>
+<p>那么我们再考虑非凸多边形面积的情况：</p>
+<p><img src="7.png" alt="在这里插入图片描述"></p>
+<p>如果采用上述的方法：$(\vec{a_1a_2}\times \vec{a_1a_3}+\vec{a_1a_3}\times \vec{a_1a_4}+…+\vec{a_1a_{k-1}}\times \vec{a_1a_k})/2$，我们发现刚好搞好就是多边形的面积，而有些叉积虽然算到多边形外面，后来又消掉。</p>
+<p>因此你会发现，如果每次叉积都取绝对值反而会错，因此叉积的正负性真的是一个非常美妙的东西啊。</p>
+<p><del>证明完全不会。</del></p>
+<p>而在网上寻找证明的时候，我看到一个有意思的东西。<del>还是没找到证明</del></p>
+<p>就是说我们上文是默认 $a_1$ 为三角形的公用顶点的，但是如果我们在坐标系中随便选一个点$x$，然后值为：$(\vec{xa_1}\times \vec{xa_2}+…+\vec{xa_k}\times \vec{xa_1})/2$，这样竟然也不会错，用一张别的大佬的博客的图来帮助理解。</p>
+<p><img src="8.png" alt=""></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  N  1100</span></span><br><span class="line"><span class="keyword">using</span>  <span class="keyword">namespace</span>  std;</span><br><span class="line"><span class="type">int</span>  n;</span><br><span class="line"><span class="keyword">struct</span>  <span class="title class_">node</span>&#123;<span class="type">double</span>  x,y;&#125;list[N];</span><br><span class="line"><span class="function"><span class="type">double</span>  <span class="title">mu</span><span class="params">(node  x,node  y,node  z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">double</span>  x1=(x.x-z.x),y1=(x.y-z.y),x2=(y.x-z.x),y2=(y.y-z.y);</span><br><span class="line">	<span class="keyword">return</span>  x1*y2-x2*y1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf&quot;</span>,&amp;list[i].x,&amp;list[i].y);</span><br><span class="line">	<span class="type">double</span>  ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">3</span>;i&lt;=n;i++)ans+=<span class="built_in">mu</span>(list[i],list[i<span class="number">-1</span>],list[<span class="number">1</span>]);<span class="comment">//直接求 </span></span><br><span class="line">	<span class="keyword">if</span>(ans&lt;<span class="number">0</span>)ans=-ans;<span class="comment">//题目并没有给出顺时针还是逆时针。</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.4lf&quot;</span>,ans/<span class="number">2.0</span><span class="comment">/*三角形面积要除以2*/</span>);</span><br><span class="line">	<span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="线段的相交与直线的交点"><a href="#线段的相交与直线的交点" class="headerlink" title="线段的相交与直线的交点"></a>线段的相交与直线的交点</h1><h2 id="线段的相交判定"><a href="#线段的相交判定" class="headerlink" title="线段的相交判定"></a>线段的相交判定</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">【题意】</span><br><span class="line">有n条线段（编号为<span class="number">1</span>~n），按<span class="number">1</span>~n的顺序放在二维坐标系上（就是先放<span class="number">1</span>号，再放<span class="number">2</span>号……），</span><br><span class="line">要求输出最上面的那些线段的编号（就是没有其他线段压在它上面的那些线段）</span><br><span class="line">【输入格式】</span><br><span class="line">第一行第一个数n（ <span class="number">1</span> &lt;= n &lt;= <span class="number">10000</span>）表示这组数据有n条线段。</span><br><span class="line">下来n行，每行两个坐标，表示第i条线段的两个端点。</span><br><span class="line">【输出格式】</span><br><span class="line">一行。输出最上面的线段的编号（从小到大）。相邻两个编号用空格隔开，最后一个编号没有空格。</span><br><span class="line">【样例<span class="number">1</span>输入】</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">4</span> <span class="number">2</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">3</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">-2.0</span> <span class="number">8</span> <span class="number">4</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">8</span> <span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">6</span> <span class="number">-2.0</span></span><br><span class="line">【样例<span class="number">1</span>输出】</span><br><span class="line"><span class="number">2</span> <span class="number">4</span> <span class="number">5</span></span><br><span class="line">【样例<span class="number">2</span>输入】</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">0</span> <span class="number">3</span> <span class="number">1</span></span><br><span class="line">【样例<span class="number">2</span>输出】</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>线段相交裸题。</p>
+<p><del>线段相交不直接列方程打几十行代码暴力判断吗</del></p>
+<p>首先看下面这张图：</p>
+<p><img src="9.png" alt="在这里插入图片描述"></p>
+<p>把向量$AB$化成直线，然后判断另外一个向量是否是$\vec{C’’D’’}$的形式，其余的两种形式肯定都不可能相交。</p>
+<p>敏锐的人发现了端点一个在左边，一个在右边（当然，其中一个端点在直线上也可以，两个端点等会讲），更加敏锐的人发现，直线不就是$180°$吗？特别敏锐的人发现，只要两条向量互相都满足这个要求，则一定相交，在不共线的情况下相交，则两条向量互相都满足这个要求。</p>
+<p>至于怎么判断是不是长这个样子，即$(\vec{AB}\times \vec{AC’’})*(\vec{AB}\times \vec{AD’’})&lt;0$，然后两个一起判断即可。</p>
+<p>代码片段：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">mu</span>(y.x,x.x,x.y)*<span class="built_in">mu</span>(y.y,x.x,x.y)&lt;=<span class="number">0</span>  &amp;&amp;  <span class="built_in">mu</span>(x.x,y.x,y.y)*<span class="built_in">mu</span>(x.y,y.x,y.y)&lt;=<span class="number">0</span>)<span class="keyword">return</span>  <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p>注：此代码在后面会稍有魔改，本质是利用叉积：$\vec{A}\times \vec{B}=-\vec{B}\times \vec{A}$的性质，而且$&lt;=0$后面要把等号去掉$0$，因为端点在直线上和共线都是$0$，不能区分。</p>
+<p>但是呢，还有一种特别特别恶心的情况，共线。</p>
+<p>共线的时候，两个既有可能相交，又有可能不相交，但是由于已经共线，所以我们不妨直接暴力判断即可。</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  N  21000</span></span><br><span class="line"><span class="keyword">using</span>  <span class="keyword">namespace</span>  std;</span><br><span class="line"><span class="keyword">struct</span>  <span class="title class_">dian</span>&#123;<span class="type">double</span>  x,y;&#125;;</span><br><span class="line"><span class="keyword">struct</span>  <span class="title class_">bian</span>&#123;dian  x,y;&#125;list[N];</span><br><span class="line"><span class="type">int</span>  n;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">double</span>  <span class="title">mymin</span><span class="params">(<span class="type">double</span>  x,<span class="type">double</span>  y)</span></span>&#123;<span class="keyword">return</span>  x&lt;y?x:y;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">double</span>  <span class="title">mymax</span><span class="params">(<span class="type">double</span>  x,<span class="type">double</span>  y)</span></span>&#123;<span class="keyword">return</span>  x&gt;y?x:y;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">double</span>  <span class="title">mu</span><span class="params">(dian  x,dian  y,dian  z)</span><span class="comment">//x-&gt;y</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">double</span>  x1=(x.x-z.x),y1=(x.y-z.y),x2=(y.x-z.x),y2=(y.y-z.y);</span><br><span class="line">	<span class="keyword">return</span>  x1*y2-x2*y1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">bool</span>  <span class="title">pd</span><span class="params">(dian  x1,dian  x2,dian  y1)</span></span>&#123;<span class="keyword">return</span>  (<span class="built_in">mymin</span>(x1.x,x2.x)&lt;=y1.x  &amp;&amp;  <span class="built_in">mymax</span>(x1.x,x2.x)&gt;=y1.x  &amp;&amp;  <span class="built_in">mymin</span>(x1.y,x2.y)&lt;=y1.y  &amp;&amp;  <span class="built_in">mymax</span>(x1.y,x2.y)&gt;=y1.y);&#125;<span class="comment">//判断y1点是否在线段x1-x2上</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">bool</span>  <span class="title">check</span><span class="params">(bian  x,bian  y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">mu</span>(y.x,x.x,x.y)*<span class="built_in">mu</span>(x.x,y.y,x.y)&gt;<span class="number">0</span>  &amp;&amp;  <span class="built_in">mu</span>(x.x,y.x,y.y)*<span class="built_in">mu</span>(y.x,x.y,y.y)&gt;<span class="number">0</span>)<span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">	<span class="comment">//普通情况</span></span><br><span class="line">	<span class="keyword">if</span>((<span class="built_in">mu</span>(x.x,x.y,y.x)==<span class="number">0</span>  &amp;&amp;  <span class="built_in">pd</span>(x.x,x.y,y.x))  ||</span><br><span class="line">	(<span class="built_in">mu</span>(x.x,x.y,y.y)==<span class="number">0</span>  &amp;&amp;  <span class="built_in">pd</span>(x.x,x.y,y.y))  ||</span><br><span class="line">	(<span class="built_in">mu</span>(y.x,y.y,x.x)==<span class="number">0</span>  &amp;&amp;  <span class="built_in">pd</span>(y.x,y.y,x.x))  ||</span><br><span class="line">	(<span class="built_in">mu</span>(y.x,y.y,x.y)==<span class="number">0</span>  &amp;&amp;  <span class="built_in">pd</span>(y.x,y.y,x.y)))<span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">	<span class="comment">//暴力判断不同的相交情况</span></span><br><span class="line">	<span class="keyword">return</span>  <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">bool</span>  bo[N];</span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%lf%lf%lf%lf&quot;</span>,&amp;list[i].x.x,&amp;list[i].x.y,&amp;list[i].y.x,&amp;list[i].y.y);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span>  j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">check</span>(list[i],list[j]))&#123;bo[i]=<span class="literal">true</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//O(n^2)暴力判</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!bo[i])<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="直线交点"><a href="#直线交点" class="headerlink" title="直线交点"></a>直线交点</h2><p>注：本文不考虑共线</p>
+<p>一个平面的直线除了平行一定有交点。</p>
+<p>平行的情况这里不讲（实际上用截距法算一下斜率判断一下即可），但是这里要将如何在知道两条直线上的各两个点（一条直线上给出的两个点不会相同）的情况下（为什么不能知道斜率啊(#`O′)），判断其交点。</p>
+<p>都知道两点确定一条直线，于是可以直接求斜率列方程求交点，但是呢，这样是不是过于麻烦了呢？</p>
+<p>于是我们考虑用叉积来求。<del>其实就是想装逼</del></p>
+<p>现在，我们不管两个点形成的直线，而是考虑其形成的线段。</p>
+<p>先考虑给出的线段$AB$在直线$CD$的两侧（$C,D$点都为直线上任意一点）：<br><img src="10.png" alt="在这里插入图片描述"></p>
+<p>注：如果你把给出的线段当成向量，那么$A,D$为起点。</p>
+<p>这里先默认$A$在$B$左边，$C$在$D$上面，保证叉积是正的。</p>
+<p>此时$AB=AP+BP$。</p>
+<p>如果我们能求出$\frac{|AP|}{|BP|}$，那么就可以用下面这条公式算出$P$的坐标：<br>$\vec{OA}+\frac{|AP|}{|AB|}*\vec{AB}=\vec{OP}$，当然，这不就是$P$的坐标吗？</p>
+<p>但是关键是怎么求$\frac{|AP|}{|AB|}$呢？</p>
+<p>考虑转换成面积，$A、B$向$CD$做一条垂线。<br><img src="11.png" alt="在这里插入图片描述"></p>
+<p>不难看出：$▲AEP∽▲BFP$</p>
+<p>所以$\frac{AP}{BP}=\frac{AE}{BF}=\frac{S▲ABD}{S▲BCD}$</p>
+<p>完美的转换成两个三角形的比值。</p>
+<p>因此考虑叉积，以$D$为基准点：</p>
+<p>$\frac{AP}{AB}=\frac{\vec{DC}\times \vec{DA}}{\vec{DB}\times \vec{DC}+\vec{DC}\times \vec{DA}}$</p>
+<p>当然，上文中$D$在$C$下面，且$A$在$B$左边，所以叉积一直都是正的，当然，如果$C$在$D$的下面，则所有叉积取负，反正求的是比例，也没什么事，如果$A$在$B$的右边，也是如此，只是正负性的变化，但是因为同时变化，所以没有关系。</p>
+<p>而且我们发现因为叉积是求逆时针的，所以旋转并不会改变正负性，只有左右翻折会（且是所有叉积的正负性都会改变，因此左右翻折不会改变叉积之间比例），而上文中，$A$与$B$互换位置其实就是翻折，$C$在$D$下面确不是完全的翻折，但是$C$在$D$下面也会导致所求的叉积全部取负，所以也不会改变比例。</p>
+<p>当然，这个做法分母不够优秀，因此我们来证明一个定理。</p>
+<h3 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h3><p>$\vec{AB}\times \vec{AC}+\vec{AC}\times \vec{AD}=\vec{AC}\times \vec{BD}$</p>
+<p>为什么这两个向量公共端点没有也能乘。</p>
+<p>这就是前面叉积讲解中忽略的第三种情况。</p>
+<p>对于$\vec{AC}$，我们用$C$的坐标减去$A$的坐标，相当于把$\vec{AC}$移到$\vec{O?}$的位置，把起点设为$O$，然后两个向量都如此操作后得到的叉积值。</p>
+<p>或者你也可以理解为通过同样的方式把一个向量的起点移到另外一个向量的起点，以此统一起点。</p>
+<p><img src="12.png" alt="在这里插入图片描述"></p>
+<p>而在这个直线交点的证明的后半部分，基本都是用这种方式，于是又多了一个性质：</p>
+<p>$\vec{AB}\times \vec{CD}=-\vec{BA}\times \vec{CD}$</p>
+<p>证明的话，同底等高的三角形面积相同，且由于方向问题，取个符号。</p>
+<p>于是不管是叉积的顺序还是向量内部的顺序，都显得十分重要。</p>
+<p>回归正题。</p>
+<p>证明：</p>
+<p>$(x_{B}-x_{A})(y_{C}-y_{A})-(y_{B}-y_{A})(x_{C}-x_{A})+(x_{C}-x_{A})(y_{D}-y_{A})-(y_{C}-y_{A})(x_{D}-x_{A})$</p>
+<p>$=(x_{B}-x_{A})(y_{C}-y_{A})-(y_{C}-y_{A})(x_{D}-x_{A})-(y_{B}-y_{A})(x_{C}-x_{A})+(x_{C}-x_{A})(y_{D}-y_{A})$</p>
+<p>$=(x_{B}-x_{D})(y_{C}-y_{A})-(y_{B}-y_{D})(x_{C}-x_{A})$</p>
+<p>$=(y_{D}-y_{B})(x_{C}-x_{A})-(x_{D}-x_{B})(y_{C}-y_{A})$</p>
+<p>$=\vec{AC}\times \vec{BD}$</p>
+<p>可视化理解：</p>
+<p><img src="13.png" alt="在这里插入图片描述"></p>
+<h3 id="运用定理1优化"><a href="#运用定理1优化" class="headerlink" title="运用定理1优化"></a>运用定理1优化</h3><p>$\frac{|AP|}{|AB|}=\frac{\vec{DC}\times \vec{DA}}{\vec{DB}\times \vec{DC}+\vec{DC}\times \vec{DA}}=\frac{\vec{DC}\times \vec{DA}}{\vec{DC}\times \vec{BA}}=\frac{\vec{DC}\times \vec{DA}}{\vec{AB}\times \vec{DC}}$</p>
+<h3 id="更加广泛的情况"><a href="#更加广泛的情况" class="headerlink" title="更加广泛的情况"></a>更加广泛的情况</h3><p>当然，还有$A,B$在直线同侧的情况，</p>
+<p><img src="14.png" alt="在这里插入图片描述"></p>
+<p>同样，先保证 $\vec{DC}\times \vec{DA}$ 是正的，且 $B$ 在 $A$ 右边，$C$ 在 $D$ 上面。</p>
+<p>此时 $AB=AP-BP$，一样可以 $\frac{AP}{BP}=\frac{AE}{BF}=\frac{S▲ABD}{S▲BCD}$</p>
+<p>但是我们发现 $-BP$ 难搞啊，但是 $\vec{DB}\times \vec{DC}$ 就是负的，完美，这种情况证毕。</p>
+<p>于是考虑翻折和旋转，我们只要证明了 $A,B$ 在直线 $C,D$ 的左边的情况是成立的，旋转便可以得到所有的情况。</p>
+<p>很明显，$C,D$ 的上下关系改变所有的叉积正负性，比例不变，但是$B$在$A$左边时，我们发现，正负性都没有改变，应该没有影响吧，但是算出来的 $\frac{AP}{AB}$ 变成了负数（但比例绝对值对的）？但是发现 $\vec{AB}$ 与 $\vec{AP}$ 方向反了，负数刚好调过来，完美，因此得证。</p>
+<p><del>考场直接记住结论他不香吗。</del></p>
+<p>实际上，你从假设给出的两条线段有交点的方向推出的公式，基本上是可以推广到所有情况的，在考场上忘了直接这样推就行了（记住推的思路是最好的），当然不排除推广不了的情况。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span>  <span class="type">double</span>  <span class="title">muu</span><span class="params">(dian  x1,dian  x2)</span></span>&#123;<span class="keyword">return</span>  x1.x*x2.y-x2.x*x1.y;&#125;<span class="comment">//叉积</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span>  dian  <span class="title">jd</span><span class="params">(line  x,line  y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">double</span> w =<span class="built_in">muu</span>((y.y-y.x),(x.x-y.x))/<span class="built_in">muu</span>((x.y-x.x),(y.y-y.x));</span><br><span class="line">    <span class="keyword">return</span> x.x+(x.y-x.x)*w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">【题意】</span><br><span class="line">在一个平面坐标系上有n个点，用笔画一个多边形，使得多边形包含这n个点（点在多边形的边上也算包含）。</span><br><span class="line">求多边形的最小周长。</span><br><span class="line">【输入格式】</span><br><span class="line">第一行整数 n (1 &lt;= n &lt;= 1000),表示有n个点。</span><br><span class="line">下来n行，每行两个整数x（横坐标）和y（纵坐标），表示点坐标（-10000&lt;=x,y&lt;=10000)。</span><br><span class="line">【输出格式】</span><br><span class="line">一行一个实数，即多边形的最小周长（保留4位小数）。</span><br><span class="line">【样例1输入】</span><br><span class="line">4</span><br><span class="line">2 1</span><br><span class="line">5 1</span><br><span class="line">5 5</span><br><span class="line">2 5</span><br><span class="line">【样例1输出】</span><br><span class="line">14.0000</span><br><span class="line"></span><br><span class="line">【样例2输入】</span><br><span class="line">5</span><br><span class="line">2 1</span><br><span class="line">5 1</span><br><span class="line">3 2</span><br><span class="line">5 3</span><br><span class="line">2 3</span><br><span class="line">【样例2输出】</span><br><span class="line">10.0000</span><br></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="凸包初步概念"><a href="#凸包初步概念" class="headerlink" title="凸包初步概念"></a>凸包初步概念</h3><p>即找到最小的凸多边形包括我们给出点集 $V$ 。</p>
+<h3 id="转换思路"><a href="#转换思路" class="headerlink" title="转换思路"></a>转换思路</h3><p>不难发现凸包就是最小周长：</p>
+<p>非凸多边形很明显可以用三角形两边之和小于第三边来证明。</p>
+<p><img src="15.png" alt=""></p>
+<p>其余的凸多边形，一定比凸包周长要大，感性的理解就是拿个橡皮筋，在一个图上放手，会发现其就是凸包，且是最小周长，但是理性证明，不会。</p>
+<h3 id="凸包求法"><a href="#凸包求法" class="headerlink" title="凸包求法"></a>凸包求法</h3><p>Orz wjyyy奆佬手推凸包。</p>
+<p>但是这里不讲上下凸包合并。</p>
+<p>讲一个算法：graham扫描法。</p>
+<h4 id="凸包的性质"><a href="#凸包的性质" class="headerlink" title="凸包的性质"></a>凸包的性质</h4><p>介绍这种算法不妨从凸包的性质讲起。</p>
+<ol>
+<li>点集的最下角（即 $y$ 最小，$y$ 相同 $x$ 最小）的点一定是凸包的顶点，设这个点为 $x$ ，不难发现对于点集中任意一点$y(y≠x)$，$\vec{xy}$ 的幅角都非负。</li>
+<li>从 $x$ 逆时针遍历凸包的顶点，得到$a$顶点序列（ $k$ 个点），其中 $a_1=x,a_{i}=a_{(i-1)\%k+1}$，$\vec{xa_2},\vec{xa_3},…,\vec{xa_k}$ 的幅角严格递增，且都非负。</li>
+<li>顶点序列中对于 $(1≤i≤k)$，$∠a_{i}a_{i+1}a_{i+2}<180°$，$\vec{a_{i}a_{i+1}}\times \vec{a_{i}a_{i+2}}>0$（注意这条，如果对于一个多边形满足这条公式，其是凸多边形<del>应该，至少凸包就是用这个判断的。</del>）。</li>
+</ol>
+<p><del>不要问我证明，我也不会证明，再问就是显然</del></p>
+<h4 id="凸包的求法"><a href="#凸包的求法" class="headerlink" title="凸包的求法"></a>凸包的求法</h4><p>根据第一条性质，找到一个点，并且把其放到第一个点，在把剩余的点，按照其和第一个点形成的向量的幅角排序（幅角相同，长度小的优先）。</p>
+<p>这样排序有个什么好处呢？这样保证了排序中最后那个点一定在凸包中。</p>
+<p>用栈维护目前凸包的点序列，设现在栈中有 $top$ 个点，现在新加入$x$点，如果$top=1$，无条件假如，如果不是，$\vec{a_{top-1}a_{top}}\times \vec{a_{top-1}x}&gt;0$ ，加入，否则 $a_{top}$ 在凸包的边上或者内部，弹出，然后不断判断，知道$x$可以加入为止。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>时间复杂度：$O(nlogn)$。</p>
+<p><del>几年前的代码好难看啊。</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span>  <span class="keyword">namespace</span>  std;</span><br><span class="line"><span class="type">int</span>  n;</span><br><span class="line"><span class="keyword">struct</span>  <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span>  x,y;</span><br><span class="line">&#125;a[<span class="number">2100</span>];<span class="type">double</span>  ans;</span><br><span class="line"><span class="function"><span class="type">double</span>  <span class="title">ins</span><span class="params">(node  x,node  y)</span></span>&#123;<span class="keyword">return</span>  <span class="built_in">sqrt</span>(<span class="built_in">double</span>((x.x-y.x)*(x.x-y.x))+<span class="built_in">double</span>((x.y-y.y)*(x.y-y.y)));&#125;</span><br><span class="line"><span class="function"><span class="type">double</span>  <span class="title">mutle</span><span class="params">(node  x,node  y,node  z<span class="comment">/*基准点*/</span>)</span><span class="comment">//叉积</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">double</span>  x1=x.x-z.x,y1=x.y-z.y,x2=y.x-z.x,y2=y.y-z.y;</span><br><span class="line">    <span class="keyword">return</span>  x1*y2-x2*y1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span>  <span class="title">cmp</span><span class="params">(node  x,node  y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">double</span>  okk=<span class="built_in">mutle</span>(y,x,a[<span class="number">1</span>]);<span class="comment">//反正幅角都是非负的，这样判断也可以。</span></span><br><span class="line">    <span class="keyword">if</span>(okk&gt;<span class="number">0</span>)<span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span>  <span class="keyword">if</span>(okk&lt;<span class="number">0</span>)<span class="keyword">return</span>  <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">double</span>  k1=<span class="built_in">ins</span>(x,a[<span class="number">1</span>]);</span><br><span class="line">        <span class="type">double</span>  k2=<span class="built_in">ins</span>(y,a[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span>(k1&gt;k2)<span class="keyword">return</span>  <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span>  <span class="keyword">return</span>  <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">node  list[<span class="number">2100</span>];</span><br><span class="line"><span class="type">int</span>  top;</span><br><span class="line"><span class="function">node  <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">sort</span>(a+<span class="number">2</span>,a+n+<span class="number">1</span>,cmp);</span><br><span class="line">    top=<span class="number">2</span>;list[<span class="number">1</span>]=a[<span class="number">1</span>];list[<span class="number">2</span>]=a[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">3</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(top&gt;<span class="number">1</span>  &amp;&amp;  <span class="built_in">mutle</span>(list[top],a[i],list[top<span class="number">-1</span>])&gt;<span class="number">0</span>)top--;</span><br><span class="line">        list[++top]=a[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span>  <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="type">int</span>  x,y;<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">    a[<span class="number">1</span>].x=x*<span class="number">1.0</span>;a[<span class="number">1</span>].y=y*<span class="number">1.0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">        a[i].x=x*<span class="number">1.0</span>;a[i].y=y*<span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[i].y&lt;a[<span class="number">1</span>].y  ||  (a[i].y==a[<span class="number">1</span>].y  &amp;&amp;  a[i].x&lt;a[<span class="number">1</span>].x))</span><br><span class="line">        &#123;</span><br><span class="line">            node  t=a[i];a[i]=a[<span class="number">1</span>];a[<span class="number">1</span>]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">work</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span>  i=<span class="number">2</span>;i&lt;=top;i++)ans+=<span class="built_in">ins</span>(list[i],list[i<span class="number">-1</span>]);</span><br><span class="line">    ans+=<span class="built_in">ins</span>(list[<span class="number">1</span>],list[top]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.4lf\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="课内可能会用到的数学知识福利"><a href="#课内可能会用到的数学知识福利" class="headerlink" title="课内可能会用到的数学知识福利"></a>课内可能会用到的数学知识福利</h1><h2 id="点到直线的距离"><a href="#点到直线的距离" class="headerlink" title="点到直线的距离"></a>点到直线的距离</h2><p>这里放上一个大佬的另类证法,很强！</p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1613918613327049797&amp;wfr=spider&amp;for=pc">大佬</a></p>
+<p><img src="16.png" alt="在这里插入图片描述"></p>
+<p><img src="17.png" alt="在这里插入图片描述"></p>
+<p>膜拜大佬。</p>
+<h2 id="如何将直线移动1个单位的距离？"><a href="#如何将直线移动1个单位的距离？" class="headerlink" title="如何将直线移动1个单位的距离？"></a>如何将直线移动1个单位的距离？</h2><p>这里指的是垂直距离，那么就不是+1-1的事情了，这里用两点式来进行证明其中的一种情况（其他情况也可以证）</p>
+<p>现在有一条直线：$ax+by=0(a<0,b>0)$</p>
+<p><img src="18.png" alt="在这里插入图片描述"></p>
+<p>$AC⊥A$ 所在的直线</p>
+<p>$AC=1$，设 $C$ 点的 $x$ 坐标为 $k$ ，那么我们可以求出 $AC$ 的两点时 $bx-ay=0$ ，那么进而求出 $AD=-\frac{bx}{a}$ ，勾股得出 $AC=\frac{x\sqrt{a^{2}+b^{2}}}{-a}=1$ ，那么 $x=\frac{-a\sqrt{a^{2}+b^{2}}}{a^{2}+b^{2}}$，那么 $C(\frac{-a\sqrt{a^{2}+b^{2}}}{a^{2}+b^{2}},\frac{-b\sqrt{a^{2}+b^{2}}}{a^{2}+b^{2}})$ ，然后我们通过将 $x,y$ 带入 $ax+by+?$ 求出 $?$ 是 $\sqrt{a^{2}+b^{2}}$ ，那么我们就知道移动 $1$ 就是加减 $\sqrt{a^{2}+b^{2}}$ 。</p>
+<h1 id="两直线交点看不懂版"><a href="#两直线交点看不懂版" class="headerlink" title="两直线交点看不懂版"></a>两直线交点看不懂版</h1><p>现在我是看不懂我以前写什么了。<del>而且这个证法好像还不严谨</del></p>
+<p>但是本着保留思想的心态，我把其保留了下来，可以不看，完全没有看的必要。<del>毕竟我自己写的东西自己也没看看懂</del></p>
+<p>难道我们求两线交点就只能列一个二元一次方程？</p>
+<p>不，我们可以用叉积！！！</p>
+<p>看如下图：</p>
+<p><img src="19.png" alt="在这里插入图片描述"></p>
+<p>如何求 $\frac{AP}{CP}$？</p>
+<p>我们做一条垂线：</p>
+<p><img src="20.png" alt="在这里插入图片描述"></p>
+<p>我们 $\frac{AE}{BF}=\frac{S▲ABD}{S▲CBD}$，$∠APE=∠CPF，∠AEP=∠CFP$，所以$▲AEP∽▲CFP$，所以 $\frac{AP}{CP}=\frac{AE}{CF}=\frac{S▲ABD}{S▲CBD}$</p>
+<p>而这个面积是可以用叉积来求的。</p>
+<p>我们设 $t1,t2$ 分别为以 $C$ 为基准点旋到 $A,B$ 的叉积。</p>
+<p>两种情况：</p>
+<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p><img src="21.png" alt="在这里插入图片描述"></p>
+<p>此处 $t1<0,t2>0$</p>
+<p>$P$ 点坐标？</p>
+<p>列波式子（求 $x$ 坐标，$y$ 坐标一样，在这里推导过程省略原因，多用相似三角形）：</p>
+<script type="math/tex; mode=display">\begin{align*}
+&x1+\frac{-(x2-x1)*t1}{t2-t1}\\
+=&\frac{x1(t2-t1)-(x2-x1)*t1}{t2-t1}\\
+=&\frac{x1*t2-x2*t1}{t2-t1}\\
+=&\frac{t1*x2-t2*x1}{t1-t2}
+\end{align*}</script><p>当然，死记硬背也没问题：$122112$。</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p><img src="22.png" alt="在这里插入图片描述"></p>
+<p>那么这个的长这样：</p>
+<p><img src="23.png" alt="在这里插入图片描述"></p>
+<p>在此$t1&lt;0,t2&lt;0$</p>
+<script type="math/tex; mode=display">\begin{align*}
+&x1+\frac{-(x2-x1)*t1}{t2-t1}\\
+=&\frac{x1(t2-t1)-(x2-x1)*t1}{t2-t1}\\
+=&\frac{x1*t2-x2*t1}{t2-t1}\\
+=&\frac{t1*x2-t2*x1}{t1-t2}
+\end{align*}</script><p>等会，这个很眼熟！！！</p>
+<p>跟上面一样，所以用这个就行了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span>  dian  <span class="title">jd</span><span class="params">(line  x,line  y)</span><span class="comment">//怎么可能用inline</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">double</span>  t1=<span class="built_in">mu</span>(x.x,y.x,y.y),t2=<span class="built_in">mu</span>(x.y,y.x,y.y);</span><br><span class="line">	<span class="keyword">return</span>  <span class="built_in">dian</span>((t1*x.y.x-t2*x.x.x)/(t1-t2),(t1*x.y.y-t2*x.x.y)/(t1-t2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这还仅仅是入门啊QAQ。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2025/02/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://oldplace.github.io/2025/02/04/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">计算几何</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/02/04/%E7%BA%BF%E6%AE%B5%E9%97%B4%E6%9C%80%E7%9F%AD%E8%B7%9D%E7%A6%BB/" title="线段间最短距离"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2025-02-04</div><div class="title">线段间最短距离</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E7%85%A7%E6%96%87%E7%8C%AE"><span class="toc-number">1.</span> <span class="toc-text">参照文献</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%82%B9%E3%80%81%E5%90%91%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">点、向量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A6%E5%86%99%E7%BA%A6%E5%AE%9A"><span class="toc-number">2.1.</span> <span class="toc-text">书写约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E8%BF%90%E7%AE%97"><span class="toc-number">2.2.</span> <span class="toc-text">向量运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%BF%90%E7%AE%97"><span class="toc-number">2.2.1.</span> <span class="toc-text">普通运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%89%E7%A7%AF"><span class="toc-number">2.2.2.</span> <span class="toc-text">叉积</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E8%BE%B9%E5%BD%A2%E7%9A%84%E9%9D%A2%E7%A7%AF"><span class="toc-number">3.</span> <span class="toc-text">多边形的面积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E4%BA%A4%E4%B8%8E%E7%9B%B4%E7%BA%BF%E7%9A%84%E4%BA%A4%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">线段的相交与直线的交点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E7%9A%84%E7%9B%B8%E4%BA%A4%E5%88%A4%E5%AE%9A"><span class="toc-number">4.1.</span> <span class="toc-text">线段的相交判定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E7%BA%BF%E4%BA%A4%E7%82%B9"><span class="toc-number">4.2.</span> <span class="toc-text">直线交点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%861"><span class="toc-number">4.2.1.</span> <span class="toc-text">定理1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%94%A8%E5%AE%9A%E7%90%861%E4%BC%98%E5%8C%96"><span class="toc-number">4.2.2.</span> <span class="toc-text">运用定理1优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E5%8A%A0%E5%B9%BF%E6%B3%9B%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">4.2.3.</span> <span class="toc-text">更加广泛的情况</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%B8%E5%8C%85"><span class="toc-number">5.</span> <span class="toc-text">凸包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">5.1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">5.2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%B8%E5%8C%85%E5%88%9D%E6%AD%A5%E6%A6%82%E5%BF%B5"><span class="toc-number">5.2.1.</span> <span class="toc-text">凸包初步概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%80%9D%E8%B7%AF"><span class="toc-number">5.2.2.</span> <span class="toc-text">转换思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%B8%E5%8C%85%E6%B1%82%E6%B3%95"><span class="toc-number">5.2.3.</span> <span class="toc-text">凸包求法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%B8%E5%8C%85%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">5.2.3.1.</span> <span class="toc-text">凸包的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%B8%E5%8C%85%E7%9A%84%E6%B1%82%E6%B3%95"><span class="toc-number">5.2.3.2.</span> <span class="toc-text">凸包的求法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">5.2.3.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%BE%E5%86%85%E5%8F%AF%E8%83%BD%E4%BC%9A%E7%94%A8%E5%88%B0%E7%9A%84%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E7%A6%8F%E5%88%A9"><span class="toc-number">6.</span> <span class="toc-text">课内可能会用到的数学知识福利</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E5%88%B0%E7%9B%B4%E7%BA%BF%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="toc-number">6.1.</span> <span class="toc-text">点到直线的距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E7%9B%B4%E7%BA%BF%E7%A7%BB%E5%8A%A81%E4%B8%AA%E5%8D%95%E4%BD%8D%E7%9A%84%E8%B7%9D%E7%A6%BB%EF%BC%9F"><span class="toc-number">6.2.</span> <span class="toc-text">如何将直线移动1个单位的距离？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%A4%E7%9B%B4%E7%BA%BF%E4%BA%A4%E7%82%B9%E7%9C%8B%E4%B8%8D%E6%87%82%E7%89%88"><span class="toc-number">7.</span> <span class="toc-text">两直线交点看不懂版</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">7.1.</span> <span class="toc-text">1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">7.2.</span> <span class="toc-text">2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">小结</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

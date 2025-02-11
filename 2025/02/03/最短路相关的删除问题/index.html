@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>最短路相关的删除问题 | Oldplace</title><meta name="author" content="player"><meta name="copyright" content="player"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="无向正权&#x2F;非负权图删边最短路正权的无向图，删除一条边，问之后的最短路是多少。 例题：CF1163F Indecisive Taxi Fee 引理1：只有删除掉最短路上的边才可能导致删边最短路增大。 引理2：删边后的最短路一定是经过最短路一段前缀+中间的一些不在最短路的边+最短路一段后缀。 证明显然，不再赘述。 因此，我们可以设必须经过一个点的起点到终点的最短路经过最短路前缀几个点为 $pre$ ，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最短路相关的删除问题">
+<meta property="og:url" content="http://oldplace.github.io/2025/02/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%9B%B8%E5%85%B3%E7%9A%84%E5%88%A0%E9%99%A4%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Oldplace">
+<meta property="og:description" content="无向正权&#x2F;非负权图删边最短路正权的无向图，删除一条边，问之后的最短路是多少。 例题：CF1163F Indecisive Taxi Fee 引理1：只有删除掉最短路上的边才可能导致删边最短路增大。 引理2：删边后的最短路一定是经过最短路一段前缀+中间的一些不在最短路的边+最短路一段后缀。 证明显然，不再赘述。 因此，我们可以设必须经过一个点的起点到终点的最短路经过最短路前缀几个点为 $pre$ ，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oldplace.github.io/img/my%20avatar.jpg">
+<meta property="article:published_time" content="2025-02-03T10:49:31.000Z">
+<meta property="article:modified_time" content="2025-02-03T10:50:26.611Z">
+<meta property="article:author" content="player">
+<meta property="article:tag" content="最短路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oldplace.github.io/img/my%20avatar.jpg"><link rel="shortcut icon" href="/img/author16.png"><link rel="canonical" href="http://oldplace.github.io/2025/02/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%9B%B8%E5%85%B3%E7%9A%84%E5%88%A0%E9%99%A4%E9%97%AE%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '最短路相关的删除问题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-02-03 18:50:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4233465_4sh0n7ckry.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/my%20avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Oldplace"><span class="site-name">Oldplace</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">最短路相关的删除问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-03T10:49:31.000Z" title="发表于 2025-02-03 18:49:31">2025-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-03T10:50:26.611Z" title="更新于 2025-02-03 18:50:26">2025-02-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AD%A6/">信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="最短路相关的删除问题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="无向正权-非负权图"><a href="#无向正权-非负权图" class="headerlink" title="无向正权/非负权图"></a>无向正权/非负权图</h1><h2 id="删边最短路"><a href="#删边最短路" class="headerlink" title="删边最短路"></a>删边最短路</h2><p>正权的无向图，删除一条边，问之后的最短路是多少。</p>
+<p>例题：CF1163F Indecisive Taxi Fee</p>
+<p>引理1：只有删除掉最短路上的边才可能导致删边最短路增大。</p>
+<p>引理2：删边后的最短路一定是经过最短路一段前缀+中间的一些不在最短路的边+最短路一段后缀。</p>
+<p>证明显然，不再赘述。</p>
+<p>因此，我们可以设必须经过一个点的起点到终点的最短路经过最短路前缀几个点为 $pre$ ，后缀几个点为 $suf$ 。</p>
+<p>如果存在多种选择随便选择一个即可。</p>
+<p>引理3：$pre_x≤suf_x$</p>
+<p>证明也很简单，如果大于，说明起点到 $x$ 或者 $x$ 到终点至少有一条不是最短路。</p>
+<p>这条引理是证明后面一条引理的关键，也是可以随便选择 $pre$ 或者 $suf$ 的原因，但是如果存在 $0$ 边，就要选择最小的 $pre$ ，最大的 $suf$ ，这样才能保证正确性，同时如果是有向图这一结论也不成立。</p>
+<p>引理4：设最短路 $I$ ，删除边 $(u,v)∈I$ ，设新最短路为 $L$ ，存在一条路径 $L$ 以及 $(x,y)∈L$ 使得 $L$ 是经过 $(x,y)$ 的最短路。</p>
+<p>这条引理是做法正确性的关键，来看看怎么证明：</p>
+<p>为了方便，不妨设 $I$ 为 $1-n$ 连续编号的一条路径，其他点的编号大于 $n$ ，设 $L$ 的点序列为 $x_1,x_2,…,x_k$ 。</p>
+<p>一定存在一个 $L$ 满足 $pre,suf$  非严格递增，因为如果 $pre_{x_i}&gt;pre_{x_{i+1}}$ ，那么可以直接走 $1-x_{i+1}$  的最短路即可，$suf$ 同理。</p>
+<p>因此，现在就是证明存在 $i$ 使得 $pre_{i}≤u,suf_{i+1}≥v=u+1$ 。</p>
+<p>首先 $x_1=1,x_{k}=n,pre_{x_1}=1,sur_{x_k}=n$</p>
+<p>如果 $pre_{i}≤u,suf_{i+1}≤u$ ，那么 $pre_{i+1}≤u$ ，继续观察 $i+1$ ，如果同理如果都大于等于 $v$ 则观察 $i-1$ 。</p>
+<p>不难看出，类似中值定理一样，一定存在一个 $i$ 满足上述要求，经过 $(x_{i},x_{i+1})$ 的其中一条最短路便是删边最短路，得证。</p>
+<p>也就是说如果存在删边最短路，图中一定存在某条边，强制以某个方向经过这条边的最短路便是删边最短路。</p>
+<p>因此预处理出每个点的 $pre,suf$ ，暴力遍历每条边的两个方向的最短路即可求出其可能是最短路上哪些边的删边最短路，直接区间取min即可。</p>
+<p>当然，如果离线可以差分加 multiset 。</p>
+<p>具体可以看洛谷上这一道题目的题解，这里着重证明其正确性。</p>
+<p>需要注意的是，如果有 $0$ 边需要取最小的 $pre$ ，最大的 $suf$ ，否则可能导致引理 $3$ 不正确，当然此题是正权，随便取就行了。</p>
+<p>代码？没有，口胡罢了。洛谷的题解也不少了，应该够了。</p>
+<h2 id="删点最短路"><a href="#删点最短路" class="headerlink" title="删点最短路"></a>删点最短路</h2><p>正权图，删起终点以外的点。</p>
+<p>不能直接套用删边最短路。</p>
+<p>为什么？</p>
+<p>因为有可能一个点的 $pre=suf$ ，导致直接卡死，拆点又是有向图，不行。</p>
+<p>因此，我们着重处理一个点 $pre=suf$ 的情况。</p>
+<p>先解释一下为什么，修改删点最短路中定理的描述，改成 $pre_x<i$ 且 $suf_x>i$ 的话，那么会有也只会有一个问题，中间会不会有点 $pre=suf=i$ ，仔细想想就知道。</p>
+<p>那么，我们只需要针对最短路的每个点 $i$ 把 $pre=suf=i$ 的点提取出来，然后将相邻的 $pre<i$ 点处理出到起点的最短路，$suf>i$ 处理出到终点的最短路，相加统计贡献就行了。</p>
+<p>时间复杂度依旧是带个 $log$ 。</p>
+<p>讨论一下 $pre,suf$ 可不可以随机取的问题，最大最小能过，且在找 $pre=suf=i$ 时这样的点一定与最短路的 $i$ 相连，可以 $BFS$ 找出。但是随机取的话没有零边（删边最短路部分就不行了），也行，只不过可能不能 $BFS$ 找出了，毕竟随机的话不一定存在与最短路相连的路径了，可能需要预处理出每个 $i$ 对应的点集才能保证时间复杂度正确，不过也不一定，没有具体实践卡过，例题部分去掉 $min,max$ 也能过，只是单纯个人感觉罢了。不过出于保险起见我还是会打最大最小的，不怕一万就怕万一。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://acm.timus.ru/problem.aspx?space=1&amp;num=2006">2006. Kirill the Gardener @ Timus Online Judge</a></p>
+<p>网格图的删点最短路。</p>
+<p>直接套就行了，慢慢做，不要慌张。</p>
+<p>不过去掉了 $min,max$ 部分也能 AC ，说明有可能随机也可以直接 $BFS$ 处理出 $pre=suf$ 的点。</p>
+<p>$L$ 就是 $pre$ ，$R$ 就是 $suf$ 。</p>
+<p>时间复杂度：$O(nm\log{nm})$</p>
+<p>空间复杂度：$O(nm)$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NM 110000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">mymin</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;<span class="keyword">return</span> x&lt;y?x:y;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">mymax</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;<span class="keyword">return</span> x&gt;y?x:y;&#125;</span><br><span class="line"><span class="type">int</span> dx[]=&#123;<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> dy[]=&#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">int</span> n,m,nm;</span><br><span class="line"><span class="type">char</span> ss[NM];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	<span class="built_in">node</span>(<span class="type">int</span> xx=<span class="number">0</span>,<span class="type">int</span> yy=<span class="number">0</span>)&#123;x=xx;y=yy;&#125;</span><br><span class="line">&#125;list[NM],st,ed,pre[NM],ord[NM];<span class="type">int</span> h1[NM],h2[NM],h[NM],head,tail,limit;</span><br><span class="line"><span class="type">int</span> fid[<span class="number">1100</span>][<span class="number">1100</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">id</span><span class="params">(node x)</span></span>&#123;<span class="keyword">return</span> fid[x.x][x.y];&#125;<span class="comment">//1</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">pd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;<span class="keyword">return</span> x&gt;=<span class="number">1</span> &amp;&amp; y&gt;=<span class="number">1</span> &amp;&amp; x&lt;=n &amp;&amp; y&lt;=m &amp;&amp; ss[<span class="built_in">id</span>(<span class="built_in">node</span>(x,y))]==<span class="string">&#x27;.&#x27;</span>;&#125;</span><br><span class="line"><span class="type">int</span> L[NM],R[NM];</span><br><span class="line"><span class="type">bool</span> v[NM];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">(<span class="type">bool</span> b1,<span class="type">bool</span> b2)</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(h,<span class="number">0</span>,<span class="built_in">sizeof</span>(h));<span class="built_in">memset</span>(pre,<span class="number">0</span>,<span class="built_in">sizeof</span>(pre));</span><br><span class="line">	<span class="keyword">if</span>(!b2)list[head=tail=<span class="number">1</span>]=st,h[<span class="built_in">id</span>(st)]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> list[head=tail=<span class="number">1</span>]=ed,h[<span class="built_in">id</span>(ed)]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(head&lt;=tail)&#123;</span><br><span class="line">		node x=list[head++];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">			node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y))&#123;</span><br><span class="line">				<span class="keyword">if</span>(!h[<span class="built_in">id</span>(y)])&#123;</span><br><span class="line">					list[++tail]=y;h[<span class="built_in">id</span>(y)]=h[<span class="built_in">id</span>(x)]+<span class="number">1</span>;pre[<span class="built_in">id</span>(y)]=x;</span><br><span class="line">					<span class="keyword">if</span>(b1)&#123;</span><br><span class="line">						<span class="keyword">if</span>(!v[<span class="built_in">id</span>(y)])&#123;</span><br><span class="line">							<span class="keyword">if</span>(!b2)L[<span class="built_in">id</span>(y)]=L[<span class="built_in">id</span>(x)];</span><br><span class="line">							<span class="keyword">else</span> R[<span class="built_in">id</span>(y)]=R[<span class="built_in">id</span>(x)];</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span>(h[<span class="built_in">id</span>(y)]==h[<span class="built_in">id</span>(x)]+<span class="number">1</span>)&#123;</span><br><span class="line">					<span class="keyword">if</span>(b1)&#123;</span><br><span class="line">						<span class="keyword">if</span>(!v[<span class="built_in">id</span>(y)])&#123;</span><br><span class="line">							<span class="keyword">if</span>(!b2)L[<span class="built_in">id</span>(y)]=<span class="built_in">mymin</span>(L[<span class="built_in">id</span>(x)],L[<span class="built_in">id</span>(y)]);</span><br><span class="line">							<span class="keyword">else</span> R[<span class="built_in">id</span>(y)]=<span class="built_in">mymax</span>(R[<span class="built_in">id</span>(x)],R[<span class="built_in">id</span>(y)]);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; add[NM],del[NM];</span><br><span class="line">multiset&lt;<span class="type">int</span>&gt; fuck;</span><br><span class="line"><span class="type">int</span> sta[NM],top;</span><br><span class="line"><span class="type">int</span> zans[NM];</span><br><span class="line"><span class="type">int</span> d1[NM],d2[NM],dd[NM];</span><br><span class="line"><span class="keyword">inline</span> <span class="type">bool</span> <span class="keyword">operator</span>&gt;(node x,node y)&#123;<span class="keyword">return</span> dd[<span class="built_in">id</span>(x)]&gt;dd[<span class="built_in">id</span>(y)];&#125;</span><br><span class="line">priority_queue&lt;node,vector&lt;node&gt;,greater&lt;node&gt; &gt; smile;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Pao</span><span class="params">(<span class="type">int</span> now)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(!smile.<span class="built_in">empty</span>())&#123;</span><br><span class="line">		node x=smile.<span class="built_in">top</span>();smile.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">			node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y)==<span class="number">1</span> &amp;&amp; h[<span class="built_in">id</span>(y)]==now &amp;&amp; !dd[<span class="built_in">id</span>(y)])&#123;</span><br><span class="line">				dd[<span class="built_in">id</span>(y)]=dd[<span class="built_in">id</span>(x)]+<span class="number">1</span>;</span><br><span class="line">				smile.<span class="built_in">push</span>(y);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">check</span><span class="params">(<span class="type">int</span> ttx,<span class="type">int</span> tty)</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(h,<span class="number">0</span>,<span class="built_in">sizeof</span>(h));</span><br><span class="line">	list[head=tail=<span class="number">1</span>]=st,h[<span class="built_in">id</span>(st)]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(head&lt;=tail)&#123;</span><br><span class="line">		node x=list[head++];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">			node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y) &amp;&amp; !(y.x==ttx &amp;&amp; y.y==tty) &amp;&amp; !h[<span class="built_in">id</span>(y)])list[++tail]=y,h[<span class="built_in">id</span>(y)]=h[<span class="built_in">id</span>(x)]+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!h[<span class="built_in">id</span>(ed)])<span class="keyword">return</span> <span class="number">999999999</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> h[<span class="built_in">id</span>(ed)];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);nm=n*m;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%d&quot;</span>,&amp;st.x,&amp;st.y,&amp;ed.x,&amp;ed.y);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,ss+(i<span class="number">-1</span>)*m+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)fid[i][j]=(i<span class="number">-1</span>)*m+j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">bfs</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">	limit=h[<span class="built_in">id</span>(ed)];</span><br><span class="line">	node x=ed;</span><br><span class="line">	<span class="keyword">while</span>(h[<span class="built_in">id</span>(x)])&#123;<span class="comment">//1&#x27;</span></span><br><span class="line">		ord[h[<span class="built_in">id</span>(x)]]=x;</span><br><span class="line">		L[<span class="built_in">id</span>(x)]=R[<span class="built_in">id</span>(x)]=h[<span class="built_in">id</span>(x)];</span><br><span class="line">		v[<span class="built_in">id</span>(x)]=<span class="number">1</span>;</span><br><span class="line">		x=pre[<span class="built_in">id</span>(x)];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(limit==<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(ss[fid[i][j]]==<span class="string">&#x27;.&#x27;</span> &amp;&amp; !v[fid[i][j]])&#123;</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,i,j);</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">bfs</span>(<span class="number">1</span>,<span class="number">0</span>);<span class="built_in">memcpy</span>(h1,h,<span class="built_in">sizeof</span>(h));</span><br><span class="line">	<span class="built_in">bfs</span>(<span class="number">1</span>,<span class="number">1</span>);<span class="built_in">memcpy</span>(h2,h,<span class="built_in">sizeof</span>(h));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			node x=<span class="built_in">node</span>(i,j);</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">pd</span>(i,j) &amp;&amp; h1[<span class="built_in">id</span>(x)])&#123;<span class="comment">//能够到达 </span></span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">					<span class="type">int</span> tx=i+dx[t],ty=j+dy[t];</span><br><span class="line">					<span class="keyword">if</span>(<span class="built_in">pd</span>(tx,ty) &amp;&amp; h1[<span class="built_in">id</span>(<span class="built_in">node</span>(tx,ty))])&#123;</span><br><span class="line">						<span class="type">int</span> ll=L[<span class="built_in">id</span>(x)],rr=R[<span class="built_in">id</span>(<span class="built_in">node</span>(tx,ty))],val=h1[<span class="built_in">id</span>(x)]+h2[<span class="built_in">id</span>(<span class="built_in">node</span>(tx,ty))];ll++;rr--;</span><br><span class="line">						<span class="keyword">if</span>(ll&lt;=rr)add[ll].<span class="built_in">push_back</span>(val),del[rr].<span class="built_in">push_back</span>(val);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;limit;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;add[i].<span class="built_in">size</span>();j++)fuck.<span class="built_in">insert</span>(add[i][j]);</span><br><span class="line">		<span class="keyword">if</span>(fuck.<span class="built_in">empty</span>())zans[i]=<span class="number">999999999</span>;</span><br><span class="line">		<span class="keyword">else</span> zans[i]=(*fuck.<span class="built_in">begin</span>());</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;del[i].<span class="built_in">size</span>();j++)fuck.<span class="built_in">erase</span>(fuck.<span class="built_in">find</span>(del[i][j]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(h,<span class="number">0</span>,<span class="built_in">sizeof</span>(h));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;limit;i++)&#123;</span><br><span class="line">		list[head=tail=<span class="number">0</span>]=ord[i];h[<span class="built_in">id</span>(ord[i])]=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">while</span>(head&lt;=tail)&#123;</span><br><span class="line">			node x=list[head++];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">				node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y)==<span class="number">1</span> &amp;&amp; L[<span class="built_in">id</span>(y)]==R[<span class="built_in">id</span>(y)] &amp;&amp; L[<span class="built_in">id</span>(y)]==i &amp;&amp; !h[<span class="built_in">id</span>(y)])h[<span class="built_in">id</span>(y)]=i,list[++tail]=y;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tail;j++)&#123;</span><br><span class="line">			node x=list[j];dd[<span class="built_in">id</span>(list[j])]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">				node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y)==<span class="number">1</span> &amp;&amp; L[<span class="built_in">id</span>(y)]&lt;i)&#123;</span><br><span class="line">					dd[<span class="built_in">id</span>(y)]=h1[<span class="built_in">id</span>(y)];smile.<span class="built_in">push</span>(y);<span class="comment">//2</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">Pao</span>(i);<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tail;j++)d1[<span class="built_in">id</span>(list[j])]=dd[<span class="built_in">id</span>(list[j])],dd[<span class="built_in">id</span>(list[j])]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tail;j++)&#123;</span><br><span class="line">			node x=list[j];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> t=<span class="number">0</span>;t&lt;=<span class="number">3</span>;t++)&#123;</span><br><span class="line">				node y=<span class="built_in">node</span>(x.x+dx[t],x.y+dy[t]);</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">pd</span>(y.x,y.y)==<span class="number">1</span> &amp;&amp; R[<span class="built_in">id</span>(y)]&gt;i)&#123;</span><br><span class="line">					dd[<span class="built_in">id</span>(y)]=h2[<span class="built_in">id</span>(y)];smile.<span class="built_in">push</span>(y);<span class="comment">//2</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">Pao</span>(i);<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tail;j++)d2[<span class="built_in">id</span>(list[j])]=dd[<span class="built_in">id</span>(list[j])],dd[<span class="built_in">id</span>(list[j])]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tail;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(d1[<span class="built_in">id</span>(list[j])] &amp;&amp; d2[<span class="built_in">id</span>(list[j])])zans[i]=<span class="built_in">mymin</span>(zans[i],d1[<span class="built_in">id</span>(list[j])]+d2[<span class="built_in">id</span>(list[j])]<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;node ansxy;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;limit;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(zans[i]&gt;ans)ans=zans[i],ansxy=ord[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,ansxy.x,ansxy.y);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说说我踩的3个坑。</p>
+<ol>
+<li>如果路径长度为 $2$ ，随便找一个点堵上就行，对应是 WA9 。</li>
+<li>代码中 $1$ 的位置可以换成 (x.x-1)*m+x.y，不过要特判 $id({0,0})=0$ ，不然在 $1’$ 会访问负数下标导致错误，我曾经就疯狂 TLE8。</li>
+<li>代码中 $2$ 的位置一定要在加入堆之前赋值，我之前打反导致我一直以为 STL 的堆出问题了，顺便提一嘴，原来小根堆要重载大于号。</li>
+</ol>
+<p>花了几天终于AC了，不容易不容易，感谢U群的各位了。</p>
+<h1 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h1><p>DAG的删点最短路</p>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/14293?&amp;headNav=acm">https://ac.nowcoder.com/acm/problem/14293?&amp;headNav=acm</a></p>
+<p>算是U群的意外收获吧。</p>
+<p>其实发现一个事情，上面的关键结论其实对DAG也生效，单纯的对有环有向图不生效而已，删点最短路也是满足的，因此直接做就行了。</p>
+<p>讨论里也有题解可以参考一下。</p>
+<p>会了删边最短路的套路后这个就基本不难了，举一反三就行了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://oldplace.github.io">player</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://oldplace.github.io/2025/02/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%9B%B8%E5%85%B3%E7%9A%84%E5%88%A0%E9%99%A4%E9%97%AE%E9%A2%98/">http://oldplace.github.io/2025/02/03/%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%9B%B8%E5%85%B3%E7%9A%84%E5%88%A0%E9%99%A4%E9%97%AE%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://oldplace.github.io" target="_blank">Oldplace</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/">最短路</a></div><div class="post_share"><div class="social-share" data-image="/img/my%20avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/my%20avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">player</div><div class="author-info__description">一个蒟蒻在网络上的温馨小窝</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">154</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/oldplace" target="_blank" title="Github"><i class="fa-brands fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="https://www.luogu.com.cn/user/65602" target="_blank" title="洛谷"><i class="iconfont icon-luogu" style="color: #1461e6;"></i></a><a class="social-icon" href="https://www.codeforces.com/profile/zhangjianjuncd" target="_blank" title="CodeForces"><i class="fa-solid fa-chart-simple" style="color: #fd9d17;"></i></a><a class="social-icon" href="https://atcoder.jp/users/juruozjj" target="_blank" title="AtCoder"><i class="fa-solid fa-a" style="color: #7e0101;"></i></a><a class="social-icon" href="https://loj.ac/u/zhangjianjunab" target="_blank" title="LibreOJ"><i class="fa-solid fa-l" style="color: #9fa4ad;"></i></a><a class="social-icon" href="https://uoj.ac/user/profile/zhangjianjunab" target="_blank" title="Universal Online Judge"><i class="fa-solid fa-u" style="color: #ece509;"></i></a><a class="social-icon" href="https://ac.nowcoder.com/acm/contest/profile/485838814" target="_blank" title="牛客竞赛"><i class="iconfont icon-niu1" style="color: #3c5867;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E5%90%91%E6%AD%A3%E6%9D%83-%E9%9D%9E%E8%B4%9F%E6%9D%83%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">无向正权&#x2F;非负权图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E8%BE%B9%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="toc-number">1.1.</span> <span class="toc-text">删边最短路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E7%82%B9%E6%9C%80%E7%9F%AD%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">删点最短路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.2.1.</span> <span class="toc-text">例题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DAG"><span class="toc-number">2.</span> <span class="toc-text">DAG</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By player</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'oldplace/oldplace.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
